@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>开源派技术播客</title>
+  <description>每周自动抓取 osp.io 最新文章，生成中文播客</description>
+  <language>zh-CN</language>
+  <link>https://yourusername.github.io/osp-podcast/</link>
+  <!-- Episodes will be added by update_rss.py -->
+</channel>
+</rss>

@@ -1,0 +1,62 @@
+name: Auto Generate Podcast
+
+on:
+  schedule:
+    - cron: '0 1 * * 1'  # 每周一 UTC 1:00 = 北京时间 9:00
+  workflow_dispatch: {}     # 支持手动触发
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install feedparser edge-tts openai ffmpeg-python
+
+      - name: Check new articles
+        id: check
+        run: |
+          python scripts/check_articles.py
+          echo "has_new=$?" >> $GITHUB_OUTPUT
+
+      - name: Generate podcast
+        if: steps.check.outputs.has_new == '0'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python scripts/generate_podcast.py \
+            --title "$ARTICLE_TITLE" \
+            --link "$ARTICLE_LINK"
+
+      - name: Update RSS
+        if: steps.check.outputs.has_new == '0'
+        run: |
+          python scripts/update_rss.py
+
+      - name: Upload to GitHub Releases
+        if: steps.check.outputs.has_new == '0'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: episodes/*.mp3
+          tag_name: episode-${{ github.run_number }}
+          name: Episode ${{ github.run_number }}
+          body: "osp.io 自动生成播客"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to GitHub Pages
+        if: steps.check.outputs.has_new == '0'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages

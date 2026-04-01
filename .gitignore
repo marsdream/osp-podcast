@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+
+# Environment
+.env
+OPENAI_API_KEY
+
+# Temporary files
+temp_*.mp3
+concat_*.txt
+last_article.json
+
+# OS
+.DS_Store
+Thumbs.db
