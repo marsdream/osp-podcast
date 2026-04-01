@@ -21,7 +21,7 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install feedparser edge-tts openai ffmpeg-python
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg && pip install feedparser edge-tts openai ffmpeg-python
 
       - name: Check new articles
         id: check
@@ -31,7 +31,6 @@ jobs:
           # GITHUB_OUTPUT is consumed by steps.check.outputs.has_new
 
       - name: Generate podcast
-        if: steps.check.outputs.has_new == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LLM_BASE_URL: https://openrouter.ai/api/v1
@@ -39,11 +38,9 @@ jobs:
         run: python scripts/generate_podcast.py --auto
 
       - name: Update RSS
-        if: steps.check.outputs.has_new == 'true'
         run: python scripts/update_rss.py
 
       - name: Upload to GitHub Releases
-        if: steps.check.outputs.has_new == 'true'
         uses: softprops/action-gh-release@v2
         with:
           files: episodes/*.mp3
@@ -54,7 +51,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
-        if: steps.check.outputs.has_new == 'true'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
