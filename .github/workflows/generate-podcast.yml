@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取完整历史，找 last_article.json
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -19,19 +21,17 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: |
-          pip install feedparser edge-tts openai ffmpeg-python
+        run: pip install feedparser edge-tts openai ffmpeg-python
 
       - name: Check new articles
         id: check
         run: |
-          result=$(python scripts/check_articles.py 2>&1)
-          exit_code=$?
-          echo "has_new=$exit_code"
-          echo "has_new=$exit_code" >> $GITHUB_OUTPUT
+          python scripts/check_articles.py >> $GITHUB_OUTPUT 2>&1
+          # Always exit 0; has_new output tells us whether to continue
+          echo "has_new=$(python -c 'import json; d=open(\"last_article.json\") if __import__(\"os\").path.exists(\"last_article.json\") else None; print(d and json.load(d).get(\"id\",\"\") if d else \"\")')" >> $GITHUB_OUTPUT
 
       - name: Generate podcast
-        if: steps.check.outputs.has_new == '0'
+        if: steps.check.outputs.has_new == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LLM_BASE_URL: https://openrouter.ai/api/v1
@@ -40,12 +40,12 @@ jobs:
           python scripts/generate_podcast.py --auto
 
       - name: Update RSS
-        if: steps.check.outputs.has_new == '0'
+        if: steps.check.outputs.has_new == 'true'
         run: |
           python scripts/update_rss.py
 
       - name: Upload to GitHub Releases
-        if: steps.check.outputs.has_new == '0'
+        if: steps.check.outputs.has_new == 'true'
         uses: softprops/action-gh-release@v2
         with:
           files: episodes/*.mp3
@@ -56,7 +56,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy to GitHub Pages
-        if: steps.check.outputs.has_new == '0'
+        if: steps.check.outputs.has_new == 'true'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
