@@ -1,61 +1,60 @@
 #!/usr/bin/env python3
 """
 check_articles.py - 检查 osp.io 是否有新文章
-返回 0 总是（GitHub Actions 用 GITHUB_OUTPUT 判断）
+写入 has_new.txt 供后续步骤判断
 """
 import feedparser
 import json
 import os
-import sys
 
 RSS_URL = "https://osp.io/feed"
 STATE_FILE = "last_article.json"
-
-
-def write_github_output(key, value):
-    """写入 GitHub Actions GITHUB_OUTPUT"""
-    path = os.environ.get("GITHUB_OUTPUT")
-    if path:
-        with open(path, "a") as f:
-            f.write(f"{key}={value}\n")
+OUTPUT_FILE = "has_new.txt"
 
 
 def main():
-    feed = feedparser.parse(RSS_URL)
-    if not feed.entries:
-        print("No entries found in RSS feed", file=sys.stderr)
-        write_github_output("has_new", "false")
-        return 0
+    try:
+        feed = feedparser.parse(RSS_URL)
+        if not feed.entries:
+            print("ERROR: No entries in RSS feed", flush=True)
+            with open(OUTPUT_FILE, "w") as f:
+                f.write("false")
+            return
 
-    latest = feed.entries[0]
-    latest_id = latest.get("id") or latest.link
-    latest_title = latest.title
-    latest_link = latest.link
+        latest = feed.entries[0]
+        latest_id = latest.get("id") or latest.link
+        latest_title = latest.title
+        latest_link = latest.link
 
-    # 检查是否有新文章
-    has_new = True
-    if os.path.exists(STATE_FILE):
-        with open(STATE_FILE) as f:
-            last = json.load(f)
-        if last.get("id") == latest_id:
-            print("No new articles — skipping generation")
-            has_new = False
+        has_new = True
+        if os.path.exists(STATE_FILE):
+            with open(STATE_FILE) as f:
+                last = json.load(f)
+            if last.get("id") == latest_id:
+                print("No new articles — skipping", flush=True)
+                has_new = False
 
-    if has_new:
-        # 保存新文章信息（generate_podcast.py --auto 会读取这个文件）
-        article_data = {
-            "id": latest_id,
-            "title": latest_title,
-            "link": latest_link,
-        }
-        with open(STATE_FILE, "w") as f:
-            json.dump(article_data, f, ensure_ascii=False, indent=2)
-        print(f"New article found: {latest_title}")
+        if has_new:
+            article_data = {
+                "id": latest_id,
+                "title": latest_title,
+                "link": latest_link,
+            }
+            with open(STATE_FILE, "w") as f:
+                json.dump(article_data, f, ensure_ascii=False, indent=2)
+            print(f"New article found: {latest_title}", flush=True)
 
-    # GitHub Actions: always exit 0, use output to decide next step
-    write_github_output("has_new", "true" if has_new else "false")
-    return 0
+        with open(OUTPUT_FILE, "w") as f:
+            f.write("true" if has_new else "false")
+        print(f"has_new={has_new}", flush=True)
+
+    except Exception as e:
+        print(f"ERROR: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        with open(OUTPUT_FILE, "w") as f:
+            f.write("false")
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

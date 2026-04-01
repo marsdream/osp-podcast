@@ -26,9 +26,10 @@ jobs:
       - name: Check new articles
         id: check
         run: |
-          python scripts/check_articles.py >> $GITHUB_OUTPUT 2>&1
-          # Always exit 0; has_new output tells us whether to continue
-          echo "has_new=$(python -c 'import json; d=open(\"last_article.json\") if __import__(\"os\").path.exists(\"last_article.json\") else None; print(d and json.load(d).get(\"id\",\"\") if d else \"\")')" >> $GITHUB_OUTPUT
+          set -x
+          python scripts/check_articles.py
+          cat has_new.txt
+        shell: bash
 
       - name: Generate podcast
         if: steps.check.outputs.has_new == 'true'
@@ -41,8 +42,7 @@ jobs:
 
       - name: Update RSS
         if: steps.check.outputs.has_new == 'true'
-        run: |
-          python scripts/update_rss.py
+        run: python scripts/update_rss.py
 
       - name: Upload to GitHub Releases
         if: steps.check.outputs.has_new == 'true'
@@ -51,7 +51,7 @@ jobs:
           files: episodes/*.mp3
           tag_name: episode-${{ github.run_number }}
           name: Episode ${{ github.run_number }}
-          body: "osp.io 自动生成播客"
+          body: osp.io 自动生成播客
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
