@@ -2,6 +2,7 @@
 """
 check_articles.py - 检查 osp.io 是否有新文章
 返回 0 表示有新文章，1 表示没有新文章
+写入 GITHUB_OUTPUT（GitHub Actions）供后续步骤使用
 """
 import feedparser
 import json
@@ -10,7 +11,6 @@ import sys
 
 RSS_URL = "https://osp.io/feed"
 STATE_FILE = "last_article.json"
-OUTPUT_FILE = os.environ.get("GITHUB_OUTPUT", os.path.join(os.path.dirname(__file__), "..", "last_article.json"))
 
 
 def main():
@@ -32,7 +32,7 @@ def main():
             print("No new articles")
             return 1
 
-    # 保存新文章信息
+    # 保存新文章信息（generate_podcast.py --auto 会读取这个文件）
     article_data = {
         "id": latest_id,
         "title": latest_title,
@@ -40,13 +40,6 @@ def main():
     }
     with open(STATE_FILE, "w") as f:
         json.dump(article_data, f, ensure_ascii=False, indent=2)
-
-    # 输出 GitHub Actions 环境变量
-    if os.environ.get("GITHUB_OUTPUT"):
-        with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-            f.write(f"ARTICLE_TITLE={latest_title}\n")
-            f.write(f"ARTICLE_LINK={latest_link}\n")
-            f.write(f"ARTICLE_ID={latest_id}\n")
 
     print(f"New article found: {latest_title}")
     return 0

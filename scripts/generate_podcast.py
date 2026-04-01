@@ -162,6 +162,7 @@ def main():
     parser = argparse.ArgumentParser(description="生成 osp.io 播客")
     parser.add_argument("--title", help="文章标题")
     parser.add_argument("--link", help="文章链接")
+    parser.add_argument("--auto", action="store_true", help="自动从 RSS 获取最新文章")
     parser.add_argument("--api-key", help="API Key（默认从 OPENAI_API_KEY 环境变量读取）")
     parser.add_argument("--base-url", default="https://openrouter.ai/api/v1", help="API Base URL")
     parser.add_argument("--model", default="deepseek/deepseek-chat-v3-0324:free", help="模型名称")
@@ -171,7 +172,16 @@ def main():
     # 获取文章
     title = args.title
     content = ""
-    if args.link:
+
+    if args.auto:
+        # 自动从 RSS 获取最新文章
+        print("从 osp.io RSS 获取最新文章...")
+        title, content = fetch_article_content("https://osp.io/feed")
+        if not title:
+            print("ERROR: 无法获取文章内容")
+            sys.exit(1)
+        print(f"文章: {title}")
+    elif args.link:
         title, content = fetch_article_content(args.link)
         if not title:
             print("ERROR: 无法获取文章内容")
