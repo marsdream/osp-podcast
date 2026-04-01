@@ -38,6 +38,9 @@ PODCAST_SCRIPT_TEMPLATE = """你是一个播客编剧。请根据以下文章内
 - 结尾：感谢收听，下期再见
 - 不要出现"首先、其次、最后"这类僵硬结构
 - 不要自称主播，可以用"咱们、我觉得、其实"
+- 禁止出现任何音效、配乐、旁白描述（如"【音效】"、"【轻快的片头音效】"、"（笑声）"、"（停顿）"、"（笑）"等）
+- 只输出纯对话，每行格式：主播：xxx 或 专家：xxx
+- 不要在对话里加括号说明角色语气
 
 文章内容：
 {content}
@@ -117,6 +120,20 @@ def synthesize_audio(text, voice, output_path):
     return True
 
 
+def clean_sound_effects(text):
+    """去掉括号里的音效/旁白提示，只留对话"""
+    import re
+    # 去掉【】、"音效"、"旁白"等所有括号内容
+    text = re.sub(r'【[^】]*】', '', text)  # 【...】
+    text = re.sub(r'（[^）]*）', '', text)  # （...）
+    text = re.sub(r'\([^)]*\)', '', text)   # (...)
+    text = re.sub(r'\[.*?\]', '', text)     # [...]
+    text = re.sub(r'音效[:：].*?(?=\n|$)', '', text)
+    text = re.sub(r'旁白[:：].*?(?=\n|$)', '', text)
+    text = re.sub(r'笑声[:：]', '', text)
+    text = re.sub(r'停顿[:：]', '', text)
+    return text.strip()
+
 def parse_script_to_segments(script):
     """把脚本解析成[（角色, 文本)]列表"""
     segments = []
@@ -130,6 +147,11 @@ def parse_script_to_segments(script):
         line = line.strip()
         if not line:
             continue
+        # 过滤音效描述行
+        if re.match(r'^【.*】$', line) or re.match(r'^（.*）$', line):
+            continue
+        if '音效' in line or '旁白' in line or line.startswith('笑声') or line.startswith('停顿'):
+            continue
         # 识别角色
         if "主播" in line or "女声" in line or ":" in line:
             if current_role and current_text:
@@ -141,19 +163,21 @@ def parse_script_to_segments(script):
                 text_part = parts[1].strip()
                 role = "host" if any(r in role_part for r in ["主播", "女声", "晓晓"]) else "expert"
                 current_role = role
-                current_text = [text_part]
+                current_text = [clean_sound_effects(text_part)]
             else:
                 current_role = "host"
                 current_text = [line]
         elif current_role:
-            current_text.append(line)
+            current_text.append(clean_sound_effects(line))
         else:
             # 开头段落
             current_role = "host"
-            current_text.append(line)
+            current_text.append(clean_sound_effects(line))
 
     if current_role and current_text:
-        segments.append((current_role, "".join(current_text)))
+        joined = "".join(current_text).strip()
+        if joined:
+            segments.append((current_role, joined))
 
     return segments
 
