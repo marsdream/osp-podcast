@@ -4,16 +4,20 @@ generate_podcast.py - 生成播客音频
 从 osp.io RSS 获取文章，生成播客对话脚本，用 Edge-TTS 合成音频
 
 依赖:
-  pip install feedparser requests edge-tts
+  pip install feedparser requests edge-tts openai
 
 用法:
   python generate_podcast.py [--title "标题"] [--link "链接"]
+
+环境变量:
+  OPENAI_API_KEY   - OpenAI / OpenRouter API Key（必填）
+  LLM_BASE_URL     - API base URL，默认 https://openrouter.ai/api/v1
+  LLM_MODEL        - 模型，默认 deepseek/deepseek-chat-v3-0324:free
 """
 import os
 import sys
 import json
 import subprocess
-import tempfile
 import argparse
 from datetime import datetime
 
@@ -64,20 +68,30 @@ def fetch_article_content(url):
     return None, None
 
 
-def generate_script(title, content, api_key=None):
-    """调用 OpenAI API 生成播客脚本"""
+def generate_script(title, content, api_key=None, base_url=None, model=None):
+    """调用 OpenAI 兼容 API（OpenRouter/Gemini/本地Ollama）生成播客脚本"""
     try:
         import openai
     except ImportError:
         print("ERROR: openai not installed. Run: pip install openai")
         return None
 
-    client = openai.OpenAI(api_key=api_key or os.environ.get("OPENAI_API_KEY"))
+    key = api_key or os.environ.get("OPENAI_API_KEY")
+    if not key:
+        print("ERROR: OPENAI_API_KEY not set")
+        return None
+
+    url = base_url or os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
+    model_name = model or os.environ.get("LLM_MODEL", "deepseek/deepseek-chat-v3-0324:free")
+
+    print(f"Using LLM: {model_name} via {url}")
+
+    client = openai.OpenAI(api_key=key, base_url=url)
 
     prompt = PODCAST_SCRIPT_TEMPLATE.format(content=content[:3000])
 
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model=model_name,
         messages=[
             {"role": "system", "content": "你是一个专业的中文播客编剧。"},
             {"role": "user", "content": prompt}
@@ -148,7 +162,9 @@ def main():
     parser = argparse.ArgumentParser(description="生成 osp.io 播客")
     parser.add_argument("--title", help="文章标题")
     parser.add_argument("--link", help="文章链接")
-    parser.add_argument("--api-key", help="OpenAI API Key")
+    parser.add_argument("--api-key", help="API Key（默认从 OPENAI_API_KEY 环境变量读取）")
+    parser.add_argument("--base-url", default="https://openrouter.ai/api/v1", help="API Base URL")
+    parser.add_argument("--model", default="deepseek/deepseek-chat-v3-0324:free", help="模型名称")
     parser.add_argument("--output-dir", default="episodes", help="输出目录")
     args = parser.parse_args()
 
@@ -168,7 +184,12 @@ def main():
 
     # 生成脚本
     print("生成播客脚本...")
-    script = generate_script(title, content, args.api_key)
+    script = generate_script(
+        title, content,
+        api_key=args.api_key,
+        base_url=args.base_url,
+        model=args.model
+    )
     if not script:
         print("ERROR: 脚本生成失败")
         sys.exit(1)
