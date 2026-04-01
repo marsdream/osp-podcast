@@ -44,10 +44,17 @@ jobs:
       - name: Update RSS
         run: python scripts/update_rss.py
 
+      - name: Prepare pages files
+        run: |
+          mkdir -p docs/episodes
+          cp feed.xml docs/
+          cp -r episodes/*.mp3 docs/episodes/ 2>/dev/null || true
+          cp episodes/*.json docs/episodes/ 2>/dev/null || true
+
       - name: Deploy to GitHub Pages
         if: success()
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./docs
           publish_branch: gh-pages
