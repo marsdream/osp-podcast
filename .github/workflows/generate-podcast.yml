@@ -26,10 +26,9 @@ jobs:
       - name: Check new articles
         id: check
         run: |
-          set -x
+          # check_articles.py writes has_new=true/false to GITHUB_OUTPUT
           python scripts/check_articles.py
-          cat has_new.txt
-        shell: bash
+          # GITHUB_OUTPUT is consumed by steps.check.outputs.has_new
 
       - name: Generate podcast
         if: steps.check.outputs.has_new == 'true'
@@ -37,8 +36,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LLM_BASE_URL: https://openrouter.ai/api/v1
           LLM_MODEL: deepseek/deepseek-chat-v3-0324:free
-        run: |
-          python scripts/generate_podcast.py --auto
+        run: python scripts/generate_podcast.py --auto
 
       - name: Update RSS
         if: steps.check.outputs.has_new == 'true'
