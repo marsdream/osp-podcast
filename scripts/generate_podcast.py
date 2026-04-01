@@ -1,56 +1,83 @@
 #!/usr/bin/env python3
 """
-generate_podcast.py - 生成播客音频
-从 osp.io RSS 获取文章，生成播客对话脚本，用 Edge-TTS 合成音频
+generate_podcast.py - 生成 osp.io 播客音频
+从 osp.io RSS 获取文章，用 AI 生成播客对话脚本，Edge-TTS 合成音频
 
 依赖:
-  pip install feedparser requests edge-tts openai
-
-用法:
-  python generate_podcast.py [--title "标题"] [--link "链接"]
+  pip install feedparser edge-tts openai
 
 环境变量:
-  OPENAI_API_KEY   - OpenAI / OpenRouter API Key（必填）
+  OPENAI_API_KEY   - OpenRouter API Key
   LLM_BASE_URL     - API base URL，默认 https://openrouter.ai/api/v1
-  LLM_MODEL        - 模型，默认 qwen-plus
+  LLM_MODEL        - 模型，默认 qwen/qwen-plus
 """
 import os
 import sys
 import json
+import re
 import subprocess
 import argparse
 from datetime import datetime
 
-# 尝试导入，缺失时给出友好提示
 try:
     import feedparser
 except ImportError:
     print("ERROR: feedparser not installed. Run: pip install feedparser")
     sys.exit(1)
 
-PODCAST_SCRIPT_TEMPLATE = """你是一个播客编剧。请根据以下文章内容，撰写一段中文播客对话脚本。
+# 用 Podcast-Generator 的 JSON prompt 技术
+PODCAST_PROMPT_TEMPLATE = """* **Output Format:** No explanatory text！Make sure the language of the output content is Chinese
 
-要求：
-- 角色：主播（女声）、技术专家（男声）交替对话
-- 时长：约3-5分钟
-- 风格：轻松自然，像两个人聊天，不要播音腔
-- 开头：欢迎收听开源派技术播客
-- 结尾：感谢收听，下期再见
-- 不要出现"首先、其次、最后"这类僵硬结构
-- 不要自称主播，可以用"咱们、我觉得、其实"
-- 禁止出现任何音效、配乐、旁白描述（如"【音效】"、"【轻快的片头音效】"、"（笑声）"、"（停顿）"、"（笑）"等）
-- 只输出纯对话，每行格式：主播：xxx 或 专家：xxx
-- 不要在对话里加括号说明角色语气
+<podcast_generation_system>
+You are a master podcast scriptwriter, adept at transforming diverse input content into a lively, engaging, and natural-sounding conversation between multiple distinct podcast hosts.
 
-文章内容：
-{content}
+<input>
+  <podcast_settings>
+    <num_speakers>2</num_speakers>
+    <turn_pattern>random</turn_pattern>
+  </podcast_settings>
+  <source_content>
+{{content}}
+  </source_content>
+</input>
 
-播客脚本：
+<guidelines>
+1. **Distinct Host Personas:**
+   * Speaker 0 (主播/女声): 引导对话，热情活泼，像朋友聊天，风格轻松
+   * Speaker 1 (专家/男声): 技术深度，用通俗语言解释，有深度但不装
+
+2. **Natural Dialogue:** 使用真实口语，像两个人在咖啡馆聊天。不要"首先、其次、最后"。用"咱们、其实、你知道吗、对对对"。
+
+3. **Pure Dialog Only:** dialog 字段里只放对话内容，不要任何角色前缀。不要"主播："、"专家："、"speaker："这类标签。
+
+4. **Random Turn Pattern:** 两人自然交替，类似真实聊天节奏。
+
+5. **Duration:** 约 3-5 分钟的对话量，内容要充实。
+</guidelines>
+
+<output_format>
+{{
+"podcast_transcripts": [
+  {{
+    "speaker_id": 0,
+    "dialog": "大家好，欢迎来到开源派！今天我们来聊聊"
+  }},
+  {{
+    "speaker_id": 1,
+    "dialog": "对，这个话题很有意思，我来给大家讲讲"
+  }}
+]
+}}
+</output_format>
+</podcast_generation_system>
+
+Transform the source material into a lively and engaging podcast conversation. The final output is a JSON string without code blocks. No explanatory text!
 """
 
-EDGE_TTS_VOICES = {
-    "host": "zh-CN-XiaoxiaoNeural",   # 女声-晓晓
-    "expert": "zh-CN-YunyangNeural",   # 男声-云扬
+# speaker_id → Edge-TTS voice
+SPEAKER_VOICES = {
+    0: "zh-CN-XiaoxiaoNeural",   # 女声-晓晓
+    1: "zh-CN-YunyangNeural",    # 男声-云扬
 }
 
 
@@ -59,7 +86,6 @@ def fetch_article_content(url):
     feed = feedparser.parse(url)
     if feed.entries:
         entry = feed.entries[0]
-        # 尝试获取完整内容
         content = ""
         if hasattr(entry, "content") and entry.content:
             content = entry.content[0].value
@@ -67,31 +93,32 @@ def fetch_article_content(url):
             content = entry.summary
         else:
             content = entry.get("description", "")
-        return entry.title, content
-    return None, None
+        return entry.title, content, entry.get("link", "")
+    return None, None, ""
 
 
 def generate_script(title, content, api_key=None, base_url=None, model=None):
-    """调用 OpenAI 兼容 API（OpenRouter/Gemini/本地Ollama）生成播客脚本"""
+    """调用 OpenAI 兼容 API 生成播客脚本（JSON 格式）"""
     try:
         import openai
     except ImportError:
         print("ERROR: openai not installed. Run: pip install openai")
-        return None
+        return None, None
 
     key = api_key or os.environ.get("OPENAI_API_KEY")
     if not key:
         print("ERROR: OPENAI_API_KEY not set")
-        return None
+        return None, None
 
     url = base_url or os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
-    model_name = model or os.environ.get("LLM_MODEL", "qwen-plus")
+    model_name = model or os.environ.get("LLM_MODEL", "qwen/qwen-plus")
 
     print(f"Using LLM: {model_name} via {url}")
 
     client = openai.OpenAI(api_key=key, base_url=url)
 
-    prompt = PODCAST_SCRIPT_TEMPLATE.format(content=content[:3000])
+    # Podcast-Generator 风格的 XML prompt
+    prompt = PODCAST_PROMPT_TEMPLATE.replace("{{content}}", content[:4000])
 
     response = client.chat.completions.create(
         model=model_name,
@@ -99,10 +126,27 @@ def generate_script(title, content, api_key=None, base_url=None, model=None):
             {"role": "system", "content": "你是一个专业的中文播客编剧。"},
             {"role": "user", "content": prompt}
         ],
-        max_tokens=2000,
+        max_tokens=3000,
         temperature=0.7
     )
-    return response.choices[0].message.content
+
+    raw = response.choices[0].message.content
+
+    # 提取 JSON（去掉 markdown code blocks）
+    raw = raw.strip()
+    raw = re.sub(r'^```json\s*', '', raw)
+    raw = re.sub(r'^```\s*', '', raw)
+    raw = re.sub(r'\s*```$', '', raw)
+
+    try:
+        data = json.loads(raw)
+        transcripts = data.get("podcast_transcripts", [])
+        print(f"解析到 {len(transcripts)} 段对话")
+        return transcripts, raw
+    except json.JSONDecodeError as e:
+        print(f"JSON 解析失败: {e}")
+        print(f"Raw: {raw[:300]}")
+        return None, raw
 
 
 def synthesize_audio(text, voice, output_path):
@@ -120,68 +164,6 @@ def synthesize_audio(text, voice, output_path):
     return True
 
 
-def clean_sound_effects(text):
-    """去掉括号里的音效/旁白提示，只留对话"""
-    import re
-    # 去掉【】、"音效"、"旁白"等所有括号内容
-    text = re.sub(r'【[^】]*】', '', text)  # 【...】
-    text = re.sub(r'（[^）]*）', '', text)  # （...）
-    text = re.sub(r'\([^)]*\)', '', text)   # (...)
-    text = re.sub(r'\[.*?\]', '', text)     # [...]
-    text = re.sub(r'音效[:：].*?(?=\n|$)', '', text)
-    text = re.sub(r'旁白[:：].*?(?=\n|$)', '', text)
-    text = re.sub(r'笑声[:：]', '', text)
-    text = re.sub(r'停顿[:：]', '', text)
-    return text.strip()
-
-def parse_script_to_segments(script):
-    """把脚本解析成[（角色, 文本)]列表"""
-    segments = []
-    import re
-    # 简单分割：按行处理，识别角色
-    lines = script.split("\n")
-    current_role = None
-    current_text = []
-
-    for line in lines:
-        line = line.strip()
-        if not line:
-            continue
-        # 过滤音效描述行
-        if re.match(r'^【.*】$', line) or re.match(r'^（.*）$', line):
-            continue
-        if '音效' in line or '旁白' in line or line.startswith('笑声') or line.startswith('停顿'):
-            continue
-        # 识别角色
-        if "主播" in line or "女声" in line or ":" in line:
-            if current_role and current_text:
-                segments.append((current_role, "".join(current_text)))
-                current_text = []
-            if ":" in line:
-                parts = line.split(":", 1)
-                role_part = parts[0].strip()
-                text_part = parts[1].strip()
-                role = "host" if any(r in role_part for r in ["主播", "女声", "晓晓"]) else "expert"
-                current_role = role
-                current_text = [clean_sound_effects(text_part)]
-            else:
-                current_role = "host"
-                current_text = [line]
-        elif current_role:
-            current_text.append(clean_sound_effects(line))
-        else:
-            # 开头段落
-            current_role = "host"
-            current_text.append(clean_sound_effects(line))
-
-    if current_role and current_text:
-        joined = "".join(current_text).strip()
-        if joined:
-            segments.append((current_role, joined))
-
-    return segments
-
-
 def main():
     parser = argparse.ArgumentParser(description="生成 osp.io 播客")
     parser.add_argument("--title", help="文章标题")
@@ -189,76 +171,76 @@ def main():
     parser.add_argument("--auto", action="store_true", help="自动从 RSS 获取最新文章")
     parser.add_argument("--api-key", help="API Key（默认从 OPENAI_API_KEY 环境变量读取）")
     parser.add_argument("--base-url", default="https://openrouter.ai/api/v1", help="API Base URL")
-    parser.add_argument("--model", default="qwen-plus", help="模型名称")
+    parser.add_argument("--model", default="qwen/qwen-plus", help="模型名称")
     parser.add_argument("--output-dir", default="episodes", help="输出目录")
     args = parser.parse_args()
 
     # 获取文章
-    title = args.title
+    title = ""
     content = ""
+    link = ""
 
     if args.auto:
-        # 自动从 RSS 获取最新文章
         print("从 osp.io RSS 获取最新文章...")
-        title, content = fetch_article_content("https://osp.io/feed")
+        title, content, link = fetch_article_content("https://osp.io/feed")
         if not title:
             print("ERROR: 无法获取文章内容")
             sys.exit(1)
         print(f"文章: {title}")
     elif args.link:
-        title, content = fetch_article_content(args.link)
+        title, content, link = fetch_article_content(args.link)
         if not title:
             print("ERROR: 无法获取文章内容")
             sys.exit(1)
         print(f"文章: {title}")
-
-    if not content:
-        print("ERROR: 缺少文章内容")
+    else:
+        print("ERROR: 需要 --auto 或 --link")
         sys.exit(1)
 
     # 生成脚本
     print("生成播客脚本...")
-    script = generate_script(
+    transcripts, raw_script = generate_script(
         title, content,
         api_key=args.api_key,
         base_url=args.base_url,
         model=args.model
     )
-    if not script:
+    if not transcripts:
         print("ERROR: 脚本生成失败")
         sys.exit(1)
 
-    print("脚本生成完成:")
-    print(script[:200] + "...")
-
-    # 解析并生成音频
-    segments = parse_script_to_segments(script)
-    print(f"生成 {len(segments)} 段音频...")
-
+    # 生成音频
     episode_id = datetime.now().strftime("%Y%m%d")
     output_dir = args.output_dir
     os.makedirs(output_dir, exist_ok=True)
 
     temp_files = []
-    for i, (role, text) in enumerate(segments):
-        voice = EDGE_TTS_VOICES.get(role, EDGE_TTS_VOICES["host"])
+    for i, item in enumerate(transcripts):
+        speaker_id = item.get("speaker_id", 0)
+        text = item.get("dialog", "").strip()
+        if not text:
+            continue
+        voice = SPEAKER_VOICES.get(speaker_id, SPEAKER_VOICES[0])
         temp_file = os.path.join(output_dir, f"temp_{episode_id}_{i}.mp3")
-        temp_files.append((role, voice, temp_file, text))
+        temp_files.append((speaker_id, voice, temp_file, text))
 
-    # 并行生成（edge-tts 可以多进程）
+    print(f"生成 {len(temp_files)} 段音频...")
+
+    # 并行生成
     import concurrent.futures
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         futures = {
-            executor.submit(synthesize_audio, text, voice, temp_file): (role, text[:50])
-            for role, voice, temp_file, text in temp_files
+            executor.submit(synthesize_audio, text, voice, temp_file): (speaker_id, text[:40])
+            for speaker_id, voice, temp_file, text in temp_files
         }
         for future in concurrent.futures.as_completed(futures):
-            role, snippet = futures[future]
+            speaker_id, snippet = futures[future]
             try:
                 success = future.result()
+                role = "女声" if speaker_id == 0 else "男声"
                 print(f"  [{'✓' if success else '✗'}] {role}: {snippet}...")
             except Exception as e:
-                print(f"  [✗] {role}: {e}")
+                print(f"  [✗] {e}")
 
     # 合并音频
     concat_file = os.path.join(output_dir, f"concat_{episode_id}.txt")
@@ -289,10 +271,12 @@ def main():
     # 保存元数据
     meta = {
         "id": episode_id,
-        "title": title or args.title,
+        "title": title,
+        "link": link,
         "date": datetime.now().isoformat(),
         "audio_file": os.path.basename(output_mp3),
-        "script": script[:500]
+        "file_size_kb": os.path.getsize(output_mp3) // 1024,
+        "num_segments": len(temp_files)
     }
     with open(os.path.join(output_dir, f"episode_{episode_id}.json"), "w") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
