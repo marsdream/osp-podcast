@@ -22,7 +22,7 @@ def get_episodes():
         if f.startswith("episode_") and f.endswith(".json"):
             path = os.path.join(EPISODES_DIR, f)
             with open(path) as fp:
-                episodes.append(json.load(fp)))
+                episodes.append(json.load(fp))
     episodes.sort(key=lambda x: x.get("date", ""), reverse=True)
     return episodes
 
