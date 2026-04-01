@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # 获取完整历史，找 last_article.json
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -34,16 +34,12 @@ jobs:
         id: check
         run: python scripts/check_articles.py
 
-      # 测试阶段暂时跳过判断，方便调试
-      # - name: Generate podcast
-      #   if: steps.check.outputs.has_new == 'true'
-
       - name: Generate podcast
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LLM_BASE_URL: https://openrouter.ai/api/v1
-          LLM_MODEL: qwen/qwen-plus
-        run: python scripts/generate_podcast.py --auto
+          LLM_MODEL: qwen3:1.7b  # 升级到 qwen3 1.7B
+        run: python scripts/generate_podcast.py --auto --base-url https://openrouter.ai/api/v1 --model qwen3:1.7b
 
       - name: Update RSS
         run: python scripts/update_rss.py
