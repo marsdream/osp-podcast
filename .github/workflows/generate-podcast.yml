@@ -40,16 +40,6 @@ jobs:
       - name: Update RSS
         run: python scripts/update_rss.py
 
-      - name: Upload to GitHub Releases
-        uses: softprops/action-gh-release@v2
-        with:
-          files: episodes/*.mp3
-          tag_name: episode-${{ github.run_number }}
-          name: Episode ${{ github.run_number }}
-          body: osp.io 自动生成播客
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
