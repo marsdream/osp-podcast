@@ -3,15 +3,12 @@ name: Auto Generate Podcast
 on:
   schedule:
     - cron: '0 1 * * 1'  # 每周一 UTC 1:00 = 北京时间 9:00
-
   workflow_dispatch: {}     # 支持手动触发
 
 permissions:
   contents: write
   pages: write
   id-token: write
-
-jobs:
 
 jobs:
   generate:
@@ -29,14 +26,13 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y ffmpeg && pip install feedparser edge-tts openai ffmpeg-python
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          pip install feedparser edge-tts openai ffmpeg-python
 
       - name: Check new articles
         id: check
-        run: |
-          # check_articles.py writes has_new=true/false to GITHUB_OUTPUT
-          python scripts/check_articles.py
-          # GITHUB_OUTPUT is consumed by steps.check.outputs.has_new
+        run: python scripts/check_articles.py
 
       - name: Generate podcast
         env:
@@ -49,6 +45,7 @@ jobs:
         run: python scripts/update_rss.py
 
       - name: Deploy to GitHub Pages
+        if: success()
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
