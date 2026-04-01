@@ -12,7 +12,7 @@ generate_podcast.py - 生成播客音频
 环境变量:
   OPENAI_API_KEY   - OpenAI / OpenRouter API Key（必填）
   LLM_BASE_URL     - API base URL，默认 https://openrouter.ai/api/v1
-  LLM_MODEL        - 模型，默认 deepseek-ai/DeepSeek-V3:free
+  LLM_MODEL        - 模型，默认 qwen3.6-plus-preview
 """
 import os
 import sys
@@ -82,7 +82,7 @@ def generate_script(title, content, api_key=None, base_url=None, model=None):
         return None
 
     url = base_url or os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
-    model_name = model or os.environ.get("LLM_MODEL", "deepseek-ai/DeepSeek-V3:free")
+    model_name = model or os.environ.get("LLM_MODEL", "qwen3.6-plus-preview")
 
     print(f"Using LLM: {model_name} via {url}")
 
@@ -165,7 +165,7 @@ def main():
     parser.add_argument("--auto", action="store_true", help="自动从 RSS 获取最新文章")
     parser.add_argument("--api-key", help="API Key（默认从 OPENAI_API_KEY 环境变量读取）")
     parser.add_argument("--base-url", default="https://openrouter.ai/api/v1", help="API Base URL")
-    parser.add_argument("--model", default="deepseek-ai/DeepSeek-V3:free", help="模型名称")
+    parser.add_argument("--model", default="qwen3.6-plus-preview", help="模型名称")
     parser.add_argument("--output-dir", default="episodes", help="输出目录")
     args = parser.parse_args()
 
