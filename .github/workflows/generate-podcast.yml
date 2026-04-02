@@ -35,13 +35,15 @@ jobs:
         run: python scripts/check_articles.py
 
       - name: Generate podcast
+        if: steps.check.outputs.has_new == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LLM_BASE_URL: https://openrouter.ai/api/v1
-          LLM_MODEL: qwen3:1.7b  # 升级到 qwen3 1.7B
+          LLM_MODEL: qwen3:1.7b
         run: python scripts/generate_podcast.py --auto --base-url https://openrouter.ai/api/v1 --model qwen3:1.7b
 
       - name: Update RSS
+        if: steps.check.outputs.has_new == 'true'
         run: python scripts/update_rss.py
 
       - name: Prepare pages files
