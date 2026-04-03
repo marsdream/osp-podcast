@@ -12,7 +12,8 @@ EPISODES_DIR = "episodes"
 RSS_FILE = "feed.xml"
 PODCAST_TITLE = "开源派技术播客"
 PODCAST_DESC = "每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报"
-PODCAST_LINK = "https://marsdream.github.io/osp-podcast/"
+import os
+PODCAST_LINK = os.environ.get("PODCAST_BASE_URL", "https://marsdream.github.io/osp-podcast/")
 
 
 def get_episodes():

@@ -1,0 +1,75 @@
+name: Auto Generate Podcast (CF)
+
+on:
+  schedule:
+    - cron: '0 22 * * 1,3,5'  # 每周一三五 UTC 22:00 = 北京时间 06:00
+  workflow_dispatch: {}     # 支持手动触发
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 获取完整历史，找 last_article.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install feedparser edge-tts openai ffmpeg-python requests
+
+      - name: Check new articles
+        id: check
+        run: |
+          python scripts/check_articles.py
+
+      - name: Generate podcast
+        if: steps.check.outputs.has_new == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LLM_BASE_URL: https://openrouter.ai/api/v1
+          LLM_MODEL: deepseek/deepseek-chat-v3-0324:free
+        run: python scripts/generate_podcast.py --auto
+
+      - name: Update RSS (podcast.herebuy.us)
+        if: steps.check.outputs.has_new == 'true'
+        env:
+          PODCAST_BASE_URL: https://podcast.herebuy.us/
+        run: python scripts/update_rss.py
+
+      - name: Upload to GitHub Releases
+        if: steps.check.outputs.has_new == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: episodes/*.mp3
+          tag_name: episode-${{ github.run_number }}
+          name: Episode ${{ github.run_number }}
+          body: osp.io 自动生成播客
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to Cloudflare Pages
+        if: steps.check.outputs.has_new == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npm install -g wrangler
+          wrangler pages deploy . --project-name=osp-podcast --commit-dirty=true
+
+      - name: Update gh-pages (with rebase)
+        if: steps.check.outputs.has_new == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull origin gh-pages --rebase || true
+          git add episodes/ feed.xml index.html last_article.json
+          git diff --cached --quiet && echo "No changes to commit" || git commit -m "Update episodes from workflow $(date -u +%Y%m%d-%H%M%S)"
+          git push origin gh-pages || echo "Push failed"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
