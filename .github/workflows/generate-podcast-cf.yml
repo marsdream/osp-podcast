@@ -65,21 +65,11 @@ jobs:
           projectName: osp-podcast
           directory: ./docs
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          enableBranchDeployments: false
-          enableSingleDeployments: false
 
-      - name: Update GitHub gh-pages
+      - name: Deploy to GitHub Pages
         if: steps.check.outputs.has_new == 'true'
-        run: |
-          # 直接用 pages-action 生成的 docs 目录来更新 gh-pages
-          cp -r docs/* gh-pages/ 2>/dev/null || mkdir -p gh-pages && cp -r docs/* gh-pages/
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout gh-pages || git checkout --orphan gh-pages
-          git rm -rf episodes/ feed.xml 2>/dev/null || true
-          cp -r docs/episodes docs/feed.xml . 2>/dev/null || true
-          git add episodes/ feed.xml
-          git diff --cached --quiet && echo "No changes" || git commit -m "Update: $(date -u +%Y%m%d)"
-          git push origin gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          publish_branch: gh-pages
