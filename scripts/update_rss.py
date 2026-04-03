@@ -24,7 +24,7 @@ def get_episodes():
     """读取所有 episode JSON 元数据"""
     episodes = []
     for f in os.listdir(EPISODES_DIR):
-        if f.startswith("episode_") and f.endswith(".json"):
+        if f.endswith(".json") and f not in ("last_article.json",):
             path = os.path.join(EPISODES_DIR, f)
             with open(path) as fp:
                 episodes.append(json.load(fp))
