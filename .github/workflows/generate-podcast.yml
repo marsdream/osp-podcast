@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update && sudo apt-get install -y ffmpeg
-          pip install feedparser edge-tts openai ffmpeg-python
+          pip install feedparser edge-tts openai ffmpeg-python requests
 
       - name: Check new articles
         id: check
