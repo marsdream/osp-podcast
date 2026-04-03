@@ -34,7 +34,7 @@ You are a master podcast scriptwriter, adept at transforming diverse input conte
 <input>
   <podcast_settings>
     <num_speakers>2</num_speakers>
-    <turn_pattern>random</turn_pattern>
+    <turn_pattern>strict_alternating</turn_pattern>
   </podcast_settings>
   <source_content>
 {{content}}
@@ -208,6 +208,14 @@ def main():
     if not transcripts:
         print("ERROR: 脚本生成失败")
         sys.exit(1)
+
+    # 强制交替：如果LLM生成的不是严格交替，强行纠正
+    forced = []
+    for i, item in enumerate(transcripts):
+        item = dict(item)
+        item['speaker_id'] = i % 2  # 强制 0,1,0,1,...
+        forced.append(item)
+    transcripts = forced
 
     # 生成音频
     episode_id = datetime.now().strftime("%Y%m%d")
