@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
+    permissions:
+      contents: write
+      deployments: write
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -44,17 +48,6 @@ jobs:
           PODCAST_BASE_URL: https://podcast.herebuy.us/
         run: python scripts/update_rss.py
 
-      - name: Upload to GitHub Releases
-        if: steps.check.outputs.has_new == 'true'
-        uses: softprops/action-gh-release@v2
-        with:
-          files: episodes/*.mp3
-          tag_name: episode-${{ github.run_number }}
-          name: Episode ${{ github.run_number }}
-          body: osp.io 自动生成播客
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Prepare pages files
         if: steps.check.outputs.has_new == 'true'
         run: |
@@ -62,11 +55,6 @@ jobs:
           cp feed.xml docs/
           cp episodes/*.mp3 docs/episodes/ 2>/dev/null || true
           cp episodes/*.json docs/episodes/ 2>/dev/null || true
-          # 同步到 gh-pages
-          mkdir -p gh-pages/episodes
-          cp feed.xml gh-pages/
-          cp episodes/*.mp3 gh-pages/episodes/ 2>/dev/null || true
-          cp episodes/*.json gh-pages/episodes/ 2>/dev/null || true
 
       - name: Deploy to Cloudflare Pages
         if: steps.check.outputs.has_new == 'true'
@@ -80,14 +68,18 @@ jobs:
           enableBranchDeployments: false
           enableSingleDeployments: false
 
-      - name: Update gh-pages (with rebase)
+      - name: Update GitHub gh-pages
         if: steps.check.outputs.has_new == 'true'
         run: |
+          # 直接用 pages-action 生成的 docs 目录来更新 gh-pages
+          cp -r docs/* gh-pages/ 2>/dev/null || mkdir -p gh-pages && cp -r docs/* gh-pages/
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull origin gh-pages --rebase || true
-          git add episodes/ feed.xml index.html last_article.json
-          git diff --cached --quiet && echo "No changes to commit" || git commit -m "Update episodes from workflow $(date -u +%Y%m%d-%H%M%S)"
-          git push origin gh-pages || echo "Push failed"
+          git checkout gh-pages || git checkout --orphan gh-pages
+          git rm -rf episodes/ feed.xml 2>/dev/null || true
+          cp -r docs/episodes docs/feed.xml . 2>/dev/null || true
+          git add episodes/ feed.xml
+          git diff --cached --quiet && echo "No changes" || git commit -m "Update: $(date -u +%Y%m%d)"
+          git push origin gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
