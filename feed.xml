@@ -8,10 +8,16 @@
     <itunes:category text="Technology" />
     <itunes:author>开源派</itunes:author>
     <item>
+      <title>在Mac上跑397B大模型？这位大哥真的做到了</title>
+      <description />
+      <pubDate>2026-04-03T22:54:23.574336</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-397b-20260403.mp3" type="audio/mpeg" length="4438844" />
+    </item>
+    <item>
       <title>开源爆发之年：AI Agent 如何改变软件开发</title>
       <description />
-      <pubDate>2026-04-03T22:30:53.147682</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260403.mp3" type="audio/mpeg" length="4420844" />
+      <pubDate>2026-04-03T22:37:04.258677</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-ai-agent-20260403.mp3" type="audio/mpeg" length="4960124" />
     </item>
     <item>
       <title>OBra新作superpowers：把AI编程方法论开源了</title>
