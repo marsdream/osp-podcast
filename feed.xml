@@ -1,28 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"
-  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
-  xmlns:atom="http://www.w3.org/2005/Atom">
-<channel>
-  <title>开源派技术播客</title>
-  <description>每周自动抓取 osp.io 最新文章，生成中文播客</description>
-  <language>zh-CN</language>
-  <link>https://marsdream.github.io/osp-podcast/</link>
-  <atom:link href="https://marsdream.github.io/osp-podcast/feed.xml" rel="self" type="application/rss+xml"/>
-  <itunes:category text="Technology"/>
-  <itunes:author>开源派</itunes:author>
-
-  <item>
-    <title>AI Agent如何改变软件开发——开源生态爆发之年</title>
-    <description>2025年被称为AI Agent元年，开源社区贡献了大量优秀的Agent框架和工具。本期聊聊AI Agent如何重塑软件开发的工作方式。</description>
-    <pubDate>Fri, 03 Apr 2026 12:00:00 +0000</pubDate>
-    <enclosure url="https://marsdream.github.io/osp-podcast/episodes/osp-podcast-v6-20260403.mp3" type="audio/mpeg" length="7078656"/>
-  </item>
-
-  <item>
-    <title>OBra新作superpowers：把AI编程方法论开源了</title>
-    <description>欢迎收听开源派技术播客...</description>
-    <pubDate>Tue, 01 Apr 2026 00:00:00 +0000</pubDate>
-    <enclosure url="https://marsdream.github.io/osp-podcast/episodes/osp-podcast-demo-20260401.mp3" type="audio/mpeg" length="94485"/>
-  </item>
-</channel>
+<?xml version='1.0' encoding='utf-8'?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>开源派技术播客</title>
+    <description>每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报</description>
+    <link>https://podcast.herebuy.us/</link>
+    <language>zh-CN</language>
+    <itunes:category text="Technology" />
+    <itunes:author>开源派</itunes:author>
+    <item>
+      <title>开源爆发之年：AI Agent 如何改变软件开发</title>
+      <description />
+      <pubDate>2026-04-03T22:30:53.147682</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260403.mp3" type="audio/mpeg" length="4420844" />
+    </item>
+    <item>
+      <title>OBra新作superpowers：把AI编程方法论开源了</title>
+      <description>（Demo版本）欢迎收听开源派技术播客...</description>
+      <pubDate>2026-04-01T00:00:00</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-demo-20260401.mp3" type="audio/mpeg" length="94485" />
+    </item>
+  </channel>
 </rss>
