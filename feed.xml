@@ -25,5 +25,11 @@
       <pubDate>2026-04-01T00:00:00</pubDate>
       <enclosure url="https://podcast.herebuy.us/episodes/demo-final.mp3" type="audio/mpeg" length="646316" />
     </item>
+    <item>
+      <title>AI Skills for Developers</title>
+      <description>Exploring the best AI skills for developers in 2026</description>
+      <pubDate>2026-04-03T23:00:00+08:00</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/podcast-ai-skills-english.mp3" type="audio/mpeg" length="5768568" />
+    </item>
   </channel>
 </rss>
