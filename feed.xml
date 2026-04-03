@@ -8,6 +8,12 @@
     <itunes:category text="Technology" />
     <itunes:author>开源派</itunes:author>
     <item>
+      <title>AI Skills for Developers - English Version</title>
+      <description />
+      <pubDate>2026-04-03T23:00:00+08:00</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/podcast-ai-skills-english.mp3" type="audio/mpeg" length="5768568" />
+    </item>
+    <item>
       <title>在Mac上跑397B大模型？这位大哥真的做到了</title>
       <description />
       <pubDate>2026-04-03T22:54:23.574336</pubDate>
@@ -21,15 +27,9 @@
     </item>
     <item>
       <title>OBra新作superpowers：把AI编程方法论开源了</title>
-      <description>（Demo版本）欢迎收听开源派技术播客</description>
+      <description>（Demo版本）欢迎收听开源派技术播客...</description>
       <pubDate>2026-04-01T00:00:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/demo-final.mp3" type="audio/mpeg" length="646316" />
-    </item>
-    <item>
-      <title>AI Skills for Developers</title>
-      <description>Exploring the best AI skills for developers in 2026</description>
-      <pubDate>2026-04-03T23:00:00+08:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/podcast-ai-skills-english.mp3" type="audio/mpeg" length="5768568" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-demo-20260401.mp3" type="audio/mpeg" length="94485" />
     </item>
   </channel>
 </rss>
