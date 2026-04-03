@@ -60,3 +60,13 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           publish_branch: gh-pages
+
+      - name: Deploy to Cloudflare Pages
+        if: steps.check.outputs.has_new == 'true'
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: osp-podcast
+          directory: ./gh-pages
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
