@@ -8,8 +8,8 @@ import feedparser
 import json
 import os
 import sys
-import urllib.request
-import urllib.error
+import base64
+import requests
 
 RSS_URL = "https://osp.io/feed"
 STATE_FILE = "last_article.json"
@@ -27,45 +27,39 @@ def gh_output(key, value):
 
 def github_api_get(path):
     """GitHub REST API GET"""
-    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GITHUBAPI_TOKEN")
+    token = os.environ.get("GITHUB_TOKEN")
     url = f"https://api.github.com/{path}"
-    req = urllib.request.Request(url)
+    headers = {"Accept": "application/vnd.github.v3+json"}
     if token:
-        req.add_header("Authorization", f"Bearer {token}")
-    req.add_header("Accept", "application/vnd.github.v3+json")
-    try:
-        with urllib.request.urlopen(req) as resp:
-            return json.loads(resp.read())
-    except urllib.error.HTTPError as e:
-        if e.code == 404:
-            return None
-        raise
+        headers["Authorization"] = f"token {token}"
+    resp = requests.get(url, headers=headers, timeout=10)
+    if resp.status_code == 404:
+        return None
+    resp.raise_for_status()
+    return resp.json()
 
 
 def github_api_put(path, payload):
     """GitHub REST API PUT (create/update file)"""
-    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GITHUBAPI_TOKEN")
+    token = os.environ.get("GITHUB_TOKEN")
     url = f"https://api.github.com/{path}"
-    data = json.dumps(payload).encode()
-    req = urllib.request.Request(url, data=data, method="PUT")
+    headers = {"Content-Type": "application/vnd.github.v3+json"}
     if token:
-        req.add_header("Authorization", f"Bearer {token}")
-    req.add_header("Content-Type", "application/vnd.github.v3+json")
-    with urllib.request.urlopen(req) as resp:
-        return json.loads(resp.read())
+        headers["Authorization"] = f"token {token}"
+    resp = requests.put(url, headers=headers, json=payload, timeout=10)
+    resp.raise_for_status()
+    return resp.json()
 
 
 def push_state_file(article_data):
     """把 last_article.json 推回 GitHub main 分支"""
-    import base64
     content = json.dumps(article_data, ensure_ascii=False, indent=2)
-    content_b64 = base64.b64encode(content.encode()).decode()
 
     # 获取当前文件的 SHA（如果存在）
     existing = github_api_get(f"repos/{REPO}/contents/{STATE_FILE}?ref={BRANCH}")
     payload = {
         "message": f"chore: update article state to {article_data['title'][:30]}",
-        "content": content_b64,
+        "content": base64.b64encode(content.encode()).decode(),
         "branch": BRANCH,
     }
     if existing:
