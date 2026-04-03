@@ -13,7 +13,11 @@ RSS_FILE = "feed.xml"
 PODCAST_TITLE = "开源派技术播客"
 PODCAST_DESC = "每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报"
 import os
-PODCAST_LINK = os.environ.get("PODCAST_BASE_URL", "https://marsdream.github.io/osp-podcast/")
+# GitHub Pages 镜像（国内访问不稳）和 Cloudflare Pages（稳定）
+GITHUB_AUDIO_BASE = "https://marsdream.github.io/osp-podcast"
+CF_AUDIO_BASE = "https://podcast.herebuy.us"
+# enclosure 用 CF Pages 地址（国内外都稳定）
+PODCAST_LINK = os.environ.get("PODCAST_BASE_URL", "https://podcast.herebuy.us/")
 
 
 def get_episodes():
@@ -51,12 +55,12 @@ def build_rss(episodes):
 
         audio_file = ep.get("audio_file", "")
         if audio_file:
-            audio_path = f"{PODCAST_LINK}episodes/{audio_file}"
+            audio_url = f"{CF_AUDIO_BASE}/episodes/{audio_file}"
             audio_size = 0
             full_path = os.path.join(EPISODES_DIR, audio_file)
             if os.path.exists(full_path):
                 audio_size = os.path.getsize(full_path)
-            ET.SubElement(item, "enclosure", url=audio_path,
+            ET.SubElement(item, "enclosure", url=audio_url,
                          type="audio/mpeg", length=str(audio_size))
 
     return rss
