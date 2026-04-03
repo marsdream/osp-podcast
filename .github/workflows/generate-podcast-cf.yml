@@ -53,14 +53,30 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Prepare pages files
+        if: steps.check.outputs.has_new == 'true'
+        run: |
+          mkdir -p docs/episodes
+          cp feed.xml docs/
+          cp episodes/*.mp3 docs/episodes/ 2>/dev/null || true
+          cp episodes/*.json docs/episodes/ 2>/dev/null || true
+          # 同步到 gh-pages
+          mkdir -p gh-pages/episodes
+          cp feed.xml gh-pages/
+          cp episodes/*.mp3 gh-pages/episodes/ 2>/dev/null || true
+          cp episodes/*.json gh-pages/episodes/ 2>/dev/null || true
+
       - name: Deploy to Cloudflare Pages
         if: steps.check.outputs.has_new == 'true'
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          npm install -g wrangler
-          wrangler pages deploy . --project-name=osp-podcast --commit-dirty=true
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: osp-podcast
+          directory: ./docs
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          enableBranchDeployments: false
+          enableSingleDeployments: false
 
       - name: Update gh-pages (with rebase)
         if: steps.check.outputs.has_new == 'true'
