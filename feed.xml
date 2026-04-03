@@ -12,6 +12,13 @@
   <itunes:author>开源派</itunes:author>
 
   <item>
+    <title>AI Agent如何改变软件开发——开源生态爆发之年</title>
+    <description>2025年被称为AI Agent元年，开源社区贡献了大量优秀的Agent框架和工具。本期聊聊AI Agent如何重塑软件开发的工作方式。</description>
+    <pubDate>Fri, 03 Apr 2026 12:00:00 +0000</pubDate>
+    <enclosure url="https://marsdream.github.io/osp-podcast/episodes/osp-podcast-v6-20260403.mp3" type="audio/mpeg" length="7078656"/>
+  </item>
+
+  <item>
     <title>OBra新作superpowers：把AI编程方法论开源了</title>
     <description>欢迎收听开源派技术播客...</description>
     <pubDate>Tue, 01 Apr 2026 00:00:00 +0000</pubDate>
