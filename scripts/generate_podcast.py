@@ -219,11 +219,38 @@ def main():
     link = ""
 
     if args.auto:
-        print("从 osp.io RSS 获取最新文章...")
-        title, content, link = fetch_article_content("https://osp.io/feed")
+        print("从 osp.io RSS 获取最新文章（自动去重）...")
+        # 获取 feed.xml 里已有的 episode 标题
+        try:
+            existing_feed = feedparser.parse("https://podcast.herebuy.us/feed.xml")
+            existing_titles = {e.title for e in existing_feed.entries}
+            print(f"Feed 已有 {len(existing_titles)} 个 episode，去重中...")
+        except Exception as e:
+            existing_titles = set()
+            print(f"(无法读取 feed.xml，跳过去重: {e})")
+
+        # 遍历 osp.io RSS，找第一个未生成的 article
+        osp_feed = feedparser.parse("https://osp.io/feed")
+        title, content, link = None, None, ""
+        for entry in osp_feed.entries[:10]:
+            t = entry.title.strip()
+            if t in existing_titles:
+                print(f"  [跳过] {t} (已在 feed 中)")
+                continue
+            # 找到第一篇新的
+            if hasattr(entry, "content") and entry.content:
+                c = entry.content[0].value
+            elif hasattr(entry, "summary"):
+                c = entry.summary
+            else:
+                c = entry.get("description", "")
+            title, content, link = t, c, entry.get("link", "")
+            print(f"  [新文] {title} -> {link}")
+            break
+
         if not title:
-            print("ERROR: 无法获取文章内容")
-            sys.exit(1)
+            print("没有新文章需要生成，退出。")
+            sys.exit(0)
         print(f"文章: {title}")
     elif args.link:
         title, content, link = fetch_article_content(args.link)
