@@ -35,6 +35,13 @@ jobs:
         id: check
         run: python scripts/check_articles.py
 
+      - name: Download intro/outro templates
+        run: |
+          mkdir -p templates
+          curl -sL -o templates/intro.mp3 https://raw.githubusercontent.com/marsdream/osp-podcast/main/templates/intro.mp3
+          curl -sL -o templates/outro.mp3 https://raw.githubusercontent.com/marsdream/osp-podcast/main/templates/outro.mp3
+          echo "Templates downloaded"
+
       - name: Generate podcast
         if: steps.check.outputs.has_new == 'true'
         env:

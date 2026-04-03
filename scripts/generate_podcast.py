@@ -1,15 +1,7 @@
 #!/usr/bin/env python3
 """
 generate_podcast.py - 生成 osp.io 播客音频
-从 osp.io RSS 获取文章，用 AI 生成播客对话脚本，Edge-TTS 合成音频
-
-依赖:
-  pip install feedparser edge-tts openai
-
-环境变量:
-  OPENAI_API_KEY   - OpenRouter API Key
-  LLM_BASE_URL     - API base URL，默认 https://openrouter.ai/api/v1
-  LLM_MODEL        - 模型，默认 qwen/qwen-plus
+从 osp.io RSS 获取文章，用 AI 生成播客对话脚本，Edge-TTS 合成音频，拼接片头片尾
 """
 import os
 import sys
@@ -79,6 +71,11 @@ SPEAKER_VOICES = {
     0: "zh-CN-XiaoxiaoNeural",   # 女声-晓晓
     1: "zh-CN-YunyangNeural",    # 男声-云扬
 }
+
+# 片头片尾音乐（相对于 repo 根目录）
+TEMPLATE_DIR = "templates"
+INTRO_FILE = "templates/intro.mp3"
+OUTRO_FILE = "templates/outro.mp3"
 
 
 def fetch_article_content(url):
@@ -164,6 +161,43 @@ def synthesize_audio(text, voice, output_path):
     return True
 
 
+def concat_audio(input_files, output_file):
+    """用 ffmpeg 拼接多个音频文件"""
+    concat_file = output_file + ".txt"
+    with open(concat_file, "w") as f:
+        for path in input_files:
+            if os.path.exists(path):
+                f.write(f"file '{os.path.abspath(path)}'\n")
+
+    result = subprocess.run([
+        "ffmpeg", "-y",
+        "-f", "concat", "-safe", "0",
+        "-i", concat_file,
+        "-codec:a", "libmp3lame", "-b:a", "192k",
+        output_file
+    ], capture_output=True, text=True)
+
+    os.remove(concat_file)
+    if result.returncode != 0:
+        print(f"FFmpeg concat error: {result.stderr}")
+        return False
+    return True
+
+
+def ensure_template(template_path, repo_dir):
+    """如果模板文件不在本地，从 GitHub 下载"""
+    if os.path.exists(template_path):
+        return True
+    name = os.path.basename(template_path)
+    url = f"https://raw.githubusercontent.com/marsdream/osp-podcast/main/templates/{name}"
+    print(f"  模板 {name} 不在本地，从 GitHub 下载...")
+    result = subprocess.run(
+        ["curl", "-sL", "-o", template_path, url],
+        capture_output=True, text=True
+    )
+    return os.path.exists(template_path)
+
+
 def main():
     parser = argparse.ArgumentParser(description="生成 osp.io 播客")
     parser.add_argument("--title", help="文章标题")
@@ -174,6 +208,10 @@ def main():
     parser.add_argument("--model", default="qwen/qwen-plus", help="模型名称")
     parser.add_argument("--output-dir", default="episodes", help="输出目录")
     args = parser.parse_args()
+
+    # 确定 repo 根目录（脚本所在目录的父目录）
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    repo_dir = os.path.dirname(script_dir)
 
     # 获取文章
     title = ""
@@ -250,28 +288,51 @@ def main():
             except Exception as e:
                 print(f"  [✗] {e}")
 
-    # 合并音频
+    # 检查片头片尾模板
+    intro_path = os.path.join(repo_dir, INTRO_FILE)
+    outro_path = os.path.join(repo_dir, OUTRO_FILE)
+    ensure_template(intro_path, repo_dir)
+    ensure_template(outro_path, repo_dir)
+
+    # 拼接音频：intro + dialog + outro
+    output_mp3 = os.path.join(output_dir, f"osp-podcast-{episode_id}.mp3")
+
+    # 先合并对话
     concat_file = os.path.join(output_dir, f"concat_{episode_id}.txt")
     with open(concat_file, "w") as f:
         for _, _, temp_file, _ in temp_files:
             if os.path.exists(temp_file):
                 f.write(f"file '{os.path.abspath(temp_file)}'\n")
 
-    output_mp3 = os.path.join(output_dir, f"osp-podcast-{episode_id}.mp3")
+    dialog_mp3 = os.path.join(output_dir, f"dialog_{episode_id}.mp3")
     result = subprocess.run([
-        "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-        "-i", concat_file, "-codec:a", "libmp3lame", "-b:a", "128k", output_mp3
+        "ffmpeg", "-y",
+        "-f", "concat", "-safe", "0",
+        "-i", concat_file, "-codec:a", "libmp3lame", "-b:a", "192k",
+        dialog_mp3
     ], capture_output=True, text=True)
 
     if result.returncode != 0:
-        print(f"FFmpeg merge error: {result.stderr}")
+        print(f"FFmpeg dialog merge error: {result.stderr}")
         sys.exit(1)
+
+    # 拼接片头 + 对话 + 片尾
+    parts = []
+    if os.path.exists(intro_path):
+        parts.append(intro_path)
+    parts.append(dialog_mp3)
+    if os.path.exists(outro_path):
+        parts.append(outro_path)
+
+    concat_audio(parts, output_mp3)
 
     # 清理临时文件
     for _, _, temp_file, _ in temp_files:
         if os.path.exists(temp_file):
             os.remove(temp_file)
     os.remove(concat_file)
+    if os.path.exists(dialog_mp3):
+        os.remove(dialog_mp3)
 
     print(f"播客生成完成: {output_mp3}")
     print(f"文件大小: {os.path.getsize(output_mp3) / 1024:.1f} KB")
