@@ -2,6 +2,14 @@
 """
 generate_podcast.py - 生成 osp.io 播客音频
 从 osp.io RSS 获取文章，用 AI 生成播客对话脚本，Edge-TTS 合成音频
+
+依赖:
+  pip install feedparser edge-tts openai
+
+环境变量:
+  OPENAI_API_KEY   - OpenRouter API Key
+  LLM_BASE_URL     - API base URL，默认 https://openrouter.ai/api/v1
+  LLM_MODEL        - 模型，默认 qwen/qwen-plus
 """
 import os
 import sys
@@ -9,7 +17,6 @@ import json
 import re
 import subprocess
 import argparse
-import shutil
 from datetime import datetime
 
 try:
@@ -72,11 +79,6 @@ SPEAKER_VOICES = {
     0: "zh-CN-XiaoxiaoNeural",   # 女声-晓晓
     1: "zh-CN-YunyangNeural",    # 男声-云扬
 }
-
-# 模板路径（GitHub Actions 会把仓库 checkout 下来）
-TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "..", "templates")
-INTRO_FILE = os.path.join(TEMPLATE_DIR, "intro.mp3")
-OUTRO_FILE = os.path.join(TEMPLATE_DIR, "outro.mp3")
 
 
 def fetch_article_content(url):
@@ -162,62 +164,6 @@ def synthesize_audio(text, voice, output_path):
     return True
 
 
-def has_intro_outro():
-    """检查是否有片头片尾音乐模板"""
-    return os.path.exists(INTRO_FILE) and os.path.exists(OUTRO_FILE)
-
-
-def add_intro_outro(input_mp3, output_mp3):
-    """给音频加上片头片尾音乐（淡入淡出）"""
-    if not has_intro_outro():
-        # 没有模板就直接复制
-        shutil.copy2(input_mp3, output_mp3)
-        return
-
-    intro = INTRO_FILE
-    outro = OUTRO_FILE
-
-    # 拼接：intro + content + outro
-    # 先给 intro 淡入，outro 淡出
-    concat_file = output_mp3 + ".concat.txt"
-    abs_input = os.path.abspath(input_mp3)
-    abs_intro = os.path.abspath(intro)
-    abs_outro = os.path.abspath(outro)
-
-    with open(concat_file, "w") as f:
-        f.write(f"file '{abs_intro}'\n")
-        f.write(f"file '{abs_input}'\n")
-        f.write(f"file '{abs_outro}'\n")
-
-    # 用 filter_complex 实现淡入淡出
-    # afade 参数：t=in/d=1（1秒淡入）, t=out/st=0/d=1（outro开头1秒淡出）
-    result = subprocess.run([
-        "ffmpeg", "-y",
-        "-f", "concat", "-safe", "0", "-i", concat_file,
-        "-filter_complex",
-        "[0]afade=t=in:st=0:d=1[intro];[1]apad=whole_dur=1[content];[2]afade=t=out:st=0:d=1[outro];[intro][content][outro]concat=n=3:v=0:a=1[out]",
-        "-map", "[out]",
-        "-codec:a", "libmp3lame", "-b:a", "128k",
-        output_mp3
-    ], capture_output=True, text=True)
-
-    # 如果 filter_complex 失败，尝试简单拼接
-    if result.returncode != 0:
-        print(f"Filter failed, using simple concat: {result.stderr[:200]}")
-        result = subprocess.run([
-            "ffmpeg", "-y",
-            "-f", "concat", "-safe", "0", "-i", concat_file,
-            "-codec:a", "libmp3lame", "-b:a", "128k",
-            output_mp3
-        ], capture_output=True, text=True)
-
-    os.remove(concat_file)
-    if result.returncode == 0:
-        print(f"Added intro/outro music to final output")
-    else:
-        print(f"Intro/outro merge failed: {result.stderr[:200]}")
-
-
 def main():
     parser = argparse.ArgumentParser(description="生成 osp.io 播客")
     parser.add_argument("--title", help="文章标题")
@@ -296,17 +242,17 @@ def main():
             except Exception as e:
                 print(f"  [✗] {e}")
 
-    # 合并音频（裸音频，无模板）
+    # 合并音频
     concat_file = os.path.join(output_dir, f"concat_{episode_id}.txt")
     with open(concat_file, "w") as f:
         for _, _, temp_file, _ in temp_files:
             if os.path.exists(temp_file):
                 f.write(f"file '{os.path.abspath(temp_file)}'\n")
 
-    content_mp3 = os.path.join(output_dir, f"content_{episode_id}.mp3")
+    output_mp3 = os.path.join(output_dir, f"osp-podcast-{episode_id}.mp3")
     result = subprocess.run([
         "ffmpeg", "-y", "-f", "concat", "-safe", "0",
-        "-i", concat_file, "-codec:a", "libmp3lame", "-b:a", "128k", content_mp3
+        "-i", concat_file, "-codec:a", "libmp3lame", "-b:a", "128k", output_mp3
     ], capture_output=True, text=True)
 
     if result.returncode != 0:
@@ -319,17 +265,8 @@ def main():
             os.remove(temp_file)
     os.remove(concat_file)
 
-    # 加入片头片尾
-    final_mp3 = os.path.join(output_dir, f"osp-podcast-{episode_id}.mp3")
-    print("Adding intro/outro music...")
-    add_intro_outro(content_mp3, final_mp3)
-
-    # 清理中间文件
-    if os.path.exists(content_mp3):
-        os.remove(content_mp3)
-
-    print(f"播客生成完成: {final_mp3}")
-    print(f"文件大小: {os.path.getsize(final_mp3) / 1024:.1f} KB")
+    print(f"播客生成完成: {output_mp3}")
+    print(f"文件大小: {os.path.getsize(output_mp3) / 1024:.1f} KB")
 
     # 保存元数据
     meta = {
@@ -337,10 +274,9 @@ def main():
         "title": title,
         "link": link,
         "date": datetime.now().isoformat(),
-        "audio_file": os.path.basename(final_mp3),
-        "file_size_kb": os.path.getsize(final_mp3) // 1024,
-        "num_segments": len(temp_files),
-        "has_intro_outro": has_intro_outro()
+        "audio_file": os.path.basename(output_mp3),
+        "file_size_kb": os.path.getsize(output_mp3) // 1024,
+        "num_segments": len(temp_files)
     }
     with open(os.path.join(output_dir, f"episode_{episode_id}.json"), "w") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
