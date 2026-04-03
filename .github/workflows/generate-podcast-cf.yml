@@ -21,7 +21,9 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install feedparser edge-tts openai ffmpeg-python requests
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          pip install feedparser edge-tts openai ffmpeg-python requests
 
       - name: Check new articles
         id: check
