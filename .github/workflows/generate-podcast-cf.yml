@@ -58,6 +58,8 @@ jobs:
           python scripts/build_index_html.py
 
       - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: npx wrangler pages deploy docs --project-name=osp-podcast --skip-caching
 
       - name: Deploy to GitHub Pages
