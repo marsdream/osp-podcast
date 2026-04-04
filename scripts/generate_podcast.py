@@ -202,6 +202,7 @@ def main():
     parser = argparse.ArgumentParser(description="生成 osp.io 播客")
     parser.add_argument("--title", help="文章标题")
     parser.add_argument("--link", help="文章链接")
+    parser.add_argument("--content", help="文章内容（直接传入，省去抓取）")
     parser.add_argument("--auto", action="store_true", help="自动从 RSS 获取最新文章")
     parser.add_argument("--api-key", help="API Key（默认从 OPENAI_API_KEY 环境变量读取）")
     parser.add_argument("--base-url", default="https://openrouter.ai/api/v1", help="API Base URL")
@@ -252,9 +253,14 @@ def main():
             print("没有新文章需要生成，退出。")
             sys.exit(0)
         print(f"文章: {title}")
-    elif args.link:
-        title, content, link = fetch_article_content(args.link)
-        if not title:
+    elif args.link or args.title:
+        if args.link:
+            title, content, link = fetch_article_content(args.link)
+        if not content and args.content:
+            content = args.content
+        if not title and args.title:
+            title = args.title
+        if not content:
             print("ERROR: 无法获取文章内容")
             sys.exit(1)
         print(f"文章: {title}")
@@ -283,7 +289,12 @@ def main():
     transcripts = forced
 
     # 生成音频
-    episode_id = datetime.now().strftime("%Y%m%d")
+    # 用文章标题的 slug 避免同一天多次生成时文件名冲突
+    import unicodedata, hashlib
+    slug = unicodedata.normalize('NFKC', title)[:30]
+    slug = re.sub(r'[^\w\u4e00-\u9fff]', '_', slug)
+    slug = re.sub(r'_+', '_', slug).strip('_')
+    episode_id = f"{datetime.now().strftime('%Y%m%d')}_{slug}"
     output_dir = args.output_dir
     os.makedirs(output_dir, exist_ok=True)
 
