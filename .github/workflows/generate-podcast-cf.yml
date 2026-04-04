@@ -49,22 +49,16 @@ jobs:
         run: python scripts/update_rss.py
 
       - name: Prepare pages files
-        if: steps.check.outputs.has_new == 'true'
         run: |
           mkdir -p docs/episodes
           cp feed.xml docs/
           cp episodes/*.mp3 docs/episodes/ 2>/dev/null || true
           cp episodes/*.json docs/episodes/ 2>/dev/null || true
+          # 生成首页 index.html（每次都要更新，保持和 feed.xml 一致）
+          python scripts/build_index_html.py
 
       - name: Deploy to Cloudflare Pages
-        if: steps.check.outputs.has_new == 'true'
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: osp-podcast
-          directory: ./docs
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        run: npx wrangler pages deploy docs --project-name=osp-podcast --branch=production --skip-caching
 
       - name: Deploy to GitHub Pages
         if: steps.check.outputs.has_new == 'true'
