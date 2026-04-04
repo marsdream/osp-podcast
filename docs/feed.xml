@@ -3,57 +3,27 @@
   <channel>
     <title>开源派技术播客</title>
     <description>每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报</description>
-    <link>https://podcast.herebuy.us</link>
+    <link>https://podcast.herebuy.us/</link>
     <language>zh-CN</language>
     <itunes:category text="Technology" />
     <itunes:author>开源派</itunes:author>
-    <item>
-      <title>OpenHub - 手机上的开源 GitHub 客户端</title>
-      <description />
-      <pubDate>2026-04-04T16:45:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-openhub-20260404.mp3" type="audio/mpeg" length="4433754" />
-      <link>https://osp.io/archives/4428</link>
-    </item>
-    <item>
-      <title>AI圈最近流行”技能外包”：Skills是如何让AI变强的</title>
-      <description />
-      <pubDate>2026-04-04T11:22:59.273237</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_AI圈最近流行_技能外包_Skills是如何让AI变强的.mp3" type="audio/mpeg" length="2957084" />
-      <link>https://osp.io/archives/9906</link>
-    </item>
-    <item>
-      <title>一个人指挥一群AI干活：ClawTeam怎么让Agent自己组队</title>
-      <description />
-      <pubDate>2026-04-04T11:22:37.419537</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_一个人指挥一群AI干活_ClawTeam怎么让Agent自己.mp3" type="audio/mpeg" length="3161564" />
-      <link>https://osp.io/archives/9928</link>
-    </item>
     <item>
       <title>用 Rust 写一次，运行 everywhere：Dioxus 如何让前端变天？</title>
       <description />
       <pubDate>2026-04-04T11:16:00</pubDate>
       <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_用_Rust_写一次_运行_everywhere_Dioxu.mp3" type="audio/mpeg" length="4626764" />
-      <link>https://osp.io/archives/9912</link>
     </item>
     <item>
       <title>Deep-Live-Cam：一键换脸，门槛已经低到可怕了</title>
       <description />
       <pubDate>2026-04-04T11:15:00</pubDate>
       <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_Deep_Live_Cam_一键换脸_门槛已经低到可怕了.mp3" type="audio/mpeg" length="3978044" />
-      <link>https://osp.io/archives/9913</link>
     </item>
     <item>
       <title>NousResearch Hermes Agent：用结构化推理重新定义 AI 代理</title>
       <description />
       <pubDate>2026-04-04T11:10:00</pubDate>
       <enclosure url="https://podcast.herebuy.us/episodes/hermes-agent.mp3" type="audio/mpeg" length="4113404" />
-      <link>https://osp.io/archives/9918</link>
-    </item>
-    <item>
-      <title>不用写代码也能做AI应用？这个开源平台有点东西</title>
-      <description />
-      <pubDate>2026-04-04T03:39:38+0000</pubDate>
-      <link>https://osp.io/archives/9926</link>
     </item>
     <item>
       <title>AI Agent 开源新物种 - Qwen TTS v6版</title>
@@ -72,32 +42,18 @@
       <description />
       <pubDate>2026-04-03T22:54:23.574336</pubDate>
       <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-397b-20260403.mp3" type="audio/mpeg" length="4438844" />
-      <link>https://osp.io/archives/9924</link>
     </item>
     <item>
       <title>开源爆发之年：AI Agent 如何改变软件开发</title>
       <description />
       <pubDate>2026-04-03T22:37:04.258677</pubDate>
       <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-ai-agent-20260403.mp3" type="audio/mpeg" length="4960124" />
-      <link>https://osp.io/archives/9846</link>
     </item>
     <item>
       <title>OBra新作superpowers：把AI编程方法论开源了</title>
-      <description />
+      <description>（Demo版本）欢迎收听开源派技术播客...</description>
       <pubDate>2026-04-01T00:00:00</pubDate>
       <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-demo-20260401.mp3" type="audio/mpeg" length="94485" />
-    </item>
-    <item>
-      <title>微软搞不定的PDF提取？韩国人开源了个怪物</title>
-      <description />
-      <pubDate>2026-03-24T13:32:37+0000</pubDate>
-      <link>https://osp.io/archives/9899</link>
-    </item>
-    <item>
-      <title>在本地跑大模型：Ollama 让 AI 触手可及</title>
-      <description />
-      <pubDate>2026-03-23T09:23:41+0000</pubDate>
-      <link>https://osp.io/archives/9873</link>
     </item>
   </channel>
 </rss>
