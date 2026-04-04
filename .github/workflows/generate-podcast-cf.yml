@@ -58,7 +58,7 @@ jobs:
           python scripts/build_index_html.py
 
       - name: Deploy to Cloudflare Pages
-        run: npx wrangler pages deploy docs --project-name=osp-podcast --branch=production --skip-caching
+        run: npx wrangler pages deploy docs --project-name=osp-podcast --skip-caching
 
       - name: Deploy to GitHub Pages
         if: steps.check.outputs.has_new == 'true'
