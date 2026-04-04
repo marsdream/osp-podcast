@@ -60,7 +60,7 @@ jobs:
       - name: Deploy to Cloudflare Pages
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-        run: npx wrangler pages deploy docs --project-name=osp-podcast --skip-caching
+        run: npx wrangler@4.72.0 pages deploy docs --project-name=osp-podcast --skip-caching
 
       - name: Deploy to GitHub Pages
         if: steps.check.outputs.has_new == 'true'
