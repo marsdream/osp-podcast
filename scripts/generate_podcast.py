@@ -11,6 +11,7 @@ import subprocess
 import argparse
 import unicodedata
 from datetime import datetime
+from email.utils import parsedate_to_datetime
 
 try:
     import feedparser
@@ -183,7 +184,7 @@ JSON输出："""
 # 单篇文章处理（供 auto 模式循环调用）
 # =============================================================================
 
-def process_article(title, content, link, args):
+def process_article(title, content, link, args, pub_date=None):
     """处理单篇文章：生成脚本 → TTS → 拼接 → 保存元数据"""
     repo_dir = args.repo_dir
     output_dir = args.output_dir
@@ -281,12 +282,22 @@ def process_article(title, content, link, args):
     size_kb = os.path.getsize(output_mp3) / 1024
     print(f"  播客生成完成: {output_mp3} ({size_kb:.0f} KB)")
 
+    # 统一转为 ISO 8601 格式（兼容 RSS pubDate 和字符串排序）
+    if pub_date:
+        try:
+            dt = parsedate_to_datetime(pub_date)
+            date_iso = dt.strftime('%Y-%m-%dT%H:%M:%S%z')
+        except Exception:
+            date_iso = pub_date
+    else:
+        date_iso = datetime.now().isoformat()
+
     # 保存元数据
     meta = {
         "id": episode_id,
         "title": title,
         "link": link,
-        "date": datetime.now().isoformat(),
+        "date": date_iso,
         "audio_file": os.path.basename(output_mp3),
         "file_size_kb": int(size_kb),
         "num_segments": len(temp_files)
@@ -347,6 +358,7 @@ def main():
             sys.exit(0)
 
         # 收集所有新文章（不在 existing_titles 里的）
+        # 按 osp.io 原始发布时间逆序（最新的在前），确保生成顺序和发布顺序一致
         new_articles = []
         for entry in osp_feed.entries[:20]:
             t = entry.title.strip()
@@ -358,7 +370,11 @@ def main():
                 c = entry.summary
             else:
                 c = entry.get("description", "")
-            new_articles.append((t, c, entry.get("link", "")))
+            # 用 osp.io 原始发布时间，用于 feed 排序
+            pub_date = getattr(entry, "published", None) or getattr(entry, "updated", None) or None
+            new_articles.append((t, c, entry.get("link", ""), pub_date))
+        # osp.io RSS 已经是最新文章在前，new_articles 顺序就是发布顺序
+        print(f"  [{len(new_articles)}] 篇，按 osp.io 发布顺序（最新→最老）")
 
         if not new_articles:
             print("没有新文章需要生成，退出。")
@@ -367,9 +383,9 @@ def main():
         print(f"发现 {len(new_articles)} 篇新文章，开始逐个生成...\n")
         success_count = 0
         fail_count = 0
-        for i, (title, content, link) in enumerate(new_articles, 1):
-            print(f"=== [{i}/{len(new_articles)}] {title} ===")
-            ok = process_article(title, content, link, args)
+        for i, (title, content, link, pub_date) in enumerate(new_articles, 1):
+            print(f"=== [{i}/{len(new_articles)}] {title} (osp: {pub_date or '?'}) ===")
+            ok = process_article(title, content, link, args, pub_date=pub_date)
             if ok:
                 success_count += 1
                 # 生成成功后，把这篇文章加入 existing_titles，防止同一篇被重复生成
