@@ -34,6 +34,8 @@ def get_remote_episodes():
             enclosure = entry.get("enclosure", {})
             if enclosure:
                 ep["enclosure_url"] = enclosure.get("url", "")
+            # osp.io 原文链接
+            ep["link"] = entry.get("link", "")
             episodes.append(ep)
         print(f"  远程 feed 有 {len(episodes)} 个 episodes")
         return episodes
@@ -64,6 +66,19 @@ def get_local_episodes():
     return episodes
 
 
+def get_episode_link(ep):
+    """获取 episode 对应的 osp.io 原文链接"""
+    # 本地 episodes/ 有 link 字段
+    if ep.get("link"):
+        return ep["link"]
+    # 远程 feed entries 有 link 字段
+    if ep.get("enclosure_url"):
+        # 从 enclosure_url 提取 osp.io 文章 ID 做简单映射
+        # enclosure_url 格式: https://podcast.herebuy.us/episodes/xxx.mp3
+        return ""
+    return ""
+
+
 def build_rss(remote_episodes, local_episodes):
     """合并远程 episodes 和本地新生成的 episodes"""
     # 用本地新生成的覆盖远程已有的（同一标题）
@@ -79,6 +94,7 @@ def build_rss(remote_episodes, local_episodes):
             "date": ep.get("date", ""),
             "audio_file": ep.get("audio_file", ""),
             "description": "",
+            "link": ep.get("link", ""),  # osp.io 原文链接
         }
 
     # 按日期倒序排列
@@ -120,6 +136,10 @@ def make_rss_xml(episodes):
         elif ep.get("enclosure_url"):
             ET.SubElement(item, "enclosure", url=ep["enclosure_url"],
                          type="audio/mpeg", length="0")
+        # 添加 osp.io 原文链接
+        ep_link = ep.get("link", "")
+        if ep_link:
+            ET.SubElement(item, "link").text = ep_link
 
     return rss
 
