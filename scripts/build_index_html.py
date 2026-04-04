@@ -21,6 +21,11 @@ def parse_feed():
         title_el = item.find('title')
         enclosure_el = item.find('enclosure')
         pubdate_el = item.find('pubDate')
+        link_el = item.find('link')
+        # link 可能在 link 标签或 href 属性里
+        osp_link = link_el.text if link_el is not None else ""
+        if not osp_link and link_el is not None:
+            osp_link = link_el.get('href', '')
         title = title_el.text if title_el is not None else "无标题"
         audio_url = enclosure_el.get('url') if enclosure_el is not None else ""
         pub_date = pubdate_el.text if pubdate_el is not None else ""
@@ -31,25 +36,25 @@ def parse_feed():
             date_str = dt.strftime('%Y-%m-%d')
         except Exception:
             date_str = pub_date[:10] if len(pub_date) >= 10 else pub_date
-        items.append({'title': title, 'audio_url': audio_url, 'date': date_str})
+        items.append({'title': title, 'audio_url': audio_url, 'date': date_str, 'osp_link': osp_link})
     return items
 
 
 def build_html(items):
     episodes_html = ""
     for ep in items:
+        title_link = ep.get('osp_link') or ep.get('audio_url') or '#'
         if ep['audio_url']:
             episodes_html += f"""<li>
-  <a href="{ep['audio_url']}" target="_blank">{ep['title']}</a>
+  <a href="{title_link}" target="_blank">{ep['title']}</a>
   <div class="date">📅 {ep['date']}</div>
   <audio controls src="{ep['audio_url']}"><a href="{ep['audio_url']}">下载音频</a></audio>
 </li>\n"""
         else:
             episodes_html += f"""<li>
-  <a href="#">{ep['title']}</a>
+  <a href="{title_link}" target="_blank">{ep['title']}</a>
   <div class="date">📅 {ep['date']}</div>
 </li>\n"""
-
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
