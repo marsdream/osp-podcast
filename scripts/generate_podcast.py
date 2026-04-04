@@ -11,6 +11,7 @@ import subprocess
 import argparse
 import unicodedata
 from datetime import datetime
+from email.utils import parsedate_to_datetime
 
 try:
     import feedparser
@@ -281,22 +282,21 @@ def process_article(title, content, link, args, pub_date=None):
     size_kb = os.path.getsize(output_mp3) / 1024
     print(f"  播客生成完成: {output_mp3} ({size_kb:.0f} KB)")
 
+    # 统一转为 ISO 8601 格式（兼容 RSS pubDate 和字符串排序）
+    if pub_date:
+        try:
+            dt = parsedate_to_datetime(pub_date)
+            date_iso = dt.strftime('%Y-%m-%dT%H:%M:%S%z')
+        except Exception:
+            date_iso = pub_date
+    else:
+        date_iso = datetime.now().isoformat()
+
     # 保存元数据
     meta = {
         "id": episode_id,
         "title": title,
         "link": link,
-        # 统一转为 ISO 8601 格式（兼容 RSS pubDate 和字符串排序）
-        import email.utils
-        if pub_date:
-            try:
-                from email.utils import parsedate_to_datetime
-                dt = parsedate_to_datetime(pub_date)
-                date_iso = dt.strftime('%Y-%m-%dT%H:%M:%S%z')
-            except Exception:
-                date_iso = pub_date  # fallback 保留原始格式
-        else:
-            date_iso = datetime.now().isoformat()
         "date": date_iso,
         "audio_file": os.path.basename(output_mp3),
         "file_size_kb": int(size_kb),
