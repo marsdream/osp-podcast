@@ -3,10 +3,17 @@
   <channel>
     <title>开源派技术播客</title>
     <description>每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报</description>
-    <link>https://podcast.herebuy.us</link>
+    <link>https://podcast.herebuy.us/</link>
     <language>zh-CN</language>
     <itunes:category text="Technology" />
     <itunes:author>开源派</itunes:author>
+    <item>
+      <title>Deep Learning深度学习：Ian Goodfellow AI经典教材</title>
+      <description />
+      <pubDate>2026-04-04T17:30:00</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-deeplearning-dylan-20260404.mp3" type="audio/mpeg" length="2693372" />
+      <link>https://osp.io/archives/3544</link>
+    </item>
     <item>
       <title>OpenHub - 手机上的开源 GitHub 客户端</title>
       <description />
