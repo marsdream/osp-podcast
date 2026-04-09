@@ -146,15 +146,19 @@ def generate_script(title, content, api_key=None, base_url=None, model=None):
 
     prompt = f"""你是一个播客编辑，根据以下文章内容，生成一段两人对话播客脚本。
 
+角色设定：
+- speaker_id=0 是梅梅，开源派作者，语气轻松活泼，爱用语气词（哇、嗯呢、你们知道吗），多提问，多感叹，自称"梅梅"
+- speaker_id=1 是开源君，开源派博主，语气沉稳专业但接地气，能用生活化比喻讲技术，自称"开源君"
+
 要求：
-- 两人交替发言（女声/男声），共8-15段对话
-- 女声先开始，每段不超过80字，语气活泼自然
+- 两人交替发言，共8-15段对话
+- 女声（梅梅）先开始，每段不超过80字，语气活泼自然
 - 内容要有观点碰撞，不是简单总结
 - 不要加任何描述性文字（如"[笑声]"、"（音乐）"）
-- 最后一段由女声引导关注/订阅
+- 最后一段由梅梅引导关注/订阅
 
-请用以下JSON格式输出（podcast_transcripts是包含dialog数组的对象，dialog数组每项有speaker_id 0或1，和dialog文字）：
-{{"podcast_transcripts": [{{"speaker_id": 0, "dialog": "女声内容"}}, {{"speaker_id": 1, "dialog": "男声内容"}}]}}
+请用以下JSON格式输出：
+{{"podcast_transcripts": [{{"speaker_id": 0, "dialog": "梅梅内容"}}, {{"speaker_id": 1, "dialog": "开源君内容"}}]}}
 
 文章标题：{title}
 文章内容：{content[:3000]}
