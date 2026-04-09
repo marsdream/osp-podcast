@@ -1,12 +1,33 @@
 <?xml version='1.0' encoding='utf-8'?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss xmlns:ns0="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
   <channel>
     <title>开源派技术播客</title>
     <description>每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报</description>
     <link>https://podcast.herebuy.us/</link>
     <language>zh-CN</language>
-    <itunes:category text="Technology" />
-    <itunes:author>开源派</itunes:author>
+    <ns0:category text="Technology" />
+    <ns0:author>开源派</ns0:author>
+    <item>
+      <title>Agent-Reach：给 AI Agent 装上互联网能力，一句话的事</title>
+      <description>欢迎收听开源派技术播客！</description>
+      <pubDate>2026-04-07T15:04:26+0000</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-agent-reach-20260407.mp3" type="audio/mpeg" length="4485644" />
+      <link>https://osp.io/archives/9997</link>
+    </item>
+    <item>
+      <title>SGLang 刷爆 GitHub 趋势：这个”省显存”的神器，让 AI 推理快到飞起</title>
+      <description>欢迎收听开源派技术播客！</description>
+      <pubDate>2026-04-05T13:48:10+0000</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-sglang-20260405.mp3" type="audio/mpeg" length="4242284" />
+      <link>https://osp.io/archives/9949</link>
+    </item>
+    <item>
+      <title>从聊天到行动：2026年AI Agent如何重塑人机协作</title>
+      <description>欢迎收听开源派技术播客！</description>
+      <pubDate>2026-04-05T12:03:25+0000</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-chat-to-action-20260405.mp3" type="audio/mpeg" length="4616684" />
+      <link>https://osp.io/archives/9967</link>
+    </item>
     <item>
       <title>Deep Learning深度学习：Ian Goodfellow AI经典教材</title>
       <description />
