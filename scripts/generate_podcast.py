@@ -343,13 +343,24 @@ def main():
         # AUTO 模式：循环处理所有待生成的新文章
         # ============================================================
         print("从 osp.io RSS 获取最新文章...")
-        # 获取 feed.xml 里已有的 episode 标题（作为去重集合）
+        # 获取 feed.xml 里已有的 episode 信息（标题 → 是否有音频 enclosure）
+        # 只跳过已有音频的条目；没有 enclosure 的条目会重新生成音频
         try:
             existing_feed = feedparser.parse("https://podcast.herebuy.us/feed.xml")
-            existing_titles = {e.title.strip() for e in existing_feed.entries}
-            print(f"Feed 已有 {len(existing_titles)} 个 episode，将跳过这些文章")
+            existing_info = {}  # title -> has_audio
+            for e in existing_feed.entries:
+                title = e.title.strip()
+                has_audio = False
+                if hasattr(e, 'enclosures') and e.enclosures:
+                    for enc in e.enclosures:
+                        if enc.get('type', '').startswith('audio/'):
+                            has_audio = True
+                            break
+                existing_info[title] = has_audio
+            audio_count = sum(1 for v in existing_info.values() if v)
+            print(f"Feed 已有 {len(existing_info)} 个 episode（{audio_count} 个有音频），将跳过有音频的条目")
         except Exception as e:
-            existing_titles = set()
+            existing_info = {}
             print(f"(无法读取 feed.xml，跳过去重: {e})")
 
         osp_feed = feedparser.parse("https://osp.io/feed")
@@ -357,12 +368,13 @@ def main():
             print("osp.io RSS 为空，退出。")
             sys.exit(0)
 
-        # 收集所有新文章（不在 existing_titles 里的）
+        # 收集所有新文章（没有音频 enclosure 的才处理）
         # 按 osp.io 原始发布时间逆序（最新的在前），确保生成顺序和发布顺序一致
         new_articles = []
         for entry in osp_feed.entries[:20]:
             t = entry.title.strip()
-            if t in existing_titles:
+            if existing_info.get(t, False):
+                # 已有音频，跳过
                 continue
             if hasattr(entry, "content") and entry.content:
                 c = entry.content[0].value
