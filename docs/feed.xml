@@ -8,6 +8,12 @@
     <itunes:category text="Technology" />
     <itunes:author>开源派</itunes:author>
     <item>
+      <title>SGLang 刷爆 GitHub 趋势：这个"省显存"的神器，让 AI 推理快到飞起</title>
+      <description>本期话题：SGLang——高性能大语言模型推理框架，RadixAttention 技术实现 KV Cache 自动复用，吞吐量比 vLLM 高 4-6 倍，已部署在全球 40 万块 GPU 上。</description>
+      <pubDate>2026-04-05T10:00:00+08:00</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-sglang-slug.mp3" type="audio/mpeg" length="3097152" />
+    </item>
+    <item>
       <title>用 Rust 写一次，运行 everywhere：Dioxus 如何让前端变天？</title>
       <description />
       <pubDate>2026-04-04T11:16:00</pubDate>
