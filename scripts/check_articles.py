@@ -23,11 +23,24 @@ def gh_output(key, value):
             f.write(f"{key}={value}\n")
 
 
-def get_feed_titles(feed_url):
-    """获取 podcast feed 里所有 episode 标题集合"""
+def get_feed_titles_with_audio(feed_url):
+    """获取 podcast feed 里已有音频的 episode 标题集合。
+
+    注意：只检查有 <enclosure type="audio/*"> 的条目。
+    曾经加入 feed 但音频生成失败（无 enclosure）的条目会被视为"未生成"，
+    下次 CI 会重新尝试生成，避免死循环。
+    """
     try:
         pf = feedparser.parse(feed_url)
-        return {e.title for e in pf.entries}
+        titles = set()
+        for e in pf.entries:
+            # 检查是否有 audio 类型的 enclosure
+            if hasattr(e, 'enclosures') and e.enclosures:
+                for enc in e.enclosures:
+                    if enc.get('type', '').startswith('audio/'):
+                        titles.add(e.title.strip())
+                        break
+        return titles
     except Exception:
         return set()
 
@@ -41,7 +54,7 @@ def main():
         gh_output("has_new", "false")
         return 0
 
-    existing_titles = get_feed_titles(FEED_URL)
+    existing_titles = get_feed_titles_with_audio(FEED_URL)
     print(f"Podcast feed already has {len(existing_titles)} episodes")
 
     new_links = []
