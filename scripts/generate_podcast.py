@@ -399,6 +399,7 @@ def main():
         print(f"发现 {len(new_articles)} 篇新文章，开始逐个生成...\n")
         success_count = 0
         fail_count = 0
+        existing_titles = set()  # 跟踪已处理文章，防止同一篇被重复生成
         for i, (title, content, link, pub_date) in enumerate(new_articles, 1):
             print(f"=== [{i}/{len(new_articles)}] {title} (osp: {pub_date or '?'}) ===")
             ok = process_article(title, content, link, args, pub_date=pub_date)
