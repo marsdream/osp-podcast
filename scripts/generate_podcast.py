@@ -70,26 +70,6 @@ async def _await_coro(fut, coro):
         fut.set_exception(e)
 
 
-def ensure_template(path, repo_dir):
-    """下载片头片尾模板（如果不存在）"""
-    if os.path.exists(path):
-        return
-    url = f"https://github.com/marsdream/osp-podcast/raw/main/{path}"
-    print(f"  下载模板: {path}")
-    try:
-        import urllib.request
-        os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
-        urllib.request.urlretrieve(url, path)
-    except Exception as e:
-        print(f"  模板下载失败: {e}，创建静音文件替代")
-        # 创建1秒静音文件
-        subprocess.run([
-            "ffmpeg", "-y", "-f", "lavfi",
-            "-i", "anullsrc=r=44100:cl=stereo",
-            "-t", "1", "-q:a", "9", "-acodec", "libmp3lame", path
-        ], capture_output=True)
-
-
 def concat_audio(parts, output_path):
     """用 FFmpeg concat 拼接多个音频文件"""
     concat_file = output_path + ".concat.txt"
@@ -247,11 +227,9 @@ def process_article(title, content, link, args, pub_date=None):
             except Exception as e:
                 print(f"    [✗] {e}")
 
-    # 检查/下载片头片尾
+    # 片头片尾文件（通过 actions/checkout@v4 lfs:true 已拉到本地）
     intro_path = os.path.join(repo_dir, INTRO_FILE)
     outro_path = os.path.join(repo_dir, OUTRO_FILE)
-    ensure_template(intro_path, repo_dir)
-    ensure_template(outro_path, repo_dir)
 
     # 生成最终文件
     output_mp3 = os.path.join(output_dir, f"osp-podcast-{episode_id}.mp3")

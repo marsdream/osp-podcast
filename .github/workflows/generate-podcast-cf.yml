@@ -55,12 +55,13 @@ jobs:
           cp feed.xml docs/
           cp episodes/*.mp3 docs/episodes/ 2>/dev/null || true
           cp episodes/*.json docs/episodes/ 2>/dev/null || true
-          # 生成首页 index.html（每次都要更新，保持和 feed.xml 一致）
-          python scripts/build_index_html.py
+
+      - name: Build index.html
+        run: python scripts/build_index_html.py
 
       - name: Deploy to Cloudflare Pages
         run: |
-          npx wrangler@3.106.0 pages deploy ./docs --project-name=osp-podcast --commit-dirty=true
+          npx wrangler@latest pages deploy ./docs --project-name=osp-podcast --commit-dirty=true
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
