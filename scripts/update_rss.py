@@ -17,6 +17,8 @@ PODCAST_TITLE = "开源派技术播客"
 PODCAST_DESC = "每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报"
 CF_AUDIO_BASE = "https://podcast.herebuy.us"
 PODCAST_LINK = os.environ.get("PODCAST_BASE_URL", "https://podcast.herebuy.us/")
+# 播客封面图（Apple Podcasts 要求 1400x1400 ~ 3000x3000）
+PODCAST_COVER_URL = "https://raw.githubusercontent.com/marsdream/osp-podcast/main/cover.png"
 
 
 def get_remote_episodes():
@@ -114,11 +116,17 @@ def make_rss_xml(episodes):
     ET.SubElement(channel, "language").text = "zh-CN"
     ET.SubElement(channel, "itunes:category", text="Technology")
     ET.SubElement(channel, "itunes:author").text = "开源派"
+    # Apple Podcasts 频道封面图
+    ET.SubElement(channel, "itunes:image", href=PODCAST_COVER_URL)
 
     for ep in episodes:
         item = ET.SubElement(channel, "item")
-        ET.SubElement(item, "title").text = ep.get("title", "untitled")
-        ET.SubElement(item, "description").text = ep.get("description", "")[:500]
+        ep_title = ep.get("title", "untitled")
+        ep_desc = ep.get("description", "")[:500] or f"开源派技术播客：{ep_title}。收听更多精彩开源技术内容，请访问 https://osp.io"
+        ET.SubElement(item, "title").text = ep_title
+        ET.SubElement(item, "description").text = ep_desc
+        # itunes:summary 支持更长内容，Apple Podcasts 显示为 Show Notes
+        ET.SubElement(item, "itunes:summary").text = ep_desc
         ET.SubElement(item, "pubDate").text = ep.get("date", "")
 
         audio_file = ep.get("audio_file", "")
@@ -140,6 +148,8 @@ def make_rss_xml(episodes):
         ep_link = ep.get("link", "")
         if ep_link:
             ET.SubElement(item, "link").text = ep_link
+        # 每集封面图（与频道封面相同，Apple 会自动适配）
+        ET.SubElement(item, "itunes:image", href=PODCAST_COVER_URL)
 
     return rss
 
