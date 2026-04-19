@@ -82,8 +82,11 @@ def get_episode_link(ep):
 
 
 def build_rss(remote_episodes, local_episodes):
-    """合并远程 episodes 和本地新生成的 episodes"""
-    # 用本地新生成的覆盖远程已有的（同一标题）
+    """合并远程 episodes 和本地新生成的 episodes
+
+    重要：只有音频文件真实存在于 episodes/ 目录的 episode 才会被加入 feed。
+    防止本地 TTS 生成失败（无音频文件）时仍将不完整的 entry 写入 feed。
+    """
     merged = {}
     for ep in remote_episodes:
         title = ep.get("title", "")
@@ -91,13 +94,19 @@ def build_rss(remote_episodes, local_episodes):
             merged[title] = ep
 
     for title, ep in local_episodes.items():
-        merged[title] = {
-            "title": ep.get("title", "untitled"),
-            "date": ep.get("date", ""),
-            "audio_file": ep.get("audio_file", ""),
-            "description": "",
-            "link": ep.get("link", ""),  # osp.io 原文链接
-        }
+        audio_file = ep.get("audio_file", "")
+        local_path = os.path.join(EPISODES_DIR, audio_file)
+        if audio_file and os.path.exists(local_path) and os.path.getsize(local_path) > 1000:
+            merged[title] = {
+                "title": ep.get("title", "untitled"),
+                "date": ep.get("date", ""),
+                "audio_file": audio_file,
+                "description": "",
+                "link": ep.get("link", ""),
+            }
+        else:
+            print(f"  [警告] 跳过 '{title}'：audio_file='{audio_file}' 但本地文件不存在或为空，"
+                  f"不写入 feed（防止无音频 entry）")
 
     # 按日期倒序排列
     episode_list = list(merged.values())
