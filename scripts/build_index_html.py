@@ -41,26 +41,36 @@ def parse_feed():
 
 
 def build_html(items):
+    INITIAL_COUNT = 4  # 首次显示的节目数
     episodes_html = ""
-    for ep in items:
+    for i, ep in enumerate(items):
         title_link = ep.get('osp_link') or ep.get('audio_url') or '#'
+        extra_class = "lazy-hidden" if i >= INITIAL_COUNT else ""
         if ep['audio_url']:
-            episodes_html += f"""<li>
+            episodes_html += f"""<li class="episode-item {extra_class}" {'style="display:none"' if i >= INITIAL_COUNT else ''}>
   <a href="{title_link}" target="_blank">{ep['title']}</a>
   <div class="date">📅 {ep['date']}</div>
   <audio controls src="{ep['audio_url']}"><a href="{ep['audio_url']}">下载音频</a></audio>
 </li>\n"""
         else:
-            episodes_html += f"""<li>
+            episodes_html += f"""<li class="episode-item {extra_class}" {'style="display:none"' if i >= INITIAL_COUNT else ''}>
   <a href="{title_link}" target="_blank">{ep['title']}</a>
   <div class="date">📅 {ep['date']}</div>
 </li>\n"""
+
+    dots_trigger = f"""<p id="show-more-dots" onclick="showLoadMoreBtn()" style="text-align:center; color:#0077cc; cursor:pointer; font-size:1rem; margin:0.5rem 0;">⋯ 点这里加载更多</p>""" if len(items) > INITIAL_COUNT else ""
+    load_more_btn = f"""<button id="load-more-btn" onclick="loadMoreEpisodes()" style="display:none; width:100%; margin-top:1rem; padding:0.8rem; background:#0077cc; color:#fff; border:none; border-radius:10px; font-size:1rem; cursor:pointer;">
+  点击加载更多 ({len(items) - INITIAL_COUNT} 期)
+</button>""" if len(items) > INITIAL_COUNT else ""
+
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{PODCAST_TITLE}</title>
+<!-- Counterscale Analytics -->
+<script defer src="https://data.herebuy.us/tracker.js" data-site-id="podcast-herebuy"></script>
 <style>
   * {{ box-sizing: border-box; }}
   body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem 1rem; background: #f8f9fa; color: #222; }}
@@ -82,6 +92,8 @@ def build_html(items):
   .no-audio {{ color: #999; font-size: 0.85rem; margin-top: 0.4rem; }}
   footer {{ text-align: center; color: #aaa; font-size: 0.8rem; margin: 3rem 0 1rem; }}
   footer a {{ color: #999; text-decoration: none; }}
+  #load-more-btn {{ background: #fff; color: #0077cc; border: 2px solid #0077cc; margin-top: 1rem; }}
+  #load-more-btn:hover {{ background: #0077cc; color: #fff; }}
 </style>
 </head>
 <body>
@@ -100,10 +112,27 @@ def build_html(items):
 <ul class="episodes">
 {episodes_html if episodes_html else '<li>暂无节目，稍后刷新</li>'}
 </ul>
+{dots_trigger}
+{load_more_btn}
 
 <footer>
   <a href="https://osp.io">开源派 OSP.IO</a> · 由 AI 自动生成
 </footer>
+
+<script>
+function showLoadMoreBtn() {{
+  document.getElementById('show-more-dots').style.display = 'none';
+  document.getElementById('load-more-btn').style.display = 'block';
+}}
+function loadMoreEpisodes() {{
+  var hidden = document.querySelectorAll('.lazy-hidden');
+  hidden.forEach(function(el) {{
+    el.style.display = '';
+    el.classList.remove('lazy-hidden');
+  }});
+  document.getElementById('load-more-btn').style.display = 'none';
+}}
+</script>
 </body>
 </html>"""
     return html

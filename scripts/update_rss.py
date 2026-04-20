@@ -45,8 +45,11 @@ def get_remote_episodes():
 
 
 def get_local_episodes():
-    """从本地 episodes/ 目录读取新生成的 episodes（覆盖远程的）"""
-    episodes = {}
+    """从本地 episodes/ 目录读取新生成的 episodes（覆盖远程的）
+
+    返回 list，每个元素是 episode dict（包含 link 字段用于匹配 osp.io URL）
+    """
+    episodes = []  # 改为 list，不再按 title 做 key
     if not os.path.isdir(EPISODES_DIR):
         return episodes
     for f in os.listdir(EPISODES_DIR):
@@ -57,9 +60,8 @@ def get_local_episodes():
             with open(path) as fp:
                 data = json.load(fp)
             # 新生成的 episodes 有 audio_file 字段
-            if data.get("audio_file"):
-                key = data.get("title", "")
-                episodes[key] = data
+            if data.get("audio_file") and data.get("link"):
+                episodes.append(data)
         except Exception:
             pass
     print(f"  本地 episodes/ 有 {len(episodes)} 个新生成的")
@@ -80,22 +82,30 @@ def get_episode_link(ep):
 
 
 def build_rss(remote_episodes, local_episodes):
-    """合并远程 episodes 和本地新生成的 episodes"""
-    # 用本地新生成的覆盖远程已有的（同一标题）
-    merged = {}
-    for ep in remote_episodes:
-        title = ep.get("title", "")
-        if title not in local_episodes:
-            merged[title] = ep
+    """合并远程 episodes 和本地新生成的 episodes
+    匹配字段：用 osp.io 原文链接（link），不用 title（因为 AI 生成的话术标题每次不同）
+    """
+    # 用 osp.io link 做 key：local_episodes[link] = data
+    # remote_episodes 里的 link 字段存的就是 osp.io 原文链接
+    merged = {}  # link -> episode data
 
-    for title, ep in local_episodes.items():
-        merged[title] = {
-            "title": ep.get("title", "untitled"),
-            "date": ep.get("date", ""),
-            "audio_file": ep.get("audio_file", ""),
-            "description": "",
-            "link": ep.get("link", ""),  # osp.io 原文链接
-        }
+    # 远程已有的 episode（保留 enclosure 信息）
+    for ep in remote_episodes:
+        link = ep.get("link", "")
+        if link:
+            merged[link] = ep
+
+    # 本地新生成的覆盖/补充（使用本地 audio_file）
+    for ep in local_episodes:
+        link = ep.get("link", "")
+        if link:
+            merged[link] = {
+                "title": ep.get("title", "untitled"),
+                "date": ep.get("date", ""),
+                "audio_file": ep.get("audio_file", ""),
+                "description": "",
+                "link": link,  # osp.io 原文链接
+            }
 
     # 按日期倒序排列
     episode_list = list(merged.values())

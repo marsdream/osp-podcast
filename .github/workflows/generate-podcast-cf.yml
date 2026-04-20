@@ -59,12 +59,58 @@ jobs:
       - name: Build index.html
         run: python scripts/build_index_html.py
 
+      - name: Verify episodes before deploy
+        id: verify_episodes
+        run: |
+          # Count MP3 files in docs/episodes/
+          MP3_COUNT=$(find docs/episodes -name "*.mp3" | wc -l)
+          echo "Local MP3 count: $MP3_COUNT"
+          
+          if [ "$MP3_COUNT" -eq 0 ]; then
+            echo "ERROR: No MP3 files found in docs/episodes/"
+            exit 1
+          fi
+          
+          echo "mp3_count=$MP3_COUNT" >> $GITHUB_OUTPUT
+          
+          # List MP3 files for verification
+          echo "=== MP3 files to be deployed ==="
+          find docs/episodes -name "*.mp3" -exec ls -lh {} \;
+
       - name: Deploy to Cloudflare Pages
         run: |
           npx wrangler@latest pages deploy ./docs --project-name=osp-podcast --commit-dirty=true
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Verify deployed files via curl
+        run: |
+          # Wait a moment for deployment to propagate
+          sleep 5
+          
+          # Spot-check MP3 files are actually accessible
+          MP3_FILES=$(find docs/episodes -name "*.mp3" | head -3)
+          FAILED=0
+          
+          for mp3 in $MP3_FILES; do
+            MP3_NAME=$(basename "$mp3")
+            URL="https://podcast.herebuy.us/episodes/$MP3_NAME"
+            echo "Checking: $URL"
+            
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$URL")
+            if [ "$HTTP_CODE" != "200" ]; then
+              echo "ERROR: $MP3_NAME returned HTTP $HTTP_CODE (expected 200)"
+              FAILED=1
+            else
+              echo "OK: $MP3_NAME is accessible (HTTP 200)"
+            fi
+          done
+          
+          if [ $FAILED -eq 1 ]; then
+            echo "WARNING: Some MP3 files may not be accessible after deploy"
+            # Don't fail the workflow, just warn - wrangler might still be propagating
+          fi
 
       - name: Deploy to GitHub Pages
         if: steps.check.outputs.has_new == 'true'
