@@ -17,6 +17,8 @@ PODCAST_TITLE = "开源派技术播客"
 PODCAST_DESC = "每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报"
 CF_AUDIO_BASE = "https://podcast.herebuy.us"
 PODCAST_LINK = os.environ.get("PODCAST_BASE_URL", "https://podcast.herebuy.us/")
+# 播客封面图（Apple Podcasts 要求 1400x1400 ~ 3000x3000）
+PODCAST_COVER_URL = "https://raw.githubusercontent.com/marsdream/osp-podcast/main/cover.png"
 
 
 def get_remote_episodes():
@@ -31,9 +33,9 @@ def get_remote_episodes():
                 "enclosure_url": "",
                 "description": getattr(entry, "summary", "")[:500] if hasattr(entry, "summary") else "",
             }
-            enclosure = entry.get("enclosure", {})
-            if enclosure:
-                ep["enclosure_url"] = enclosure.get("url", "")
+            # feedparser 用 entry.enclosures（列表）访问 enclosure，而非 entry.get("enclosure")
+            if entry.get("enclosures"):
+                ep["enclosure_url"] = entry.enclosures[0].href
             # osp.io 原文链接
             ep["link"] = entry.get("link", "")
             episodes.append(ep)
@@ -45,11 +47,8 @@ def get_remote_episodes():
 
 
 def get_local_episodes():
-    """从本地 episodes/ 目录读取新生成的 episodes（覆盖远程的）
-
-    返回 list，每个元素是 episode dict（包含 link 字段用于匹配 osp.io URL）
-    """
-    episodes = []  # 改为 list，不再按 title 做 key
+    """从本地 episodes/ 目录读取新生成的 episodes（覆盖远程的）"""
+    episodes = {}
     if not os.path.isdir(EPISODES_DIR):
         return episodes
     for f in os.listdir(EPISODES_DIR):
@@ -60,8 +59,9 @@ def get_local_episodes():
             with open(path) as fp:
                 data = json.load(fp)
             # 新生成的 episodes 有 audio_file 字段
-            if data.get("audio_file") and data.get("link"):
-                episodes.append(data)
+            if data.get("audio_file"):
+                key = data.get("title", "")
+                episodes[key] = data
         except Exception:
             pass
     print(f"  本地 episodes/ 有 {len(episodes)} 个新生成的")
@@ -83,29 +83,30 @@ def get_episode_link(ep):
 
 def build_rss(remote_episodes, local_episodes):
     """合并远程 episodes 和本地新生成的 episodes
-    匹配字段：用 osp.io 原文链接（link），不用 title（因为 AI 生成的话术标题每次不同）
+
+    重要：只有音频文件真实存在于 episodes/ 目录的 episode 才会被加入 feed。
+    防止本地 TTS 生成失败（无音频文件）时仍将不完整的 entry 写入 feed。
     """
-    # 用 osp.io link 做 key：local_episodes[link] = data
-    # remote_episodes 里的 link 字段存的就是 osp.io 原文链接
-    merged = {}  # link -> episode data
-
-    # 远程已有的 episode（保留 enclosure 信息）
+    merged = {}
     for ep in remote_episodes:
-        link = ep.get("link", "")
-        if link:
-            merged[link] = ep
+        title = ep.get("title", "")
+        if title not in local_episodes:
+            merged[title] = ep
 
-    # 本地新生成的覆盖/补充（使用本地 audio_file）
-    for ep in local_episodes:
-        link = ep.get("link", "")
-        if link:
-            merged[link] = {
+    for title, ep in local_episodes.items():
+        audio_file = ep.get("audio_file", "")
+        local_path = os.path.join(EPISODES_DIR, audio_file)
+        if audio_file and os.path.exists(local_path) and os.path.getsize(local_path) > 1000:
+            merged[title] = {
                 "title": ep.get("title", "untitled"),
                 "date": ep.get("date", ""),
-                "audio_file": ep.get("audio_file", ""),
+                "audio_file": audio_file,
                 "description": "",
-                "link": link,  # osp.io 原文链接
+                "link": ep.get("link", ""),
             }
+        else:
+            print(f"  [警告] 跳过 '{title}'：audio_file='{audio_file}' 但本地文件不存在或为空，"
+                  f"不写入 feed（防止无音频 entry）")
 
     # 按日期倒序排列
     episode_list = list(merged.values())
@@ -124,11 +125,17 @@ def make_rss_xml(episodes):
     ET.SubElement(channel, "language").text = "zh-CN"
     ET.SubElement(channel, "itunes:category", text="Technology")
     ET.SubElement(channel, "itunes:author").text = "开源派"
+    # Apple Podcasts 频道封面图
+    ET.SubElement(channel, "itunes:image", href=PODCAST_COVER_URL)
 
     for ep in episodes:
         item = ET.SubElement(channel, "item")
-        ET.SubElement(item, "title").text = ep.get("title", "untitled")
-        ET.SubElement(item, "description").text = ep.get("description", "")[:500]
+        ep_title = ep.get("title", "untitled")
+        ep_desc = ep.get("description", "")[:500] or f"开源派技术播客：{ep_title}。收听更多精彩开源技术内容，请访问 https://osp.io"
+        ET.SubElement(item, "title").text = ep_title
+        ET.SubElement(item, "description").text = ep_desc
+        # itunes:summary 支持更长内容，Apple Podcasts 显示为 Show Notes
+        ET.SubElement(item, "itunes:summary").text = ep_desc
         ET.SubElement(item, "pubDate").text = ep.get("date", "")
 
         audio_file = ep.get("audio_file", "")
@@ -150,6 +157,8 @@ def make_rss_xml(episodes):
         ep_link = ep.get("link", "")
         if ep_link:
             ET.SubElement(item, "link").text = ep_link
+        # 每集封面图（与频道封面相同，Apple 会自动适配）
+        ET.SubElement(item, "itunes:image", href=PODCAST_COVER_URL)
 
     return rss
 
