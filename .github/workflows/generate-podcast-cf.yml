@@ -66,6 +66,9 @@ jobs:
           echo "Deploying to production branch..."
           npx wrangler@latest pages deploy ./docs --project-name=osp-podcast --branch=production --commit-dirty=true 2>&1
           echo "Deployment complete"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Deploy to GitHub Pages
         if: steps.check.outputs.has_new == 'true'
