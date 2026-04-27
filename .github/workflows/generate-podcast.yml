@@ -56,6 +56,7 @@ jobs:
         run: |
           mkdir -p docs/episodes
           cp feed.xml docs/
+          cp index.html docs/
           cp -r episodes/*.mp3 docs/episodes/ 2>/dev/null || true
           cp episodes/*.json docs/episodes/ 2>/dev/null || true
 

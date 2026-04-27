@@ -179,6 +179,89 @@ def indent(elem, level=0):
             elem.tail = i
 
 
+def make_index_html(episodes):
+    """生成 episodes 列表页 index.html"""
+    episodes_html = ""
+    for ep in episodes:
+        title = ep.get("title", "untitled")
+        date_raw = ep.get("date", "")
+        # 格式化日期显示
+        try:
+            from email.utils import parsedate_to_datetime
+            dt = parsedate_to_datetime(date_raw)
+            date_display = dt.strftime("%Y-%m-%d")
+        except Exception:
+            date_display = date_raw[:10] if date_raw else "?"
+        link = ep.get("link", "")
+        audio_file = ep.get("audio_file", "")
+        enclosure_url = ep.get("enclosure_url", "")
+        audio_url = ""
+        if audio_file:
+            audio_url = f"{CF_AUDIO_BASE}/episodes/{audio_file}"
+        elif enclosure_url:
+            audio_url = enclosure_url
+
+        title_escaped = title.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+        article_link_html = f'<a href="{link}" target="_blank" style="color:#666;font-size:13px;">📖 阅读原文</a>' if link else ""
+
+        if audio_url:
+            audio_html = f'''
+        <div class="audio-row">
+          <audio controls preload="none" src="{audio_url}"></audio>
+        </div>'''
+        else:
+            audio_html = '<div class="audio-row"><span style="color:#999;font-size:13px;">⏳ 音频生成中...</span></div>'
+
+        episodes_html += f'''
+    <div class="episode">
+      <div class="episode-header">
+        <span class="date">📅 {date_display}</span>
+        {article_link_html}
+      </div>
+      <h2 class="title">{title_escaped}</h2>
+      {audio_html}
+    </div>'''
+
+    html = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{PODCAST_TITLE}</title>
+<meta name="description" content="{PODCAST_DESC}">
+<link rel="alternate" type="application/rss+xml" title="{PODCAST_TITLE}" href="feed.xml">
+<style>
+  * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+  body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fafafa; color: #333; max-width: 720px; margin: 0 auto; padding: 20px; }}
+  header {{ text-align: center; margin-bottom: 32px; padding: 24px 0; border-bottom: 1px solid #eee; }}
+  h1 {{ font-size: 24px; font-weight: 600; margin-bottom: 8px; }}
+  .subtitle {{ color: #888; font-size: 14px; }}
+  .rss-link {{ display: inline-block; margin-top: 12px; padding: 6px 14px; background: #e67e22; color: #fff; border-radius: 20px; font-size: 13px; text-decoration: none; }}
+  .episode {{ background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }}
+  .episode-header {{ display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }}
+  .date {{ color: #888; font-size: 13px; }}
+  .title {{ font-size: 17px; font-weight: 500; margin-bottom: 12px; line-height: 1.4; }}
+  .audio-row audio {{ width: 100%; height: 40px; }}
+  footer {{ text-align: center; color: #aaa; font-size: 12px; margin-top: 32px; }}
+</style>
+</head>
+<body>
+<header>
+  <h1>{PODCAST_TITLE}</h1>
+  <p class="subtitle">{PODCAST_DESC}</p>
+  <a class="rss-link" href="feed.xml">📡 RSS 订阅</a>
+</header>
+<main>
+{episodes_html}
+</main>
+<footer>
+  <p>由 AI 自动生成 · 更新于 {datetime.now().strftime('%Y-%m-%d %H:%M')}</p>
+</footer>
+</body>
+</html>"""
+    return html
+
+
 def main():
     print("读取远程 feed...")
     remote = get_remote_episodes()
@@ -192,6 +275,12 @@ def main():
     tree = ET.ElementTree(rss)
     tree.write(RSS_FILE, encoding="utf-8", xml_declaration=True)
     print(f"RSS updated: {RSS_FILE}")
+
+    # 生成 index.html
+    index_html = make_index_html(episodes)
+    with open("index.html", "w", encoding="utf-8") as f:
+        f.write(index_html)
+    print(f"index.html updated ({len(episodes)} episodes)")
 
 
 if __name__ == "__main__":
