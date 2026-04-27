@@ -194,11 +194,19 @@ def process_article(title, content, link, args, pub_date=None):
         forced.append(item)
     transcripts = forced
 
-    # episode_id 用文章标题 slug，避免同天冲突
+    # episode_id 用文章原始发布时间 + slug，避免同日期多篇互相覆盖
     slug = unicodedata.normalize('NFKC', title)[:30]
     slug = re.sub(r'[^\w\u4e00-\u9fff]', '_', slug)
     slug = re.sub(r'_+', '_', slug).strip('_')
-    episode_id = f"{datetime.now().strftime('%Y%m%d')}_{slug}"
+    if pub_date:
+        try:
+            dt = parsedate_to_datetime(pub_date)
+            date_str = dt.strftime('%Y%m%d')
+        except Exception:
+            date_str = datetime.now().strftime('%Y%m%d')
+    else:
+        date_str = datetime.now().strftime('%Y%m%d')
+    episode_id = f"{date_str}_{slug}"
 
     # 生成 TTS 片段
     temp_files = []
@@ -253,6 +261,21 @@ def process_article(title, content, link, args, pub_date=None):
     parts = [p for p in [intro_path, dialog_mp3, outro_path] if os.path.exists(p)]
     concat_audio(parts, output_mp3)
 
+    # === 关键检查：音频文件必须真实存在且有内容 ===
+    if not os.path.exists(output_mp3) or os.path.getsize(output_mp3) < 1000:
+        print(f"  错误：音频文件生成失败或文件过小，删除残留并退出")
+        if os.path.exists(output_mp3):
+            os.remove(output_mp3)
+        # 清理临时文件
+        for _, _, temp_file, _ in temp_files:
+            if os.path.exists(temp_file):
+                os.remove(temp_file)
+        if os.path.exists(concat_file):
+            os.remove(concat_file)
+        if os.path.exists(dialog_mp3):
+            os.remove(dialog_mp3)
+        return False
+
     # 清理临时文件
     for _, _, temp_file, _ in temp_files:
         if os.path.exists(temp_file):
@@ -274,7 +297,7 @@ def process_article(title, content, link, args, pub_date=None):
     else:
         date_iso = datetime.now().isoformat()
 
-    # 保存元数据
+    # === 必须等音频文件确认生成成功后才写 metadata ===
     meta = {
         "id": episode_id,
         "title": title,
