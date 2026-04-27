@@ -1,6 +1,8 @@
 name: Auto Generate Podcast (CF)
 
 on:
+  push:
+    branches: [main]        # push 到 main 时自动触发
   schedule:
     - cron: '0 22 * * 1,3,5'  # 每周一三五 UTC 22:00 = 北京时间 06:00
   workflow_dispatch: {}     # 支持手动触发
