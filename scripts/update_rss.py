@@ -183,8 +183,9 @@ def indent(elem, level=0):
 
 def make_index_html(episodes):
     """生成 episodes 列表页 index.html"""
+    INITIAL_COUNT = 5  # 首次显示的节目数
     episodes_html = ""
-    for ep in episodes:
+    for i, ep in enumerate(episodes):
         title = ep.get("title", "untitled")
         date_raw = ep.get("date", "")
         # 格式化日期显示
@@ -214,8 +215,11 @@ def make_index_html(episodes):
         else:
             audio_html = '<div class="audio-row"><span style="color:#999;font-size:13px;">⏳ 音频生成中...</span></div>'
 
+        extra_style = ' style="display:none"' if i >= INITIAL_COUNT else ""
+        extra_class = " lazy-hidden" if i >= INITIAL_COUNT else ""
+
         episodes_html += f'''
-    <div class="episode">
+    <div class="episode{extra_class}"{extra_style}>
       <div class="episode-header">
         <span class="date">📅 {date_display}</span>
         {article_link_html}
@@ -223,6 +227,11 @@ def make_index_html(episodes):
       <h2 class="title">{title_escaped}</h2>
       {audio_html}
     </div>'''
+
+    load_more_btn = f'''
+<button id="load-more-btn" onclick="loadMoreEpisodes()" style="display:block; width:100%; margin-top:8px; padding:14px; background:#e67e22; color:#fff; border:none; border-radius:10px; font-size:15px; cursor:pointer; font-weight:500;">
+  查看更多节目（共 {len(episodes)} 期，展示前 {INITIAL_COUNT} 期）
+</button>''' if len(episodes) > INITIAL_COUNT else ""
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -245,6 +254,8 @@ def make_index_html(episodes):
   .title {{ font-size: 17px; font-weight: 500; margin-bottom: 12px; line-height: 1.4; }}
   .audio-row audio {{ width: 100%; height: 40px; }}
   footer {{ text-align: center; color: #aaa; font-size: 12px; margin-top: 32px; }}
+  #load-more-btn {{ background: #e67e22; }}
+  #load-more-btn:hover {{ background: #cf6816; }}
 </style>
 </head>
 <body>
@@ -255,10 +266,20 @@ def make_index_html(episodes):
 </header>
 <main>
 {episodes_html}
+{load_more_btn}
 </main>
 <footer>
   <p>由 AI 自动生成 · 更新于 {datetime.now().strftime('%Y-%m-%d %H:%M')}</p>
 </footer>
+<script>
+function loadMoreEpisodes() {{
+  document.querySelectorAll('.lazy-hidden').forEach(function(el) {{
+    el.style.display = '';
+    el.classList.remove('lazy-hidden');
+  }});
+  document.getElementById('load-more-btn').style.display = 'none';
+}}
+</script>
 </body>
 </html>"""
     return html
