@@ -61,14 +61,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
-          publish_branch: gh-pages
+          publish_branch: main
 
-      - name: Deploy to Cloudflare Pages
-        if: success()
-        uses: cloudflare/pages-action@v1
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: osp-podcast
-          directory: ./docs
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      # 注意：CF Pages GitHub Integration 已连接 main 分支，push 到 main 即自动部署到 podcast.herebuy.us
+      # 删除了 cloudflare/pages-action（Direct Upload 模式会产生预览 URL，无法更新 podcast.herebuy.us）
