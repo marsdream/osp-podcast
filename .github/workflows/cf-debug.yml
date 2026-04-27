@@ -1,0 +1,20 @@
+name: CF Debug
+on: workflow_dispatch
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "=== Trying POST promote ==="
+          curl -s -X POST \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/osp-podcast/deployments/8809375d/promote" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"production_branch":"production"}' | jq .
+
+          echo "=== Trying GET deployments ==="
+          curl -s "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/osp-podcast/deployments" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" | jq '.deployments[0:2] | .[].id, .[].environment, .[].created_on'
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
