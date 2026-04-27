@@ -9,6 +9,8 @@ import sys
 import json
 import xml.etree.ElementTree as ET
 import feedparser
+from datetime import datetime
+from email.utils import parsedate_to_datetime
 
 EPISODES_DIR = "episodes"
 RSS_FILE = "feed.xml"
