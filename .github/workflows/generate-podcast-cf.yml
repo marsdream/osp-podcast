@@ -63,31 +63,9 @@ jobs:
       - name: Deploy to Cloudflare Pages
         id: cf-deploy
         run: |
-          deployment_url=$(npx wrangler@latest pages deploy ./docs --project-name=osp-podcast --commit-dirty=true 2>&1 | grep -o 'https://[^ ]*pages.dev' | tail -1)
-          echo "deployment_url=$deployment_url" >> $GITHUB_OUTPUT
-          echo "deployment_url: $deployment_url"
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-
-      - name: Promote CF Pages preview to production
-        run: |
-          DEPLOYMENT_URL="${{ steps.cf-deploy.outputs.deployment_url }}"
-          if [ -z "$DEPLOYMENT_URL" ]; then
-            echo "No deployment URL found, skipping promotion"
-            exit 0
-          fi
-          # Extract deployment ID from URL (e.g., https://d8031ba4.osp-podcast.pages.dev)
-          DEPLOYMENT_ID=$(echo "$DEPLOYMENT_URL" | grep -o '[a-z0-9]*\.osp-podcast\.pages\.dev' | cut -d. -f1)
-          echo "Promoting deployment $DEPLOYMENT_ID to production..."
-          curl -s -X POST \
-            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/osp-podcast/deployments/$DEPLOYMENT_ID/promote" \
-            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-            -H "Content-Type: application/json" \
-            | jq .
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          echo "Deploying to production branch..."
+          npx wrangler@latest pages deploy ./docs --project-name=osp-podcast --branch=production --commit-dirty=true 2>&1
+          echo "Deployment complete"
 
       - name: Deploy to GitHub Pages
         if: steps.check.outputs.has_new == 'true'
