@@ -41,7 +41,7 @@ def parse_feed():
 
 
 def build_html(items):
-    INITIAL_COUNT = 4  # 首次显示的节目数
+    INITIAL_COUNT = 5  # 首次显示的节目数
     episodes_html = ""
     for i, ep in enumerate(items):
         title_link = ep.get('osp_link') or ep.get('audio_url') or '#'
@@ -58,9 +58,8 @@ def build_html(items):
   <div class="date">📅 {ep['date']}</div>
 </li>\n"""
 
-    dots_trigger = f"""<p id="show-more-dots" onclick="showLoadMoreBtn()" style="text-align:center; color:#0077cc; cursor:pointer; font-size:1rem; margin:0.5rem 0;">⋯ 点这里加载更多</p>""" if len(items) > INITIAL_COUNT else ""
-    load_more_btn = f"""<button id="load-more-btn" onclick="loadMoreEpisodes()" style="display:none; width:100%; margin-top:1rem; padding:0.8rem; background:#0077cc; color:#fff; border:none; border-radius:10px; font-size:1rem; cursor:pointer;">
-  点击加载更多 ({len(items) - INITIAL_COUNT} 期)
+    load_more_btn = f"""<button id="load-more-btn" onclick="loadMoreEpisodes()" style="display:block; width:100%; margin-top:1rem; padding:0.8rem; background:#0077cc; color:#fff; border:none; border-radius:10px; font-size:1rem; cursor:pointer;">
+  查看更多节目（共 {len(items)} 期，展示前 {INITIAL_COUNT} 期）
 </button>""" if len(items) > INITIAL_COUNT else ""
 
     html = f"""<!DOCTYPE html>
@@ -112,7 +111,6 @@ def build_html(items):
 <ul class="episodes">
 {episodes_html if episodes_html else '<li>暂无节目，稍后刷新</li>'}
 </ul>
-{dots_trigger}
 {load_more_btn}
 
 <footer>
@@ -120,10 +118,6 @@ def build_html(items):
 </footer>
 
 <script>
-function showLoadMoreBtn() {{
-  document.getElementById('show-more-dots').style.display = 'none';
-  document.getElementById('load-more-btn').style.display = 'block';
-}}
 function loadMoreEpisodes() {{
   var hidden = document.querySelectorAll('.lazy-hidden');
   hidden.forEach(function(el) {{
