@@ -23,24 +23,26 @@ def gh_output(key, value):
             f.write(f"{key}={value}\n")
 
 
-def get_feed_titles_with_audio(feed_url):
-    """获取 podcast feed 里已有音频的 episode 标题集合。
+def get_feed_article_ids_with_audio(feed_url):
+    """获取 podcast feed 里已有音频的 article_id 集合。
 
-    注意：只检查有 <enclosure type="audio/*"> 的条目。
-    曾经加入 feed 但音频生成失败（无 enclosure）的条目会被视为"未生成"，
-    下次 CI 会重新尝试生成，避免死循环。
+    article_id 从 URL link 里提取（如 .../12345 → 12345）。
+    只有带 audio enclosure 的条目才认为已生成，避免 enclosure 丢失时误重试。
     """
     try:
+        import re
         pf = feedparser.parse(feed_url)
-        titles = set()
+        ids = set()
         for e in pf.entries:
-            # 检查是否有 audio 类型的 enclosure
             if hasattr(e, 'enclosures') and e.enclosures:
                 for enc in e.enclosures:
                     if enc.get('type', '').startswith('audio/'):
-                        titles.add(e.title.strip())
+                        # 从 link 里提取 article_id（如 https://osp.io/archives/12345）
+                        m = re.search(r'/(\d+)/?$', e.get('link', ''))
+                        if m:
+                            ids.add(m.group(1))
                         break
-        return titles
+        return ids
     except Exception:
         return set()
 
@@ -54,18 +56,20 @@ def main():
         gh_output("has_new", "false")
         return 0
 
-    existing_titles = get_feed_titles_with_audio(FEED_URL)
-    print(f"Podcast feed already has {len(existing_titles)} episodes")
+    existing_ids = get_feed_article_ids_with_audio(FEED_URL)
+    print(f"Podcast feed already has {len(existing_ids)} episodes")
 
     new_links = []
     skipped = 0
     for entry in osp_feed.entries[:MAX_ARTICLES]:
-        title = entry.title.strip()
-        if title in existing_titles:
-            print(f"  [skip] {title}")
+        import re
+        m = re.search(r'/(\d+)/?$', entry.link)
+        article_id = m.group(1) if m else None
+        if article_id and article_id in existing_ids:
+            print(f"  [skip] [{article_id}] {entry.title.strip()}")
             skipped += 1
         else:
-            print(f"  [new]  {title} -> {entry.link}")
+            print(f"  [new]  [{article_id}] {entry.title.strip()} -> {entry.link}")
             new_links.append(entry.link)
 
     gh_output("skipped", str(skipped))
