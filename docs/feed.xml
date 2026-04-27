@@ -49,19 +49,21 @@
       <title>Anthropic 向 GitHub 发出版权删除请求，欲下架 8000 份 Claude Code 源码</title>
       <description />
       <pubDate>2026-04-12T09:56:53+0000</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260420_Anthropic_向_GitHub_发出版权删除请求_欲下.mp3" type="audio/mpeg" length="3315645" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260412_Anthropic_%E5%90%91_GitHub_%E5%8F%91%E5%87%BA%E7%89%88%E6%9D%83%E5%88%A0%E9%99%A4.mp3" type="audio/mpeg" length="1396364" />
       <link>https://osp.io/archives/10030</link>
     </item>
     <item>
       <title>N.O.M.A.D：—装着世界知识的离线服务器</title>
       <description>开源派技术播客：N.O.M.A.D：—装着世界知识的离线服务器。收听更多精彩开源技术内容，请访问 https://osp.io</description>
       <pubDate>2026-04-12T00:30:40+0000</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260412_N_O_M_A_D.mp3" type="audio/mpeg" length="1667564" />
       <link>https://osp.io/archives/9986</link>
     </item>
     <item>
       <title>ClawFeed：我再也不想刷 RSS 了</title>
       <description>开源派技术播客：ClawFeed：我再也不想刷 RSS 了。收听更多精彩开源技术内容，请访问 https://osp.io</description>
       <pubDate>2026-04-11T07:07:49+0000</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260411_ClawFeed.mp3" type="audio/mpeg" length="420768" />
       <link>https://osp.io/archives/9994</link>
     </item>
     <item>
@@ -138,6 +140,7 @@
       <title>不用写代码也能做AI应用？这个开源平台有点东西</title>
       <description>开源派技术播客：不用写代码也能做AI应用？这个开源平台有点东西。收听更多精彩开源技术内容，请访问 https://osp.io</description>
       <pubDate>2026-04-04T03:39:38+0000</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_%E4%B8%8D%E7%94%A8%E5%86%99%E4%BB%A3%E7%A0%81%E4%B9%9F%E8%83%BD%E5%81%9AAI%E5%BA%94%E7%94%A8.mp3" type="audio/mpeg" length="5279494" />
       <link>https://osp.io/archives/9926</link>
     </item>
     <item>
@@ -165,6 +168,7 @@
       <title>在本地跑大模型：Ollama 让 AI 触手可及</title>
       <description>开源派技术播客：在本地跑大模型：Ollama 让 AI 触手可及。收听更多精彩开源技术内容，请访问 https://osp.io</description>
       <pubDate>2026-03-23T09:23:41+0000</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260323_%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%B7%91%E5%A4%A7%E6%A8%A1%E5%9E%8B_Ollama.mp3" type="audio/mpeg" length="4350371" />
       <link>https://osp.io/archives/9873</link>
     </item>
   </channel>
