@@ -7,8 +7,10 @@ update_rss.py - 更新 RSS Feed
 import os
 import sys
 import json
+import ssl
 import xml.etree.ElementTree as ET
 import feedparser
+import urllib.request
 from datetime import datetime
 from email.utils import parsedate_to_datetime
 
@@ -97,16 +99,32 @@ def build_rss(remote_episodes, local_episodes):
         title = ep.get("title", "")
         if title in local_episodes:
             continue  # 本地 episode 会处理
-        # 远程 episode：必须验证本地音频文件存在
+        # 远程 episode：必须验证音频文件在 herebuy.us 上真实可访问（HTTP HEAD）
         enclosure_url = ep.get("enclosure_url", "")
         if enclosure_url:
-            # enclosure_url 形如 https://podcast.herebuy.us/episodes/xxx.mp3
-            audio_filename = os.path.basename(enclosure_url)
-            local_path = os.path.join(EPISODES_DIR, audio_filename)
-            if not (os.path.exists(local_path) and os.path.getsize(local_path) > 1000):
+            try:
+                ctx = ssl.create_default_context()
+                req = urllib.request.Request(
+                    enclosure_url,
+                    method="HEAD",
+                    headers={"User-Agent": "osp-podcast/1.0"}
+                )
+                with urllib.request.urlopen(req, timeout=10, context=ctx) as resp:
+                    content_type = resp.headers.get("Content-Type", "")
+                    content_length = int(resp.headers.get("Content-Length", 0))
+                    is_audio = content_type.startswith("audio/")
+                    # 音频必须 > 10KB（防止 TTS 失败时服务器返回的 HTML fallback）
+                    is_valid_size = content_length > 10000
+                    if not (is_audio and is_valid_size):
+                        print(f"  [警告] 跳过 remote episode '{title}'："
+                              f"enclosure={os.path.basename(enclosure_url)} "
+                              f"但服务器返回 content_type={content_type}, length={content_length}，"
+                              f"可能是假音频文件（不写入 feed）")
+                        continue
+            except Exception as e:
                 print(f"  [警告] 跳过 remote episode '{title}'："
-                      f"enclosure={audio_filename} 但本地文件不存在或不完整，"
-                      f"不写入 feed（防止假播放链接）")
+                      f"enclosure={enclosure_url} HTTP 检查失败: {e}，"
+                      f"可能是文件不存在（不写入 feed）")
                 continue
         merged[title] = ep
 
