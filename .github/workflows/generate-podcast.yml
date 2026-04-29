@@ -56,8 +56,30 @@ jobs:
           mkdir -p docs/episodes
           cp feed.xml docs/
           cp index.html docs/
-          cp -r episodes/*.mp3 docs/episodes/ 2>/dev/null || true
-          cp episodes/*.json docs/episodes/ 2>/dev/null || true
+          # 用 nullglob 避免 *.mp3 字面量参与拷贝
+          shopt -s nullglob
+          mp3_files=(episodes/*.mp3)
+          json_files=(episodes/*.json)
+          if [ ${#mp3_files[@]} -gt 0 ]; then
+            cp "${mp3_files[@]}" docs/episodes/
+          fi
+          if [ ${#json_files[@]} -gt 0 ]; then
+            cp "${json_files[@]}" docs/episodes/
+          fi
+          echo "Prepared $(ls docs/episodes/ | wc -l) episode files"
+
+      - name: Verify audio files before deploy
+        if: steps.check.outputs.has_new == 'true'
+        run: |
+          # 如果有 new 文章但没有音频文件，说明 generate_podcast.py 失败了但没报非零退出码
+          mp3_count=$(ls episodes/*.mp3 2>/dev/null | wc -l)
+          if [ "$mp3_count" -eq 0 ]; then
+            echo "ERROR: has_new=true 但 episodes/ 目录没有任何 .mp3 文件，生成可能已失败"
+            echo "检查 episodes/ 内容:"
+            ls -la episodes/ 2>/dev/null || echo "(目录为空或不存在)"
+            exit 1
+          fi
+          echo "Verified $mp3_count audio files exist"
 
       - name: Deploy to GitHub Pages
         if: success()

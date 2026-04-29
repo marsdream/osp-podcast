@@ -88,12 +88,27 @@ def build_rss(remote_episodes, local_episodes):
 
     重要：只有音频文件真实存在于 episodes/ 目录的 episode 才会被加入 feed。
     防止本地 TTS 生成失败（无音频文件）时仍将不完整的 entry 写入 feed。
+
+    Remote episodes 也必须验证本地音频文件存在（从 enclosure_url 提取文件名），
+    否则不写入 feed（宁可显示"音频生成中"也不能有假播放链接）。
     """
     merged = {}
     for ep in remote_episodes:
         title = ep.get("title", "")
-        if title not in local_episodes:
-            merged[title] = ep
+        if title in local_episodes:
+            continue  # 本地 episode 会处理
+        # 远程 episode：必须验证本地音频文件存在
+        enclosure_url = ep.get("enclosure_url", "")
+        if enclosure_url:
+            # enclosure_url 形如 https://podcast.herebuy.us/episodes/xxx.mp3
+            audio_filename = os.path.basename(enclosure_url)
+            local_path = os.path.join(EPISODES_DIR, audio_filename)
+            if not (os.path.exists(local_path) and os.path.getsize(local_path) > 1000):
+                print(f"  [警告] 跳过 remote episode '{title}'："
+                      f"enclosure={audio_filename} 但本地文件不存在或不完整，"
+                      f"不写入 feed（防止假播放链接）")
+                continue
+        merged[title] = ep
 
     for title, ep in local_episodes.items():
         audio_file = ep.get("audio_file", "")

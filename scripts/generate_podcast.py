@@ -413,6 +413,9 @@ def main():
             print()
 
         print(f"=== 完成：成功 {success_count} 篇，失败 {fail_count} 篇 ===")
+        if fail_count > 0:
+            print("ERROR: 有文章生成失败，CI 将报告错误")
+            sys.exit(1)
 
     elif args.link or args.title:
         # ============================================================
