@@ -274,6 +274,7 @@ def make_index_html(episodes):
 <title>{PODCAST_TITLE}</title>
 <meta name="description" content="{PODCAST_DESC}">
 <link rel="alternate" type="application/rss+xml" title="{PODCAST_TITLE}" href="feed.xml">
+<script defer src="https://data.herebuy.us/tracker.js" data-site-id="podcast-herebuy"></script>
 <style>
   * {{ box-sizing: border-box; margin: 0; padding: 0; }}
   body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #fafafa; color: #333; max-width: 720px; margin: 0 auto; padding: 20px; }}
