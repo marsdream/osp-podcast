@@ -326,8 +326,8 @@ def main():
     parser.add_argument("--title", help="文章标题")
     parser.add_argument("--content", help="文章内容（直接传入，省去抓取）")
     parser.add_argument("--api-key", help="API Key（默认从 OPENAI_API_KEY 环境变量读取）")
-    parser.add_argument("--base-url", default="https://openrouter.ai/api/v1", help="API Base URL")
-    parser.add_argument("--model", default="qwen/qwen-plus", help="模型名称")
+    parser.add_argument("--base-url", default="https://api.deepseek.com", help="API Base URL")
+    parser.add_argument("--model", default="deepseek-chat", help="模型名称")
     parser.add_argument("--output-dir", default="episodes", help="输出目录")
     args = parser.parse_args()
 
