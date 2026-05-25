@@ -36,6 +36,19 @@ jobs:
           sudo apt-get update && sudo apt-get install -y ffmpeg
           pip install feedparser edge-tts openai ffmpeg-python requests
 
+      - name: Restore historical episodes from gh-pages
+        run: |
+          # force_orphan 每次清空 gh-pages，所以先从 gh-pages 分支恢复历史音频
+          # shallow clone 没有完整的 gh-pages 历史，用 git fetch 单独拉取
+          git fetch origin gh-pages:gh-pages 2>&1 || echo "No existing gh-pages, starting fresh"
+          if [ -d gh-pages/episodes ]; then
+            mkdir -p episodes
+            cp -rn gh-pages/episodes/* episodes/ 2>/dev/null || true
+            echo "Restored $(ls gh-pages/episodes/*.mp3 2>/dev/null | wc -l) historical mp3 files"
+          else
+            echo "No existing episodes to restore"
+          fi
+
       - name: Check new articles
         id: check
         run: python scripts/check_articles.py
