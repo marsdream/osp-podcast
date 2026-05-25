@@ -41,13 +41,7 @@ jobs:
           LLM_BASE_URL: https://api.deepseek.com/v1
           LLM_MODEL: deepseek-chat
         run: |
-          # 从 GITHUB_OUTPUT 读取 new_articles JSON 数组
-          NEW_ARTICLES=$(echo "${{ steps.check.outputs.new_articles }}" | python3 -c "
-            import sys, json
-            articles = json.load(sys.stdin)
-            for a in articles:
-              print(a['link'])
-          ")
+          NEW_ARTICLES=$(echo "${{ steps.check.outputs.new_articles }}" | python3 -c "import sys,json; [print(a['link']) for a in json.load(sys.stdin)]")
           for link in $NEW_ARTICLES; do
             echo "Generating podcast for: $link"
             python scripts/generate_podcast.py --link "$link" \
