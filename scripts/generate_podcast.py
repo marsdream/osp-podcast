@@ -185,13 +185,17 @@ def process_article(title, content, link, args, pub_date=None):
         print(f"  ERROR: 脚本生成失败")
         return False
 
-    # 强制交替
-    forced = []
-    for i, item in enumerate(transcripts):
-        item = dict(item)
-        item['speaker_id'] = i % 2
-        forced.append(item)
-    transcripts = forced
+# 强制交替
+        forced = []
+        for i, item in enumerate(transcripts):
+            item = dict(item)
+            item['speaker_id'] = i % 2
+            # 后处理：去除角色名前缀（梅梅：/开源君：/男：/女：等）
+            raw_text = item.get("dialog", "")
+            cleaned = re.sub(r'^(梅梅|开源君|男|女|马大师|开源派)[：:\s]*', '', raw_text).strip()
+            item['dialog'] = cleaned
+            forced.append(item)
+        transcripts = forced
 
     # episode_id 用文章原始发布时间 + slug，避免同日期多篇互相覆盖
     slug = unicodedata.normalize('NFKC', title)[:30]
