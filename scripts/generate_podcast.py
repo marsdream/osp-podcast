@@ -176,42 +176,67 @@ def add_intro_outro(input_mp3, output_mp3):
 
     intro = INTRO_FILE
     outro = OUTRO_FILE
-
-    # 拼接：intro + content + outro
-    # 先给 intro 淡入，outro 淡出
-    concat_file = output_mp3 + ".concat.txt"
     abs_input = os.path.abspath(input_mp3)
     abs_intro = os.path.abspath(intro)
     abs_outro = os.path.abspath(outro)
 
-    with open(concat_file, "w") as f:
+    # 第一段：intro + content
+    concat1_file = output_mp3 + ".concat1.txt"
+    with open(concat1_file, "w") as f:
         f.write(f"file '{abs_intro}'\n")
         f.write(f"file '{abs_input}'\n")
-        f.write(f"file '{abs_outro}'\n")
 
-    # 用 filter_complex 实现淡入淡出
-    # afade 参数：t=in/d=1（1秒淡入）, t=out/st=0/d=1（outro开头1秒淡出）
+    mid_mp3 = output_mp3 + ".mid.mp3"
     result = subprocess.run([
         "ffmpeg", "-y",
-        "-f", "concat", "-safe", "0", "-i", concat_file,
-        "-filter_complex",
-        "[0]afade=t=in:st=0:d=1[intro];[1]apad=whole_dur=1[content];[2]afade=t=out:st=0:d=1[outro];[intro][content][outro]concat=n=3:v=0:a=1[out]",
+        "-f", "concat", "-safe", "0", "-i", concat1_file,
+        "-codec:a", "libmp3lame", "-b:a", "128k",
+        mid_mp3
+    ], capture_output=True, text=True)
+    os.remove(concat1_file)
+
+    if result.returncode != 0:
+        print(f"Intro+content merge failed: {result.stderr[:200]}")
+        shutil.copy2(input_mp3, output_mp3)
+        return
+
+    # 第二段：(intro+content) + outro
+    concat2_file = output_mp3 + ".concat2.txt"
+    with open(concat2_file, "w") as f:
+        f.write(f"file '{os.path.abspath(mid_mp3)}'\n")
+        f.write(f"file '{abs_outro}'\n")
+
+    result = subprocess.run([
+        "ffmpeg", "-y",
+        "-f", "concat", "-safe", "0", "-i", concat2_file,
+        "-filter_complex", "[1]afade=t=out:st=0:d=1[out];[0][out]concat=n=2:v=0:a=1[out]",
         "-map", "[out]",
         "-codec:a", "libmp3lame", "-b:a", "128k",
         output_mp3
     ], capture_output=True, text=True)
+    os.remove(concat2_file)
+    os.remove(mid_mp3)
 
-    # 如果 filter_complex 失败，尝试简单拼接
-    if result.returncode != 0:
-        print(f"Filter failed, using simple concat: {result.stderr[:200]}")
+    if result.returncode == 0:
+        print(f"Added intro/outro music to final output")
+    else:
+        print(f"Outtro merge with fade failed, using simple concat: {result.stderr[:200]}")
+        # 简单拼接，不做淡出
+        concat_final = output_mp3 + ".concat_final.txt"
+        with open(concat_final, "w") as f:
+            f.write(f"file '{os.path.abspath(mid_mp3)}'\n")
+            f.write(f"file '{abs_outro}'\n")
         result = subprocess.run([
             "ffmpeg", "-y",
-            "-f", "concat", "-safe", "0", "-i", concat_file,
+            "-f", "concat", "-safe", "0", "-i", concat_final,
             "-codec:a", "libmp3lame", "-b:a", "128k",
             output_mp3
         ], capture_output=True, text=True)
-
-    os.remove(concat_file)
+        os.remove(concat_final)
+        if result.returncode == 0:
+            print(f"Added outro (simple concat)")
+        else:
+            print(f"Outtro merge failed: {result.stderr[:200]}")
     if result.returncode == 0:
         print(f"Added intro/outro music to final output")
     else:

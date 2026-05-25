@@ -34,13 +34,26 @@ jobs:
         id: check
         run: python scripts/check_articles.py
 
-      - name: Generate podcast
+      - name: Generate podcasts for all new articles
         if: steps.check.outputs.has_new == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          LLM_BASE_URL: https://openrouter.ai/api/v1
-          LLM_MODEL: qwen/qwen3-14b
-        run: python scripts/generate_podcast.py --auto --base-url https://openrouter.ai/api/v1 --model qwen/qwen3-14b
+          LLM_BASE_URL: https://api.deepseek.com/v1
+          LLM_MODEL: deepseek-chat
+        run: |
+          # 从 GITHUB_OUTPUT 读取 new_articles JSON 数组
+          NEW_ARTICLES=$(echo "${{ steps.check.outputs.new_articles }}" | python3 -c "
+            import sys, json
+            articles = json.load(sys.stdin)
+            for a in articles:
+              print(a['link'])
+          ")
+          for link in $NEW_ARTICLES; do
+            echo "Generating podcast for: $link"
+            python scripts/generate_podcast.py --link "$link" \
+              --base-url https://api.deepseek.com/v1 \
+              --model deepseek-chat
+          done
 
       - name: Update RSS
         if: steps.check.outputs.has_new == 'true'
