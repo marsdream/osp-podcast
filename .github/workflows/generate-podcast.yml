@@ -2,8 +2,8 @@ name: Auto Generate Podcast
 
 on:
   schedule:
-    - cron: '0 1 * * 1,3,5'  # 周一/三/五 UTC 1:00 = 北京时间 9:00
-  workflow_dispatch: {}     # 支持手动触发
+    - cron: '0 1 * * 1,3,5' # 周一/三/五 UTC 1:00 = 北京时间 9:00
+  workflow_dispatch: {} # 支持手动触发
 
 permissions:
   contents: write
@@ -20,6 +20,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Fetch gh-pages for historical episodes
+        run: |
+          git fetch origin gh-pages:gh-pages || true
+          git checkout gh-pages -- docs/ 2>/dev/null || true
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -27,7 +32,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt-get update && sudo apt-get install -y ffmpeg
+          sudo apt-get update && sudo apt-get install -y ffmpeg rsync
           pip install feedparser edge-tts openai ffmpeg-python
 
       - name: Check new articles
@@ -50,8 +55,19 @@ jobs:
         run: |
           mkdir -p docs/episodes
           cp feed.xml docs/
-          cp -r episodes/*.mp3 docs/episodes/ 2>/dev/null || true
-          cp episodes/*.json docs/episodes/ 2>/dev/null || true
+          # rsync --update: only copies new/changed files, does NOT delete existing in dest
+          # This preserves historical episodes even when no new episodes are generated
+          rsync -a --update episodes/ docs/episodes/
+          rsync -a --update --include='*.json' --exclude='*' episodes/ docs/
+
+      - name: Verify audio files before deploy
+        run: |
+          echo "Checking audio files in docs/episodes/"
+          COUNT=$(ls docs/episodes/*.mp3 2>/dev/null | wc -l)
+          echo "Found $COUNT mp3 files"
+          if [ "$COUNT" -eq 0 ]; then
+            echo "WARNING: No audio files found — preserving existing gh-pages content"
+          fi
 
       - name: Deploy to GitHub Pages
         if: success()
