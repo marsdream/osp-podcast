@@ -12,7 +12,9 @@ EPISODES_DIR = "episodes"
 RSS_FILE = "feed.xml"
 PODCAST_TITLE = "开源派技术播客"
 PODCAST_DESC = "每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报"
-PODCAST_LINK = "https://marsdream.github.io/osp-podcast/"
+PODCAST_LINK = "https://podcast.herebuy.us/"
+PODCAST_COVER_URL = "https://podcast.herebuy.us/cover.png"
+CF_AUDIO_BASE = "https://podcast.herebuy.us"
 
 
 def get_episodes():
@@ -41,6 +43,7 @@ def build_rss(episodes):
     ET.SubElement(channel, "language").text = "zh-CN"
     ET.SubElement(channel, "itunes:category", text="Technology")
     ET.SubElement(channel, "itunes:author").text = "开源派"
+    ET.SubElement(channel, "itunes:image", href=PODCAST_COVER_URL)
 
     for ep in episodes:
         item = ET.SubElement(channel, "item")
@@ -50,13 +53,19 @@ def build_rss(episodes):
 
         audio_file = ep.get("audio_file", "")
         if audio_file:
-            audio_path = f"{PODCAST_LINK}episodes/{audio_file}"
+            audio_url = f"{CF_AUDIO_BASE}/episodes/{audio_file}"
             audio_size = 0
             full_path = os.path.join(EPISODES_DIR, audio_file)
             if os.path.exists(full_path):
                 audio_size = os.path.getsize(full_path)
-            ET.SubElement(item, "enclosure", url=audio_path,
+            ET.SubElement(item, "enclosure", url=audio_url,
                          type="audio/mpeg", length=str(audio_size))
+        # osp.io 原文链接
+        ep_link = ep.get("link", "")
+        if ep_link:
+            ET.SubElement(item, "link").text = ep_link
+        # 每集封面图
+        ET.SubElement(item, "itunes:image", href=PODCAST_COVER_URL)
 
     return rss
 
