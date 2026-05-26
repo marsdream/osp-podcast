@@ -36,16 +36,18 @@ You are a master podcast scriptwriter, adept at transforming diverse input conte
 
 <guidelines>
 1. **Distinct Host Personas:**
-   * Speaker 0 (女声): 引导对话，热情活泼，像朋友聊天，风格轻松
-   * Speaker 1 (男声): 技术深度，用通俗语言解释，有深度但不装
+   * Speaker 0 (主播/女声): 引导对话，热情活泼，像朋友聊天，风格轻松
+   * Speaker 1 (专家/男声): 技术深度，用通俗语言解释，有深度但不装
 
 2. **Natural Dialogue:** 使用真实口语，像两个人在咖啡馆聊天。不要"首先、其次、最后"。用"咱们、其实、你知道吗、对对对"。
 
-3. **No Self-Reference by Name:** 对话中禁止 Speaker 自己提及自己的名字。梅梅不能说出"梅梅"二字，开源君不能说出"开源君"二字。名字只能由对方提起（打招呼、问观点等场景）。例如："开源君，你怎么看"是正确的（梅梅提起对方名字）；"梅梅，你觉得呢"也是正确的（开源君提起对方名字）。但梅梅自己的 dialog 里不能出现"梅梅"，开源君自己的 dialog 里不能出现"开源君"。
+3. **Pure Dialog Only:** dialog 字段里只放对话内容，不要任何角色前缀。不要"主播："、"专家："、"speaker："这类标签。
 
-4. **Random Turn Pattern:** 两人自然交替，类似真实聊天节奏。
+4. **No Self-Reference by Name:** 对话中禁止 Speaker 自己提及自己的名字。梅梅不能说出"梅梅"二字，开源君不能说出"开源君"二字。名字只能由对方提起（打招呼、问观点等场景）。例如："开源君，你怎么看"是正确的（梅梅提起对方名字）；"梅梅，你觉得呢"也是正确的（开源君提起对方名字）。但梅梅自己的 dialog 里不能出现"梅梅"，开源君自己的 dialog 里不能出现"开源君"。
 
-5. **Duration:** 约 3-5 分钟的对话量，内容要充实。
+5. **Random Turn Pattern:** 两人自然交替，类似真实聊天节奏。
+
+6. **Duration:** 约 3-5 分钟的对话量，内容要充实。
 </guidelines>
 
 <output_format>
@@ -176,67 +178,42 @@ def add_intro_outro(input_mp3, output_mp3):
 
     intro = INTRO_FILE
     outro = OUTRO_FILE
+
+    # 拼接：intro + content + outro
+    # 先给 intro 淡入，outro 淡出
+    concat_file = output_mp3 + ".concat.txt"
     abs_input = os.path.abspath(input_mp3)
     abs_intro = os.path.abspath(intro)
     abs_outro = os.path.abspath(outro)
 
-    # 第一段：intro + content
-    concat1_file = output_mp3 + ".concat1.txt"
-    with open(concat1_file, "w") as f:
+    with open(concat_file, "w") as f:
         f.write(f"file '{abs_intro}'\n")
         f.write(f"file '{abs_input}'\n")
-
-    mid_mp3 = output_mp3 + ".mid.mp3"
-    result = subprocess.run([
-        "ffmpeg", "-y",
-        "-f", "concat", "-safe", "0", "-i", concat1_file,
-        "-codec:a", "libmp3lame", "-b:a", "128k",
-        mid_mp3
-    ], capture_output=True, text=True)
-    os.remove(concat1_file)
-
-    if result.returncode != 0:
-        print(f"Intro+content merge failed: {result.stderr[:200]}")
-        shutil.copy2(input_mp3, output_mp3)
-        return
-
-    # 第二段：(intro+content) + outro
-    concat2_file = output_mp3 + ".concat2.txt"
-    with open(concat2_file, "w") as f:
-        f.write(f"file '{os.path.abspath(mid_mp3)}'\n")
         f.write(f"file '{abs_outro}'\n")
 
+    # 用 filter_complex 实现淡入淡出
+    # afade 参数：t=in/d=1（1秒淡入）, t=out/st=0/d=1（outro开头1秒淡出）
     result = subprocess.run([
         "ffmpeg", "-y",
-        "-f", "concat", "-safe", "0", "-i", concat2_file,
-        "-filter_complex", "[1]afade=t=out:st=0:d=1[out];[0][out]concat=n=2:v=0:a=1[out]",
+        "-f", "concat", "-safe", "0", "-i", concat_file,
+        "-filter_complex",
+        "[0]afade=t=in:st=0:d=1[intro];[1]apad=whole_dur=1[content];[2]afade=t=out:st=0:d=1[outro];[intro][content][outro]concat=n=3:v=0:a=1[out]",
         "-map", "[out]",
         "-codec:a", "libmp3lame", "-b:a", "128k",
         output_mp3
     ], capture_output=True, text=True)
-    os.remove(concat2_file)
-    os.remove(mid_mp3)
 
-    if result.returncode == 0:
-        print(f"Added intro/outro music to final output")
-    else:
-        print(f"Outtro merge with fade failed, using simple concat: {result.stderr[:200]}")
-        # 简单拼接，不做淡出
-        concat_final = output_mp3 + ".concat_final.txt"
-        with open(concat_final, "w") as f:
-            f.write(f"file '{os.path.abspath(mid_mp3)}'\n")
-            f.write(f"file '{abs_outro}'\n")
+    # 如果 filter_complex 失败，尝试简单拼接
+    if result.returncode != 0:
+        print(f"Filter failed, using simple concat: {result.stderr[:200]}")
         result = subprocess.run([
             "ffmpeg", "-y",
-            "-f", "concat", "-safe", "0", "-i", concat_final,
+            "-f", "concat", "-safe", "0", "-i", concat_file,
             "-codec:a", "libmp3lame", "-b:a", "128k",
             output_mp3
         ], capture_output=True, text=True)
-        os.remove(concat_final)
-        if result.returncode == 0:
-            print(f"Added outro (simple concat)")
-        else:
-            print(f"Outtro merge failed: {result.stderr[:200]}")
+
+    os.remove(concat_file)
     if result.returncode == 0:
         print(f"Added intro/outro music to final output")
     else:

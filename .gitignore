@@ -17,4 +17,3 @@ last_article.json
 # OS
 .DS_Store
 Thumbs.db
-processed_articles.json
