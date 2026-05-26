@@ -8,19 +8,22 @@ import subprocess
 MAX_PER_RUN = 3
 
 def main():
-    # 从 GITHUB_OUTPUT 读取 new_articles
-    github_output = os.environ.get("GITHUB_OUTPUT", "")
-    new_articles_json = ""
-
-    if github_output and os.path.exists(github_output):
-        with open(github_output) as f:
-            for line in f:
-                if line.startswith("new_articles="):
-                    new_articles_json = line[len("new_articles="):].strip()
-                    break
+    # 从命令行参数读取 new_articles JSON（workflow 传入方式）
+    if len(sys.argv) > 1:
+        new_articles_json = sys.argv[1]
+    else:
+        # fallback: 从 GITHUB_OUTPUT 读
+        github_output = os.environ.get("GITHUB_OUTPUT", "")
+        new_articles_json = ""
+        if github_output and os.path.exists(github_output):
+            with open(github_output) as f:
+                for line in f:
+                    if line.startswith("new_articles="):
+                        new_articles_json = line[len("new_articles="):].strip()
+                        break
 
     if not new_articles_json:
-        print("No new_articles found in GITHUB_OUTPUT")
+        print("No new_articles found")
         return 0
 
     articles = json.loads(new_articles_json)
