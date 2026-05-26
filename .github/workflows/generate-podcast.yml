@@ -51,12 +51,15 @@ jobs:
         if: steps.check.outputs.has_new == 'true'
         run: python scripts/update_rss.py
 
+      - name: Generate index.html
+        run: python scripts/generate_index.py
+
       - name: Prepare pages files
         run: |
           mkdir -p docs/episodes
           cp feed.xml docs/
+          cp index.html docs/
           # rsync --update: only copies new/changed files, does NOT delete existing in dest
-          # This preserves historical episodes even when no new episodes are generated
           rsync -a --update episodes/ docs/episodes/
           rsync -a --update --include='*.json' --exclude='*' episodes/ docs/
 

@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+"""generate_index.py - 从 episode JSON 生成 index.html"""
+import os, json, glob
+
+EPISODES_DIR = "episodes"
+OUTPUT = "index.html"
+
+episodes = []
+for f in sorted(glob.glob(f"{EPISODES_DIR}/osp-podcast-*.json")):
+    with open(f, encoding="utf-8") as fp:
+        ep = json.load(fp)
+    mp3 = ep.get("audio_file", "")
+    if mp3 and os.path.exists(os.path.join(EPISODES_DIR, mp3)):
+        size = os.path.getsize(os.path.join(EPISODES_DIR, mp3))
+        if size > 100000:
+            episodes.append(ep)
+
+episodes.sort(key=lambda x: x.get("date", ""), reverse=True)
+
+html = '''<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>开源派技术播客</title>
+<meta name="description" content="每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报">
+<link rel="alternate" type="application/rss+xml" title="开源派技术播客" href="feed.xml">
+<script defer src="https://data.herebuy.us/tracker.js" data-site-id="podcast-herebuy"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #fafafa; color: #333; max-width: 720px; margin: 0 auto; padding: 20px; }
+  header { text-align: center; margin-bottom: 32px; padding: 24px 0; border-bottom: 1px solid #eee; }
+  h1 { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+  .subtitle { color: #888; font-size: 14px; }
+  .rss-link { display: inline-block; margin-top: 12px; padding: 6px 14px; background: #e67e22; color: #fff; border-radius: 20px; font-size: 13px; text-decoration: none; }
+  .episode { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .episode-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .date { color: #888; font-size: 13px; }
+  .title { font-size: 17px; font-weight: 500; margin-bottom: 12px; line-height: 1.4; }
+  .audio-row audio { width: 100%; height: 40px; }
+  .read-original { color: #666; font-size: 13px; text-decoration: none; }
+  .read-original:hover { color: #0077cc; }
+  footer { text-align: center; color: #aaa; font-size: 12px; margin-top: 32px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🎙️ 开源派技术播客</h1>
+  <p class="subtitle">每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报</p>
+  <a class="rss-link" href="feed.xml">📡 RSS 订阅</a>
+</header>
+<main>
+'''
+
+for ep in episodes:
+    date = ep.get("date", "")[:10]
+    title = ep.get("title", "")
+    link = ep.get("link", "")
+    mp3 = ep.get("audio_file", "")
+    mp3_url = f"https://podcast.herebuy.us/episodes/{mp3}"
+    html += f'''  <div class="episode">
+    <div class="episode-header">
+      <span class="date">📅 {date}</span>
+      <a class="read-original" href="{link}" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">{title}</h2>
+    <div class="audio-row">
+      <audio controls preload="none" src="{mp3_url}"></audio>
+    </div>
+  </div>
+'''
+
+html += '''</main>
+<footer>© 2026 开源派 · <a href="https://osp.io">osp.io</a></footer>
+</body>
+</html>'''
+
+with open(OUTPUT, "w", encoding="utf-8") as f:
+    f.write(html)
+
+print(f"Generated {OUTPUT}: {len(episodes)} episodes")
