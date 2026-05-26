@@ -17,13 +17,6 @@
       <itunes:image href="https://podcast.herebuy.us/cover.png" />
     </item>
     <item>
-      <title>测试文章</title>
-      <description />
-      <pubDate>2026-05-18T22:06:37.996910</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260518_测试文章.mp3" type="audio/mpeg" length="2617512" />
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
-    </item>
-    <item>
       <title>Anthropic 向 GitHub 发出版权删除请求，欲下架 8000 份 Claude Code</title>
       <description />
       <pubDate>2026-04-12T09:56:53+00:00</pubDate>
