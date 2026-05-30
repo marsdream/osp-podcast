@@ -45,7 +45,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: deepseek-v4-flash
-        run: python scripts/generate_podcast.py --auto --model deepseek-v4-flash
+        run: python scripts/generate_podcast.py --auto --model deepseek-v4-flash --base-url "$LLM_BASE_URL"
 
       - name: Update RSS
         if: steps.check.outputs.has_new == 'true'
