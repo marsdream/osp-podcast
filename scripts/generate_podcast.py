@@ -344,7 +344,11 @@ def main():
         "num_segments": len(temp_files),
         "has_intro_outro": has_intro_outro()
     }
+    # episode_*.json - used by update_rss.py
     with open(os.path.join(output_dir, f"episode_{episode_id}.json"), "w") as f:
+        json.dump(meta, f, ensure_ascii=False, indent=2)
+    # osp-podcast-*.json - used by generate_index.py (alias, same content)
+    with open(os.path.join(output_dir, f"osp-podcast-{episode_id}.json"), "w") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
 
 
