@@ -40,6 +40,9 @@ html = '''<!DOCTYPE html>
   .date { color: #888; font-size: 13px; }
   .title { font-size: 17px; font-weight: 500; margin-bottom: 12px; line-height: 1.4; }
   .audio-row audio { width: 100%; height: 40px; }
+  /* 隐藏原生 audio 下载按钮 */
+  audio::-webkit-media-controls-download-button { display: none !important; }
+  audio::-webkit-media-controls { overflow: hidden; }
   .read-original { color: #666; font-size: 13px; text-decoration: none; }
   .read-original:hover { color: #0077cc; }
   #load-more { display: none; width: 100%; padding: 12px; margin-top: 8px; background: #f0f0f0; border: none; border-radius: 8px; font-size: 14px; color: #666; cursor: pointer; }
@@ -71,7 +74,7 @@ for i, ep in enumerate(episodes):
     </div>
     <h2 class="title">{title}</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="{mp3_url}"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="{mp3_url}"></audio>
     </div>
   </div>
 '''

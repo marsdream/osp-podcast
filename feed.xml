@@ -7,157 +7,157 @@
     <language>zh-CN</language>
     <itunes:category text="Technology" />
     <itunes:author>开源派</itunes:author>
-    <itunes:image href="https://podcast.herebuy.us/cover.png" />
+    <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
       <title>ViMax：让 AI 当你的导演，香港大学这个开源项目想把拍电影变简单</title>
       <description />
       <pubDate>2026-05-26T03:03:59.094223</pubDate>
       <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260526.mp3" type="audio/mpeg" length="3173805" />
       <link>https://osp.io/archives/10366</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>Anthropic 向 GitHub 发出版权删除请求，欲下架 8000 份 Claude Code</title>
       <description />
       <pubDate>2026-04-12T09:56:53+00:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260412_Anthropic_向_GitHub_发出版权删除.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260412_Anthropic_向_GitHub_发出版权删除.mp3" type="audio/mpeg" length="0" />
       <link>https://osp.io/archives/10030</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>N.O.M.A.D：装着世界知识的离线服务器</title>
       <description />
       <pubDate>2026-04-12T00:30:40+00:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260412_N_O_M_A_D.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260412_N_O_M_A_D.mp3" type="audio/mpeg" length="0" />
       <link>https://osp.io/archives/9986</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>ClawFeed：我再也不想刷 RSS 了</title>
       <description />
       <pubDate>2026-04-11T07:07:49+00:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260411_ClawFeed.mp3" type="audio/mpeg" length="131" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260411_ClawFeed.mp3" type="audio/mpeg" length="0" />
       <link>https://osp.io/archives/9994</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>从聊天到行动：2026年AI Agent如何重塑人机协作</title>
       <description />
       <pubDate>2026-04-10T06:35:49.946495</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-chat-to-action-20260405.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-chat-to-action-20260405.mp3" type="audio/mpeg" length="4616684" />
       <link>https://osp.io/archives/9967</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>SGLang 刷爆 GitHub 趋势：这个“省显存”的神器，让 AI 推理快到飞起</title>
       <description />
       <pubDate>2026-04-10T06:34:09.872246</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-sglang-20260405.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-sglang-20260405.mp3" type="audio/mpeg" length="4242284" />
       <link>https://osp.io/archives/9949</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>Agent-Reach：给 AI Agent 装上互联网能力，一句话的事</title>
       <description />
       <pubDate>2026-04-10T06:32:36.326825</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-agent-reach-20260407.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-agent-reach-20260407.mp3" type="audio/mpeg" length="4485644" />
       <link>https://osp.io/archives/9997</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>Deep Learning深度学习：Ian Goodfellow AI经典教材</title>
       <description />
       <pubDate>2026-04-04T17:30:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-deeplearning-dylan-20260404.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-deeplearning-dylan-20260404.mp3" type="audio/mpeg" length="2693372" />
       <link>https://osp.io/archives/3544</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>OpenHub - 手机上的开源 GitHub 客户端</title>
       <description />
       <pubDate>2026-04-04T16:45:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-openhub-20260404.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-openhub-20260404.mp3" type="audio/mpeg" length="4433754" />
       <link>https://osp.io/archives/4428</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>AI圈最近流行”技能外包”：Skills是如何让AI变强的</title>
       <description />
       <pubDate>2026-04-04T11:22:59.273237</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_AI圈最近流行_技能外包_Skills是如何让AI变强的.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_AI圈最近流行_技能外包_Skills是如何让AI变强的.mp3" type="audio/mpeg" length="2957084" />
       <link>https://osp.io/archives/9906</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>一个人指挥一群AI干活：ClawTeam怎么让Agent自己组队</title>
       <description />
       <pubDate>2026-04-04T11:22:37.419537</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_一个人指挥一群AI干活_ClawTeam怎么让Agent自己.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_一个人指挥一群AI干活_ClawTeam怎么让Agent自己.mp3" type="audio/mpeg" length="3161564" />
       <link>https://osp.io/archives/9928</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>用 Rust 写一次，运行 everywhere：Dioxus 如何让前端变天？</title>
       <description />
       <pubDate>2026-04-04T11:16:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_用_Rust_写一次_运行_everywhere_Dioxu.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_用_Rust_写一次_运行_everywhere_Dioxu.mp3" type="audio/mpeg" length="4626764" />
       <link>https://osp.io/archives/9912</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>Deep-Live-Cam：一键换脸，门槛已经低到可怕了</title>
       <description />
       <pubDate>2026-04-04T11:15:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_Deep_Live_Cam_一键换脸_门槛已经低到可怕了.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_Deep_Live_Cam_一键换脸_门槛已经低到可怕了.mp3" type="audio/mpeg" length="3978044" />
       <link>https://osp.io/archives/9913</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>不用写代码也能做AI应用？这个开源平台有点东西</title>
       <description />
       <pubDate>2026-04-04T03:39:38+00:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_不用写代码也能做AI应用.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260404_不用写代码也能做AI应用.mp3" type="audio/mpeg" length="0" />
       <link>https://osp.io/archives/9926</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>在Mac上跑397B大模型？这位大哥真的做到了</title>
       <description />
       <pubDate>2026-04-03T22:54:23.574336</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-397b-20260403.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-397b-20260403.mp3" type="audio/mpeg" length="4438844" />
       <link>https://osp.io/archives/9924</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>开源爆发之年：AI Agent 如何改变软件开发</title>
       <description />
       <pubDate>2026-04-03T22:37:04.258677</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-ai-agent-20260403.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-ai-agent-20260403.mp3" type="audio/mpeg" length="4960124" />
       <link>https://osp.io/archives/9846</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>OBra新作superpowers：把AI编程方法论开源了</title>
       <description>（Demo版本）欢迎收听开源派技术播客...</description>
       <pubDate>2026-04-01T00:00:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-demo-20260401.mp3" type="audio/mpeg" length="130" />
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-demo-20260401.mp3" type="audio/mpeg" length="0" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>微软搞不定的PDF提取？韩国人开源了个怪物</title>
       <description />
       <pubDate>2026-03-24T13:32:37+0000</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260324_微软搞不定的PDF提取？韩国人开源了个怪物.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260324_微软搞不定的PDF提取？韩国人开源了个怪物.mp3" type="audio/mpeg" length="3188235" />
       <link>https://osp.io/archives/9899</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
       <title>在本地跑大模型：Ollama 让 AI 触手可及</title>
       <description />
       <pubDate>2026-03-23T09:23:41+00:00</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260323_在本地跑大模型_Ollama.mp3" type="audio/mpeg" length="132" />
+      <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-20260323_在本地跑大模型_Ollama.mp3" type="audio/mpeg" length="0" />
       <link>https://osp.io/archives/9873</link>
-      <itunes:image href="https://podcast.herebuy.us/cover.png" />
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
   </channel>
 </rss>
