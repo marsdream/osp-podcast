@@ -13,7 +13,7 @@ RSS_FILE = "feed.xml"
 PODCAST_TITLE = "开源派技术播客"
 PODCAST_DESC = "每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报"
 PODCAST_LINK = "https://podcast.herebuy.us/"
-PODCAST_COVER_URL = "https://podcast.herebuy.us/cover.png"
+PODCAST_COVER_URL = "https://img.osp.io/podcastcover.png"
 CF_AUDIO_BASE = "https://podcast.herebuy.us"
 
 
