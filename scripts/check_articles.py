@@ -68,7 +68,7 @@ def main():
                         with open(fpath) as f:
                             ep_data = json.load(f)
                         # episode JSON 里 article_link 字段存储原始文章链接
-                        if ep_data.get("article_link") == link:
+                        if ep_data.get("link") == link:
                             found = True
                             break
                     except (json.JSONDecodeError, IOError):
