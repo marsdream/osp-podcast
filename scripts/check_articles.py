@@ -7,7 +7,7 @@ import feedparser
 import json
 import os
 import sys
-import urllib.request
+import subprocess
 
 RSS_URL = "https://osp.io/feed"
 STATE_FILE = "last_article.json"
@@ -22,37 +22,45 @@ def gh_output(key, value):
 
 
 def fetch_gh_pages_episode_links():
-    """通过 GitHub API 获取 gh-pages 上所有 episode JSON 的 link 字段"""
-    import subprocess
+    """通过 git archive 获取 gh-pages 上所有 episode JSON 的 link 字段"""
+    import io
+    import tarfile
     
-    # 先确保本地有完整的 gh-pages（不用 shallow）
+    links = set()
+    
+    # 先确保本地有完整的 gh-pages
     subprocess.run(
         ["git", "fetch", "origin", "gh-pages:gh-pages"],
         capture_output=True, text=True
     )
     
-    links = set()
-    # 用 git ls-tree 获取 gh-pages 上所有 .json 文件（不在 docs/ 下的）
+    # 使用 git archive 获取 gh-pages 的文件列表
     result = subprocess.run(
-        ["git", "ls-tree", "-r", "--name-only", "gh-pages"],
-        capture_output=True, text=True
+        ["git", "archive", "--prefix=gh-pages/", "gh-pages"],
+        capture_output=True, timeout=30
     )
-    if result.returncode == 0:
-        for line in result.stdout.strip().split("\n"):
-            if line.endswith(".json") and not line.startswith("docs/"):
-                # 这是个 episode JSON 文件（不在 docs/ 下）
-                file_result = subprocess.run(
-                    ["git", "show", f"gh-pages:{line}"],
-                    capture_output=True, text=True
-                )
-                if file_result.returncode == 0:
+    if result.returncode != 0:
+        print(f"git archive failed: {result.stderr[:200]}")
+        return links
+    
+    try:
+        tar = tarfile.open(fileobj=io.BytesIO(result.stdout), mode='r')
+        for member in tar.getmembers():
+            path = member.name
+            if path.endswith(".json") and not path.startswith("gh-pages/docs/"):
+                f = tar.extractfile(member)
+                if f:
                     try:
-                        data = json.loads(file_result.stdout)
+                        data = json.loads(f.read().decode("utf-8"))
                         link = data.get("link", "")
                         if link:
                             links.add(link)
-                    except json.JSONDecodeError:
+                    except (json.JSONDecodeError, UnicodeDecodeError):
                         pass
+        tar.close()
+    except Exception as e:
+        print(f"tar parse error: {e}")
+    
     return links
 
 
@@ -65,7 +73,7 @@ def main():
         gh_output("has_new", "false")
         return 0
 
-    # 通过 git 直接读取 gh-pages 上的 episode JSON 文件
+    # 通过 git archive 读取 gh-pages 上的 episode JSON 文件
     existing_links = fetch_gh_pages_episode_links()
     print(f"Found {len(existing_links)} existing episodes on gh-pages")
 
