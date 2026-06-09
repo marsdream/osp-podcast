@@ -11,7 +11,6 @@ import urllib.request
 
 RSS_URL = "https://osp.io/feed"
 STATE_FILE = "last_article.json"
-GITHUB_REPO = "marsdream/osp-podcast"
 
 
 def gh_output(key, value):
@@ -22,43 +21,18 @@ def gh_output(key, value):
             f.write(f"{key}={value}\n")
 
 
-def get_gh_pages_tree_sha():
-    """获取 gh-pages 分支的 tree SHA"""
-    import subprocess
-    result = subprocess.run(
-        ["git", "ls-remote", "origin", "gh-pages"],
-        capture_output=True, text=True, cwd=os.path.dirname(__file__)
-    )
-    if result.returncode == 0:
-        # 返回格式: sha\trefs/heads/gh-pages
-        parts = result.stdout.strip().split()
-        if parts:
-            return parts[0]
-    return None
-
-
 def fetch_gh_pages_episode_links():
     """通过 GitHub API 获取 gh-pages 上所有 episode JSON 的 link 字段"""
     import subprocess
     
-    # 使用 git archive 直接获取 gh-pages 的内容
-    # 或者通过 GitHub API tree
-    result = subprocess.run(
-        ["git", "fetch", "origin", "gh-pages:gh-pages", "--depth=1"],
-        capture_output=True, text=True
-    )
-    if result.returncode != 0:
-        print(f"git fetch gh-pages failed: {result.stderr[:200]}")
-        return set()
-    
-    # 读取 gh-pages 分支上的 episode JSON 文件
-    result = subprocess.run(
-        ["git", "show", "gh-pages:episode_20260609.json"],
+    # 先确保本地有完整的 gh-pages（不用 shallow）
+    subprocess.run(
+        ["git", "fetch", "origin", "gh-pages:gh-pages"],
         capture_output=True, text=True
     )
     
     links = set()
-    # 用 git ls-tree 获取 gh-pages 上所有 .json 文件
+    # 用 git ls-tree 获取 gh-pages 上所有 .json 文件（不在 docs/ 下的）
     result = subprocess.run(
         ["git", "ls-tree", "-r", "--name-only", "gh-pages"],
         capture_output=True, text=True
