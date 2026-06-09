@@ -58,21 +58,27 @@ def main():
         # episode 文件命名: osp-podcast-YYYYMMDD_*.json 或 episode_YYYYMMDD*.json
         # 简单策略：检查 episodes/ 目录是否有对应日期的文件
         # 更可靠：检查是否有任何 episode JSON 包含此 article 的 link
+        # Scan top-level episode JSON files (gh-pages structure: episode_YYYYMMDD*.json, osp-podcast-*.json)
+        # Also scan docs/episodes/ (for mp3s)
+        scan_dirs = ["docs", "."]  # docs/ has JSONs from rsync, . has top-level episode JSONs
         found = False
-        episodes_dir = "docs/episodes"
-        if os.path.isdir(episodes_dir):
-            for fname in os.listdir(episodes_dir):
-                if fname.endswith(".json"):
-                    fpath = os.path.join(episodes_dir, fname)
-                    try:
-                        with open(fpath) as f:
-                            ep_data = json.load(f)
-                        # episode JSON 里 article_link 字段存储原始文章链接
-                        if ep_data.get("link") == link:
-                            found = True
-                            break
-                    except (json.JSONDecodeError, IOError):
-                        continue
+        for scan_dir in scan_dirs:
+            if not os.path.isdir(scan_dir):
+                continue
+            for fname in os.listdir(scan_dir):
+                if not fname.endswith(".json"):
+                    continue
+                fpath = os.path.join(scan_dir, fname)
+                try:
+                    with open(fpath) as f:
+                        ep_data = json.load(f)
+                    if ep_data.get("link") == link:
+                        found = True
+                        break
+                except (json.JSONDecodeError, IOError):
+                    continue
+            if found:
+                break
 
         if not found:
             new_article = {"id": article_id, "title": title, "link": link}
