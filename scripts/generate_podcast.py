@@ -81,20 +81,52 @@ INTRO_FILE = os.path.join(TEMPLATE_DIR, "intro.mp3")
 OUTRO_FILE = os.path.join(TEMPLATE_DIR, "outro.mp3")
 
 
-def fetch_article_content(url):
-    """通过 feedparser 获取文章内容"""
+def fetch_article_content(url, target_link=None):
+    """通过 feedparser 获取文章内容
+    
+    Args:
+        url: RSS feed URL
+        target_link: 如果指定，只返回 link 匹配的那篇文章；否则返回 entry[0]
+    """
     feed = feedparser.parse(url)
-    if feed.entries:
-        entry = feed.entries[0]
-        content = ""
-        if hasattr(entry, "content") and entry.content:
-            content = entry.content[0].value
-        elif hasattr(entry, "summary"):
-            content = entry.summary
-        else:
-            content = entry.get("description", "")
-        return entry.title, content, entry.get("link", "")
-    return None, None, ""
+    if not feed.entries:
+        return None, None, ""
+
+    if target_link:
+        # 遍历找到匹配的文章
+        for entry in feed.entries:
+            entry_link = entry.get("link", "")
+            if entry_link == target_link:
+                content = ""
+                if hasattr(entry, "content") and entry.content:
+                    content = entry.content[0].value
+                elif hasattr(entry, "summary"):
+                    content = entry.summary
+                else:
+                    content = entry.get("description", "")
+                # 尝试解析 published date 用于 episode_id
+                published = None
+                if hasattr(entry, "published_parsed") and entry.published_parsed:
+                    import time
+                    published = datetime(*entry.published_parsed[:6])
+                return entry.title, content, entry_link, published
+        # 没找到匹配的，返回 None
+        print(f"WARNING: target_link={target_link} not found in RSS, falling back to entry[0]")
+    
+    # 默认返回 entry[0]
+    entry = feed.entries[0]
+    content = ""
+    if hasattr(entry, "content") and entry.content:
+        content = entry.content[0].value
+    elif hasattr(entry, "summary"):
+        content = entry.summary
+    else:
+        content = entry.get("description", "")
+    published = None
+    if hasattr(entry, "published_parsed") and entry.published_parsed:
+        import time
+        published = datetime(*entry.published_parsed[:6])
+    return entry.title, content, entry.get("link", ""), published
 
 
 def generate_script(title, content, api_key=None, base_url=None, model=None):
@@ -180,7 +212,6 @@ def add_intro_outro(input_mp3, output_mp3):
     outro = OUTRO_FILE
 
     # 拼接：intro + content + outro
-    # 先给 intro 淡入，outro 淡出
     concat_file = output_mp3 + ".concat.txt"
     abs_input = os.path.abspath(input_mp3)
     abs_intro = os.path.abspath(intro)
@@ -192,7 +223,6 @@ def add_intro_outro(input_mp3, output_mp3):
         f.write(f"file '{abs_outro}'\n")
 
     # 用 filter_complex 实现淡入淡出
-    # afade 参数：t=in/d=1（1秒淡入）, t=out/st=0/d=1（outro开头1秒淡出）
     result = subprocess.run([
         "ffmpeg", "-y",
         "-f", "concat", "-safe", "0", "-i", concat_file,
@@ -235,16 +265,27 @@ def main():
     title = ""
     content = ""
     link = ""
+    article_date = None
 
     if args.auto:
         print("从 osp.io RSS 获取最新文章...")
-        title, content, link = fetch_article_content("https://osp.io/feed")
+        # 优先用 check_articles.py 输出的 NEW_ARTICLE_LINK 环境变量
+        new_article_link = os.environ.get("NEW_ARTICLE_LINK", "")
+        if new_article_link:
+            print(f"Using NEW_ARTICLE_LINK: {new_article_link}")
+            result = fetch_article_content("https://osp.io/feed", target_link=new_article_link)
+            title, content, link, article_date = result
+        else:
+            print("NEW_ARTICLE_LINK not set, falling back to RSS entry[0]")
+            result = fetch_article_content("https://osp.io/feed")
+            title, content, link, article_date = result
         if not title:
             print("ERROR: 无法获取文章内容")
             sys.exit(1)
         print(f"文章: {title}")
     elif args.link:
-        title, content, link = fetch_article_content(args.link)
+        result = fetch_article_content("https://osp.io/feed", target_link=args.link)
+        title, content, link, article_date = result
         if not title:
             print("ERROR: 无法获取文章内容")
             sys.exit(1)
@@ -265,8 +306,14 @@ def main():
         print("ERROR: 脚本生成失败")
         sys.exit(1)
 
-    # 生成音频
-    episode_id = datetime.now().strftime("%Y%m%d")
+    # episode_id 用文章发布日期，而非当前日期（避免同一天重复生成互相覆盖）
+    if article_date:
+        episode_id = article_date.strftime("%Y%m%d")
+        print(f"Using article date for episode_id: {episode_id}")
+    else:
+        episode_id = datetime.now().strftime("%Y%m%d")
+        print(f"Using current date for episode_id: {episode_id}")
+
     output_dir = args.output_dir
     os.makedirs(output_dir, exist_ok=True)
 
@@ -338,7 +385,7 @@ def main():
         "id": episode_id,
         "title": title,
         "link": link,
-        "date": datetime.now().isoformat(),
+        "date": article_date.isoformat() if article_date else datetime.now().isoformat(),
         "audio_file": os.path.basename(final_mp3),
         "file_size_kb": os.path.getsize(final_mp3) // 1024,
         "num_segments": len(temp_files),
