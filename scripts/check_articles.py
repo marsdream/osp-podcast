@@ -59,7 +59,7 @@ def main():
         # 简单策略：检查 episodes/ 目录是否有对应日期的文件
         # 更可靠：检查是否有任何 episode JSON 包含此 article 的 link
         found = False
-        episodes_dir = "episodes"
+        episodes_dir = "docs/episodes"
         if os.path.isdir(episodes_dir):
             for fname in os.listdir(episodes_dir):
                 if fname.endswith(".json"):
