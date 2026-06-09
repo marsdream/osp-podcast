@@ -89,6 +89,7 @@ def main():
 
     print(f"New article: {new_article['title']}")
     gh_output("has_new", "true")
+    gh_output("new_article_link", new_article["link"])
     return 0
 
 
