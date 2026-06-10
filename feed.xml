@@ -9,43 +9,43 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
-      <title>给AI助手装上微博翅膀：openclaw-weibo让私信变成命令行</title>
+      <title>2B参数的小模型，视频理解能打赢Gemini-2.5？</title>
       <description>{
 "podcast_transcripts": [
   {
     "speaker_id": 0,
-    "dialog": "嘿，今天咱们聊点啥？我刚刚发现一个特别有意思的东西，微博官方搞了个叫‘龙虾助手’的账号，你知道吗？"
+    "dialog": "哎你最近看没看到那条推文？说有个2B参数的视频理解模型，在俩关键测试上把Gemini-2.5给干翻了。"
   },
   {
     "speaker_id": 1,
-    "dialog": "哎，这个我还真听说了！是那个@微博龙虾助手对吧？用户只要私信它一句‘连接龙虾’，就能拿到API凭证，然后配置到OpenClaw里，AI就能通过微博私信跟你聊天了。这不比注册微信还简单？"
+    "dialog": "2B参数？跟Gemini-2.5比？那参数差了一百倍吧，我当时第一反应也是吹牛。结果去Hugging Face上一看，好家伙，是真的。而且还开源了。"
   },
   {
     "speaker_id": 0,
-    "dialog": "对对对，我也是这么想的。而且你知道，现在很多平台嘴上说拥抱AI，实际API限制一大堆，开发者根本没法好好用。微博这次直接自己推了个官方工具，算是真正主动拥抱了，挺难得的。"
+    "dialog": "对对对，叫Marlin-2B，NemoStation出的。它专做两件事：密集字幕生成和自然语言时间定位。说白了就是扔个视频进去，能精确到秒告诉你发生了什么，还能按时间定位你想找的事件。"
   },
   {
     "speaker_id": 1,
-    "dialog": "是啊，这背后其实有个开源项目叫openclaw-weibo，功能还挺全的。比如让AI帮你发微博，你告诉它‘帮我发一条关于今天天气的微博’，它就自动搞定了，连APP都不用打开。"
+    "dialog": "啧，这俩能力恰恰是开发者处理视频时最常问的：发生了什么，啥时候发生的。而且它能在DREAM-1K和CaReBench上做到2B参数级别最强，TimeLens-Bench也是冠军，直接对标Gemini-2.5还不落下风，推理成本完全不是一个量级。"
   },
   {
     "speaker_id": 0,
-    "dialog": "这个好！还有微博智搜，通过关键词搜索内容，AI帮你筛选有价值的信息，省得每天被信息流淹没了。热搜榜也支持主榜、文娱榜、社会榜，让AI帮你盯着热点，有什么大事小情第一时间告诉你。"
+    "dialog": "这就是所谓的小专家模型吧？不追求大而全，死磕特定场景，反而能赢。开源君，你说它技术上咋做到的？"
   },
   {
     "speaker_id": 1,
-    "dialog": "超话社区也能用！在超话发帖、评论、回复，追星的朋友可以让AI自动签到互动。还有个杀手锏——定时任务，比如每天早上8点发早安微博，或者在某个超话定时签到，简直懒人福音啊。"
+    "dialog": "它基于Qwen3.5架构，本质是video-to-text。暴露两个模式：caption模式生成结构化场景描述，带秒级时间戳；find模式用自然语言查询，返回事件的起止时间。还封装了modeling_marlin.py，调用起来特简单，marlin.caption('video.mp4')就完事了。"
   },
   {
     "speaker_id": 0,
-    "dialog": "视频图片上传也支持，大文件分片上传，发个带图的微博完全没问题。技术上是怎么实现的呢？"
+    "dialog": "那它依赖啥？我这种小白能跑起来吗？"
   },
   {
     "speaker_id": 1,
-    "dialog": "它通过微博的开放平台接口跟服务器通信，把私信消息转成OpenClaw能理解的格式，AI回复再原路返回。插件是模块化设计，每个功能都是独立的AI工具，可以单</description>
-      <pubDate>2026-06-09T12:37:19</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260609_10486.mp3" type="audio/mpeg" length="3636333" />
-      <link>https://osp.io/archives/10486</link>
+    "dialog": "可以！它用torchcodec解码，最多处理2分钟视频、240帧，FPS采样2.0。装几个pip包就行</description>
+      <pubDate>2026-06-10T01:48:41</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260610_10469.mp3" type="audio/mpeg" length="3245805" />
+      <link>https://osp.io/archives/10469</link>
       <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
