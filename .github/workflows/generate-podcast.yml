@@ -82,6 +82,14 @@ jobs:
           rsync -a episodes/ docs/episodes/
           rsync -a --include='episode_*.json' --exclude='osp-podcast-*.json' --exclude='*' episodes/ docs/
 
+      - name: Update main branch with generated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/index.html docs/feed.xml
+          git commit -m "chore: update index.html and feed.xml" || true
+          git push origin main || true
+
       - name: Verify audio files before deploy
         run: |
           echo "Checking audio files in docs/episodes/"
