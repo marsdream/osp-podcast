@@ -33,7 +33,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Install dependencies
         run: |
           sudo apt-get update && sudo apt-get install -y ffmpeg rsync
@@ -43,14 +42,24 @@ jobs:
         id: check
         run: python scripts/check_articles.py
 
+      - name: Commit initial queue to git
+        if: steps.check.outputs.has_new == 'true'
+        run: |
+          git add last_article.json
+          git commit -m "chore: initial article queue for podcast generation" || true
+          git push origin main || true
+
       - name: Generate podcast
         if: steps.check.outputs.has_new == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: deepseek-v4-flash
-          NEW_ARTICLE_LINK: ${{ steps.check.outputs.new_article_link }}
         run: python scripts/generate_podcast.py --auto --model deepseek-v4-flash --base-url "$LLM_BASE_URL"
+
+      - name: Update queue & trigger next run
+        if: steps.check.outputs.has_new == 'true'
+        run: python scripts/update_queue.py
 
       - name: Update RSS
         if: steps.check.outputs.has_new == 'true'
