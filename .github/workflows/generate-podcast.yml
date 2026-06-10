@@ -28,10 +28,11 @@ jobs:
       - name: Fetch gh-pages for historical episodes
         run: |
           git fetch origin gh-pages:gh-pages || true
-          # Fetch ALL mp3 (both old osp-podcast-* and new episode_*), but only episode_*.json
+          # Fetch ALL mp3 (old osp-podcast-* and new episode_*)
           git checkout gh-pages -- docs/episodes/*.mp3 docs/ 2>/dev/null || true
+          # Fetch both JSON formats
           git checkout gh-pages -- docs/episodes/episode_*.json docs/ 2>/dev/null || true
-          rm -f docs/episodes/osp-podcast-*.json 2>/dev/null || true
+          git checkout gh-pages -- docs/episodes/osp-podcast-*.json docs/ 2>/dev/null || true
 
       - name: Set up Python
         uses: actions/setup-python@v5

@@ -23,8 +23,9 @@ for f in sorted(glob.glob(f"{EPISODES_DIR}/episode_*.json")):
         size = os.path.getsize(local_path if os.path.exists(local_path) else deployed_path)
         if size > 100000:
             episodes.append(ep)
-# 旧格式 osp-podcast-*.json（从未重写的老 episode，只留在 docs/episodes/）
-for f in sorted(glob.glob(f"docs/{EPISODES_DIR}/osp-podcast-*.json")):
+# 旧格式 osp-podcast-*.json（从未重写的老 episode）
+for f in sorted(glob.glob(f"docs/{EPISODES_DIR}/osp-podcast-*.json")) + \
+         sorted(glob.glob(f"{EPISODES_DIR}/osp-podcast-*.json")):
     with open(f, encoding="utf-8") as fp:
         ep = json.load(fp)
     link = ep.get("link", "")
