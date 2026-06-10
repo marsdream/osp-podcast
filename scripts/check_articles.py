@@ -113,6 +113,17 @@ def main():
                 json.dump(new_articles, f, ensure_ascii=False, indent=2)
             print(f"Queue re-initialized (invalid format) with {len(new_articles)} articles")
 
+    # has_new=true 条件：队列里有文章（由 update_queue.py 管理）
+    # 如果队列文件存在且非空，说明有待处理的文章
+    if os.path.exists(STATE_FILE):
+        with open(STATE_FILE) as f:
+            queue = json.load(f)
+        if isinstance(queue, list) and len(queue) > 0:
+            gh_output("has_new", "true")
+            gh_output("new_article_links", json.dumps([a["link"] for a in queue]))
+            print(f"has_new=true ({len(queue)} articles in queue)")
+            return 0
+    # 队列为空，且 RSS 有新文章 -> 初始化队列（第一次运行）
     gh_output("has_new", "true")
     gh_output("new_article_links", json.dumps([a["link"] for a in new_articles]))
     return 0
