@@ -9,55 +9,47 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
-      <title>给AI助手装上微博翅膀：openclaw-weibo让私信变成命令行</title>
+      <title>Stremio：我为什么把奈飞、优酷和爱奇艺全删了</title>
       <description>{
 "podcast_transcripts": [
 {
 "speaker_id": 0,
-"dialog": "哎，你听说了吗？微博官方搞了个叫“龙虾助手”的东西，直接让AI通过私信跟你聊天！"
+"dialog": "大家好，欢迎收听本期节目！今天咱们聊聊一个让我彻底删掉所有视频App的神器——Stremio。你知道吗，我每次打开Netflix、优酷，光是找想看的片子就能翻半小时，推荐算法还老把我困在信息茧房里。"
 },
 {
 "speaker_id": 1,
-"dialog": "对对对，这事儿我昨天刚试了一下。整个过程简单得离谱，私信发一句“连接龙虾”就能拿到API凭证，然后配到OpenClaw里，你的AI助手就能在微博里跟人对话了。"
+"dialog": "哈哈，太懂了！不过你说的这个Stremio，我得先澄清一下——它可不是什么盗版工具。它本质上是个内容聚合器，就像浏览器，插件就是网页，内容全靠社区开发者维护。"
 },
 {
 "speaker_id": 0,
-"dialog": "比注册微信号还简单？那社交平台接入AI以前不是挺折腾的吗，各种限制……微博这次居然这么主动，让人有点意外啊。"
+"dialog": "对，一开始我也误会了。后来发现它的插件生态真的太强了——动画、美剧、体育直播，甚至成人内容都能找到对应的Addon。我装了Toropi、DOKI几个插件，追剧体验直接起飞。"
 },
 {
 "speaker_id": 1,
-"dialog": "确实。以前好多平台嘴上说拥抱AI，实际API文档写得跟天书似的，开发者根本没法用。微博这次直接官方下场做工具，算是第一个真正落地的主流社交平台AI方案。"
+"dialog": "而且界面特别干净，没有任何广告和烦人的推荐。所有播放记录、评分、海报都统一在一个界面里。以前我追剧得在B站、腾讯、YouTube之间切来切去，现在一个Stremio全搞定。"
 },
 {
 "speaker_id": 0,
-"dialog": "那这个插件到底能干啥？我看介绍说功能还挺多的——发微博、搜东西、看热搜、超话互动，甚至还能定时任务？"
+"dialog": "说到这个，我很好奇它跟Jellyfin、Plex比怎么样？我之前折腾过Jellyfin，搭NAS、刮削海报，没点技术背景真搞不定。"
 },
 {
 "speaker_id": 1,
-"dialog": "没错，它几乎把微博的核心操作都包了。比如你告诉AI“帮我发一条今天天气的微博”，它自己就能写文案发出去。还有那个微博智搜，避免了你被信息流淹没，直接搜关键词筛选有用信息。"
+"dialog": "简单说：Jellyfin是给你自己建电影院，Stremio是给你一把万能钥匙。你不需要任何本地存储，装好插件就能直接播。代价就是内容质量看插件维护者的脸色，万一插件停更，那片源就断了。"
 },
 {
 "speaker_id": 0,
-"dialog": "定时任务这点子太绝了！每天早上8点自动发早安微博，或者追星的人设置在超话里自动签到、互动，连打卡都省了。"
+"dialog": "嗯，确实。我用了三个月，优点是跨平台同步、插件丰富；缺点是部分插件得花点心思找，偶尔播放也会卡。不过比起国内App的广告和套路，这点折腾我觉得值。"
 },
 {
 "speaker_id": 1,
-"dialog": "哈哈，确实省心。技术上呢，它是通过微博的开放平台接口通信，把私信消息转成OpenClaw能懂的格式。而且设计成模块化，发微博、搜索、热搜这些功能都可以独立开关，不想让AI看热搜就关掉。"
+"dialog": "没错！Stremio给我的最大感受是主动权回来了。Netflix告诉你应该看什么，爱奇艺逼你开会员才能跳过广告。而Stremio只是工具，内容你自己选，插件你自己装，播放源你自己决定。"
 },
 {
 "speaker_id": 0,
-"dialog": "那更新怎么办？普通用户哪会折腾升级啊。"
-},
-{
-"speaker_id": 1,
-"dialog": "这点挺贴心——2.2.0版本之后，插件每30分钟自动检查技能更新，有新功能就自动推送，完全不用手动操作。"
-},
-{
-"speaker_id": 0,
-"dial</description>
-      <pubDate>2026-06-09T12:37:19</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260609_10486.mp3" type="audio/mpeg" length="3196845" />
-      <link>https://osp.io/archives/10486</link>
+"d</description>
+      <pubDate>2026-06-07T00:33:10</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260607_10383.mp3" type="audio/mpeg" length="2597805" />
+      <link>https://osp.io/archives/10383</link>
       <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
