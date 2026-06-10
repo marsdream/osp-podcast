@@ -19,11 +19,10 @@ for f in sorted(glob.glob(f"{EPISODES_DIR}/episode_*.json")):
     mp3 = ep.get("audio_file", "")
     local_path = os.path.join(EPISODES_DIR, mp3)
     deployed_path = os.path.join("docs", EPISODES_DIR, mp3)
-    has_audio = False
     if mp3 and (os.path.exists(local_path) or os.path.exists(deployed_path)):
         size = os.path.getsize(local_path if os.path.exists(local_path) else deployed_path)
-        has_audio = size > 100000
-    episodes.append({**ep, "_has_audio": has_audio})
+        if size > 100000:
+            episodes.append(ep)
 # 旧格式 osp-podcast-*.json（从未重写的老 episode）
 for f in sorted(glob.glob(f"docs/{EPISODES_DIR}/osp-podcast-*.json")) + \
          sorted(glob.glob(f"{EPISODES_DIR}/osp-podcast-*.json")):
@@ -35,11 +34,10 @@ for f in sorted(glob.glob(f"docs/{EPISODES_DIR}/osp-podcast-*.json")) + \
     seen_links.add(link)
     mp3 = ep.get("audio_file", "")
     deployed_path = os.path.join("docs", EPISODES_DIR, mp3)
-    has_audio = False
     if mp3 and os.path.exists(deployed_path):
         size = os.path.getsize(deployed_path)
-        has_audio = size > 100000
-    episodes.append({**ep, "_has_audio": has_audio})
+        if size > 100000:
+            episodes.append(ep)
 
 episodes.sort(key=lambda x: x.get("date", ""), reverse=True)
 
@@ -90,11 +88,9 @@ for i, ep in enumerate(episodes):
     title = ep.get("title", "")
     link = ep.get("link", "")
     mp3 = ep.get("audio_file", "")
-    has_audio = ep.get("_has_audio", False)
-    mp3_url = f"https://podcast.herebuy.us/episodes/{mp3}" if has_audio else ""
+    mp3_url = f"https://podcast.herebuy.us/episodes/{mp3}"
     hidden = 'class="episode hidden"' if i >= INITIAL_SHOW else 'class="episode"'
-    if has_audio:
-        html += f'''  <div {hidden}>
+    html += f'''  <div {hidden}>
     <div class="episode-header">
       <span class="date">📅 {date}</span>
       <a class="read-original" href="{link}" target="_blank">📖 阅读原文</a>
@@ -102,18 +98,6 @@ for i, ep in enumerate(episodes):
     <h2 class="title">{title}</h2>
     <div class="audio-row">
       <audio controls preload="none" controlsList="nodownload" src="{mp3_url}"></audio>
-    </div>
-  </div>
-'''
-    else:
-        html += f'''  <div {hidden}>
-    <div class="episode-header">
-      <span class="date">📅 {date}</span>
-      <a class="read-original" href="{link}" target="_blank">📖 阅读原文</a>
-    </div>
-    <h2 class="title">{title}</h2>
-    <div class="audio-row">
-      <span style="font-size:13px;color:#888;">🔇 暂无音频，欢迎阅读原文</span>
     </div>
   </div>
 '''
