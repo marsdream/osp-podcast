@@ -9,52 +9,58 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
-      <title>AV2 视频编码标准 v1.0.0 正式发布！AOMedia 下一代开源视频编码来了</title>
+      <title>你的私有容器镜像，其实公开了四年：Gitea CVE-2026-27771 漏洞详解</title>
       <description>{
 "podcast_transcripts": [
 {
 "speaker_id": 0,
-"dialog": "开源君，你听说了吗？AV2 视频编码标准前两天正式发布 1.0.0 版本了！"
+"dialog": "哎，你听说了吗？Gitea最近悄悄发了个补丁，1.26.2，说是修了个安全漏洞。"
 },
 {
 "speaker_id": 1,
-"dialog": "当然听说了！这可是继 AV1 之后又一个里程碑。你知道吗，它比 AV1 在相同画质下能节省约 30% 的带宽，几乎和收费的 VVC 持平了。"
+"dialog": "听说了，这事儿可大了。那个漏洞评分9.1，CVE-2026-27771，属于灾难级的。而且最吓人的是，它已经存在了将近四年！"
 },
 {
 "speaker_id": 0,
-"dialog": "30% 那也太厉害了吧！流媒体平台肯定乐坏了，带宽成本直接降一大截。"
+"dialog": "四年？我的天，那这四年里，任何人不需要账号密码就能拖走私有容器镜像？"
 },
 {
 "speaker_id": 1,
-"dialog": "对对对，用户体验也提升啊，同等带宽下画面更清晰。不过现在编码速度挺慢的，Reddit 上有开发者吐槽说在好硬件上也就跑个 1fps，距离普及还有段路要走。"
+"dialog": "没错。你给镜像标记了‘private’，前端显示个小锁，但实际上后端根本没做验证。用docker pull直接就能拉下来，匿名访问，完全绕过。"
 },
 {
 "speaker_id": 0,
-"dialog": "哎，这不跟当年 AV1 一样嘛，先出标准，再等硬件加速。据说 AV2 的硬件芯片要到 2028 年才出来？"
+"dialog": "这也太离谱了吧……那这个漏洞是怎么被发现的？"
 },
 {
 "speaker_id": 1,
-"dialog": "没错。不过别急，软件支持已经在推了。VLC 4.0 在 CES 2026 上已经演示了 AV2 播放，而且 AOMedia 还发布了纯 CPU 解码器 DAV2D，直播场景现在就能跑起来，不用等硬件。"
+"dialog": "是一家叫NoScope的安全公司干的，但干活的是他们的自动渗透测试AI，不是人类安全工程师。那个AI不带情绪，把公网上暴露的Gitea实例都扫了一遍，就发现了这个bug。"
 },
 {
 "speaker_id": 0,
-"dialog": "哦？那开源社区是不是已经能玩起来了？我记得 AV2 的参考软件 AVM 在 GitHub 上可以拿到。"
+"dialog": "AI真厉害啊，不吃不喝不睡觉，一板一眼地测。那这个漏洞具体影响到哪些人？"
 },
 {
 "speaker_id": 1,
-"dialog": "对的，任何人都可以研究甚至自己实现。这就是 AOMedia 这类组织最有意思的地方——用开源协作做影响几十亿人看视频的东西。"
+"dialog": "全球大概有31750个部署实例，医疗、航天、零售、ISP都有。容器镜像里面通常藏着微服务代码、数据库凭证、SSH密钥、CI/CD凭证……要是有攻击者从2022年开始扫，现在可能手里一堆内部资料了。"
 },
 {
 "speaker_id": 0,
-"dialog": "咱们来聊聊 AV2 有哪些黑科技吧？我看到有多参考帧预测、帧级多线程，还有专门优化 AR/VR 和屏幕内容的。"
+"dialog": "细思极恐啊。对了，Forgejo不是Gitea的社区分叉吗？它是不是也中招了？"
 },
 {
 "speaker_id": 1,
-"dialog": "没错。多参考帧预测就是用多帧来算运动矢量，压缩更准；帧级多线程让编码解码效率都提升。屏幕内容优化对 PPT、打字稿这类场景效果特别好。而且祖传优势——免授权费，继续保持着。"
-</description>
-      <pubDate>2026-06-02T08:31:38</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260602_10446.mp3" type="audio/mpeg" length="2983149" />
-      <link>https://osp.io/archives/10446</link>
+"dialog": "对对对，Forgejo共享同一套容器注册表代码，所以也一样。好在Gitea团队在5月20号发布了1.26.2，把访问控制检查补上了。"
+},
+{
+"speaker_id": 0,
+"dialog": "那就是说，如果你还在用低于1.26.2的版本，就得立刻升级？"
+},
+{
+"sp</description>
+      <pubDate>2026-06-02T03:18:49</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260602_10431.mp3" type="audio/mpeg" length="3381741" />
+      <link>https://osp.io/archives/10431</link>
       <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
