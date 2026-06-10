@@ -56,9 +56,12 @@ def build_rss(episodes):
         if audio_file:
             audio_url = f"{CF_AUDIO_BASE}/episodes/{audio_file}"
             audio_size = 0
-            full_path = os.path.join(EPISODES_DIR, audio_file)
-            if os.path.exists(full_path):
-                audio_size = os.path.getsize(full_path)
+            local_path = os.path.join(EPISODES_DIR, audio_file)
+            deployed_path = os.path.join("docs", EPISODES_DIR, audio_file)
+            if os.path.exists(local_path):
+                audio_size = os.path.getsize(local_path)
+            elif os.path.exists(deployed_path):
+                audio_size = os.path.getsize(deployed_path)
             ET.SubElement(item, "enclosure", url=audio_url,
                          type="audio/mpeg", length=str(audio_size))
         # osp.io 原文链接

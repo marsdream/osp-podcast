@@ -28,9 +28,10 @@ jobs:
       - name: Fetch gh-pages for historical episodes
         run: |
           git fetch origin gh-pages:gh-pages || true
-          # Only fetch episode_*.mp3 + episode_*.json (skip old osp-podcast-* duplicates)
-          git checkout gh-pages -- docs/episodes/episode_*.mp3 docs/ 2>/dev/null || true
-          rm -f docs/episodes/osp-podcast-*.json docs/episodes/osp-podcast-*.mp3 2>/dev/null || true
+          # Fetch ALL mp3 (both old osp-podcast-* and new episode_*), but only episode_*.json
+          git checkout gh-pages -- docs/episodes/*.mp3 docs/ 2>/dev/null || true
+          git checkout gh-pages -- docs/episodes/episode_*.json docs/ 2>/dev/null || true
+          rm -f docs/episodes/osp-podcast-*.json 2>/dev/null || true
 
       - name: Set up Python
         uses: actions/setup-python@v5

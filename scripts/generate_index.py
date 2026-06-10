@@ -11,8 +11,10 @@ for f in sorted(glob.glob(f"{EPISODES_DIR}/episode_*.json")):
     with open(f, encoding="utf-8") as fp:
         ep = json.load(fp)
     mp3 = ep.get("audio_file", "")
-    if mp3 and os.path.exists(os.path.join(EPISODES_DIR, mp3)):
-        size = os.path.getsize(os.path.join(EPISODES_DIR, mp3))
+    local_path = os.path.join(EPISODES_DIR, mp3)
+    deployed_path = os.path.join("docs", EPISODES_DIR, mp3)
+    if mp3 and (os.path.exists(local_path) or os.path.exists(deployed_path)):
+        size = os.path.getsize(local_path if os.path.exists(local_path) else deployed_path)
         if size > 100000:
             episodes.append(ep)
 
