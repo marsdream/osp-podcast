@@ -5,9 +5,10 @@ on:
     - cron: '0 1 * * 1,3,5' # 周一/三/五 UTC 1:00 = 北京时间 9:00
   workflow_dispatch: {} # 支持手动触发
 
+# 串行队列：同时间只跑一个，trigger 的新 run 排在后面等
 concurrency:
   group: osp-podcast-generate
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -17,7 +18,7 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
 
     steps:
       - uses: actions/checkout@v4
@@ -42,24 +43,20 @@ jobs:
         id: check
         run: python scripts/check_articles.py
 
-      - name: Commit initial queue to git
+      - name: Commit queue to git
         if: steps.check.outputs.has_new == 'true'
         run: |
-          git add -f last_article.json
-          git commit --no-verify -m "chore: initial article queue for podcast generation" || true
+          git add last_article.json
+          git commit -m "chore: article queue for podcast generation" || true
           git push origin main || true
 
-      - name: Generate podcast
+      - name: Process queue (generate podcasts)
         if: steps.check.outputs.has_new == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: deepseek-v4-flash
         run: python scripts/generate_podcast.py --auto --model deepseek-v4-flash --base-url "$LLM_BASE_URL"
-
-      - name: Update queue & trigger next run
-        if: steps.check.outputs.has_new == 'true'
-        run: python scripts/update_queue.py
 
       - name: Update RSS
         if: steps.check.outputs.has_new == 'true'
@@ -73,7 +70,6 @@ jobs:
           mkdir -p docs/episodes
           cp feed.xml docs/
           cp index.html docs/
-          # rsync --update: only copies new/changed files, does NOT delete existing in dest
           rsync -a --update episodes/ docs/episodes/
           rsync -a --update --include='*.json' --exclude='*' episodes/ docs/
 
@@ -93,3 +89,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           publish_branch: gh-pages
+
+      - name: Update queue & trigger next run
+        if: steps.check.outputs.has_new == 'true'
+        run: python scripts/update_queue.py
