@@ -27,6 +27,7 @@ jobs:
 
       - name: Fetch gh-pages for historical episodes
         run: |
+          mkdir -p docs/episodes
           git fetch origin gh-pages:gh-pages || true
           # Fetch ALL mp3 (old osp-podcast-* and new episode_*)
           git checkout gh-pages -- docs/episodes/*.mp3 docs/ 2>/dev/null || true
