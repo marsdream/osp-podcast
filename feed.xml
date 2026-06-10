@@ -11,48 +11,48 @@
     <item>
       <title>Syncthing：开源文件同步神器，数据自己掌控不香吗？</title>
       <description>{
-"podcast_transcripts": [
-  {
-    "speaker_id": 0,
-    "dialog": "哎，你有没有这种经历？手机拍了一堆照片，想传到电脑上修一下，结果得先上传到 iCloud，等半天同步完，再从电脑下载。有时候网络不好，急死人。"
-  },
-  {
-    "speaker_id": 1,
-    "dialog": "哈哈，太有了！而且不光是照片，那些敏感的工作文件，你敢全扔云端吗？万一账号出问题，或者服务商跑路，资料就没了。"
-  },
-  {
-    "speaker_id": 0,
-    "dialog": "对啊，我一直想找个靠谱的解决方案。最近听说了一个叫 Syncthing 的东西，据说能直接在两台设备之间同步文件，不需要云服务器？"
-  },
-  {
-    "speaker_id": 1,
-    "dialog": "没错！它就是干这个的。开源的文件同步工具，让电脑 A 和电脑 B 直接打隧道传数据，中间不经过任何第三方。每个设备有个唯一的 ID，你把对方的 ID 添加进来，就能连上了，所有通信都是加密的。"
-  },
-  {
-    "speaker_id": 0,
-    "dialog": "听起来有点技术范儿，但用起来复杂吗？我怕折腾半天搞不定。"
-  },
-  {
-    "speaker_id": 1,
-    "dialog": "其实超级简单。下载安装后启动，在浏览器里打开一个本地地址，就能看到管理界面。添加文件夹，选好目录，再选要同步的设备，搞定。第一次可能需要局域网或者手动交换 ID，之后它们就记住彼此了，哪怕在不同网络也能通过中继服务器连接。"
-  },
-  {
-    "speaker_id": 0,
-    "dialog": "那它费电吗？我笔记本一直开着就怕耗电。"
-  },
-  {
-    "speaker_id": 1,
-    "dialog": "很省电。你不主动改文件时，它不会频繁读写硬盘。"
-  },
-  {
-    "speaker_id": 0,
-    "dialog": "那跟百度网盘、iCloud 比呢？很多人都有会员啊。"
-  },
-  {
-    "speaker_id": 1,
-    "dialog": "会员也有隐私风险啊。管理员理论上</description>
+  "podcast_transcripts": [
+    {
+      "speaker_id": 0,
+      "dialog": "嗨，大家有没有这种烦恼？手机上拍了好多照片，想在电脑上修一修，结果要等 iCloud 慢慢同步，急死个人。"
+    },
+    {
+      "speaker_id": 1,
+      "dialog": "哈哈，太真实了！而且不只是照片，像我这种经常在不同电脑间切换工作的，最怕文件版本混乱。今儿正好聊一个神器——Syncthing。"
+    },
+    {
+      "speaker_id": 0,
+      "dialog": "哦？这名字听着就有点技术范儿，它到底能干嘛呀？"
+    },
+    {
+      "speaker_id": 1,
+      "dialog": "简单说，它就是个开源的文件同步工具。让你在电脑和手机之间自动同步文件夹，最关键的是——不需要任何云服务器！你的设备直接点对点传数据。"
+    },
+    {
+      "speaker_id": 0,
+      "dialog": "哇，那隐私岂不是超安全？毕竟数据都不经过第三方。"
+    },
+    {
+      "speaker_id": 1,
+      "dialog": "对对对，所有通信都加密，连 Syncthing 自己都看不到你文件内容。你只要把每台设备的唯一 ID 互相添加一下，就能自动连接。"
+    },
+    {
+      "speaker_id": 0,
+      "dialog": "听起来挺复杂的样子……我这种小白能上手吗？"
+    },
+    {
+      "speaker_id": 1,
+      "dialog": "放心，实际用起来超级简单！下载安装后，后台一跑，打开浏览器访问个本地地址就能管理了。添加文件夹、选目标设备，搞定。第一次连接可能需要同个局域网或者手动交换下 ID，之后它们就记住彼此了。"
+    },
+    {
+      "speaker_id": 0,
+      "dialog": "那跟百度网盘、iCloud 比，它强在哪？我好多朋友都还在用那些呢。"
+    },
+    {
+      "speaker_id": 1,
+    </description>
       <pubDate>2026-06-01T07:30:04</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260601_10111.mp3" type="audio/mpeg" length="3141549" />
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260601_10111.mp3" type="audio/mpeg" length="3030957" />
       <link>https://osp.io/archives/10111</link>
       <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
