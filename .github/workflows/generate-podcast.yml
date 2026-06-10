@@ -28,7 +28,9 @@ jobs:
       - name: Fetch gh-pages for historical episodes
         run: |
           git fetch origin gh-pages:gh-pages || true
-          git checkout gh-pages -- docs/ 2>/dev/null || true
+          # Only fetch episode_*.mp3 + episode_*.json (skip old osp-podcast-* duplicates)
+          git checkout gh-pages -- docs/episodes/episode_*.mp3 docs/ 2>/dev/null || true
+          rm -f docs/episodes/osp-podcast-*.json docs/episodes/osp-podcast-*.mp3 2>/dev/null || true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -71,12 +73,13 @@ jobs:
           cp feed.xml docs/
           cp index.html docs/
           # 把 gh-pages 已有的 episode 合并进来（不覆盖已有的 episode mp3）
+          # 排除 old osp-podcast-*.json 格式，只合并不重复的新 mp3
           if [ -d docs/episodes ] && [ "$(ls -A docs/episodes)" ]; then
             echo "Preserving existing episodes from gh-pages"
-            rsync -a --ignore-existing docs/episodes/ episodes/
+            rsync -a --ignore-existing --exclude='osp-podcast-*.json' docs/episodes/ episodes/
           fi
           rsync -a episodes/ docs/episodes/
-          rsync -a --include='*.json' --exclude='*' episodes/ docs/
+          rsync -a --include='episode_*.json' --exclude='osp-podcast-*.json' --exclude='*' episodes/ docs/
 
       - name: Verify audio files before deploy
         run: |

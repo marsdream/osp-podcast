@@ -375,7 +375,7 @@ def main():
     os.remove(concat_file)
 
     # 加入片头片尾
-    final_mp3 = os.path.join(output_dir, f"osp-podcast-{episode_id}.mp3")
+    final_mp3 = os.path.join(output_dir, f"episode_{episode_id}.mp3")
     print("Adding intro/outro music...")
     add_intro_outro(content_mp3, final_mp3)
 
@@ -396,13 +396,10 @@ def main():
         "audio_file": os.path.basename(final_mp3),
         "file_size_kb": os.path.getsize(final_mp3) // 1024,
         "num_segments": len(temp_files),
-        "has_intro_outro": has_intro_outro()
+        "has_intro_outro": has_intro_outro(),
+        "script": raw_script[:1000] if raw_script else ""
     }
-    # episode_*.json - used by update_rss.py
     with open(os.path.join(output_dir, f"episode_{episode_id}.json"), "w") as f:
-        json.dump(meta, f, ensure_ascii=False, indent=2)
-    # osp-podcast-*.json - used by generate_index.py (alias, same content)
-    with open(os.path.join(output_dir, f"osp-podcast-{episode_id}.json"), "w") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
 
 
