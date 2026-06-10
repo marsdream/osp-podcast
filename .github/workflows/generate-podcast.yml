@@ -46,7 +46,7 @@ jobs:
       - name: Commit queue to git
         if: steps.check.outputs.has_new == 'true'
         run: |
-          git add last_article.json
+          git add -f last_article.json
           git commit -m "chore: article queue for podcast generation" || true
           git push origin main || true
 
