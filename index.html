@@ -20,7 +20,9 @@
   .date { color: #888; font-size: 13px; }
   .title { font-size: 17px; font-weight: 500; margin-bottom: 12px; line-height: 1.4; }
   .audio-row audio { width: 100%; height: 40px; }
+  /* 隐藏原生 audio 下载按钮 */
   audio::-webkit-media-controls-download-button { display: none !important; }
+  audio::-webkit-media-controls { overflow: hidden; }
   .read-original { color: #666; font-size: 13px; text-decoration: none; }
   .read-original:hover { color: #0077cc; }
   #load-more { display: none; width: 100%; padding: 12px; margin-top: 8px; background: #f0f0f0; border: none; border-radius: 8px; font-size: 14px; color: #666; cursor: pointer; }
@@ -36,6 +38,16 @@
   <a class="rss-link" href="feed.xml">📡 RSS 订阅</a>
 </header>
 <main>
+  <div class="episode">
+    <div class="episode-header">
+      <span class="date">📅 2026-05-26</span>
+      <a class="read-original" href="https://osp.io/archives/10366" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">ViMax：让 AI 当你的导演，香港大学这个开源项目想把拍电影变简单</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260526.mp3"></audio>
+    </div>
+  </div>
   <div class="episode">
     <div class="episode-header">
       <span class="date">📅 2026-05-26</span>
@@ -76,7 +88,7 @@
       <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260525_开源工具-now-playing-service-全能歌曲展示工具.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-05-25</span>
       <a class="read-original" href="https://osp.io/archives/10283" target="_blank">📖 阅读原文</a>
@@ -198,6 +210,36 @@
   </div>
   <div class="episode hidden">
     <div class="episode-header">
+      <span class="date">📅 2026-04-10</span>
+      <a class="read-original" href="https://osp.io/archives/9967" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">从聊天到行动：2026年AI Agent如何重塑人机协作</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-chat-to-action-20260405.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-10</span>
+      <a class="read-original" href="https://osp.io/archives/9949" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">SGLang 刷爆 GitHub 趋势：这个“省显存”的神器，让 AI 推理快到飞起</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-sglang-20260405.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-10</span>
+      <a class="read-original" href="https://osp.io/archives/9997" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Agent-Reach：给 AI Agent 装上互联网能力，一句话的事</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-agent-reach-20260407.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
       <span class="date">📅 2026-04-07</span>
       <a class="read-original" href="https://osp.io/archives/9997" target="_blank">📖 阅读原文</a>
     </div>
@@ -224,6 +266,76 @@
     <h2 class="title">sglang 20260405</h2>
     <div class="audio-row">
       <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-sglang-20260405.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/3544" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Deep Learning深度学习：Ian Goodfellow AI经典教材</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-deeplearning-dylan-20260404.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/4428" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">OpenHub - 手机上的开源 GitHub 客户端</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-openhub-20260404.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/9906" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">AI圈最近流行”技能外包”：Skills是如何让AI变强的</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260404_AI圈最近流行_技能外包_Skills是如何让AI变强的.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/9928" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">一个人指挥一群AI干活：ClawTeam怎么让Agent自己组队</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260404_一个人指挥一群AI干活_ClawTeam怎么让Agent自己.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/9912" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">用 Rust 写一次，运行 everywhere：Dioxus 如何让前端变天？</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260404_用_Rust_写一次_运行_everywhere_Dioxu.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/9913" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Deep-Live-Cam：一键换脸，门槛已经低到可怕了</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260404_Deep_Live_Cam_一键换脸_门槛已经低到可怕了.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/9918" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">NousResearch Hermes Agent：用结构化推理重新定义 AI 代理</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/hermes-agent.mp3"></audio>
     </div>
   </div>
   <div class="episode hidden">
@@ -289,6 +401,36 @@
   <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-04-03</span>
+      <a class="read-original" href="" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">AI Skills for Developers - English Version</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/podcast-ai-skills-english.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-03</span>
+      <a class="read-original" href="https://osp.io/archives/9924" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">在Mac上跑397B大模型？这位大哥真的做到了</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-397b-20260403.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-03</span>
+      <a class="read-original" href="https://osp.io/archives/9846" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">开源爆发之年：AI Agent 如何改变软件开发</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-ai-agent-20260403.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-03</span>
       <a class="read-original" href="https://osp.io/archives/9924" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">397b 20260403</h2>
@@ -321,6 +463,16 @@
       <span class="date">📅 2026-03-24</span>
       <a class="read-original" href="https://osp.io/archives/9899" target="_blank">📖 阅读原文</a>
     </div>
+    <h2 class="title">微软搞不定的PDF提取？韩国人开源了个怪物</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260324_微软搞不定的PDF提取？韩国人开源了个怪物.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-03-24</span>
+      <a class="read-original" href="https://osp.io/archives/9899" target="_blank">📖 阅读原文</a>
+    </div>
     <h2 class="title">20260324 微软搞不定的PDF提取？韩国人开源了个怪物</h2>
     <div class="audio-row">
       <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260324_微软搞不定的PDF提取？韩国人开源了个怪物.mp3"></audio>
@@ -328,7 +480,7 @@
   </div>
 </main>
 <button id="load-more" class="visible">
-  加载更多 (24 条)
+  加载更多 (39 条)
 </button>
 <footer>© 2026 开源派 · <a href="https://osp.io">osp.io</a></footer>
 <script>
