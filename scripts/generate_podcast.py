@@ -313,8 +313,13 @@ def main():
         model=args.model
     )
     if not transcripts:
-        print("ERROR: 脚本生成失败")
-        sys.exit(1)
+        print("ERROR: 脚本生成失败，跳过此文章")
+        # 单篇失败：更新队列文件（移除此文章）并正常退出，让下一 CI run 继续处理队列中下一篇
+        if os.path.exists(STATE_FILE):
+            with open(STATE_FILE) as f:
+                remaining = json.load(f)
+            # 此文章已在上面从队列移除，无需额外操作
+        sys.exit(0)  # 不算 CI 失败，只是跳过
 
     # episode_id 用日期+slug，避免同一天多篇文章互相覆盖
     episode_id = make_episode_id(article_date, link, title)
