@@ -48,7 +48,8 @@ def build_rss(episodes):
     for ep in episodes:
         item = ET.SubElement(channel, "item")
         ET.SubElement(item, "title").text = ep.get("title", "untitled")
-        ET.SubElement(item, "description").text = ep.get("script", "")[:500]
+        desc = ep.get("script", "")[:1000] or ep.get("title", "")
+        ET.SubElement(item, "description").text = desc
         ET.SubElement(item, "pubDate").text = ep.get("date", "")
 
         audio_file = ep.get("audio_file", "")
