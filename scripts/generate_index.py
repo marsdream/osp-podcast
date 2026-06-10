@@ -7,7 +7,7 @@ OUTPUT = "index.html"
 INITIAL_SHOW = 5   # 默认显示最新 N 条
 
 episodes = []
-for f in sorted(glob.glob(f"{EPISODES_DIR}/*.json")):
+for f in sorted(glob.glob(f"{EPISODES_DIR}/episode_*.json")):
     with open(f, encoding="utf-8") as fp:
         ep = json.load(fp)
     mp3 = ep.get("audio_file", "")
