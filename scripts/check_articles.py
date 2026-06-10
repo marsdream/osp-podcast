@@ -77,29 +77,31 @@ def main():
     existing_links = fetch_gh_pages_episode_links()
     print(f"Found {len(existing_links)} existing episodes on gh-pages")
 
-    # 遍历所有 RSS entry，找到第一个没有生成过 episode 的文章
-    new_article = None
+    # 遍历所有 RSS entry，收集所有没有生成过 episode 的文章
+    new_articles = []
     for entry in feed.entries:
         article_id = entry.get("id") or entry.link
         title = entry.title
         link = entry.link
 
         if link not in existing_links:
-            new_article = {"id": article_id, "title": title, "link": link}
-            break
+            new_articles.append({"id": article_id, "title": title, "link": link})
 
-    if new_article is None:
+    if not new_articles:
         print("No new articles — all already have episodes, skipping generation")
         gh_output("has_new", "false")
         return 0
 
-    # 更新 state file
-    with open(STATE_FILE, "w") as f:
-        json.dump(new_article, f, ensure_ascii=False, indent=2)
+    print(f"Found {len(new_articles)} new articles")
+    for a in new_articles:
+        print(f"  - {a['title']}")
 
-    print(f"New article: {new_article['title']}")
+    # 更新 state file（存所有新文章）
+    with open(STATE_FILE, "w") as f:
+        json.dump(new_articles, f, ensure_ascii=False, indent=2)
+    
     gh_output("has_new", "true")
-    gh_output("new_article_link", new_article["link"])
+    gh_output("new_article_links", json.dumps([a["link"] for a in new_articles]))
     return 0
 
 
