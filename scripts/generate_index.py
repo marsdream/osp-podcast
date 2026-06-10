@@ -2,7 +2,7 @@
 """generate_index.py - 从 episode JSON 生成 index.html（加载更多分页）"""
 import os, json, glob
 
-EPISODES_DIR = "episodes"
+EPISODES_DIR = "docs/episodes"
 OUTPUT = "index.html"
 INITIAL_SHOW = 5   # 默认显示最新 N 条
 
