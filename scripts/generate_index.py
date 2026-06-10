@@ -7,14 +7,34 @@ OUTPUT = "index.html"
 INITIAL_SHOW = 5   # 默认显示最新 N 条
 
 episodes = []
+seen_links = set()  # 去重：同 link 只取第一次出现
+# 新格式 episode_*.json（优先）
 for f in sorted(glob.glob(f"{EPISODES_DIR}/episode_*.json")):
     with open(f, encoding="utf-8") as fp:
         ep = json.load(fp)
+    link = ep.get("link", "")
+    if link in seen_links:
+        continue
+    seen_links.add(link)
     mp3 = ep.get("audio_file", "")
     local_path = os.path.join(EPISODES_DIR, mp3)
     deployed_path = os.path.join("docs", EPISODES_DIR, mp3)
     if mp3 and (os.path.exists(local_path) or os.path.exists(deployed_path)):
         size = os.path.getsize(local_path if os.path.exists(local_path) else deployed_path)
+        if size > 100000:
+            episodes.append(ep)
+# 旧格式 osp-podcast-*.json（从未重写的老 episode，只留在 docs/episodes/）
+for f in sorted(glob.glob(f"docs/{EPISODES_DIR}/osp-podcast-*.json")):
+    with open(f, encoding="utf-8") as fp:
+        ep = json.load(fp)
+    link = ep.get("link", "")
+    if link in seen_links:
+        continue
+    seen_links.add(link)
+    mp3 = ep.get("audio_file", "")
+    deployed_path = os.path.join("docs", EPISODES_DIR, mp3)
+    if mp3 and os.path.exists(deployed_path):
+        size = os.path.getsize(deployed_path)
         if size > 100000:
             episodes.append(ep)
 
