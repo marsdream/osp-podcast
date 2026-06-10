@@ -9,47 +9,52 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
-      <title>Stremio：我为什么把奈飞、优酷和爱奇艺全删了</title>
+      <title>AV2 视频编码标准 v1.0.0 正式发布！AOMedia 下一代开源视频编码来了</title>
       <description>{
 "podcast_transcripts": [
 {
 "speaker_id": 0,
-"dialog": "大家好，欢迎收听本期节目！今天咱们聊聊一个让我彻底删掉所有视频App的神器——Stremio。你知道吗，我每次打开Netflix、优酷，光是找想看的片子就能翻半小时，推荐算法还老把我困在信息茧房里。"
+"dialog": "开源君，你听说了吗？AV2 视频编码标准前两天正式发布 1.0.0 版本了！"
 },
 {
 "speaker_id": 1,
-"dialog": "哈哈，太懂了！不过你说的这个Stremio，我得先澄清一下——它可不是什么盗版工具。它本质上是个内容聚合器，就像浏览器，插件就是网页，内容全靠社区开发者维护。"
+"dialog": "当然听说了！这可是继 AV1 之后又一个里程碑。你知道吗，它比 AV1 在相同画质下能节省约 30% 的带宽，几乎和收费的 VVC 持平了。"
 },
 {
 "speaker_id": 0,
-"dialog": "对，一开始我也误会了。后来发现它的插件生态真的太强了——动画、美剧、体育直播，甚至成人内容都能找到对应的Addon。我装了Toropi、DOKI几个插件，追剧体验直接起飞。"
+"dialog": "30% 那也太厉害了吧！流媒体平台肯定乐坏了，带宽成本直接降一大截。"
 },
 {
 "speaker_id": 1,
-"dialog": "而且界面特别干净，没有任何广告和烦人的推荐。所有播放记录、评分、海报都统一在一个界面里。以前我追剧得在B站、腾讯、YouTube之间切来切去，现在一个Stremio全搞定。"
+"dialog": "对对对，用户体验也提升啊，同等带宽下画面更清晰。不过现在编码速度挺慢的，Reddit 上有开发者吐槽说在好硬件上也就跑个 1fps，距离普及还有段路要走。"
 },
 {
 "speaker_id": 0,
-"dialog": "说到这个，我很好奇它跟Jellyfin、Plex比怎么样？我之前折腾过Jellyfin，搭NAS、刮削海报，没点技术背景真搞不定。"
+"dialog": "哎，这不跟当年 AV1 一样嘛，先出标准，再等硬件加速。据说 AV2 的硬件芯片要到 2028 年才出来？"
 },
 {
 "speaker_id": 1,
-"dialog": "简单说：Jellyfin是给你自己建电影院，Stremio是给你一把万能钥匙。你不需要任何本地存储，装好插件就能直接播。代价就是内容质量看插件维护者的脸色，万一插件停更，那片源就断了。"
+"dialog": "没错。不过别急，软件支持已经在推了。VLC 4.0 在 CES 2026 上已经演示了 AV2 播放，而且 AOMedia 还发布了纯 CPU 解码器 DAV2D，直播场景现在就能跑起来，不用等硬件。"
 },
 {
 "speaker_id": 0,
-"dialog": "嗯，确实。我用了三个月，优点是跨平台同步、插件丰富；缺点是部分插件得花点心思找，偶尔播放也会卡。不过比起国内App的广告和套路，这点折腾我觉得值。"
+"dialog": "哦？那开源社区是不是已经能玩起来了？我记得 AV2 的参考软件 AVM 在 GitHub 上可以拿到。"
 },
 {
 "speaker_id": 1,
-"dialog": "没错！Stremio给我的最大感受是主动权回来了。Netflix告诉你应该看什么，爱奇艺逼你开会员才能跳过广告。而Stremio只是工具，内容你自己选，插件你自己装，播放源你自己决定。"
+"dialog": "对的，任何人都可以研究甚至自己实现。这就是 AOMedia 这类组织最有意思的地方——用开源协作做影响几十亿人看视频的东西。"
 },
 {
 "speaker_id": 0,
-"d</description>
-      <pubDate>2026-06-07T00:33:10</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260607_10383.mp3" type="audio/mpeg" length="2597805" />
-      <link>https://osp.io/archives/10383</link>
+"dialog": "咱们来聊聊 AV2 有哪些黑科技吧？我看到有多参考帧预测、帧级多线程，还有专门优化 AR/VR 和屏幕内容的。"
+},
+{
+"speaker_id": 1,
+"dialog": "没错。多参考帧预测就是用多帧来算运动矢量，压缩更准；帧级多线程让编码解码效率都提升。屏幕内容优化对 PPT、打字稿这类场景效果特别好。而且祖传优势——免授权费，继续保持着。"
+</description>
+      <pubDate>2026-06-02T08:31:38</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260602_10446.mp3" type="audio/mpeg" length="2983149" />
+      <link>https://osp.io/archives/10446</link>
       <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
