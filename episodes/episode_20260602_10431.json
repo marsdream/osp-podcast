@@ -1,0 +1,11 @@
+{
+  "id": "20260602_10431",
+  "title": "你的私有容器镜像，其实公开了四年：Gitea CVE-2026-27771 漏洞详解",
+  "link": "https://osp.io/archives/10431",
+  "date": "2026-06-02T03:18:49",
+  "audio_file": "episode_20260602_10431.mp3",
+  "file_size_kb": 3302,
+  "num_segments": 20,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n{\n\"speaker_id\": 0,\n\"dialog\": \"哎，你听说了吗？Gitea最近悄悄发了个补丁，1.26.2，说是修了个安全漏洞。\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"听说了，这事儿可大了。那个漏洞评分9.1，CVE-2026-27771，属于灾难级的。而且最吓人的是，它已经存在了将近四年！\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"四年？我的天，那这四年里，任何人不需要账号密码就能拖走私有容器镜像？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"没错。你给镜像标记了‘private’，前端显示个小锁，但实际上后端根本没做验证。用docker pull直接就能拉下来，匿名访问，完全绕过。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"这也太离谱了吧……那这个漏洞是怎么被发现的？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"是一家叫NoScope的安全公司干的，但干活的是他们的自动渗透测试AI，不是人类安全工程师。那个AI不带情绪，把公网上暴露的Gitea实例都扫了一遍，就发现了这个bug。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"AI真厉害啊，不吃不喝不睡觉，一板一眼地测。那这个漏洞具体影响到哪些人？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"全球大概有31750个部署实例，医疗、航天、零售、ISP都有。容器镜像里面通常藏着微服务代码、数据库凭证、SSH密钥、CI/CD凭证……要是有攻击者从2022年开始扫，现在可能手里一堆内部资料了。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"细思极恐啊。对了，Forgejo不是Gitea的社区分叉吗？它是不是也中招了？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对对对，Forgejo共享同一套容器注册表代码，所以也一样。好在Gitea团队在5月20号发布了1.26.2，把访问控制检查补上了。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"那就是说，如果你还在用低于1.26.2的版本，就得立刻升级？\"\n},\n{\n\"sp"
+}
