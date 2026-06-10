@@ -92,6 +92,8 @@ for i, ep in enumerate(episodes):
     mp3 = ep.get("audio_file", "")
     mp3_url = f"https://podcast.herebuy.us/episodes/{mp3}"
     hidden = 'class="episode hidden"' if i >= INITIAL_SHOW else 'class="episode"'
+    has_audio = bool(mp3)
+    audio_html = f'''<audio controls preload="none" controlsList="nodownload" src="{mp3_url}"></audio>''' if has_audio else '''<span class="no-audio">暂无音频，欢迎阅读原文</span>'''
     html += f'''  <div {hidden}>
     <div class="episode-header">
       <span class="date">📅 {date}</span>
@@ -99,7 +101,7 @@ for i, ep in enumerate(episodes):
     </div>
     <h2 class="title">{title}</h2>
     <div class="audio-row">
-      <audio controls preload="none" controlsList="nodownload" src="{mp3_url}"></audio>
+      {audio_html}
     </div>
   </div>
 '''
