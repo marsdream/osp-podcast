@@ -1,15 +1,5 @@
 [
   {
-    "id": "https://osp.io/?p=10431",
-    "title": "你的私有容器镜像，其实公开了四年：Gitea CVE-2026-27771 漏洞详解",
-    "link": "https://osp.io/archives/10431"
-  },
-  {
-    "id": "https://osp.io/?p=10416",
-    "title": "7-Zip 再爆高危漏洞：打开一个文件就能被黑掉",
-    "link": "https://osp.io/archives/10416"
-  },
-  {
     "id": "https://osp.io/?p=10111",
     "title": "Syncthing：开源文件同步神器，数据自己掌控不香吗？",
     "link": "https://osp.io/archives/10111"
