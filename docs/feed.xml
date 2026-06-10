@@ -9,58 +9,49 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
-      <title>你的私有容器镜像，其实公开了四年：Gitea CVE-2026-27771 漏洞详解</title>
+      <title>Syncthing：开源文件同步神器，数据自己掌控不香吗？</title>
       <description>{
 "podcast_transcripts": [
-{
-"speaker_id": 0,
-"dialog": "哎，你听说了吗？Gitea最近悄悄发了个补丁，1.26.2，说是修了个安全漏洞。"
-},
-{
-"speaker_id": 1,
-"dialog": "听说了，这事儿可大了。那个漏洞评分9.1，CVE-2026-27771，属于灾难级的。而且最吓人的是，它已经存在了将近四年！"
-},
-{
-"speaker_id": 0,
-"dialog": "四年？我的天，那这四年里，任何人不需要账号密码就能拖走私有容器镜像？"
-},
-{
-"speaker_id": 1,
-"dialog": "没错。你给镜像标记了‘private’，前端显示个小锁，但实际上后端根本没做验证。用docker pull直接就能拉下来，匿名访问，完全绕过。"
-},
-{
-"speaker_id": 0,
-"dialog": "这也太离谱了吧……那这个漏洞是怎么被发现的？"
-},
-{
-"speaker_id": 1,
-"dialog": "是一家叫NoScope的安全公司干的，但干活的是他们的自动渗透测试AI，不是人类安全工程师。那个AI不带情绪，把公网上暴露的Gitea实例都扫了一遍，就发现了这个bug。"
-},
-{
-"speaker_id": 0,
-"dialog": "AI真厉害啊，不吃不喝不睡觉，一板一眼地测。那这个漏洞具体影响到哪些人？"
-},
-{
-"speaker_id": 1,
-"dialog": "全球大概有31750个部署实例，医疗、航天、零售、ISP都有。容器镜像里面通常藏着微服务代码、数据库凭证、SSH密钥、CI/CD凭证……要是有攻击者从2022年开始扫，现在可能手里一堆内部资料了。"
-},
-{
-"speaker_id": 0,
-"dialog": "细思极恐啊。对了，Forgejo不是Gitea的社区分叉吗？它是不是也中招了？"
-},
-{
-"speaker_id": 1,
-"dialog": "对对对，Forgejo共享同一套容器注册表代码，所以也一样。好在Gitea团队在5月20号发布了1.26.2，把访问控制检查补上了。"
-},
-{
-"speaker_id": 0,
-"dialog": "那就是说，如果你还在用低于1.26.2的版本，就得立刻升级？"
-},
-{
-"sp</description>
-      <pubDate>2026-06-02T03:18:49</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260602_10431.mp3" type="audio/mpeg" length="3381741" />
-      <link>https://osp.io/archives/10431</link>
+  {
+    "speaker_id": 0,
+    "dialog": "哎，你有没有这种感觉，手机拍了一堆照片，想传到电脑上修一下，结果得上传 iCloud 等半天，网络不好的时候急死个人。"
+  },
+  {
+    "speaker_id": 1,
+    "dialog": "对对对，尤其那种工作文件，你敢全扔云端吗？万一账号被封、服务商跑路，哭都来不及。所以我最近迷上一个叫 Syncthing 的开源工具，专门治这毛病。"
+  },
+  {
+    "speaker_id": 0,
+    "dialog": "哦？听起来挺厉害，具体啥原理？"
+  },
+  {
+    "speaker_id": 1,
+    "dialog": "说白了就是两台设备直接打个隧道传文件，中间不经过任何云服务器。每台机器都有个唯一 ID，你加一下对方 ID，后面就自动同步了。而且全程加密，连 Syncthing 自己都看不到内容。"
+  },
+  {
+    "speaker_id": 0,
+    "dialog": "哇，那隐私这块可放心多了。不过听起来好复杂，普通用户能上手吗？"
+  },
+  {
+    "speaker_id": 1,
+    "dialog": "其实超级简单。下载装上，后台跑着，然后打开浏览器访问 http://127.0.0.1:8384/ 就能管理了。添加文件夹、选设备，完了。第一次连接可能需要同一局域网或者手动交换设备 ID，之后哪怕在不同网络也能通过中继自动连上。"
+  },
+  {
+    "speaker_id": 0,
+    "dialog": "那比我想的省心多了。比百度网盘、iCloud 那些强在哪？我买了会员也挺好用的。"
+  },
+  {
+    "speaker_id": 1,
+    "dialog": "你想过没有，文件放在别人服务器上，管理员理论上能看到内容，而且像当年 360 云盘突然关停，一堆人忙着备份。Syncthing 数据完全在自己设备上，你弄个旧电脑或者移动硬盘当备份节点，数据主权在手，才是真安全感。"
+  },
+  {
+    "speaker_id": 0,
+    "dialog": "有道理。那它适合什么样的人用？"
+  },
+  {</description>
+      <pubDate>2026-06-01T07:30:04</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260601_10111.mp3" type="audio/mpeg" length="2560941" />
+      <link>https://osp.io/archives/10111</link>
       <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
