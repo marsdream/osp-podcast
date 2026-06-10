@@ -65,9 +65,10 @@ jobs:
           mkdir -p docs/episodes
           cp feed.xml docs/
           cp index.html docs/
-          # episodes/ already has all 68 mp3 from main branch (fetch-depth: 0)
+          # Local episodes/ has main branch episodes + newly generated ones.
+          # Copy to docs/episodes/ for deployment (Cloudflare Pages reads main/docs/).
           rsync -a episodes/ docs/episodes/
-          # only keep episode_*.json in docs/ (not osp-podcast-*.json legacy)
+          # In docs/ only keep episode_*.json (not legacy osp-podcast-*.json)
           rsync -a --include='episode_*.json' --exclude='osp-podcast-*.json' --exclude='*' episodes/ docs/
 
       - name: Update main branch with generated files
