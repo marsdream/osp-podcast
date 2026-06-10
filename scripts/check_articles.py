@@ -97,9 +97,22 @@ def main():
         print(f"  - {a['title']}")
 
     # 更新 state file（存所有新文章）
-    with open(STATE_FILE, "w") as f:
-        json.dump(new_articles, f, ensure_ascii=False, indent=2)
-    
+    # 只在队列为空时写入；非空说明已被 update_queue.py 管理
+    if not os.path.exists(STATE_FILE):
+        with open(STATE_FILE, "w") as f:
+            json.dump(new_articles, f, ensure_ascii=False, indent=2)
+        print(f"Queue initialized with {len(new_articles)} articles")
+    else:
+        with open(STATE_FILE) as f:
+            existing = json.load(f)
+        if isinstance(existing, list):
+            print(f"Queue already exists with {len(existing)} articles, preserving existing queue")
+        else:
+            # 格式不对，重新写入
+            with open(STATE_FILE, "w") as f:
+                json.dump(new_articles, f, ensure_ascii=False, indent=2)
+            print(f"Queue re-initialized (invalid format) with {len(new_articles)} articles")
+
     gh_output("has_new", "true")
     gh_output("new_article_links", json.dumps([a["link"] for a in new_articles]))
     return 0
