@@ -272,44 +272,42 @@ def main():
     parser.add_argument("--model", default="qwen/qwen-plus", help="模型名称")
     parser.add_argument("--output-dir", default="episodes", help="输出目录")
     args = parser.parse_args()
+    STATE_FILE = "last_article.json"
 
-    # 获取文章
-    title = ""
-    content = ""
-    link = ""
-    article_date = None
-
-    if args.auto:
-        print("从 osp.io RSS 获取最新文章...")
-        # 优先用 check_articles.py 输出的 NEW_ARTICLE_LINK 环境变量
-        new_article_link = os.environ.get("NEW_ARTICLE_LINK", "")
-        if new_article_link:
-            print(f"Using NEW_ARTICLE_LINK: {new_article_link}")
-            result = fetch_article_content("https://osp.io/feed", target_link=new_article_link)
-            title, content, link, article_date = result
-        else:
-            print("NEW_ARTICLE_LINK not set, falling back to RSS entry[0]")
-            result = fetch_article_content("https://osp.io/feed")
-            title, content, link, article_date = result
-        if not title:
-            print("ERROR: 无法获取文章内容")
-            sys.exit(1)
-        print(f"文章: {title}")
-    elif args.link:
-        result = fetch_article_content("https://osp.io/feed", target_link=args.link)
-        title, content, link, article_date = result
-        if not title:
-            print("ERROR: 无法获取文章内容")
-            sys.exit(1)
-        print(f"文章: {title}")
+    # 读取文章链接：优先级 --link > NEW_ARTICLE_LINK > last_article.json 队列
+    target_link = None
+    if args.link:
+        target_link = args.link
+    elif os.environ.get("NEW_ARTICLE_LINK"):
+        target_link = os.environ["NEW_ARTICLE_LINK"]
     else:
-        print("ERROR: 需要 --auto 或 --link")
+        if os.path.exists(STATE_FILE):
+            with open(STATE_FILE) as f:
+                queue = json.load(f)
+            if isinstance(queue, list) and queue:
+                target_link = queue[0]["link"]
+                remaining = queue[1:]
+                with open(STATE_FILE, "w") as f:
+                    json.dump(remaining, f, ensure_ascii=False, indent=2)
+                print(f"Queue: processing first of {len(queue)}, {len(remaining)} remaining")
+            elif isinstance(queue, dict):
+                target_link = queue["link"]
+
+    if not target_link:
+        print("ERROR: no article link (need --link or NEW_ARTICLE_LINK or queue in last_article.json)")
         sys.exit(1)
+
+    title, article_content, link, article_date = fetch_article_content("https://osp.io/feed", target_link=target_link)
+    if not title:
+        print("ERROR: 无法获取文章内容")
+        sys.exit(1)
+    print(f"文章: {title}")
+
 
     # 生成脚本
     print("生成播客脚本...")
     transcripts, raw_script = generate_script(
-        title, content,
+        title, article_content,
         api_key=args.api_key,
         base_url=args.base_url,
         model=args.model
