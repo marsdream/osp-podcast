@@ -2,7 +2,7 @@
 """generate_index.py - 从 episode JSON 生成 index.html（加载更多分页）"""
 import os, json, glob
 
-EPISODES_DIR = "docs/episodes"
+EPISODES_DIR = "docs"
 OUTPUT = "index.html"
 INITIAL_SHOW = 5   # 默认显示最新 N 条
 
@@ -11,8 +11,8 @@ for f in sorted(glob.glob(f"{EPISODES_DIR}/osp-podcast-*.json")):
     with open(f, encoding="utf-8") as fp:
         ep = json.load(fp)
     mp3 = ep.get("audio_file", "")
-    if mp3 and os.path.exists(os.path.join(EPISODES_DIR, mp3)):
-        size = os.path.getsize(os.path.join(EPISODES_DIR, mp3))
+    if mp3 and os.path.exists(os.path.join(EPISODES_DIR, "episodes", mp3)):
+        size = os.path.getsize(os.path.join(EPISODES_DIR, "episodes", mp3))
         if size > 100000:
             episodes.append(ep)
 
