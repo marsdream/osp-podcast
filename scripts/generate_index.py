@@ -33,9 +33,11 @@ for f in sorted(glob.glob(f"docs/{EPISODES_DIR}/osp-podcast-*.json")) + \
         continue
     seen_links.add(link)
     mp3 = ep.get("audio_file", "")
+    local_path = os.path.join(EPISODES_DIR, mp3)
     deployed_path = os.path.join("docs", EPISODES_DIR, mp3)
-    if mp3 and os.path.exists(deployed_path):
-        size = os.path.getsize(deployed_path)
+    if mp3 and (os.path.exists(local_path) or os.path.exists(deployed_path)):
+        path = local_path if os.path.exists(local_path) else deployed_path
+        size = os.path.getsize(path)
         if size > 100000:
             episodes.append(ep)
 
