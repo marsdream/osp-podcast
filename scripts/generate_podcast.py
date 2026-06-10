@@ -387,36 +387,7 @@ def main():
 
     print(f"播客生成完成: {final_mp3}")
     print(f"文件大小: {os.path.getsize(final_mp3) / 1024:.1f} KB")
-
-    # Queue 模式：检查是否还有待处理文章，有则触发下一个 workflow run
-    if os.path.exists(STATE_FILE):
-        with open(STATE_FILE) as f:
-            remaining = json.load(f)
-        if remaining and isinstance(remaining, list) and len(remaining) > 0:
-            next_link = remaining[0]["link"]
-            print(f"Queue still has {len(remaining)} articles, triggering next run for: {next_link}")
-            import urllib.request
-            token = os.environ.get("GITHUB_TOKEN")
-            repo = os.environ.get("GITHUB_REPOSITORY", "marsdream/osp-podcast")
-            api_base = f"https://api.github.com/repos/{repo}"
-            if token:
-                url = f"{api_base}/actions/workflows/generate-podcast.yml/dispatch"
-                data = json.dumps({"ref": "main"}).encode()
-                req = urllib.request.Request(
-                    url, data=data,
-                    headers={
-                        "Authorization": f"Bearer {token}",
-                        "Accept": "application/vnd.github+json",
-                        "Content-Type": "application/vnd.github+json",
-                        "X-GitHub-Api-Version": "2022-11-28"
-                    },
-                    method="POST"
-                )
-                try:
-                    with urllib.request.urlopen(req) as resp:
-                        print(f"Next workflow triggered: {resp.status}")
-                except Exception as e:
-                    print(f"Could not trigger next run (may already be running): {e}")
+    print(f"Queue management delegated to update_queue.py step")
 
     # 保存元数据
     meta = {
