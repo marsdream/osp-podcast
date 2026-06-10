@@ -250,6 +250,18 @@ def add_intro_outro(input_mp3, output_mp3):
         print(f"Intro/outro merge failed: {result.stderr[:200]}")
 
 
+
+def make_episode_id(article_date, link, title):
+    """Generate unique episode_id from date + article slug (avoids same-day collisions)"""
+    import re as _re
+    date_str = article_date.strftime("%Y%m%d") if article_date else datetime.now().strftime("%Y%m%d")
+    m = _re.search(r'/archives/([\w-]+)', link)
+    if m:
+        slug = m.group(1)
+    else:
+        slug = _re.sub(r'[^\w\u4e00-\-\uff00]+', '_', title)[:30]
+    return f"{date_str}_{slug}"
+
 def main():
     parser = argparse.ArgumentParser(description="生成 osp.io 播客")
     parser.add_argument("--title", help="文章标题")
@@ -306,13 +318,9 @@ def main():
         print("ERROR: 脚本生成失败")
         sys.exit(1)
 
-    # episode_id 用文章发布日期，而非当前日期（避免同一天重复生成互相覆盖）
-    if article_date:
-        episode_id = article_date.strftime("%Y%m%d")
-        print(f"Using article date for episode_id: {episode_id}")
-    else:
-        episode_id = datetime.now().strftime("%Y%m%d")
-        print(f"Using current date for episode_id: {episode_id}")
+    # episode_id 用日期+slug，避免同一天多篇文章互相覆盖
+    episode_id = make_episode_id(article_date, link, title)
+    print(f"Using episode_id: {episode_id}")
 
     output_dir = args.output_dir
     os.makedirs(output_dir, exist_ok=True)
@@ -379,6 +387,36 @@ def main():
 
     print(f"播客生成完成: {final_mp3}")
     print(f"文件大小: {os.path.getsize(final_mp3) / 1024:.1f} KB")
+
+    # Queue 模式：检查是否还有待处理文章，有则触发下一个 workflow run
+    if os.path.exists(STATE_FILE):
+        with open(STATE_FILE) as f:
+            remaining = json.load(f)
+        if remaining and isinstance(remaining, list) and len(remaining) > 0:
+            next_link = remaining[0]["link"]
+            print(f"Queue still has {len(remaining)} articles, triggering next run for: {next_link}")
+            import urllib.request
+            token = os.environ.get("GITHUB_TOKEN")
+            repo = os.environ.get("GITHUB_REPOSITORY", "marsdream/osp-podcast")
+            api_base = f"https://api.github.com/repos/{repo}"
+            if token:
+                url = f"{api_base}/actions/workflows/generate-podcast.yml/dispatch"
+                data = json.dumps({"ref": "main"}).encode()
+                req = urllib.request.Request(
+                    url, data=data,
+                    headers={
+                        "Authorization": f"Bearer {token}",
+                        "Accept": "application/vnd.github+json",
+                        "Content-Type": "application/vnd.github+json",
+                        "X-GitHub-Api-Version": "2022-11-28"
+                    },
+                    method="POST"
+                )
+                try:
+                    with urllib.request.urlopen(req) as resp:
+                        print(f"Next workflow triggered: {resp.status}")
+                except Exception as e:
+                    print(f"Could not trigger next run (may already be running): {e}")
 
     # 保存元数据
     meta = {
