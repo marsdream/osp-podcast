@@ -29,9 +29,9 @@ jobs:
         run: |
           mkdir -p docs/episodes
           git fetch origin gh-pages:gh-pages --depth=1 || true
-          # Use git restore (supports pathspec patterns) to fetch historical files
-          git restore --source=gh-pages --work-tree=docs docs/episodes/ 2>/dev/null || true
-          ls docs/episodes/ | wc -l
+          # Checkout entire episodes dir from gh-pages into docs/
+          git checkout gh-pages -- docs/episodes/ 2>/dev/null || true
+          echo "Fetched $(ls docs/episodes/ | wc -l) files from gh-pages"
 
       - name: Set up Python
         uses: actions/setup-python@v5
