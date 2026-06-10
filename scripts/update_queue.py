@@ -16,7 +16,7 @@ if isinstance(queue, list) and len(queue) > 0:
         json.dump(queue, f, ensure_ascii=False, indent=2)
     print(f"Removed '{removed['title']}' from queue, {len(queue)} remaining")
 
-    subprocess.run(["git", "add", state_file], check=True)
+    subprocess.run(["git", "add", "-f", state_file], check=True)
     result = subprocess.run(
         ["git", "commit", "-m", f"chore: dequeue article '{removed['title']}'\n\nAuto-commit by CI after generating podcast episode."],
         capture_output=True, text=True
