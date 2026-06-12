@@ -9,50 +9,18 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>NVIDIA开源首个4-bit超长视频生成基础设施：LongLive-2.0如何让长视频变天</title>
+      <description>NVIDIA开源首个4-bit超长视频生成基础设施：LongLive-2.0如何让长视频变天</description>
+      <pubDate>2026-06-11T13:42:45</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260611_10432.mp3" type="audio/mpeg" length="4193325" />
+      <link>https://osp.io/archives/10432</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>Syncthing：开源文件同步神器，数据自己掌控不香吗？</title>
-      <description>{
-"podcast_transcripts": [
-{
-"speaker_id": 0,
-"dialog": "哎，你有没有那种感觉？手机拍了好多照片，想拿到电脑上修一下，结果要先上传到iCloud，等半天同步完，再从电脑下载，有时候网络不好，急死人。"
-},
-{
-"speaker_id": 1,
-"dialog": "太有同感了！尤其工作文件，谁也不敢全扔云端，万一账号出问题或者服务商跑路，资料就没了。今天说的这个Syncthing，就是专门解决这种痛点的。"
-},
-{
-"speaker_id": 0,
-"dialog": "Syncthing？我好像听说过，但一直没搞明白它到底能干嘛。"
-},
-{
-"speaker_id": 1,
-"dialog": "其实特简单——它是一个开源的文件同步工具，能让你两台甚至多台电脑、手机之间自动同步文件夹，而且完全不需要云服务器，所有数据走的是设备之间的加密隧道，中间不经过任何第三方。"
-},
-{
-"speaker_id": 0,
-"dialog": "哇，那连iCloud、百度网盘都不用？隐私安全多了吧！"
-},
-{
-"speaker_id": 1,
-"dialog": "对，每个设备有个唯一ID，你把对方的ID添加进来，它们直接就建立连接了，通信全程加密，连Syncthing自己都看不到你的文件内容。"
-},
-{
-"speaker_id": 0,
-"dialog": "听起来技术含量挺高的，用起来会不会很麻烦？"
-},
-{
-"speaker_id": 1,
-"dialog": "一点也不！下载安装后，启动程序，它就在后台跑了。然后打开浏览器访问一个本地地址，就能看到管理界面，添加文件夹、选择同步到哪些设备，就完了。第一次连接可能需要手动交换一下设备ID，之后它们就记住彼此了，哪怕不在同一个局域网也能自动连上。"
-},
-{
-"speaker_id": 0,
-"dialog": "那比云盘省心多了。而且我听说百度网盘那些，其实有很多坑？"
-},
-{
-"speaker_id": 1,
-"dialog": "没错。你看啊，云盘有四大问题：第一隐私风险，管理员理论上能看到你的文件；第二服务可能关停，当年360云盘关停大家都慌了；第三免费用户限速，充会员也不一定快；第四容量焦虑，给你好多TB但你总担心不够用。Syncthing数据完</description>
+      <description>Syncthing：开源文件同步神器，数据自己掌控不香吗？</description>
       <pubDate>2026-06-01T07:30:04</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260601_10111.mp3" type="audio/mpeg" length="3301677" />
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260601_10111.mp3" type="audio/mpeg" length="2758509" />
       <link>https://osp.io/archives/10111</link>
       <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
@@ -186,7 +154,7 @@
     </item>
     <item>
       <title>OBra新作superpowers：把AI编程方法论开源了</title>
-      <description>（Demo版本）欢迎收听开源派技术播客...</description>
+      <description>OBra新作superpowers：把AI编程方法论开源了</description>
       <pubDate>2026-04-01T00:00:00</pubDate>
       <enclosure url="https://podcast.herebuy.us/episodes/osp-podcast-demo-20260401.mp3" type="audio/mpeg" length="0" />
       <itunes:image href="https://img.osp.io/podcastcover.png" />
