@@ -1,0 +1,11 @@
+{
+  "id": "20260616_10545",
+  "title": "开源模型盛宴：Gemma 4、DeepSeek V4、Kimi K2.6 们正在抢谁的饭碗？",
+  "link": "https://osp.io/archives/10545",
+  "date": "2026-06-16T09:59:12",
+  "audio_file": "episode_20260616_10545.mp3",
+  "file_size_kb": 4169,
+  "num_segments": 13,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你最近有没有觉得AI圈的风向有点不一样了？不是那种大厂发新模型吹PPT，而是开源这波，感觉真的开始接地气了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对对对，像谷歌那个Gemma 4，居然换成Apache 2.0协议了，我第一反应是：终于想通了！以前那个自定义许可证，看得开发者头大，现在好了，直接商用、随便改，跟Hugging Face无缝对接，省了多少请律师的功夫。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"说实话，我之前对谷歌开源小模型真有点不屑，感觉就是试探，没拿出真东西。但这次Gemma 4，参数覆盖手机到服务器，编程能力飙升——LiveCodeBench从29%跳到80%，Codeforces 2150分，专家级水准了！而且它会主动做输入校验，挺靠谱的。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"嗯，谷歌这步走得扎实。不过国内那波开源模型更猛，像Kimi K2.6，原生支持300个子智能体并行协作，在SWE-Bench Verified上拿到80.2%，这能力以前都得靠外面套框架，现在模型自带，太狠了。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"我注意到GLM-5.1，智谱的，千亿参数用MIT协议，比Apache 2.0还宽松！你拿去包装成商业产品，不用开源，只要保留版权声明就行。这自信哪来的？在SWE-bench上直接对标Claude Opus 4.5，闭源模型压力山大啊。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"没错，还有DeepSeek V4，1.6万亿参数，每次推理只激活490亿，成本低到离谱——Flash版本输入才0.23美元/百万token，基本算“不要钱”了。小米的MiMo 2.5也不甘示弱，INT4量化后显存从24GB降到8GB，一张RTX 3060就能跑，AP"
+}
