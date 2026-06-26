@@ -3,5 +3,50 @@
     "id": "https://osp.io/?p=10111",
     "title": "Syncthing：开源文件同步神器，数据自己掌控不香吗？",
     "link": "https://osp.io/archives/10111"
+  },
+  {
+    "id": "https://osp.io/?p=10602",
+    "title": "Red Hat 官方 npm 通道遭投毒：Shai-Hulud 蠕虫正在扩散",
+    "link": "https://osp.io/archives/10602"
+  },
+  {
+    "id": "https://osp.io/?p=10603",
+    "title": "GitHub 拉上 Hugging Face、Mozilla 给加州 AI 透明法案递了一封联名信",
+    "link": "https://osp.io/archives/10603"
+  },
+  {
+    "id": "https://osp.io/?p=10597",
+    "title": "VoidZero 整建制并入 Cloudflare：Evan You 的 JS 工具链帝国，被云厂商收编了",
+    "link": "https://osp.io/archives/10597"
+  },
+  {
+    "id": "https://osp.io/?p=10572",
+    "title": "MiniMax M3 开源：稀疏注意力革了谁的命？",
+    "link": "https://osp.io/archives/10572"
+  },
+  {
+    "id": "https://osp.io/?p=10587",
+    "title": "curl 官宣「夏季歇夏」：漏洞报告按月暂停，8.22.0 延期两周",
+    "link": "https://osp.io/archives/10587"
+  },
+  {
+    "id": "https://osp.io/?p=10571",
+    "title": "AUR 恶意软件第二波来了：这次攻击者学会了「隐身术」",
+    "link": "https://osp.io/archives/10571"
+  },
+  {
+    "id": "https://osp.io/?p=10576",
+    "title": "前 Hugging Face 王铁震：中国开源 AI 能打败 OpenAI 吗？",
+    "link": "https://osp.io/archives/10576"
+  },
+  {
+    "id": "https://osp.io/?p=10568",
+    "title": "BSA 警告：欧盟原产地数字主权标准要凉？一场利益集团的大乱斗",
+    "link": "https://osp.io/archives/10568"
+  },
+  {
+    "id": "https://osp.io/?p=10521",
+    "title": "Odysseus：PewDiePie 的自托管 AI 工作站",
+    "link": "https://osp.io/archives/10521"
   }
 ]
