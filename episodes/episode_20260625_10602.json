@@ -1,0 +1,11 @@
+{
+  "id": "20260625_10602",
+  "title": "Red Hat 官方 npm 通道遭投毒：Shai-Hulud 蠕虫正在扩散",
+  "link": "https://osp.io/archives/10602",
+  "date": "2026-06-25T23:38:55",
+  "audio_file": "episode_20260625_10602.mp3",
+  "file_size_kb": 2808,
+  "num_segments": 12,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"大家最近有没有留意到Red Hat npm包那个事儿？听说有恶意蠕虫通过官方渠道感染了几十个包，名字特别有意思，叫什么沙虫？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对对对，Shai-Hulud，就是《沙丘》里那个巨型沙虫。开发者社区现在都叫它“沙虫蠕虫”。这次不是那种小打小闹的漏洞，而是典型的供应链攻击。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"供应链攻击……听起来就很吓人。那它是怎么混进Red Hat官方的npm仓库的呢？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"突破口是GitHub Actions的OIDC——就是和云服务交互用的临时凭证。攻击者通过Red Hat的CI/CD流水线直接发布了带毒包。你猜这个凭证怎么丢的？大概率是另一次供应链攻击，先黑了某位Red Hat员工的电脑。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"我的天，这是连环套啊！那到底有多少人受影响？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"Red Hat官方说恶意代码只限于内部开发环境，没有通过console.redhat.com发给客户。但安全圈不买账，Socket和Aikido都公布了受影响包清单和安全建议。说得挺直白的：过去36小时内碰过这些包的开发者，默认工作站、CI/CD流水线、云服务凭据全都要当已经失陷处理。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"这么严重？那普通开发者现在该怎么办啊？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"赶紧查一下Socket和Aikido提供的受影响包列表。然后立刻轮换所有在CI/CD环境里出现过的凭据，包括云、GitHub、npm token这些。还要检查GitHub Actions的OIDC配置，把可疑的云服务连接去掉。另外最好开启npm的--audit完整性校验"
+}
