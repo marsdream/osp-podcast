@@ -106,7 +106,17 @@ def main():
         with open(STATE_FILE) as f:
             existing = json.load(f)
         if isinstance(existing, list):
-            print(f"Queue already exists with {len(existing)} articles, preserving existing queue")
+            # 合并：把新文章追加到队列末尾（去重）
+            existing_links = {a.get("link") for a in existing}
+            added = 0
+            for a in new_articles:
+                if a["link"] not in existing_links:
+                    existing.append(a)
+                    existing_links.add(a["link"])
+                    added += 1
+            with open(STATE_FILE, "w") as f:
+                json.dump(existing, f, ensure_ascii=False, indent=2)
+            print(f"Queue merged: {len(existing)} total ({added} new)")
         else:
             # 格式不对，重新写入
             with open(STATE_FILE, "w") as f:
