@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>Omnigent：一个框架，把所有 AI 编码 Agent 串联起来</title>
+      <description>Omnigent：一个框架，把所有 AI 编码 Agent 串联起来</description>
+      <pubDate>2026-06-29T12:04:10</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260629_10580.mp3" type="audio/mpeg" length="4098285" />
+      <link>https://osp.io/archives/10580</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>AUR 恶意软件第二波来了：这次攻击者学会了「隐身术」</title>
       <description>AUR 恶意软件第二波来了：这次攻击者学会了「隐身术」</description>
       <pubDate>2026-06-23T06:14:16</pubDate>
