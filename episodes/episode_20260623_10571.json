@@ -1,0 +1,11 @@
+{
+  "id": "20260623_10571",
+  "title": "AUR 恶意软件第二波来了：这次攻击者学会了「隐身术」",
+  "link": "https://osp.io/archives/10571",
+  "date": "2026-06-23T06:14:16",
+  "audio_file": "episode_20260623_10571.mp3",
+  "file_size_kb": 2274,
+  "num_segments": 12,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"大家好，欢迎收听开源派！今天聊一个爆炸性新闻——Arch Linux的AUR被大规模投毒了。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"梅梅，你消息真灵通！我刚看到邮件列表，第一波清理完1500个包，第二波又来了，还用了代码混淆。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"对对对，我还在想这帮攻击者怎么这么嚣张。他们批量注册账号，往包里面注入恶意代码。Arch团队反应挺快，但没想到第二天又卷土重来。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"第一波明显粗糙，第二波就升级了，把恶意代码藏在看起来正常的代码里，安装完成后偷偷下载执行JS。而且感染的包都是开发者高频用的，Node.js、KDE小组件、Firefox相关等等。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"听说这次能发现第二波，全靠一位开发者用AI模型。凌晨三点半，他本地跑的Gemma E2B模型扫描出了异常。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对，Nicolas Boichat这个发现太关键了。这就体现了AI辅助安全审查的价值，不需要什么昂贵平台，一个小模型就能盯着代码变更。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"那AUR这个社区以后怎么办？我看到有人说要改成只读模式，还有人呼吁直接关停。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"这个话题我正好想聊聊。AUR的设计是'社区自治'，信任用户上传。但规模一大，信任就脆弱了。其实这暴露了开源软件供应链安全的老问题——社区审查能力跟不上。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"说得对，npm、PyPI都出过类似的事。那对于普通Arch用户，你有什么建议吗，开源君？\"\n  },\n  {\n    \"speaker_id\": 1,\n"
+}
