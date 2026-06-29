@@ -1,0 +1,11 @@
+{
+  "id": "20260629_10580",
+  "title": "Omnigent：一个框架，把所有 AI 编码 Agent 串联起来",
+  "link": "https://osp.io/archives/10580",
+  "date": "2026-06-29T12:04:10",
+  "audio_file": "episode_20260629_10580.mp3",
+  "file_size_kb": 4002,
+  "num_segments": 15,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n{\n\"speaker_id\": 0,\n\"dialog\": \"大家好，欢迎来到开源派！今天咱们聊聊一个特别有意思的开源项目——Omnigent。你知道吗，现在AI编码工具简直是大爆发，Claude Code、Cursor、Codex，各有各的粉丝，但要是想让它们一起干活，基本就是截图发群里的节奏😅\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对对对，这个问题太真实了。你打开三个窗口，一个人写代码，另一个人review，第三个跑测试，结果进度全靠喊。Omnigent就是来解决这个痛点的，它是个开源的AI Agent编排框架，GitHub上6月11号建仓，两周就冲上4400多星了。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"哇，涨这么快！那它到底是怎么工作的？是不是又出一个新的AI编码工具？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"不是不是，它的思路挺聪明——不替换你现有的Agent，而是给它们加一个统一调度层。你可以在Omnigent里同时召唤Claude Code、Codex、Cursor、Pi，甚至自己写的自定义Agent，让它们在一个对话窗口里协作。比如一个写代码、一个review、一个跑测试，各司其职。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"这个设计挺妙的。那它有什么特别好玩的功能吗？开源君，你研究过没？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"嘿，还真有。它支持跨设备同步，你在Mac上开个编程session，手机上可以直接继续，文件、终端、Agent状态都跟着走，不用拷来拷去。还有云沙箱运行，不想在自己电脑上跑？直接用Modal、Daytona这些云服务，一键扔到云上，跑完结果拉回来，本地机器完全不累。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"那是不是说，我可以让Claude Code写代码，然后用Codex跑测试，再让Cursor做代码审查？哇，听起来好爽！不过这么多Agent聚在一起，会不会乱套啊？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"所以它还有策略管控功能。你可以给每个Agent设置规则，比如‘在执行这个操作"
+}
