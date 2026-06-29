@@ -33,5 +33,25 @@
     "id": "https://osp.io/?p=10578",
     "title": "龙虾之父 Peter 开源 skill-cleaner：给你的 AI 技能做体检",
     "link": "https://osp.io/archives/10578"
+  },
+  {
+    "id": "https://osp.io/?p=10613",
+    "title": "2880 万次偷师：Anthropic 把阿里巴巴告到美国国会，AI 蒸馏攻防进入新阶段",
+    "link": "https://osp.io/archives/10613"
+  },
+  {
+    "id": "https://osp.io/?p=10627",
+    "title": "国产 x86 再下一城：海光 Model 8 “苏州” 上游进 GCC 17",
+    "link": "https://osp.io/archives/10627"
+  },
+  {
+    "id": "https://osp.io/?p=10602",
+    "title": "Red Hat 官方 npm 通道遭投毒：Shai-Hulud 蠕虫正在扩散",
+    "link": "https://osp.io/archives/10602"
+  },
+  {
+    "id": "https://osp.io/?p=10597",
+    "title": "VoidZero 整建制并入 Cloudflare：Evan You 的 JS 工具链帝国，被云厂商收编了",
+    "link": "https://osp.io/archives/10597"
   }
 ]
