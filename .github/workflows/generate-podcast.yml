@@ -34,6 +34,14 @@ jobs:
           sudo apt-get update && sudo apt-get install -y ffmpeg rsync
           pip install feedparser edge-tts openai ffmpeg-python
 
+      # ── 关键修复 1：从 gh-pages 拿历史音频，确保下次 CI 也能读到 ──
+      - name: Fetch historical episodes from gh-pages
+        run: |
+          git fetch origin gh-pages:gh-pages
+          mkdir -p episodes
+          cp gh-pages/episodes/*.mp3 episodes/ 2>/dev/null || true
+          cp gh-pages/episodes/*.json episodes/ 2>/dev/null || true
+
       - name: Check new articles
         id: check
         run: python scripts/check_articles.py
@@ -59,6 +67,16 @@ jobs:
 
       - name: Generate index.html
         run: python scripts/generate_index.py
+
+      # ── 关键修复 2：新生成的 mp3 写回 main 分支，下次 CI 才能拿到 ──
+      - name: Commit new episodes to main
+        if: steps.check.outputs.has_new == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add episodes/*.mp3 episodes/*.json
+          git diff --cached --quiet || git commit -m "chore: add new podcast episodes $(date +%Y-%m-%d)"
+          git push
 
       - name: Prepare pages files
         run: |
