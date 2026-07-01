@@ -1,0 +1,11 @@
+{
+  "id": "20260624_10578",
+  "title": "龙虾之父 Peter 开源 skill-cleaner：给你的 AI 技能做体检",
+  "link": "https://osp.io/archives/10578",
+  "date": "2026-06-24T04:45:46",
+  "audio_file": "episode_20260624_10578.mp3",
+  "file_size_kb": 3676,
+  "num_segments": 19,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你听说了吗？最近有个超有意思的事儿——有人给AI塞了一堆技能，结果它反而变笨了！\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈，这可太真实了。我之前也犯过这错，装了一堆什么写代码、查文档、跑测试的Skill，结果Agent要么选错，要么直接卡住不知道用哪个。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对对对！那后来你怎么解决的？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"后来才发现，问题不在AI本身，而是那些Skill的'简历'写得太烂了——就像面试官看一堆废话，根本不知道该让你干啥。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"简历？这比喻好有意思！那到底该怎么优化啊？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"你知道吗，有个叫Peter的开发者，人称'龙虾之父'，他最近开源了个项目叫skill-cleaner，专门给Skill做体检。他在X上发了个帖子，立马炸出一堆共鸣。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哦？具体怎么说的？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"他说，很多人把Skill的提示词写得跟说明书似的，Agent每次调用都得读完才能决定用不用——这不烧钱吗？有人回复说，原来描述写了90多词，Agent选不对，砍到40词以内，一次就中了。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"那这个skill-cleaner到底能干嘛？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"它干五件事：第一是技能预算审计，算每个Ski"
+}
