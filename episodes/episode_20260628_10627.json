@@ -1,0 +1,11 @@
+{
+  "id": "20260628_10627",
+  "title": "国产 x86 再下一城：海光 Model 8 “苏州” 上游进 GCC 17",
+  "link": "https://osp.io/archives/10627",
+  "date": "2026-06-28T04:10:27",
+  "audio_file": "episode_20260628_10627.mp3",
+  "file_size_kb": 4769,
+  "num_segments": 21,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"嘿，各位听众朋友们，欢迎收听我们的播客！今天聊一个可能很多人没听过、但绝对影响深远的名字——海光。你知道吗？最近GCC上游合并了一个补丁，把海光的新芯片正式加进去了！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对对对，这事儿我关注了。海光Hygon Model 8，代号“苏州”，也就是c86-4g-m8。别小看这个补丁啊，它意味着以后你在海光新机器上编译代码，GCC会自动识别并选用最优的CPU架构，再也不用fallback到那些老掉牙的架构上了。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哇，那以前是什么情况？是不是很惨？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"确实，以前GCC对海光的支持滞后，比如你跑-march=native，它可能给你认成core2甚至更早的，性能优化根本没法有效利用。这次补丁是海光工程师刘鑫提交的，经过三轮review，6月22号正式合并到trunk。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"三轮review！那维护者一定很严格吧？有没有什么有意思的小故事？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"哈哈，有啊。有个细节：Uros在review时发现get_hygon_cpu里用的是精确匹配model==0x8，但driver-i386.cc里用的是开放匹配model>=8。Kewen解释说这是有意为之，Uros也接受了，最终保持两条分支不一致——遇到未知CPU就返回NULL，让上层走fallback。这种对严谨的执念真让人佩服。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"严谨！果然开源社区不是那么好混的。那这个补丁到底支持了哪些具体功能？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"内容还不少呢。包括CPU检测、driver层、target macros、内置函"
+}
