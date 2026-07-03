@@ -17,6 +17,14 @@
       <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
+      <title>国产 x86 再下一城：海光 Model 8 “苏州” 上游进 GCC 17</title>
+      <description>国产 x86 再下一城：海光 Model 8 “苏州” 上游进 GCC 17</description>
+      <pubDate>2026-06-28T04:10:27</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260628_10627.mp3" type="audio/mpeg" length="4883949" />
+      <link>https://osp.io/archives/10627</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>龙虾之父 Peter 开源 skill-cleaner：给你的 AI 技能做体检</title>
       <description>龙虾之父 Peter 开源 skill-cleaner：给你的 AI 技能做体检</description>
       <pubDate>2026-06-24T04:45:46</pubDate>
