@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>WSL Container 公测：Windows 里直接跑 Linux 容器，不用装 Docker Desktop 了</title>
+      <description>WSL Container 公测：Windows 里直接跑 Linux 容器，不用装 Docker Desktop 了</description>
+      <pubDate>2026-07-05T03:53:40</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260705_10684.mp3" type="audio/mpeg" length="3379437" />
+      <link>https://osp.io/archives/10684</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>Omnigent：一个框架，把所有 AI 编码 Agent 串联起来</title>
       <description>Omnigent：一个框架，把所有 AI 编码 Agent 串联起来</description>
       <pubDate>2026-06-29T12:04:10</pubDate>
