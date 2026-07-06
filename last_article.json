@@ -53,5 +53,15 @@
     "id": "https://osp.io/?p=10613",
     "title": "2880 万次偷师：Anthropic 把阿里巴巴告到美国国会，AI 蒸馏攻防进入新阶段",
     "link": "https://osp.io/archives/10613"
+  },
+  {
+    "id": "https://osp.io/?p=10684",
+    "title": "WSL Container 公测：Windows 里直接跑 Linux 容器，不用装 Docker Desktop 了",
+    "link": "https://osp.io/archives/10684"
+  },
+  {
+    "id": "https://osp.io/?p=10685",
+    "title": "F-Droid 急了：直接把 Google 的 ADV 骂成「恶意软件」",
+    "link": "https://osp.io/archives/10685"
   }
 ]

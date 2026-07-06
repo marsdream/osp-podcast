@@ -1,0 +1,11 @@
+{
+  "id": "20260705_10684",
+  "title": "WSL Container 公测：Windows 里直接跑 Linux 容器，不用装 Docker Desktop 了",
+  "link": "https://osp.io/archives/10684",
+  "date": "2026-07-05T03:53:40",
+  "audio_file": "episode_20260705_10684.mp3",
+  "file_size_kb": 3300,
+  "num_segments": 16,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"嘿，你听说了吗？微软Build 2026大会上搞了个大新闻，WSL Container！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对对对，我看了！就是那个直接在Windows上跑Linux容器的新工具，而且只要一个命令就能搞定，特方便。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"可不是嘛，以前想在Windows上玩容器，得装Docker Desktop，还得折腾WSL 2、Hyper-V，各种坑。现在一个wslc就能拉起来带桌面的Linux容器，甚至能跑GPU！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"没错，比如用那个webtop镜像，直接就能在Windows浏览器里打开一个完整的KDE桌面环境，你说离谱不离谱？\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哈哈，而且测试PyTorch GPU也超级简单，一行命令就验证CUDA好不好用了。哎，你试过了吗？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"还没呢，但我准备今晚就搞。先wsl --update --pre-release，然后找个目录跑起来。不过更让我激动的是，微软还出了个NuGet包，C#项目里可以直接调用容器API！\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哇塞，这简直就是给Windows原生应用插上了Linux的翅膀啊。比如本地跑CI流水线、把云上的微服务拉下来调试，甚至给Linux进程搞个资源隔离——全都能在代码里搞定。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对！而且他们跟MSBuild、CMake都集成了，加几行配置就能把容器构建变成你应用build的一部分，完全自动化。说到这个，我特别欣赏微软这次的开源态度。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"嗯，你说的是他们"
+}
