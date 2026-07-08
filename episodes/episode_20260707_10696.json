@@ -1,0 +1,11 @@
+{
+  "id": "20260707_10696",
+  "title": "ReactOS 又整活了：这个 30 岁的开源 Windows“替身”，刚刚跑起了 Half-Life 2",
+  "link": "https://osp.io/archives/10696",
+  "date": "2026-07-07T07:13:32",
+  "audio_file": "episode_20260707_10696.mp3",
+  "file_size_kb": 3240,
+  "num_segments": 13,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"你知道吗？ReactOS居然让2004年的《半条命2》跑起来了！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"哈，这事儿我也看到了，挺有意思的。一个月前刚能跑《半条命1》，现在直接升级到2代，进步挺快。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"是啊，而且这次用的是GTX 960显卡和古老的NVIDIA驱动，连声卡都用上了Creative的Audigy，听着就很有年代感。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对，他们测试者还录了视频，从启动器到游戏画面看起来都挺正常的。关键是《半条命2》用的Source引擎，对Direct3D和窗口管理要求比一代高不少，能跑起来说明ReactOS在XP/2003系统调用这块又稳了一截。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"而且我注意到他们还搞了个大新闻——迈出了向NT6兼容的第一步，实现了第一个NT6系统调用。这个NT6就是Vista、Win7、8、10那套内核接口吧？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"没错，之前ReactOS一直停留在模仿NT5.x（就是XP/2003）的阶段，现在能实现第一个NT6调用，相当于把地基往外推了一小块。虽然离真正能用还差十万八千里，但这已经是里程碑了。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"说到这个项目，1996年就立项了，快30年了！中间被无数次宣告死亡，居然还能更新到现在，也太顽强了吧。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"确实，比它年轻的同类项目大多已经躺尸了。你看看它GitHub上，17,766个star，代码量超过600MB，最近几天还有提交。核心目标从来没变过：让你直接在上面跑Windows的二进制程序，不是通过Wine或者虚拟机，是内核级兼容。这目标太逆天了，所以才这么难、这么慢。\""
+}
