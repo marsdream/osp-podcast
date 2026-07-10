@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>工程师用 Claude Code 把《命令与征服》搬上了 iPad——只花了一天</title>
+      <description>工程师用 Claude Code 把《命令与征服》搬上了 iPad——只花了一天</description>
+      <pubDate>2026-07-09T00:46:54</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260709_10693.mp3" type="audio/mpeg" length="3969837" />
+      <link>https://osp.io/archives/10693</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>ReactOS 又整活了：这个 30 岁的开源 Windows“替身”，刚刚跑起了 Half-Life 2</title>
       <description>ReactOS 又整活了：这个 30 岁的开源 Windows“替身”，刚刚跑起了 Half-Life 2</description>
       <pubDate>2026-07-07T07:13:32</pubDate>
