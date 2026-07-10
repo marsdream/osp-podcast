@@ -1,0 +1,11 @@
+{
+  "id": "20260709_10693",
+  "title": "工程师用 Claude Code 把《命令与征服》搬上了 iPad——只花了一天",
+  "link": "https://osp.io/archives/10693",
+  "date": "2026-07-09T00:46:54",
+  "audio_file": "episode_20260709_10693.mp3",
+  "file_size_kb": 3876,
+  "num_segments": 16,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哎，你听说了吗？《命令与征服：将军 零点时刻》居然在 iPad Pro 上跑起来了！不是云游戏，不是模拟器，是真·原生移植！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对对对！我刚看到那个项目的时候也愣了一下。二十多年前的游戏，DirectX 8 的引擎，硬是被一个人加一个 AI 给搬到 Apple Silicon 上了，而且用的是 C++ 原生编译。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"一个人加一个 AI？什么意思？代码不是人类写的吗？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"哈哈，这就精彩了。作者 ammaarreshi 说得很清楚——工程部分，比如交叉编译、设备调试，是 Claude Code 做的；人类负责描述 bug 现象和做决策。比如“我听见 EVA 在唧唧叫”、“小地图是黑的”这种，AI 可听不见，得真人守着 iPad 抓问题。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哇，那这 AI 也太厉害了吧？直接写 C++ 改引擎？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"其实最牛逼的不是 AI 写代码，是 AI 读代码。你想，EA 2003 年公开的 GPL v3 源码，里面有一段中文注释写着“对，EVA 一直唧唧是因为它持着全局不说话的标志”，这种破事人类翻代码得疯，AI 一搜就出来了。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"说到 bug，我听说他们还挖出几个特别经典的？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"简直考古现场！比如小地图全黑——因为 2003 年的纹理 fallback 逻辑，遇到不带 alpha 通道的格式就静默丢弃，整个小地图渲染失败。还有 EVA 语音随机静音，是一个僵尸音频流一直占着全局 flag，导致所有语音都出不来。这种 bug 你不真的"
+}
