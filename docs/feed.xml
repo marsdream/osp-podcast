@@ -33,6 +33,14 @@
       <itunes:image href="https://img.osp.io/podcastcover.png" />
     </item>
     <item>
+      <title>EpicGames 开源 Lore：游戏公司做的版本控制，有什么不一样？</title>
+      <description>EpicGames 开源 Lore：游戏公司做的版本控制，有什么不一样？</description>
+      <pubDate>2026-07-03T00:16:52</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260703_10619.mp3" type="audio/mpeg" length="4212909" />
+      <link>https://osp.io/archives/10619</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>Omnigent：一个框架，把所有 AI 编码 Agent 串联起来</title>
       <description>Omnigent：一个框架，把所有 AI 编码 Agent 串联起来</description>
       <pubDate>2026-06-29T12:04:10</pubDate>
