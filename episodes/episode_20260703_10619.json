@@ -1,0 +1,11 @@
+{
+  "id": "20260703_10619",
+  "title": "EpicGames 开源 Lore：游戏公司做的版本控制，有什么不一样？",
+  "link": "https://osp.io/archives/10619",
+  "date": "2026-07-03T00:16:52",
+  "audio_file": "episode_20260703_10619.mp3",
+  "file_size_kb": 4114,
+  "num_segments": 12,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"嘿，各位听友，今天咱们聊点让开发者又爱又恨的东西——版本控制。你有没有被Git折磨过？比如一个Unity项目，.git文件夹直接几个GB，每次clone都得等半天，合并大分支直接罢工报错“your repository is over 5GB”……\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对对对，这太真实了。Git本来是为代码设计的，小文本文件可以，但游戏资产——3D模型、纹理、音效，全是二进制大文件，改动一点点就得重新存整个文件，仓库体积爆炸。Epic Games显然也踩过这个坑，所以他们干脆自己搞了一套新的版本控制系统，叫Lore，还开源了！\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哦？Epic Games做的？就是开发Unreal引擎那个公司？他们自己不用Perforce或者Git吗？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"没错，就是他们。Lore是用Rust写的，MIT协议开源。其实他们自家的产品UEFN（Unreal Editor for Fortnite）已经在用Lore做内置版本控制了，只是目前压缩格式还没完全打通，团队正在对齐，之后就能互通。Lore的设计思路跟Git完全不同——它用的是内容寻址存储加Merkle树，文件按内容哈希存，同一个2GB视频文件改了一百次名，只存一份。每次提交只存变更的数据块，仓库体积可能只有Git的几分之一。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哇，那确实厉害。不过除了体积，还有什么别的亮点吗？我听说还有按需拉取，就是只下载自己需要的部分？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对，按需拉取（Sparse Checkout + On-demand Hydration）很适合大项目。游戏项目资产服务器几十GB，但开发者本地可能只需要改自己负责的模块。Lore支持只拉取当前分支当前目录的文件，5秒钟启动工作区，不用等半小时clone"
+}
