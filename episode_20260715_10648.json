@@ -1,0 +1,11 @@
+{
+  "id": "20260715_10648",
+  "title": "腾讯开源 BrowserSkill：让 AI Agent 借用你已登录的浏览器",
+  "link": "https://osp.io/archives/10648",
+  "date": "2026-07-15T00:26:40",
+  "audio_file": "episode_20260715_10648.mp3",
+  "file_size_kb": 3661,
+  "num_segments": 20,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n{\n\"speaker_id\": 0,\n\"dialog\": \"哎，你最近有没有遇到那种情况？想让AI帮自己操作个网页，结果碰到扫码登录或者验证码，直接卡住了。\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对对对，太常见了！尤其是一些公司内部的系统，或者需要登录态才能用的网站，AI根本没法自己搞定。不过最近腾讯开源了一个叫BrowserSkill的工具，就是专门解决这个问题的。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"哦？听起来不错。它怎么做的？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"核心思路特别简单：让AI借用你本机浏览器里已经登录好的会话。你想想，你平时浏览器里都挂着各种账号，对吧？BrowserSkill就是让AI打开一个独立的代理窗口，但这个窗口用的是你真实浏览器的cookie和登录状态。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"哎，那岂不是不用再给AI单独准备测试账号了？也不用头疼验证码了？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"没错！而且cookie过期的问题它也不用担心，因为用的是你本地实时的会话。架构上呢，它分三部分：一个叫bsk的命令行工具，一个本地守护进程，还有个Chrome或者Edge的浏览器扩展，三个之间通过WebSocket在本地通信。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"等等，WebSocket走127.0.0.1？那是不是只能在单机上用？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对，你抓到重点了。它本质是单机方案，多机协同的场景下就不太适合了。但反过来想，它数据全在本地，隐私风险小很多。不会像有些方案要把浏览器状态同步到云端。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"嗯，这确实是很多开发者和企业担心的点。那它能用在哪些AI工具上？是不是只能搭配某个特定模型？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"不会，它很开放。bsk CLI暴露的是标准接口，上层像Cursor、Claude Code、Codex、OpenClaw、CodeBuddy"
+}
