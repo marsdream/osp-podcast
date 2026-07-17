@@ -1,0 +1,11 @@
+{
+  "id": "20260717_10717",
+  "title": "FluentCleaner：把 CCleaner 那个年代的「良心工具」搬回 Windows 11",
+  "link": "https://osp.io/archives/10717",
+  "date": "2026-07-17T00:50:37",
+  "audio_file": "episode_20260717_10717.mp3",
+  "file_size_kb": 4462,
+  "num_segments": 16,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你还记不记得当年那个CCleaner？就是那个小绿图标，清理系统垃圾的，差不多每台Windows电脑都装过吧？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"当然记得，2006年那会儿真是神器啊，一个5MB的小工具，没广告没弹窗，清清缓存、扫扫注册表，干净利落。后来被Avast收购了，然后就变味了——界面塞满了升级提醒、吓唬式的扫描结果，连社区维护的winapp2.ini规则集都给砍了。真是眼睁睁看着一个好工具被资本逻辑碾过去。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对啊，所以最近我看到一个叫FluentCleaner的开源替代品，作者builtbybel就是看不下去才自己写的。GitHub上已经3k多星了，用C#和WinUI 3做的，MIT协议，支持Windows 10和11。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"这个项目最打动我的是作者在README里写的那段话——大概意思就是那些真正好用的工具，慢慢都变味了。小开发者做出好东西，公司买走，然后疯狂商业化，最后变成‘它怎么变成这样了’的故事。你说得对，我们这代PC用户都是看着这些工具被一步步‘优化’死的。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"那FluentCleaner到底做了什么呢？它是不是从零重新写一套清理规则？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"关键就在这里——它直接读社区维护了15年以上的winapp2.ini，那个开源清理规则数据库里面有几千条精确规则：哪个应用的临时文件夹能清、哪个缓存路径可以删、哪些注册表项是冗余的。FluentCleaner自己写了一个解析器，作者说比当年Piriform那套老实现还快——一个独立开发者用C#写的解析器，比被收购过的商业产品跑得还快，挺讽刺的吧？\"\n    },\n    "
+}
