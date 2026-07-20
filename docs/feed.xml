@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>瑞士军方把 Microsoft 365 扔了，换上德国这套开源办公套件</title>
+      <description>瑞士军方把 Microsoft 365 扔了，换上德国这套开源办公套件</description>
+      <pubDate>2026-07-19T07:38:01</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260719_10766.mp3" type="audio/mpeg" length="4097133" />
+      <link>https://osp.io/archives/10766</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>FluentCleaner：把 CCleaner 那个年代的「良心工具」搬回 Windows 11</title>
       <description>FluentCleaner：把 CCleaner 那个年代的「良心工具」搬回 Windows 11</description>
       <pubDate>2026-07-17T00:50:37</pubDate>
