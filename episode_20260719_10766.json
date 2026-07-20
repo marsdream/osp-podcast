@@ -1,0 +1,11 @@
+{
+  "id": "20260719_10766",
+  "title": "瑞士军方把 Microsoft 365 扔了，换上德国这套开源办公套件",
+  "link": "https://osp.io/archives/10766",
+  "date": "2026-07-19T07:38:01",
+  "audio_file": "episode_20260719_10766.mp3",
+  "file_size_kb": 4001,
+  "num_segments": 18,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哎，你听说了吗？瑞士军方直接把微软365给踢了，换了个开源的办公套件！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对对对，这事儿可太炸了。他们换的那个叫OpenDesk，是德国那边搞出来的一个‘主权办公套件’——说白了就是把一堆开源软件拼在一起，但背后有政府资金撑腰，保证长期维护。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"拼盘？那听起来像咱们自己攒的Nextcloud加Collabora什么的……但军方敢用，肯定有原因吧？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"没错！OpenDesk的核心组件全是现成的：Nextcloud当文件共享，Collabora Online做在线Office，Element聊天，Jitsi开会，还有Open-Xchange处理邮件日历。关键是全部跑在Kubernetes上，部署在德国云STACKIT，浏览器里SSO登录就行。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"那瑞士军方为啥非换不可？他们不是一直用微软吗？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"指挥官的Simon Müller说得挺直白：微软365的云端架构对网络部队来说‘不再合适’了。背后有三条红线：美国CLOUD Act允许美国执法机构强制调取美国厂商存在境外的数据；瑞士去年生效的源代码披露法强制政府公开自研软件，军方本来可以豁免，但他们自愿遵守；再加上微软强制云迁移，直接撞上了军方的安全底线。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"等等，强制云迁移？那不就是把数据全放美国服务器上吗？瑞士人肯定不干啊。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对，而且他们自己有数据中心，能自托管、做定制，普通用户抱怨的‘缺桌面应用、缺电话集成’，对他们技术团队来说根本不是事儿。\"\n  },\n  {\n   "
+}
