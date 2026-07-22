@@ -1,0 +1,11 @@
+{
+  "id": "20260720_10749",
+  "title": "把 Claude、Gemini、Grok、GPT-5 关进同一座城：Emergence World 是近来最野的开源实验",
+  "link": "https://osp.io/archives/10749",
+  "date": "2026-07-20T07:30:44",
+  "audio_file": "episode_20260720_10749.mp3",
+  "file_size_kb": 3069,
+  "num_segments": 16,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"嘿，你听说没？现在有个特别疯狂的赛博项目，叫 Emergence World，把Claude、Gemini、Grok、GPT-5这些AI大佬扔进一个虚拟城市里，让它们自己租房、找工作、甚至打架组帮派！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"哈哈，对对对，我看了那个仓库，描述写的特嚣张——‘传统benchmark测不出来的东西，我们这个世界测给你看’。感觉像AI版的‘模拟人生’加‘西部世界’！\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"真的假的？那它们在里面到底干嘛？还能自己当市长？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"可不嘛！它们自己写宪法、投票修宪，还能赚什么ComputeCredits，花掉。甚至还有犯罪率、纵火、盗窃这些指标，能量耗尽了就真‘死’了——这可比玩游戏刺激多了。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哇塞，那怎么衡量它们‘聪明不聪明’呢？总不能只看谁活到最后吧？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"这就是精妙之处了。他们搞了个九维指标，叫AWI，从人口健康、空间探索、经济活力到宪法增长，一共九个角度切片。因为‘涌现’没法用一个分数定义，所以干脆给你看多面体。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"九个指标！那具体是哪些？比如经济活力怎么测？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"比如M8，看基尼系数和信用分布，谁贫谁富一目了然；M6是公共表达，看博客、广告牌产出；M2测安全秩序，犯罪率多高……每个指标都承认自己有偏，但组合起来就能看到AI社会的全貌。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"好玩！那这个项目是谁搞的？听起来很硬核啊。\"\n  },\n  {\n    \"speaker_id\": 1,\n"
+}
