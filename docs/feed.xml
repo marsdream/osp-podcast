@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>30 年后，Comic Chat 终于住进了 GitHub——微软把那个教世界用 Comic Sans 的聊天软件开源了</title>
+      <description>30 年后，Comic Chat 终于住进了 GitHub——微软把那个教世界用 Comic Sans 的聊天软件开源了</description>
+      <pubDate>2026-07-23T17:29:56</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260723_10828.mp3" type="audio/mpeg" length="4689837" />
+      <link>https://osp.io/archives/10828</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>把 Claude、Gemini、Grok、GPT-5 关进同一座城：Emergence World 是近来最野的开源实验</title>
       <description>把 Claude、Gemini、Grok、GPT-5 关进同一座城：Emergence World 是近来最野的开源实验</description>
       <pubDate>2026-07-20T07:30:44</pubDate>
