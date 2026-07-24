@@ -1,0 +1,11 @@
+{
+  "id": "20260723_10828",
+  "title": "30 年后，Comic Chat 终于住进了 GitHub——微软把那个教世界用 Comic Sans 的聊天软件开源了",
+  "link": "https://osp.io/archives/10828",
+  "date": "2026-07-23T17:29:56",
+  "audio_file": "episode_20260723_10828.mp3",
+  "file_size_kb": 4579,
+  "num_segments": 18,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n{\n\"speaker_id\": 0,\n\"dialog\": \"你知道吗，最近微软把一款1996年的聊天软件开源了，叫Comic Chat。而且它居然就是Comic Sans字体第一次真正落地的地方！\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对对对，这事儿我刷到了。Comic Sans当年是为了这个聊天软件设计的，不是给PPT用的。而且那个聊天软件本身比字体还离谱——它能把聊天内容实时画成漫画！\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"实时画成漫画？那会儿1996年啊，连AI都没普及，他们怎么做到的？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"靠的是规则引擎和专家系统。你打字“I'm angry”，角色就双手抱胸皱眉；写“I like that”，角色就指着自己点头笑。每一句话自动切下一格漫画，完全不用人工干预。而且兼容传统IRC，你用普通客户端也能跟他们一起聊。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"太酷了。那这个项目是谁做的？不会是微软那帮宅男程序员吧？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"还真不是。构思者是微软研究院的David Kurlander，技术搭档Tim Skelly和David Salesin，他们还发了SIGGRAPH论文。美术是独立漫画家Jim Woodring，那些带点诡异感的卡通角色全是他的作品。整个团队就几十个人，但想法特别大胆。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"那为什么30年后才开源？上周刚发生的事情吧？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"没错，2026年7月16号。微软把v1.0-pre、v1.0正式版、v2.1 beta、v2.5 beta全放到GitHub上，MIT协议。而且拉了两个现役员工——Robert Standefer和Scott Hanselman来搞“考古”。仓库里还有现代版代码，用Visual Studio 2022重新编译，连高分屏和现代TLS都适配了，能直接在Windows 11上跑IRC。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\""
+}
