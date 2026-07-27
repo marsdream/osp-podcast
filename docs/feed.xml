@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>WordPress紧急补丁背后：9000万网站还在裸奔</title>
+      <description>WordPress紧急补丁背后：9000万网站还在裸奔</description>
+      <pubDate>2026-07-25T04:55:05</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260725_10844.mp3" type="audio/mpeg" length="2710125" />
+      <link>https://osp.io/archives/10844</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>30 年后，Comic Chat 终于住进了 GitHub——微软把那个教世界用 Comic Sans 的聊天软件开源了</title>
       <description>30 年后，Comic Chat 终于住进了 GitHub——微软把那个教世界用 Comic Sans 的聊天软件开源了</description>
       <pubDate>2026-07-23T17:29:56</pubDate>
