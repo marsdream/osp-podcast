@@ -1,0 +1,11 @@
+{
+  "id": "20260725_10844",
+  "title": "WordPress紧急补丁背后：9000万网站还在裸奔",
+  "link": "https://osp.io/archives/10844",
+  "date": "2026-07-25T04:55:05",
+  "audio_file": "episode_20260725_10844.mp3",
+  "file_size_kb": 2646,
+  "num_segments": 12,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哎，你今天刷到WordPress那个漏洞了吗？WP2Shell，名字听着就吓人！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对对对，我正要跟你说呢！安全圈都炸了，7.0.2紧急补丁，两个Critical级别的漏洞，其中一个还能远程拿下整个网站，太可怕了。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"这个漏洞组合拳据说是Adam Kues发现的，WordPress官方反应倒是挺快，立马发了强制更新。但问题是——已经在野外被利用了！Patchstack、Hexastrake那些公司都发警告了。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"是呢，更让人揪心的是，虽然有85%的站点已经更新了，但全球4亿个WordPress网站里，还有9000万个暴露在风险中。这数字听着就头皮发麻。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"9000万啊……其实也能理解，有些企业站更新要走审批，有些主机商统一管理租户没权限，还有些站早就被遗忘了，密码都找不着。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对，而且自动更新机制也不是万能的。很多站点禁用了自动更新，或者因为兼容性问题不敢更，甚至有的主机把cron都关了——自动更新根本跑不起来。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"不过这次大厂反应挺快的，Automattic旗下所有平台提前打好了补丁，Cloudflare也加了WAF规则。换句话说，就算你是那9000万里没更新的，只要用了Cloudflare，某种程度上已经被保护了。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"嗯，这种‘上游先拦住’的思路挺值得中小企业借鉴——不是每家都有能力快速修漏洞，但把网站套在靠谱的CDN/WAF后面，至少能争取到时间窗口。\"\n  },\n  {\n    \"speaker_id\": 0"
+}
