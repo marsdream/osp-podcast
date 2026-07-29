@@ -1,0 +1,11 @@
+{
+  "id": "20260729_10858",
+  "title": "Codeberg 拒绝把 FLOSS 当 AI 的血包：开源平台开始站队了",
+  "link": "https://osp.io/archives/10858",
+  "date": "2026-07-29T00:00:55",
+  "audio_file": "episode_20260729_10858.mp3",
+  "file_size_kb": 4104,
+  "num_segments": 18,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"嘿，开源君，你听说了吗？Codeberg最近搞了个大动作，直接禁止vibe-coded项目入驻，还承诺不用用户数据训练LLM，这波操作挺猛的啊！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对对对，我看了他们的年度大会投票，358票赞成、144票反对，通过率挺高的。这可不是随便说说，是真写进服务条款了。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"为什么Codeberg这么急啊？我印象里他们一直挺佛系的，非营利组织嘛。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"说白了，LLM训练那帮爬虫把他们服务器搞炸了。你知道原来700欧元的硬盘现在涨到3700欧元，还经常断货，都是因为AI公司疯狂爬数据，数据库压力大得系统管理员天天写防御代码，最后正常用户也跟着遭殃。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哇，这成本直接翻五倍，还不算人工成本，怪不得他们急。不过除了成本，还有别的原因吗？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"还有生态问题。他们发现平台上出现好多只有一个人维护、没有真实用户、但CI/CD跑得飞起的项目，典型的就是一个人用AI短期堆出来的，占用大量存储和计算资源，跟开源精神里的协作完全没关系。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"这倒是，开源社区最值钱的就是人与人之间的信任和协作。现在连提个issue都要被怀疑是不是AI写的，这太伤人了。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"没错，而且还有大量LLM生成的PR，看起来格式完美，但全是幻觉内容。维护者得花大量时间甄别，这种不信任感正在腐蚀社区。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"其实不只是Codeberg，之前Zig直接从GitHub搬到Codeberg，FFmpeg也"
+}
