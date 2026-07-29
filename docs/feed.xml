@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>Codeberg 拒绝把 FLOSS 当 AI 的血包：开源平台开始站队了</title>
+      <description>Codeberg 拒绝把 FLOSS 当 AI 的血包：开源平台开始站队了</description>
+      <pubDate>2026-07-29T00:00:55</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260729_10858.mp3" type="audio/mpeg" length="4203117" />
+      <link>https://osp.io/archives/10858</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>WordPress紧急补丁背后：9000万网站还在裸奔</title>
       <description>WordPress紧急补丁背后：9000万网站还在裸奔</description>
       <pubDate>2026-07-25T04:55:05</pubDate>
