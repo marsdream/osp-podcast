@@ -1,0 +1,11 @@
+{
+  "id": "20260731_10925",
+  "title": "Mozilla 终于松口：Haiku OS 拿到 Firefox 品牌授权，开源社区与商标博弈",
+  "link": "https://osp.io/archives/10925",
+  "date": "2026-07-31T00:15:12",
+  "audio_file": "episode_20260731_10925.mp3",
+  "file_size_kb": 3848,
+  "num_segments": 22,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"嘿，你听说了吗？Haiku OS 最近拿到 Firefox 的商标授权了！\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对对对，这事儿在开源圈炸了。我一开始还以为看错了，毕竟 Mozilla 对商标卡得挺严的。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"是啊，之前 Haiku 的浏览器只能叫 Icweasel，这名字听着就让人想笑。火狐对冰鼬，谐音梗玩得挺溜。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈哈，没错。不过背后其实是个挺严肃的问题：Mozilla 的商标政策，让非官方编译版没法直接用 Firefox 品牌。所以 Haiku 社区只能委屈自己 fork 一个，起个谐音名。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"那这次怎么就突然松口了？我听说是一封邮件的功劳？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"真的，就是 Haiku 项目的开发者 3dEyes 直接给 Mozilla 法务发了邮件，没想到首席法务官 Joshua Landau 亲自回复说可以授权。这事你能信？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哇，那也太意外了。Mozilla 之前不是一直挺保守的吗？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"其实最近几年 Mozilla 在商标上有点松动的迹象，但这次是第一次给一个非官方发行版正式授权。意义很大，不只是名字的问题，等于说 Haiku 在生态上有了官方背书。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"那 Haiku 打算怎么处理？以后就用 Firefox 名字，把 Icwea"
+}

@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>Mozilla 终于松口：Haiku OS 拿到 Firefox 品牌授权，开源社区与商标博弈</title>
+      <description>Mozilla 终于松口：Haiku OS 拿到 Firefox 品牌授权，开源社区与商标博弈</description>
+      <pubDate>2026-07-31T00:15:12</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260731_10925.mp3" type="audio/mpeg" length="3940461" />
+      <link>https://osp.io/archives/10925</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>Codeberg 拒绝把 FLOSS 当 AI 的血包：开源平台开始站队了</title>
       <description>Codeberg 拒绝把 FLOSS 当 AI 的血包：开源平台开始站队了</description>
       <pubDate>2026-07-29T00:00:55</pubDate>
