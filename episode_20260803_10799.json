@@ -1,0 +1,11 @@
+{
+  "id": "20260803_10799",
+  "title": "Kimi CLI 宣布演进为 Kimi Code CLI——Moonshot 的终端 AI Agent 进入下半场",
+  "link": "https://osp.io/archives/10799",
+  "date": "2026-08-03T04:17:24",
+  "audio_file": "episode_20260803_10799.mp3",
+  "file_size_kb": 3210,
+  "num_segments": 17,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"嘿，最近你关注AI写代码的工具了吗？Claude Code、Codex CLI这些，但你知道吗，我发现了Kimi CLI，感觉挺有意思的。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哦？Kimi CLI？我还真没怎么留意，毕竟国内大厂搞这类工具好像不太多。它到底干啥的？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"就是在终端里跑AI Agent，能读写代码、执行shell命令、搜网页，跟Claude Code是同类。但让我惊讶的是，他们刚发了v1.49.0版本，而且宣布要演进成Kimi Code CLI了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"等等，演进成新版本？那老项目怎么办？我记得很多项目重写2.0就把老用户扔一边了。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"这次有点不一样，官方说配置和会话会自动迁移，挺贴心的。而且Kimi CLI开源，Apache 2.0协议，比MIT更友好。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"Apache 2.0？那确实对商业用户更友好，说明Moonshot是认真做社区贡献的。功能上有什么亮点吗？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"有啊，比如一键切换Shell模式，按Ctrl-X直接变成shell，不用退出Agent。还有原生支持ACP协议，就是Agent Client Protocol，可以集成到Zed、JetBrains这些IDE里。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"这个Shell模式好！用Claude Code最烦就是每次执行命令都要确认，Kimi CLI直接让用户敲命令，更贴近习惯。\"\n    },\n"
+}
