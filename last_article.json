@@ -123,5 +123,30 @@
     "id": "https://osp.io/?p=10874",
     "title": "Kimi K3 撕开 OpenAI/Anthropic 防线：开源 AI 的成本优势让美国圈慌了",
     "link": "https://osp.io/archives/10874"
+  },
+  {
+    "id": "https://osp.io/?p=10798",
+    "title": "Ubuntu 26.10 的「Myna」：把语音转文字第一次做成桌面一等公民",
+    "link": "https://osp.io/archives/10798"
+  },
+  {
+    "id": "https://osp.io/?p=10452",
+    "title": "IBM Granite Embedding 多语言 R2：开源嵌入embedding模型新选择",
+    "link": "https://osp.io/archives/10452"
+  },
+  {
+    "id": "https://osp.io/?p=10796",
+    "title": "微软拿 DeepSeek 喂 Copilot：一场 57 倍价差逼出来的开源转向",
+    "link": "https://osp.io/archives/10796"
+  },
+  {
+    "id": "https://osp.io/?p=9978",
+    "title": "别再折腾数据库了：PocketBase用三行代码搞定后端",
+    "link": "https://osp.io/archives/9978"
+  },
+  {
+    "id": "https://osp.io/?p=11000",
+    "title": "Claude of Duty：单段 prompt 写出 55k 行 Three.js FPS，这事到底算不算 3A？",
+    "link": "https://osp.io/archives/11000"
   }
 ]
