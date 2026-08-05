@@ -1,0 +1,11 @@
+{
+  "id": "20260805_10798",
+  "title": "Ubuntu 26.10 的「Myna」：把语音转文字第一次做成桌面一等公民",
+  "link": "https://osp.io/archives/10798",
+  "date": "2026-08-05T00:41:38",
+  "audio_file": "episode_20260805_10798.mp3",
+  "file_size_kb": 3871,
+  "num_segments": 16,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n{\n\"speaker_id\": 0,\n\"dialog\": \"嘿，你听说了没？Ubuntu 26.10 要搞一个语音转文字的项目，叫 Myna，听起来挺有意思的！\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对对对，我看到了！Myna 这名字挺有意思，八哥鸟嘛，模仿人说话。这个项目是 Ubuntu 桌面团队的官方项目，目标就是让 Linux 桌面也能有像 macOS 和 Windows 那种流畅的 dictation 体验。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"其实我一直觉得 Linux 桌面缺这个，写邮件、回消息还得手动打字，有时候真想直接开口说。不过之前要折腾 Vosk 或者 Whisper 自己拼，太麻烦了。\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"没错，Myna 就是把那堆胶水代码帮你做好了。它设计得很简单：按快捷键开始说话，松开手文字就自动出现在你当前的应用里。第一版明确不做语音助手、语音命令、桌面控制那些花哨的东西，先把基本功做扎实。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"哎，这个项目负责人 jibel 说得好，先把基本功做扎实。不过我想问一个关键问题：隐私方面怎么样？毕竟语音识别如果上传到云端，很多人会担心。\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"这一点 Myna 做得很硬核。它从一开始就把隐私写进架构：模型本地跑，装完模型之后断网照常用。麦克风只有你按快捷键时才打开，音频处理完立刻清掉，不上传不落盘。对比一下，macOS 的 Voice Control 背后是 Siri 的云端栈，Windows 新版本也越来越往云上靠。Myna 这个“端侧优先”对国内用户尤其友好，很多场景下网络不稳定，本地 STT 才是真能用的方案。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"国内用户确实需要这个。那技术架构呢？我看它内部是模块化的，对吧？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"是的，模块化设计。语音识别、用户交互、 dictation 管理、文本注入这几块都是解耦的。以后想换更猛的模型，比如 Whisper 或者 P"
+}
