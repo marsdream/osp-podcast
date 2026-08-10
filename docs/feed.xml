@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>light-c：把 C 盘清理做成现代桌面应用的国产新尝试</title>
+      <description>light-c：把 C 盘清理做成现代桌面应用的国产新尝试</description>
+      <pubDate>2026-08-10T00:55:27</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260810_11008.mp3" type="audio/mpeg" length="5186925" />
+      <link>https://osp.io/archives/11008</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>Qwen3-TTS：阿里开源语音克隆模型，97ms延迟、2分钟复制你的声音</title>
       <description>Qwen3-TTS：阿里开源语音克隆模型，97ms延迟、2分钟复制你的声音</description>
       <pubDate>2026-08-06T23:57:43</pubDate>
