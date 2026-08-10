@@ -1,0 +1,11 @@
+{
+  "id": "20260810_11008",
+  "title": "light-c：把 C 盘清理做成现代桌面应用的国产新尝试",
+  "link": "https://osp.io/archives/11008",
+  "date": "2026-08-10T00:55:27",
+  "audio_file": "episode_20260810_11008.mp3",
+  "file_size_kb": 5065,
+  "num_segments": 19,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你上次看见 C 盘红了是什么时候？我上周刚经历一回，装了个 AIDA64，又手痒想跑个本地小模型，结果打开“此电脑”一看，那根进度条红得发紫，我瞬间就清醒了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈哈哈，你这属于是日常操作了。说实话，都2026年了，Windows用户还得自己手动清理系统盘，这事儿想想确实挺荒诞的。不过你提到这个，我最近刚好发现一个特别有意思的开源项目，叫 light-c，就是专门干这个的。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哦？又一个C盘清理工具？这赛道不是早被360、火绒、CCleaner他们卷烂了吗？我第一反应也是“这还能有什么新花样”。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对吧，我一开始也这么想。但仔细一看，还真不一样。这个项目用 Rust 写后台，React 做前端，Tauri 2 打包，2026年1月才开坑，现在已经有1334颗星了。最让我眼前一亮的是，它有个模块叫“AI Model Storage”，专门扫本地模型、LoRA、embedding缓存。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"啊？专门扫AI模型的？这个我倒是头一回听说。我之前跑LM Studio，下了几个模型，C盘莫名其妙就满了，查了半天才发现一个 `.safetensors` 文件躺在 `.cache` 目录里，光KV cache就吃了十几个GB。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对吧，这就是2026年Windows用户的真实痛点。light-c 直接把AI模型存储单独列为一个清理类别，这思路就很前卫。而且它还有“Social App Cache”模块，微信、QQ、钉钉、飞书的缓存目录都能单独识别，只清缓存不动聊天记录，这对咱们国内用户太实用了。\"\n    },\n"
+}
