@@ -148,5 +148,20 @@
     "id": "https://osp.io/?p=11026",
     "title": "Arch Linux 一夜按停 AUR：1500 多个包被偷家，开源生态的’人治’难题又回来了",
     "link": "https://osp.io/archives/11026"
+  },
+  {
+    "id": "https://osp.io/?p=10793",
+    "title": "Google 把『AI Agent 流水线』开源了 —— 一行命令，让你手头的 coding agent 变成 Google Cloud AI agent 专家",
+    "link": "https://osp.io/archives/10793"
+  },
+  {
+    "id": "https://osp.io/?p=11027",
+    "title": "OpenAI 发布 Codex Security：用 AI 扫描代码漏洞",
+    "link": "https://osp.io/archives/11027"
+  },
+  {
+    "id": "https://osp.io/?p=11038",
+    "title": "中国开源AI模型豁免美国安全审查，这事没那么简单",
+    "link": "https://osp.io/archives/11038"
   }
 ]
