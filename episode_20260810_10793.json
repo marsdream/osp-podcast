@@ -1,0 +1,11 @@
+{
+  "id": "20260810_10793",
+  "title": "Google 把『AI Agent 流水线』开源了 —— 一行命令，让你手头的 coding agent 变成 Google Cloud AI agent 专家",
+  "link": "https://osp.io/archives/10793",
+  "date": "2026-08-10T10:00:04",
+  "audio_file": "episode_20260810_10793.mp3",
+  "file_size_kb": 5452,
+  "num_segments": 24,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你听说了吗？谷歌这周开源了一个叫 agents-cli 的东西，GitHub 上已经五千多 star 了，朋友圈都刷屏了！\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"当然看到了！我第一反应是——谷歌又双叒叕造了个新工具？结果仔细一看，哎，这玩意儿有点意思，它不是来替代谁的，是给咱们现在手上用的 coding agent 装技能的。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"装技能？什么意思啊？我手上常年挂着 Claude Code 和 Codex，已经够乱的了，这不会又是一堆新命令要学吧？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈哈，别慌别慌。你平时用 Claude Code 或者 Codex 干啥？写代码、跑测试、部署，对吧？但每次你想把 AI agent 部署到 Google Cloud 上，是不是都得翻半天文档？ADK 怎么写？Agent Runtime 怎么配？Eval 怎么跑？Cloud Run 怎么发布？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"啊——你戳到痛处了！部署这步我每次都要打开十几个标签页，看文档看得头大，感觉自己不是程序员，是文档翻译员。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对对对，agents-cli 就是来解决这个问题的。它把 Google Cloud 上构建、评估、部署 AI agent 的整个流程，切成了七个 skill，每个 skill 都是一份给 AI agent 读的岗位手册。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"岗位手册？这比喻挺形象。也就是说，我的 Claude Code 装上这些 skill 之后，它就秒懂 Google Cloud 的套路了？\"\n    },\n  "
+}
