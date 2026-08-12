@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>Google 把『AI Agent 流水线』开源了 —— 一行命令，让你手头的 coding agent 变成 Google Cloud AI agent 专家</title>
+      <description>Google 把『AI Agent 流水线』开源了 —— 一行命令，让你手头的 coding agent 变成 Google Cloud AI agent 专家</description>
+      <pubDate>2026-08-10T10:00:04</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260810_10793.mp3" type="audio/mpeg" length="5583789" />
+      <link>https://osp.io/archives/10793</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>light-c：把 C 盘清理做成现代桌面应用的国产新尝试</title>
       <description>light-c：把 C 盘清理做成现代桌面应用的国产新尝试</description>
       <pubDate>2026-08-10T00:55:27</pubDate>
