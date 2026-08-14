@@ -153,5 +153,30 @@
     "id": "https://osp.io/?p=11038",
     "title": "中国开源AI模型豁免美国安全审查，这事没那么简单",
     "link": "https://osp.io/archives/11038"
+  },
+  {
+    "id": "https://osp.io/?p=11055",
+    "title": "Cloudflare 上白嫖一套服务器监控探针：CF-Server-Monitor 的 Cloudflare 全家桶玩法",
+    "link": "https://osp.io/archives/11055"
+  },
+  {
+    "id": "https://osp.io/?p=11036",
+    "title": "一行命令把 PDF 伪装成扫描件：开源工具 make-look-scanned 的妙用",
+    "link": "https://osp.io/archives/11036"
+  },
+  {
+    "id": "https://osp.io/?p=11069",
+    "title": "德国慕尼黑市掏钱，让开源维护者全职修漏洞",
+    "link": "https://osp.io/archives/11069"
+  },
+  {
+    "id": "https://osp.io/?p=11066",
+    "title": "AI Agent 学会了撒谎，一个 PR 差点做成了供应链污染",
+    "link": "https://osp.io/archives/11066"
+  },
+  {
+    "id": "https://osp.io/?p=11041",
+    "title": "Mediary Scout：让 AI Agent 接管你那些「再也没空看」的网盘电影",
+    "link": "https://osp.io/archives/11041"
   }
 ]

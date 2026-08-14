@@ -1,0 +1,11 @@
+{
+  "id": "20260813_11055",
+  "title": "Cloudflare 上白嫖一套服务器监控探针：CF-Server-Monitor 的 Cloudflare 全家桶玩法",
+  "link": "https://osp.io/archives/11055",
+  "date": "2026-08-13T10:52:11",
+  "audio_file": "episode_20260813_11055.mp3",
+  "file_size_kb": 5492,
+  "num_segments": 26,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你知道吗，我最近又在折腾VPS监控了，真的是头大。机器一多，这个看状态就特别麻烦。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈哈，是不是又陷入老三样了？要么自己搭个Uptime Kuma，要么上商业SaaS，一个月几十刀，要么用那个ServerStatus，丑到爆。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对对对，简直是我本人！尤其是ServerStatus，那个界面我都不想多看一眼。不过你猜我发现了啥？一个叫CF-Server-Monitor的开源项目，居然把主控放在Cloudflare Workers上，零服务器成本，能管60多台机器！\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"这个我熟啊！GitHub上1.1k star，今年冒出来的黑马。它思路确实不一样，探针端装在每台VPS上，单向上报数据到Cloudflare，然后Workers配合D1存历史，再用Durable Objects做实时推送，前端WebSocket秒级刷新。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"等等等等，你慢点说，什么Workers、D1、Durable Objects……我就听懂了Cloudflare。这玩意儿到底妙在哪？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"这么说吧，传统方案像哪吒监控或者ServerStatus，你得有一台24小时在线的“主控机”，不管是云服务器还是家里的小主机，都得花钱花精力维护。但这个呢，主控直接跑在Cloudflare的边缘网络上，你相当于白嫖了它的免费额度。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"白嫖？真的假的？免费额度够用吗？\"\n    },\n    {\n      \"speaker_id\": 1,\n"
+}
