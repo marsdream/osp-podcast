@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>Cloudflare 上白嫖一套服务器监控探针：CF-Server-Monitor 的 Cloudflare 全家桶玩法</title>
+      <description>Cloudflare 上白嫖一套服务器监控探针：CF-Server-Monitor 的 Cloudflare 全家桶玩法</description>
+      <pubDate>2026-08-13T10:52:11</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260813_11055.mp3" type="audio/mpeg" length="5624685" />
+      <link>https://osp.io/archives/11055</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>Google 把『AI Agent 流水线』开源了 —— 一行命令，让你手头的 coding agent 变成 Google Cloud AI agent 专家</title>
       <description>Google 把『AI Agent 流水线』开源了 —— 一行命令，让你手头的 coding agent 变成 Google Cloud AI agent 专家</description>
       <pubDate>2026-08-10T10:00:04</pubDate>
