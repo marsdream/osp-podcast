@@ -168,5 +168,25 @@
     "id": "https://osp.io/?p=11041",
     "title": "Mediary Scout：让 AI Agent 接管你那些「再也没空看」的网盘电影",
     "link": "https://osp.io/archives/11041"
+  },
+  {
+    "id": "https://osp.io/?p=11085",
+    "title": "GOG Galaxy 官方原生 Linux 客户端开发中：10 年等待的 DRM-free 启动器 Linux 化",
+    "link": "https://osp.io/archives/11085"
+  },
+  {
+    "id": "https://osp.io/?p=11010",
+    "title": "让 AI 把《西游记》《金瓶梅》直接做成游戏",
+    "link": "https://osp.io/archives/11010"
+  },
+  {
+    "id": "https://osp.io/?p=10954",
+    "title": "微软 VibeVoice：开源语音 AI 把 60 分钟长音频压到 1.58GB，CPU 就能跑",
+    "link": "https://osp.io/archives/10954"
+  },
+  {
+    "id": "https://osp.io/?p=10960",
+    "title": "给 AI Agent 的「Skill」装个安检门：NVIDIA 开源 SkillSpector",
+    "link": "https://osp.io/archives/10960"
   }
 ]
