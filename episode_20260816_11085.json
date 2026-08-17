@@ -1,0 +1,11 @@
+{
+  "id": "20260816_11085",
+  "title": "GOG Galaxy 官方原生 Linux 客户端开发中：10 年等待的 DRM-free 启动器 Linux 化",
+  "link": "https://osp.io/archives/11085",
+  "date": "2026-08-16T01:57:05",
+  "audio_file": "episode_20260816_11085.mp3",
+  "file_size_kb": 3628,
+  "num_segments": 16,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哎，你听说了没？GOG终于要搞官方Linux客户端了！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"啊？真的假的？我印象里GOG卖Linux游戏都十年了，客户端一直没动静，现在突然官宣？\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"对，就是最近的事。联合CEO亲自放话，说原生Linux版Galaxy客户端正在开发中。你说这十年才动，是不是有点离谱？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"确实，十年前GOG就开始提供Linux游戏下载了，但买了之后，想管理游戏、云存档、成就同步，全靠社区第三方工具，比如Heroic Games Launcher、Lutris这些。官方客户端？不存在的，就跟你买宜家家具，螺丝孔都给你标好了，但官方不给你螺丝刀，让你自己想办法。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哈哈哈，这个比喻太形象了！那为什么现在才动手呢？技术债吗？还是说觉得Linux用户没市场？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"技术债肯定有，GOG客户端的代码积累不是一天两天。但真正卡住决策的，恐怕还是市场盘子。在Steam Deck出现之前，Linux桌面游戏用户一直是个“看起来有需求，但实际付费转化极低”的群体。Valve搞了个Steam Deck，一下子证明了两件事：第一，Linux游戏体验能达到日常可用水平；第二，这帮人不是只在论坛里喊，他们是真掏钱的主儿。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"对对对，Steam Deck简直是Linux游戏的转折点。那现在GOG入局，意味着什么？Galaxy客户端到底有啥特别的？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"Galaxy是业内唯一一个能把Steam、Epic、Xbox、EA、PlayStation等九大平台游戏库统一到一个界面"
+}

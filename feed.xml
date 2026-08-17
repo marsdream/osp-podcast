@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>GOG Galaxy 官方原生 Linux 客户端开发中：10 年等待的 DRM-free 启动器 Linux 化</title>
+      <description>GOG Galaxy 官方原生 Linux 客户端开发中：10 年等待的 DRM-free 启动器 Linux 化</description>
+      <pubDate>2026-08-16T01:57:05</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260816_11085.mp3" type="audio/mpeg" length="3715821" />
+      <link>https://osp.io/archives/11085</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>Cloudflare 上白嫖一套服务器监控探针：CF-Server-Monitor 的 Cloudflare 全家桶玩法</title>
       <description>Cloudflare 上白嫖一套服务器监控探针：CF-Server-Monitor 的 Cloudflare 全家桶玩法</description>
       <pubDate>2026-08-13T10:52:11</pubDate>
