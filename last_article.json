@@ -178,5 +178,25 @@
     "id": "https://osp.io/?p=10960",
     "title": "给 AI Agent 的「Skill」装个安检门：NVIDIA 开源 SkillSpector",
     "link": "https://osp.io/archives/10960"
+  },
+  {
+    "id": "https://osp.io/?p=11091",
+    "title": "MiniMax Music 3 开源：5 分钟结构化音乐生成模型，用双 LLM 拆掉”AI 唱歌三分钟就开始糊”的魔咒",
+    "link": "https://osp.io/archives/11091"
+  },
+  {
+    "id": "https://osp.io/?p=11084",
+    "title": "Rust 采纳AI政策——开源治理的「人机分界线」",
+    "link": "https://osp.io/archives/11084"
+  },
+  {
+    "id": "https://osp.io/?p=11098",
+    "title": "微软把开放权重写进美国 AI 战略，这件事比你想的更深",
+    "link": "https://osp.io/archives/11098"
+  },
+  {
+    "id": "https://osp.io/?p=11099",
+    "title": "AI 水印之战才刚开始，1.2 万 Star 的工具揭开了多深的口子",
+    "link": "https://osp.io/archives/11099"
   }
 ]
