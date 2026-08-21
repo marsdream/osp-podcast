@@ -1,0 +1,11 @@
+{
+  "id": "20260821_11134",
+  "title": "VLC 33 秒放不出 MP3，不是开源拉胯，是微软 Defender 误杀",
+  "link": "https://osp.io/archives/11134",
+  "date": "2026-08-21T01:18:17",
+  "audio_file": "episode_20260821_11134.mp3",
+  "file_size_kb": 4811,
+  "num_segments": 14,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你听说了吗？游戏圈那个大佬Jonathan Blow，就是做《Braid》和《The Witness》那位，前两天在X上疯狂吐槽，说他把VLC换掉了，换回微软自带的播放器，因为点开一个MP3要等33秒才出声。33秒啊！这谁受得了？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对对对，我看到那条推了。这33秒确实离谱，但你猜怎么着？这事儿根本不是VLC的锅，也不是什么开源软件的锅。VideoLAN官方当天就回应了，说是Windows 11某次Defender更新出了bug，'神奇地'把VLC的插件缓存当成威胁隔离了。你想想，VLC每次启动本来不需要扫描插件目录的，它有个缓存文件叫plugins.dat，结果被Defender一隔离，每次打开MP3都得现场重扫几百个插件，那可不就半分钟过去了嘛。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"原来是这样！那这Defender也太'魔法'了吧？不过我觉得有意思的是，Jonathan Blow可是个技术老兵，他怎么会犯这种'一个bug否定整个行业'的错呢？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"这正是最值得琢磨的地方。你想想，如果是Visual Studio出了这问题，他大概率会写篇长博客分析Windows缓存机制；但发生在VLC身上，'开源拉胯'四个字就直接脱口而出。这不就是典型的双标嘛——商业软件出问题叫'这个版本的bug'，开源软件出问题叫'开源不行'。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎你这么一说还真是！而且我注意到，当天就有人发了对比视频，同一个VLC、同一个MP3，在Linux KDE桌面上1到2秒就打开了。这证据也太硬了吧？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"铁证如山啊。所以这就说明跟VLC的代码没关系，跟开源理念更没关"
+}
