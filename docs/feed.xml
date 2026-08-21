@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>VLC 33 秒放不出 MP3，不是开源拉胯，是微软 Defender 误杀</title>
+      <description>VLC 33 秒放不出 MP3，不是开源拉胯，是微软 Defender 误杀</description>
+      <pubDate>2026-08-21T01:18:17</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260821_11134.mp3" type="audio/mpeg" length="4926573" />
+      <link>https://osp.io/archives/11134</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>GOG Galaxy 官方原生 Linux 客户端开发中：10 年等待的 DRM-free 启动器 Linux 化</title>
       <description>GOG Galaxy 官方原生 Linux 客户端开发中：10 年等待的 DRM-free 启动器 Linux 化</description>
       <pubDate>2026-08-16T01:57:05</pubDate>
