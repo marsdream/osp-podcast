@@ -188,5 +188,35 @@
     "id": "https://osp.io/?p=11099",
     "title": "AI 水印之战才刚开始，1.2 万 Star 的工具揭开了多深的口子",
     "link": "https://osp.io/archives/11099"
+  },
+  {
+    "id": "https://osp.io/?p=11134",
+    "title": "VLC 33 秒放不出 MP3，不是开源拉胯，是微软 Defender 误杀",
+    "link": "https://osp.io/archives/11134"
+  },
+  {
+    "id": "https://osp.io/?p=11089",
+    "title": "DeepSeek Harness：把Agent运行时做成开源标准的一次豪赌",
+    "link": "https://osp.io/archives/11089"
+  },
+  {
+    "id": "https://osp.io/?p=11083",
+    "title": "Oracle 一边劝员工「让 AI 写代码」，一边禁止 AI 写 OpenJDK",
+    "link": "https://osp.io/archives/11083"
+  },
+  {
+    "id": "https://osp.io/?p=11094",
+    "title": "Linux 桌面某天冲到 22%：Cloudflare 数据背后，AI 时代的工作站大迁徙",
+    "link": "https://osp.io/archives/11094"
+  },
+  {
+    "id": "https://osp.io/?p=11120",
+    "title": "Cursor 亲手做代码托管：Origin 上线，GitHub 的护城河还在吗？",
+    "link": "https://osp.io/archives/11120"
+  },
+  {
+    "id": "https://osp.io/?p=11119",
+    "title": "Xodus：把 Xbox PC / Game Pass 搬上 Linux 的开源逆向工程框架",
+    "link": "https://osp.io/archives/11119"
   }
 ]
