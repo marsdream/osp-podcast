@@ -1,0 +1,11 @@
+{
+  "id": "20260823_11139",
+  "title": "Qwen 成了开源模型的「默认底座」：Hugging Face 夏季报告的三个关键信号",
+  "link": "https://osp.io/archives/11139",
+  "date": "2026-08-23T03:39:17",
+  "audio_file": "episode_20260823_11139.mp3",
+  "file_size_kb": 4681,
+  "num_segments": 17,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"嘿，大家好！欢迎来到开源派，今天咱们聊点硬核的——Hugging Face 刚发了份夏季报告，关于开源模型的生态，数据特别炸裂。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对对对，我看了，那报告叫《State of Open Models: Summer 2026》，时间跨度是今年1月到7月。它不聊某个新模型，而是回头看整个Hub上的真实流量和关注度，挺有意思的。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"嗯，我印象最深的第一个事儿是地理重心变化。之前总觉得美国开源模型强，但报告里说中国实验室今年每个月发布的最大开源模型，参数都比美国本土的大，最高冲到2.78万亿，美国那边好多月份都没超130B。\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"没错，而且美国那少数几个100B+的模型，像Thinking Machines的Inkling、NVIDIA的Nemotron，但大部分超过100B的开源项目反而是基于中国模型改的。你知道吗，其实不是美国开源不行了，是发布主力从模型实验室换成了芯片公司，比如AMD和NVIDIA，今年各发了200多个新模型仓库，NVIDIA直接坐上头把交椅。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哇，这个转折挺有意思的。那Meta和Google呢？他们不是一直很积极吗？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"Google跌到NVIDIA后面了，Meta更惨，旗舰模型转闭源了，报告里专门提了一嘴。所以开源权重的重心，从模型实验室搬到了硬件和基础设施公司。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"第二个事儿更炸——Qwen已经成了社区默认底座。报告说Qwen系列的衍生仓库有15万多个，是Meta系总量的2.6倍，Llama系的4.7倍！每天新增180到210个，下载总数20.45亿次，比Moonshot多了55倍。\""
+}
