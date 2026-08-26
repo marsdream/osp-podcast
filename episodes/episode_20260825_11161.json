@@ -1,0 +1,11 @@
+{
+  "id": "20260825_11161",
+  "title": "Qwen3.8-Max开源——2.4 万亿参数，阿里把自家最强模型放出来",
+  "link": "https://osp.io/archives/11161",
+  "date": "2026-08-25T05:02:45",
+  "audio_file": "episode_20260825_11161.mp3",
+  "file_size_kb": 5850,
+  "num_segments": 25,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"我跟你说，今天咱们得聊个大新闻。阿里居然把Qwen系列里那个一直藏着掖着的Max旗舰模型，直接开源了！你知道这意味着什么吗？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对对对，我早上刷Hugging Face的时候也看到了，那个仓库名字叫Qwen/Qwen3.8-2.4T-A95B，一看数字就吓人。2.4万亿总参数，每次推理激活950亿，这真的是个大家伙。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"等等，你慢点说。2.4万亿参数是个什么概念？我记得之前DeepSeek V3好像是671B，这直接翻了好几倍啊。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"可不是嘛，而且这次是MoE架构的多模态模型，支持文本、图像、视频三种输入，上下文窗口默认1M token。最最关键的是，这是Max类模型第一次开放权重，以前都是闭源卖的。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"那价格呢？我记得之前闭源Preview版本在WAIC大会上有打一折试水的活动，现在GA了价格应该不一样了吧？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"输入每百万token两美元，输出六美元。不过有意思的是，它的Implicit Cache读取只要0.25美元，比新输入便宜8倍。这个玩法和Claude的Prompt Caching挺像的，前缀稳定性比prompt长度更影响成本。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哦，这个设计很聪明啊。不过我注意到你刚才说这个名字有个标点符号的区别，容易看错。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对，得提醒大家。Qwen3.8-Max带点的是这次开源的2.4T旗舰"
+}
