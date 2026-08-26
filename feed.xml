@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>Qwen3.8-Max开源——2.4 万亿参数，阿里把自家最强模型放出来</title>
+      <description>Qwen3.8-Max开源——2.4 万亿参数，阿里把自家最强模型放出来</description>
+      <pubDate>2026-08-25T05:02:45</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260825_11161.mp3" type="audio/mpeg" length="5991021" />
+      <link>https://osp.io/archives/11161</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>Qwen 成了开源模型的「默认底座」：Hugging Face 夏季报告的三个关键信号</title>
       <description>Qwen 成了开源模型的「默认底座」：Hugging Face 夏季报告的三个关键信号</description>
       <pubDate>2026-08-23T03:39:17</pubDate>
