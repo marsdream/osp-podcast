@@ -208,5 +208,30 @@
     "id": "https://osp.io/?p=11141",
     "title": "Codex CLI 把 AI 编码 Agent 做成了终端基建",
     "link": "https://osp.io/archives/11141"
+  },
+  {
+    "id": "https://osp.io/?p=11011",
+    "title": "当经典 MMO 变成 AI Agent 训练场：World of ClaudeCraft 给强化学习注入了真实游戏血液",
+    "link": "https://osp.io/archives/11011"
+  },
+  {
+    "id": "https://osp.io/?p=11153",
+    "title": "Tencent/AI-Infra-Guard — 腾讯开源的全栈 AI 红队平台",
+    "link": "https://osp.io/archives/11153"
+  },
+  {
+    "id": "https://osp.io/?p=11173",
+    "title": "Hugging Face 估值 130 亿美元：AI 时代的 GitHub 也要被「收编」了？",
+    "link": "https://osp.io/archives/11173"
+  },
+  {
+    "id": "https://osp.io/?p=11162",
+    "title": "一个打字错误救了百万台机器：当 AI 编码助手变成可执行表面",
+    "link": "https://osp.io/archives/11162"
+  },
+  {
+    "id": "https://osp.io/?p=11131",
+    "title": "Freenet：27 年老项目踩中 AI Agent 时机",
+    "link": "https://osp.io/archives/11131"
   }
 ]
