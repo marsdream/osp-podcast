@@ -223,5 +223,30 @@
     "id": "https://osp.io/?p=11131",
     "title": "Freenet：27 年老项目踩中 AI Agent 时机",
     "link": "https://osp.io/archives/11131"
+  },
+  {
+    "id": "https://osp.io/?p=11217",
+    "title": "微软把 WinUI 主线搬上 GitHub，但「真开源」这事没那么简单",
+    "link": "https://osp.io/archives/11217"
+  },
+  {
+    "id": "https://osp.io/?p=11218",
+    "title": "Android 车机首次沦陷——DoFun 固件 OTA 渠道被劫持的背后",
+    "link": "https://osp.io/archives/11218"
+  },
+  {
+    "id": "https://osp.io/?p=11197",
+    "title": "Google 停推 Pixel 内核源码 tag，GrapheneOS 公开指控：这是「故意制造的 GPL 摩擦」",
+    "link": "https://osp.io/archives/11197"
+  },
+  {
+    "id": "https://osp.io/?p=11198",
+    "title": "AWS 收编 DuckDB 母公司 DuckLabs：开源的「暖心陷阱」？",
+    "link": "https://osp.io/archives/11198"
+  },
+  {
+    "id": "https://osp.io/?p=11155",
+    "title": "DeepSeek 涨价风云：成本与流量控制的公开辩论",
+    "link": "https://osp.io/archives/11155"
   }
 ]
