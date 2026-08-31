@@ -1,0 +1,11 @@
+{
+  "id": "20260831_11217",
+  "title": "微软把 WinUI 主线搬上 GitHub，但「真开源」这事没那么简单",
+  "link": "https://osp.io/archives/11217",
+  "date": "2026-08-31T00:29:22",
+  "audio_file": "episode_20260831_11217.mp3",
+  "file_size_kb": 4667,
+  "num_segments": 20,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"大家好，欢迎来到开源派！今天咱们聊点微软的料，你知道吗，WinUI 最近悄悄搞了个大动作，差点就被大家忽略了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈哈，你说的该不会是那个 WinUI 主线终于搬到 GitHub 的事儿吧？我可是盯了好久的讨论区，四个阶段终于全勾上 ✅ 了。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对对对！就是这个！一开始我看到标题还以为又是那种“内部优化”的没意思新闻，结果点进去一看，发现这事儿还真不小——人家直接说 GitHub 成了“重心”，开发主场正式从微软内网搬到了主仓库。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对，这句话是关键。“GitHub as Center of Gravity”，听着就有分量。你知道这意味着啥不？以前咱们在 GitHub 上看到的 WinUI 仓库其实是个“镜像”，里面代码可能落后内网好几个月。现在 main 分支就是 main，提交几乎是实时的，透明的多。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你这么一说我想起来了，我之前还真看到有人吐槽过“玻璃门”——说外面的人想贡献代码，PR 就算提了也可能被内网同步覆盖掉，等于白干。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈哈，你这个比喻太形象了。讨论区里那位 michael-hawker 也说得很直白，以前 repo 里的代码基本会被内网镜像覆盖，你就算想办法通过验证提了 PR，也得被复制到普通仓库去。这不是玻璃门是啥？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"所以这次拆门，是直接把整个门都拆了？我看那时间线，好像不是一夜之间的事，还挺有策略的。\"\n    },\n    {\n      \"speaker_id"
+}
