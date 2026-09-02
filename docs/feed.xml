@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>Debian 投票决定「既不背书、也不禁止」生成式 AI——8 提案对决背后的开源治理难题</title>
+      <description>Debian 投票决定「既不背书、也不禁止」生成式 AI——8 提案对决背后的开源治理难题</description>
+      <pubDate>2026-09-01T08:20:24</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260901_11232.mp3" type="audio/mpeg" length="5610285" />
+      <link>https://osp.io/archives/11232</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>微软把 WinUI 主线搬上 GitHub，但「真开源」这事没那么简单</title>
       <description>微软把 WinUI 主线搬上 GitHub，但「真开源」这事没那么简单</description>
       <pubDate>2026-08-31T00:29:22</pubDate>
