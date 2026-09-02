@@ -238,5 +238,15 @@
     "id": "https://osp.io/?p=11155",
     "title": "DeepSeek 涨价风云：成本与流量控制的公开辩论",
     "link": "https://osp.io/archives/11155"
+  },
+  {
+    "id": "https://osp.io/?p=11232",
+    "title": "Debian 投票决定「既不背书、也不禁止」生成式 AI——8 提案对决背后的开源治理难题",
+    "link": "https://osp.io/archives/11232"
+  },
+  {
+    "id": "https://osp.io/?p=11194",
+    "title": "Apache 基金会亲手孵化了一个 Agent：本地优先、把每一次工具调用都写成日志",
+    "link": "https://osp.io/archives/11194"
   }
 ]

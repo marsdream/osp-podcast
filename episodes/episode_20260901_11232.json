@@ -1,0 +1,11 @@
+{
+  "id": "20260901_11232",
+  "title": "Debian 投票决定「既不背书、也不禁止」生成式 AI——8 提案对决背后的开源治理难题",
+  "link": "https://osp.io/archives/11232",
+  "date": "2026-09-01T08:20:24",
+  "audio_file": "episode_20260901_11232.mp3",
+  "file_size_kb": 5478,
+  "num_segments": 34,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"咱们今天聊个特别有意思的事，你知道吗，Debian 最近搞了个大投票，八个提案，最后选了个“既不背书也不禁止”生成式 AI 的结果。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对对对，我看了那个结果，简直像一场漫长的辩论赛。八个选项加一个“以上都不满意”，最后胜出的那个特别微妙。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"咱们先给没听过的人说说背景呗？Debian 不是做 Linux 发行版的吗，他们怎么突然跟 AI 较上劲了？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"其实就是社区里有人用 LLM 写代码、写文档、翻译，还有人把 AI 生成的东西直接提上来当贡献。有人就觉得这不行，版权不清、质量没法保证，还有人担心新人全靠 AI 烧掉 reviewer 的耐心。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"所以就有八个人分别提了方案？这也太夸张了，一个投票八个提案。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对，从最严格到最开放全都有。最严格那个说要改 Social Contract，直接把禁止写进根本大法，但需要 3:1 多数，结果票数最少。最开放那个就说随便用，责任在提交者。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"那最后赢的 Choice 5 到底说了啥？我看了官方结果，感觉有点像打太极。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"还真不是打太极。它核心就一句话：Debian 既不背书也不禁止生成式 AI，但不管内容是怎么来的，都必须达到现有标准。然后建议披露 AI 协助情况，但不强制。\"\n    },\n    {\n      \"speaker_id\": 0"
+}
