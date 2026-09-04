@@ -238,5 +238,10 @@
     "id": "https://osp.io/?p=11194",
     "title": "Apache 基金会亲手孵化了一个 Agent：本地优先、把每一次工具调用都写成日志",
     "link": "https://osp.io/archives/11194"
+  },
+  {
+    "id": "https://osp.io/?p=10674",
+    "title": "Meta 开源的内部设计系统Astryx，1.3万应用验证",
+    "link": "https://osp.io/archives/10674"
   }
 ]
