@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>Meta 开源的内部设计系统Astryx，1.3万应用验证</title>
+      <description>Meta 开源的内部设计系统Astryx，1.3万应用验证</description>
+      <pubDate>2026-09-03T23:19:10</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260903_10674.mp3" type="audio/mpeg" length="6063597" />
+      <link>https://osp.io/archives/10674</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>Debian 投票决定「既不背书、也不禁止」生成式 AI——8 提案对决背后的开源治理难题</title>
       <description>Debian 投票决定「既不背书、也不禁止」生成式 AI——8 提案对决背后的开源治理难题</description>
       <pubDate>2026-09-01T08:20:24</pubDate>
