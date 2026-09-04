@@ -1,0 +1,11 @@
+{
+  "id": "20260903_10674",
+  "title": "Meta 开源的内部设计系统Astryx，1.3万应用验证",
+  "link": "https://osp.io/archives/10674",
+  "date": "2026-09-03T23:19:10",
+  "audio_file": "episode_20260903_10674.mp3",
+  "file_size_kb": 5921,
+  "num_segments": 25,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你知道吗？我最近被设计系统整崩溃了。想改个按钮颜色，结果要折腾老半天，最后干脆不用了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈哈，我太懂这种感觉了。很多设计系统看着挺美，用起来各种别扭，你动个样式它跟你打架。跟封建社会似的，规矩太多。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对对对，就是这种感觉。所以我今天要跟你分享个好东西，Meta憋了八年的大招，刚开源的，叫Astryx。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"Astryx？这名字有点意思。Meta的设计系统？我记得他们内部用的那个是不是早就有所耳闻，秘密武器那种感觉。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"没错，这可不是那种出来秀一下的设计组件库。人家在Meta内部已经打磨八年了，而且你天天用的Facebook、Instagram、WhatsApp，全都有它的功劳。超过1.3万个应用都用它来构建界面。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"1.3万？这数字真是够有说服力的，而且是被几千个工程师每天拷问出来的，绝对皮实。它跟市面上那些像Material UI、Ant Design有什么不一样吗？我很好奇。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"那差别可大了。一般设计系统给一堆组件，你只能在他们框定的范围内用。Astryx的核心哲学是“开放内部结构”，啥意思呢？就是它把组件拆成了底层积木，你可以自由组合，不会被它的顶层API给卡死。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"这个设计思路有意思，有点“授人以鱼不如授人以渔”的味道。但这样自由度是大了，真到要魔改的时候会不会特别费劲？\"\n "
+}
