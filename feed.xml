@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>手机里跑 Alpine Linux：用 OpenMinis 把 iPhone 变成真正的 AI Agent 设备</title>
+      <description>手机里跑 Alpine Linux：用 OpenMinis 把 iPhone 变成真正的 AI Agent 设备</description>
+      <pubDate>2026-09-05T12:57:38</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260905_10930.mp3" type="audio/mpeg" length="5114349" />
+      <link>https://osp.io/archives/10930</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>Meta 开源的内部设计系统Astryx，1.3万应用验证</title>
       <description>Meta 开源的内部设计系统Astryx，1.3万应用验证</description>
       <pubDate>2026-09-03T23:19:10</pubDate>

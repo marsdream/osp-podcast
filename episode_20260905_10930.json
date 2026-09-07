@@ -1,0 +1,11 @@
+{
+  "id": "20260905_10930",
+  "title": "手机里跑 Alpine Linux：用 OpenMinis 把 iPhone 变成真正的 AI Agent 设备",
+  "link": "https://osp.io/archives/10930",
+  "date": "2026-09-05T12:57:38",
+  "audio_file": "episode_20260905_10930.mp3",
+  "file_size_kb": 4994,
+  "num_segments": 30,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你说现在手机上那些AI助手，是不是都挺鸡肋的？我昨天在地铁上想让它帮我处理个JSON，结果它说“我没有执行环境”，真是气死我了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈哈，太真实了。十次有九次都是这样，要么让你打开电脑，要么干脆装死。不过，你知道吗，我最近发现一个特别牛的开源项目，叫OpenMinis，真的让我眼前一亮。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"OpenMinis？这名字听着有点耳熟……是不是那个MacStories上Federico都夸过的？他说什么“最令人印象深刻的独立开发App”？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对对对，就是那个。咱就说它干了啥吧——直接在手机里跑一个完整的Alpine Linux沙盒！iOS上用iSH的ARM64 fork，安卓上用PRoot的fork。你说疯狂不疯狂？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"iPhone上跑Linux？我第一反应是噱头吧？不过你这么一说，我倒想认真听听它到底能干什么。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"我给你举几个例子啊。你拍一张饭的照片，它能识别菜名、估算热量，然后直接写进Apple Health。你拉一个Telegram群的聊天记录，它能帮你提取bug和待办，去重之后写进Apple Reminders。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，这个有点意思啊。那像我们平时用的Obsidian笔记库，它能碰吗？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"能啊！它可以把你的Obsidian Vault挂载成工作区，Agent直接在里面读写Markdow"
+}
