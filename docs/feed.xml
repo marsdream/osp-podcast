@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>wigolo：把 18 个搜索引擎塞进一个本地 MCP，AI 编程 Agent 的免费「查资料搭子」</title>
+      <description>wigolo：把 18 个搜索引擎塞进一个本地 MCP，AI 编程 Agent 的免费「查资料搭子」</description>
+      <pubDate>2026-09-10T23:26:20</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260910_11265.mp3" type="audio/mpeg" length="5159277" />
+      <link>https://osp.io/archives/11265</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>手机里跑 Alpine Linux：用 OpenMinis 把 iPhone 变成真正的 AI Agent 设备</title>
       <description>手机里跑 Alpine Linux：用 OpenMinis 把 iPhone 变成真正的 AI Agent 设备</description>
       <pubDate>2026-09-05T12:57:38</pubDate>
