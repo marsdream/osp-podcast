@@ -1,0 +1,11 @@
+{
+  "id": "20260910_11265",
+  "title": "wigolo：把 18 个搜索引擎塞进一个本地 MCP，AI 编程 Agent 的免费「查资料搭子」",
+  "link": "https://osp.io/archives/11265",
+  "date": "2026-09-10T23:26:20",
+  "audio_file": "episode_20260910_11265.mp3",
+  "file_size_kb": 5038,
+  "num_segments": 20,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你最近用那些 AI 编程助手的时候，有没有被它们一本正经地胡说八道给气到过？我让它查个 API 用法，它能给我编一个不存在的参数出来。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈哈，太常见了。尤其是让 Agent 去查最新文档、翻 GitHub Issue，它要么答非所问，要么给你造一个看起来特别真的假答案。说白了，就是它的内置联网能力太弱了，有时候有配额，有时候干脆就没网。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对！所以之前都得靠那些云服务，Tavily 啊、Exa 啊，还有 Firecrawl，全都是按查询收费的。查一次两次还行，你要是让 Agent 一口气搜个几十次，那账单简直不敢看。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"没错，但最近我挖到一个特别有意思的开源项目，叫 wigolo，就是专门干这个的。它直接在本地给你架了一个元搜索引擎，背后挂了 18 个搜索引擎的直连适配器，还带本地的 reranker、embedding、浏览器引擎、缓存，全都放在你电脑的 ~/.wigolo/ 目录下面。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"等会儿，你的意思是说，不需要任何 API key？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对，零 API key、零云依赖、零月费。你跑一个 npx wigolo init，Claude Code、Cursor、Codex、Gemini CLI、OpenCode 这些主流 Agent 就全都接上了。每次查询都是真正的 0 美元，一次会话爆搜 200 次，也不会收到什么 Stripe 的扣款提醒。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"天呐，这太爽了吧。而且数据都留在本地，"
+}

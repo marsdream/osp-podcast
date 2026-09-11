@@ -233,5 +233,45 @@
     "id": "https://osp.io/?p=11056",
     "title": "浏览器里写 3D 游戏？PlayCanvas 把这件事当真了",
     "link": "https://osp.io/archives/11056"
+  },
+  {
+    "id": "https://osp.io/?p=11265",
+    "title": "wigolo：把 18 个搜索引擎塞进一个本地 MCP，AI 编程 Agent 的免费「查资料搭子」",
+    "link": "https://osp.io/archives/11265"
+  },
+  {
+    "id": "https://osp.io/?p=11302",
+    "title": "Linux 内核每版本近 2000 个 CVE，AI 漏洞猎人把维护者压垮了",
+    "link": "https://osp.io/archives/11302"
+  },
+  {
+    "id": "https://osp.io/?p=11214",
+    "title": "OpenBot 让每个 AI 同事都有自己的’电脑’：治理优先的开源 Agent 平台",
+    "link": "https://osp.io/archives/11214"
+  },
+  {
+    "id": "https://osp.io/?p=11219",
+    "title": "5天5版本，一个人用Go重写青龙面板",
+    "link": "https://osp.io/archives/11219"
+  },
+  {
+    "id": "https://osp.io/?p=11277",
+    "title": "48k Star 的 moeru-ai/airi，让”二次元老婆”从云端黑盒里走出来",
+    "link": "https://osp.io/archives/11277"
+  },
+  {
+    "id": "https://osp.io/?p=11266",
+    "title": "GNOME 安全追踪流程悄悄改了：90→30 天、AI 报告不区分对待、负责人 11 月退休",
+    "link": "https://osp.io/archives/11266"
+  },
+  {
+    "id": "https://osp.io/?p=11264",
+    "title": "Microduck：399美元的开源机器鸭，把强化学习从实验室搬上桌面",
+    "link": "https://osp.io/archives/11264"
+  },
+  {
+    "id": "https://osp.io/?p=11272",
+    "title": "NVIDIA 下场做的开源小工具：把家里几台电脑拼成一个 LLM 推理路由器",
+    "link": "https://osp.io/archives/11272"
   }
 ]
