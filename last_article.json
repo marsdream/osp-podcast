@@ -263,5 +263,20 @@
     "id": "https://osp.io/?p=11272",
     "title": "NVIDIA 下场做的开源小工具：把家里几台电脑拼成一个 LLM 推理路由器",
     "link": "https://osp.io/archives/11272"
+  },
+  {
+    "id": "https://osp.io/?p=11301",
+    "title": "Apple 官方下场做容器，49k Star 的 Swift 原生引擎",
+    "link": "https://osp.io/archives/11301"
+  },
+  {
+    "id": "https://osp.io/?p=11165",
+    "title": "Cloudflare OS 想重新定义「软件」",
+    "link": "https://osp.io/archives/11165"
+  },
+  {
+    "id": "https://osp.io/?p=11313",
+    "title": "11k Star 的 Pumpkin-MC，用 Rust 重写 Minecraft 服务器",
+    "link": "https://osp.io/archives/11313"
   }
 ]
