@@ -1,0 +1,11 @@
+{
+  "id": "20260916_11355",
+  "title": "Mullenweg 的 48 小时 —— WordPress 之父被自己董事会架走，48 小时又翻盘",
+  "link": "https://osp.io/archives/11355",
+  "date": "2026-09-16T04:01:39",
+  "audio_file": "episode_20260916_11355.mp3",
+  "file_size_kb": 4188,
+  "num_segments": 24,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎你知道吗，昨晚科技圈炸锅了，WordPress母公司Automattic的创始人居然被董事会赶出公司了！\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"啊？就是那个做开源CMS的WordPress？创始人不是叫Matt Mullenweg吗？被赶走了？这也太刺激了吧。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对啊，据说四名董事投票把他强制带薪休假，CFO代理CEO，结果不到48小时，他又杀回来了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"这剧情反转得也太快了吧？到底是咋回事，跟我详细说说。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"起因是Mullenweg自己发Slack截图曝光。他说董事会成员背着他密谋，开会前50分钟才把决议给他，他要求让法律顾问过目都没被答应。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"这听起来有点像是精心策划的突袭啊。那董事会为啥要这么干？总得有个理由吧。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"还不是因为之前跟WP Engine那个官司。Mullenweg自己都说，他们可能让法官认定他‘恶意销毁证据’，意思就是董事会拿这个当借口搞他。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哦对，就是那个WordPress商标加8%抽成的官司对吧？我记得这官司打了一年多了。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对，而且今年2月WP Engine还爆出文件，说Automattic打算把这8%抽成模式推广到另外10家竞争对手。你说董事会能不慌吗？\"\n    },\n    {\n    "
+}

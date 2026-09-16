@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>Mullenweg 的 48 小时 —— WordPress 之父被自己董事会架走，48 小时又翻盘</title>
+      <description>Mullenweg 的 48 小时 —— WordPress 之父被自己董事会架走，48 小时又翻盘</description>
+      <pubDate>2026-09-16T04:01:39</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260916_11355.mp3" type="audio/mpeg" length="4288941" />
+      <link>https://osp.io/archives/11355</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>wigolo：把 18 个搜索引擎塞进一个本地 MCP，AI 编程 Agent 的免费「查资料搭子」</title>
       <description>wigolo：把 18 个搜索引擎塞进一个本地 MCP，AI 编程 Agent 的免费「查资料搭子」</description>
       <pubDate>2026-09-10T23:26:20</pubDate>
