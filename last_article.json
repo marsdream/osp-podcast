@@ -268,5 +268,45 @@
     "id": "https://osp.io/?p=11313",
     "title": "11k Star 的 Pumpkin-MC，用 Rust 重写 Minecraft 服务器",
     "link": "https://osp.io/archives/11313"
+  },
+  {
+    "id": "https://osp.io/?p=11355",
+    "title": "Mullenweg 的 48 小时 —— WordPress 之父被自己董事会架走，48 小时又翻盘",
+    "link": "https://osp.io/archives/11355"
+  },
+  {
+    "id": "https://osp.io/?p=11133",
+    "title": "Cloudflare 把邮箱搬进 Workers，Agentic Inbox 想干掉你的 Gmail",
+    "link": "https://osp.io/archives/11133"
+  },
+  {
+    "id": "https://osp.io/?p=11233",
+    "title": "当 Piper 遇上 GPL：开源 TTS 的一次「灵魂转正」",
+    "link": "https://osp.io/archives/11233"
+  },
+  {
+    "id": "https://osp.io/?p=11304",
+    "title": "开源派点评：XCorp 一纸律师函没能杀死 Nitter，替代前端的猫鼠游戏",
+    "link": "https://osp.io/archives/11304"
+  },
+  {
+    "id": "https://osp.io/?p=11300",
+    "title": "瑞士联邦政府 Microsoft 365 替换试点：3000 台工作站押注开源",
+    "link": "https://osp.io/archives/11300"
+  },
+  {
+    "id": "https://osp.io/?p=11299",
+    "title": "LibreOffice 26.8 首周下载破百万：开源办公套件靠「不卷 AI」突围",
+    "link": "https://osp.io/archives/11299"
+  },
+  {
+    "id": "https://osp.io/?p=11274",
+    "title": "Sifty：Windows 上那个删文件前一定要先问你的开源清理工具",
+    "link": "https://osp.io/archives/11274"
+  },
+  {
+    "id": "https://osp.io/?p=11340",
+    "title": "Datawhale 7年：中国最大AI开源学习社区怎么炼成的",
+    "link": "https://osp.io/archives/11340"
   }
 ]
