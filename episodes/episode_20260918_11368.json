@@ -1,0 +1,11 @@
+{
+  "id": "20260918_11368",
+  "title": "F-Droid AI 体检报告：102 款更新应用，67 款是 AI 写的",
+  "link": "https://osp.io/archives/11368",
+  "date": "2026-09-18T04:15:21",
+  "audio_file": "episode_20260918_11368.mp3",
+  "file_size_kb": 4471,
+  "num_segments": 21,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n{\n\"speaker_id\": 0,\n\"dialog\": \"诶，你听说了吗？最近有个人把F-Droid上某天推送的102款应用全下载下来，一个个人工审查，看有多少是AI写的。结果你猜怎么着？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"我看了那个帖子，说实话有点震惊。超过六成，65.7%的应用被判定为'大部分是AI生成的'。这可是F-Droid啊，不是那种野鸡应用商店。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"对对对，F-Droid在咱们开源圈子里一直算是一片净土吧。没广告没追踪，全是自由软件。结果这一查，直接给人整沉默了。\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"而且这个开发者tintotint还挺较真，没用那些AI检测器，就是纯靠肉眼一点点看。分了三档：大部分AI、不好说、没有AI痕迹。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"肉眼怎么看啊？总得有依据吧？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"就是看commit信息有没有一股LLM味，README是不是AI代笔，仓库里有没有Claude Code之类的配置文件，或者有没有agent自动提交的PR。说白了，vibe coder的懒惰根本藏不住。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"哈哈哈，确实。我见过那种README，满屏emoji堆砌，一看就是AI写的。还有那种commit信息，什么'feat: enhance user experience'，特别虚。\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对，还有更过分的，直接给agent仓库写权限，连commit都懒得自己点。那个tintotint还发现一个叫brandonp2412的用户，一个人维护了好几个不同命名空间下的应用，全是vibe coded，特高产。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"这让我想到一个词，今年Merriam-Webster把'slop'评为年度词汇嘛。这算是AI垃圾食品大规模涌入开源生态了吧？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \""
+}
