@@ -1,0 +1,11 @@
+{
+  "id": "20260920_11378",
+  "title": "XCancel 又双叒叕死了：Nitter 猫鼠游戏第二季，XCorp 开始杀鸡儆猴",
+  "link": "https://osp.io/archives/11378",
+  "date": "2026-09-20T23:15:44",
+  "audio_file": "episode_20260920_11378.mp3",
+  "file_size_kb": 5219,
+  "num_segments": 22,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你听说了吗？Nitter 这回是真的没了，GitHub 仓库都变只读了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"听说了，9月11号的事儿对吧？之前8月那波律师函我还以为能撑过去，结果这次直接进入诉讼程序了。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对，一开始是 The Register 说法律咨询后要继续，XCancel 还短暂复活了一下。结果没撑几天，XCancel 又发公告说什么‘由于正在进行的法律诉讼的新进展’被迫暂停，这措辞一看就不妙。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对对对，关键词就是那个‘ongoing legal proceedings’。已经从律师函警告升级到真刀真枪的诉讼了。XCorp 这次是玩真的，不是吓唬人。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"咱们先捋一下时间线吧，免得听众听得云里雾里的。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"行，我记得大概是：8月24号 XCorp 给 XCancel 发了停止函，8月25号给 Nitter 主实例截止期限，8月26号媒体就开始报道‘Nitter 被吓瘫’。然后9月7号 The Register 说 Nitter 要继续，XCancel 复活，结果9月11号 Nitter 仓库就归档了，9月15号 XCancel 再次下线。也就是上周的事儿。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"他们援引的法律依据是什么呢？听着又是德州法律又是商标法的。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"主要是 Texas Harmful Access by Computer Act，就是德州的计"
+}
