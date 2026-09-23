@@ -303,5 +303,30 @@
     "id": "https://osp.io/?p=11364",
     "title": "微软把 Rust 升到和 C++、C# 平起平坐了",
     "link": "https://osp.io/archives/11364"
+  },
+  {
+    "id": "https://osp.io/?p=11384",
+    "title": "Bevy 0.19 来了：游戏引擎正在’下一个时代’",
+    "link": "https://osp.io/archives/11384"
+  },
+  {
+    "id": "https://osp.io/?p=11399",
+    "title": "NVIDIA 把 GPU 里那几十颗 RISC-V 核用起来了",
+    "link": "https://osp.io/archives/11399"
+  },
+  {
+    "id": "https://osp.io/?p=11381",
+    "title": "SDL3 上游合并 HarmonyOS 支持：国产 OS 踢开游戏基础设施的第一道门",
+    "link": "https://osp.io/archives/11381"
+  },
+  {
+    "id": "https://osp.io/?p=11400",
+    "title": "10 万星项目 Neovim 收到 10 枚比特币，沉睡三年没人动",
+    "link": "https://osp.io/archives/11400"
+  },
+  {
+    "id": "https://osp.io/?p=11390",
+    "title": "Valve 低调开源 Lepton：把 Android 容器装进 Steam Frame",
+    "link": "https://osp.io/archives/11390"
   }
 ]
