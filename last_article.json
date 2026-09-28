@@ -323,5 +323,20 @@
     "id": "https://osp.io/?p=11363",
     "title": "阿里把内部 AI 代码审查工具 open-code-review 甩出来了——为什么这次值得看",
     "link": "https://osp.io/archives/11363"
+  },
+  {
+    "id": "https://osp.io/?p=11417",
+    "title": "无停机重写80万行Rust：Microsoft用Copilot重写Copilot的14.5周",
+    "link": "https://osp.io/archives/11417"
+  },
+  {
+    "id": "https://osp.io/?p=11423",
+    "title": "Googlebook 上位：Android 桌面化终局，还是 ChromeOS 的替身？",
+    "link": "https://osp.io/archives/11423"
+  },
+  {
+    "id": "https://osp.io/?p=11401",
+    "title": "Meshtastic: 完全开源的离网 LoRa Mesh 通信生态",
+    "link": "https://osp.io/archives/11401"
   }
 ]
