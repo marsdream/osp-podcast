@@ -1,0 +1,11 @@
+{
+  "id": "20260926_11417",
+  "title": "无停机重写80万行Rust：Microsoft用Copilot重写Copilot的14.5周",
+  "link": "https://osp.io/archives/11417",
+  "date": "2026-09-26T10:14:04",
+  "audio_file": "episode_20260926_11417.mp3",
+  "file_size_kb": 4651,
+  "num_segments": 22,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"嗨，你看了GitHub那篇博客了吗？用AI agent把Copilot runtime从TypeScript整个重写成Rust了，这也太疯狂了吧。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"看了看了，43万行TS变成80万行Rust，128个PR，14.5周搞定，期间居然一天都没停机。关键还是用Copilot自己来写的，有点自举的味道。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"所以是AI把自己的底层runtime给重写了？那为什么非要重写呢？原来的架构有那么差吗？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"其实就是架构倒挂了。一开始作为CLI工具用Node.js没问题，但后来变成了shared runtime，六个语言的SDK每次调用都要spawn一个Node进程，光V8内存开销就吃掉100MB。每次session创建都要启动Node、解析JS、JIT编译，全是性能税。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"我听说了，性能提升了差不多16倍，内存降了11倍？这数字也太硬了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对，7.55到120 lifecycles每秒，内存从1383MB降到126MB。token成本12万美元，人力就一个工程师3周净工作时间，分布在14.5周里。这账怎么算都划算。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"不过我最好奇的是，怎么做到不停机重写的？传统大型重写不是要开一个长周期分支，最后merge的时候冲突爆炸吗？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"他们用的是in-place migration。每个PR替换一个TS组件，加一"
+}
