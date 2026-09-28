@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>无停机重写80万行Rust：Microsoft用Copilot重写Copilot的14.5周</title>
+      <description>无停机重写80万行Rust：Microsoft用Copilot重写Copilot的14.5周</description>
+      <pubDate>2026-09-26T10:14:04</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260926_11417.mp3" type="audio/mpeg" length="4762989" />
+      <link>https://osp.io/archives/11417</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>新浪云 9·16 关停前夜:百万 B 站老视频差点跟着一起死,被全球志愿者接力救下</title>
       <description>新浪云 9·16 关停前夜:百万 B 站老视频差点跟着一起死,被全球志愿者接力救下</description>
       <pubDate>2026-09-25T04:46:54</pubDate>
