@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>荷兰政府用 NixOS 重建数字主权：被微软切断 ICC 邮箱后，DAWO 项目正式上岗</title>
+      <description>荷兰政府用 NixOS 重建数字主权：被微软切断 ICC 邮箱后，DAWO 项目正式上岗</description>
+      <pubDate>2026-09-29T14:38:38</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20260929_11462.mp3" type="audio/mpeg" length="6043437" />
+      <link>https://osp.io/archives/11462</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>无停机重写80万行Rust：Microsoft用Copilot重写Copilot的14.5周</title>
       <description>无停机重写80万行Rust：Microsoft用Copilot重写Copilot的14.5周</description>
       <pubDate>2026-09-26T10:14:04</pubDate>
