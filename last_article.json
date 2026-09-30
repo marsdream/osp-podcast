@@ -1,15 +1,5 @@
 [
   {
-    "id": "https://osp.io/?p=10954",
-    "title": "微软 VibeVoice：开源语音 AI 把 60 分钟长音频压到 1.58GB，CPU 就能跑",
-    "link": "https://osp.io/archives/10954"
-  },
-  {
-    "id": "https://osp.io/?p=10960",
-    "title": "给 AI Agent 的「Skill」装个安检门：NVIDIA 开源 SkillSpector",
-    "link": "https://osp.io/archives/10960"
-  },
-  {
     "id": "https://osp.io/?p=11091",
     "title": "MiniMax Music 3 开源：5 分钟结构化音乐生成模型，用双 LLM 拆掉”AI 唱歌三分钟就开始糊”的魔咒",
     "link": "https://osp.io/archives/11091"
