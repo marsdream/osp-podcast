@@ -298,5 +298,45 @@
     "id": "https://osp.io/?p=13904",
     "title": "开源派点评：AI 把 Google 的开源漏洞悬赏搞停了",
     "link": "https://osp.io/archives/13904"
+  },
+  {
+    "id": "https://osp.io/?p=13888",
+    "title": "唯一从零造引擎的浏览器，决定不再接受你的 PR",
+    "link": "https://osp.io/archives/13888"
+  },
+  {
+    "id": "https://osp.io/?p=13883",
+    "title": "HowToLiveBetter：按性价比排序的循证生活指南",
+    "link": "https://osp.io/archives/13883"
+  },
+  {
+    "id": "https://osp.io/?p=13886",
+    "title": "微软把「训练智能体」拆成了一套公共水电:聊聊 Orchard-Agentic 这套开源基建",
+    "link": "https://osp.io/archives/13886"
+  },
+  {
+    "id": "https://osp.io/?p=10389",
+    "title": "密码保护：开源商城系统，ThinkPHP 写了 5 年还在更新",
+    "link": "https://osp.io/archives/10389"
+  },
+  {
+    "id": "https://osp.io/?p=11336",
+    "title": "密码保护：337KB 装下一个语音合成引擎：sanoTTS 把神经网络 TTS 压到极限",
+    "link": "https://osp.io/archives/11336"
+  },
+  {
+    "id": "https://osp.io/?p=13900",
+    "title": "Hallmark — 给大模型的「反 AI 味」设计 skill",
+    "link": "https://osp.io/archives/13900"
+  },
+  {
+    "id": "https://osp.io/?p=13895",
+    "title": "Google 把内部 Agent 运行时开源了，这次没加「不官方」免责声明",
+    "link": "https://osp.io/archives/13895"
+  },
+  {
+    "id": "https://osp.io/?p=13902",
+    "title": "英伟达把 AI 编程 Agent 的「harness」拆开研究：用 4 个机制砍掉近一半 token",
+    "link": "https://osp.io/archives/13902"
   }
 ]

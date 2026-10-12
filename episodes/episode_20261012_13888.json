@@ -1,0 +1,11 @@
+{
+  "id": "20261012_13888",
+  "title": "唯一从零造引擎的浏览器，决定不再接受你的 PR",
+  "link": "https://osp.io/archives/13888",
+  "date": "2026-10-12T04:42:44",
+  "audio_file": "episode_20261012_13888.mp3",
+  "file_size_kb": 4386,
+  "num_segments": 28,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"咱俩今天聊点啥？我最近感觉浏览器这圈子真的有点无聊，翻来覆去就那几家。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"确实，Chrome、Edge、Firefox、Safari，手指头掰完就没了。而且引擎就剩下Blink、Gecko、WebKit三家。但你知道吗，这中间有个特立独行的项目，Ladybird。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"Ladybird？是不是那个从零开始写浏览器的？我好像听过，但一直没细看。它到底特别在哪儿？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"特别在它不是fork，不是套壳，连引擎都是自己从第一行代码写的。背后没有Google、Apple、Microsoft，是个非营利组织在运营。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哇，那它靠什么养活自己？纯用爱发电吗？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"赞助商还挺多的，FUTO、Shopify、Cloudflare都是白金级。但关键点是，所有赞助都是无条件捐赠，谁也买不到话语权或者技术方向。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"这听起来太理想主义了。不过真正让它出圈的，好像是什么关闭PR通道的事？我记得当时好多人在吵。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对，2026年6月那篇博客《Changing How We Develop Ladybird》，核心就一句话：关闭公开PR通道，不再接受外部代码贡献。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"这在开源世界不就是异端吗？开源不就是欢迎所有人来贡献代码？"
+}
