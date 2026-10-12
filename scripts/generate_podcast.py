@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 generate_podcast.py - 生成 osp.io 播客音频
-从 osp.io RSS 获取文章，用 AI 生成播客对话脚本，Edge-TTS 合成音频
+从 osp.io RSS 获取文章，用 AI 生成播客对话脚本，Azure TTS 合成音频
 """
+
 import os
 import sys
 import json
@@ -16,6 +17,13 @@ try:
     import feedparser
 except ImportError:
     print("ERROR: feedparser not installed. Run: pip install feedparser")
+    sys.exit(1)
+
+# Azure TTS
+try:
+    import azure.cognitiveservices.speech as speechsdk
+except ImportError:
+    print("ERROR: azure-cognitiveservices-speech not installed. Run: pip install azure-cognitiveservices-speech")
     sys.exit(1)
 
 # 用 Podcast-Generator 的 JSON prompt 技术
@@ -69,11 +77,15 @@ You are a master podcast scriptwriter, adept at transforming diverse input conte
 Transform the source material into a lively and engaging podcast conversation. The final output is a JSON string without code blocks. No explanatory text!
 """
 
-# speaker_id → Edge-TTS voice
+# speaker_id → Azure TTS voice (Neural)
 SPEAKER_VOICES = {
     0: "zh-CN-XiaoxiaoNeural",   # 女声-晓晓
     1: "zh-CN-YunyangNeural",    # 男声-云扬
 }
+
+# Azure TTS 配置（从环境变量读取）
+AZURE_SPEECH_KEY = os.environ.get("AZURE_SPEECH_KEY", "")
+AZURE_SPEECH_REGION = os.environ.get("AZURE_SPEECH_REGION", "southeastasia")
 
 # 模板路径（GitHub Actions 会把仓库 checkout 下来）
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "..", "templates")
@@ -182,18 +194,32 @@ def generate_script(title, content, api_key=None, base_url=None, model=None):
 
 
 def synthesize_audio(text, voice, output_path):
-    """用 edge-tts 生成音频"""
-    cmd = [
-        sys.executable, "-m", "edge_tts",
-        "--text", text,
-        "--voice", voice,
-        "--write-media", output_path
-    ]
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    if result.returncode != 0:
-        print(f"TTS error: {result.stderr}", file=sys.stderr)
+    """用 Azure TTS 生成音频"""
+    if not AZURE_SPEECH_KEY:
+        print("ERROR: AZURE_SPEECH_KEY not set", file=sys.stderr)
         return False
-    return True
+
+    speech_config = speechsdk.SpeechConfig(
+        subscription=AZURE_SPEECH_KEY,
+        region=AZURE_SPEECH_REGION
+    )
+    audio_config = speechsdk.AudioConfig(filename=output_path)
+
+    synthesizer = speechsdk.SpeechSynthesizer(
+        speech_config=speech_config,
+        audio_config=audio_config
+    )
+
+    # Azure TTS 使用 ssml 格式，voice name 在 ssml 里指定
+    ssml = f"<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='zh-CN'><voice name='{voice}'>{text}</voice></speak>"
+
+    result = synthesizer.speak_ssml_async(ssml).get()
+
+    if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
+        return True
+    else:
+        print(f"TTS error: {result.error_details}", file=sys.stderr)
+        return False
 
 
 def has_intro_outro():
