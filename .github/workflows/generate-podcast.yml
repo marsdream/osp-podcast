@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update && sudo apt-get install -y ffmpeg rsync
-          pip install feedparser edge-tts openai ffmpeg-python
+          pip install feedparser azure-cognitiveservices-speech openai ffmpeg-python
 
       # ── 关键修复 1：从 gh-pages 拿历史音频，确保下次 CI 也能读到 ──
       - name: Fetch historical episodes from gh-pages
@@ -59,6 +59,8 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: deepseek-v4-flash
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
         run: python scripts/generate_podcast.py --auto --model deepseek-v4-flash --base-url "$LLM_BASE_URL"
 
       - name: Update RSS
