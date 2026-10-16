@@ -328,5 +328,35 @@
     "id": "https://osp.io/?p=13902",
     "title": "英伟达把 AI 编程 Agent 的「harness」拆开研究：用 4 个机制砍掉近一半 token",
     "link": "https://osp.io/archives/13902"
+  },
+  {
+    "id": "https://osp.io/?p=13982",
+    "title": "一行代码、24 个 patch、18 次重启：Linus 用AI修了一个潜伏两年的Linux内核bug",
+    "link": "https://osp.io/archives/13982"
+  },
+  {
+    "id": "https://osp.io/?p=13946",
+    "title": "Deno 团队并入 Cloudflare，一年后停止 runtime 开发——开发者该怎么办",
+    "link": "https://osp.io/archives/13946"
+  },
+  {
+    "id": "https://osp.io/?p=13947",
+    "title": "开源AI渗透工具ARTEX卷入韩国银行案：因滥用闭源背后的反思",
+    "link": "https://osp.io/archives/13947"
+  },
+  {
+    "id": "https://osp.io/?p=10812",
+    "title": "CyberVerse：一张照片让AI数字人开口说话",
+    "link": "https://osp.io/archives/10812"
+  },
+  {
+    "id": "https://osp.io/?p=11422",
+    "title": "AirCard——给 iOS 18 钱包和锁屏换皮的 macOS 神器",
+    "link": "https://osp.io/archives/11422"
+  },
+  {
+    "id": "https://osp.io/?p=13894",
+    "title": "KDE 想给 AI slop merge request 立规矩，结果被一群「局外人」打成了 shitstorm",
+    "link": "https://osp.io/archives/13894"
   }
 ]
