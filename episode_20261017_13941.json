@@ -1,0 +1,11 @@
+{
+  "id": "20261017_13941",
+  "title": "连《剑星》都能跑：开源项目 steamac 让 M 系列 Mac 完美运行 SteamOS",
+  "link": "https://osp.io/archives/13941",
+  "date": "2026-10-17T23:27:38",
+  "audio_file": "episode_20261017_13941.mp3",
+  "file_size_kb": 6018,
+  "num_segments": 22,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你知道吗，最近有个开源项目特别有意思，它能让你的 Mac 跑起来 SteamOS，就是那个掌机上的系统！\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哦？在 Apple Silicon Mac 上跑 SteamOS？这听起来有点邪门啊。Valve 不是一直在搞 ARM64 的 SteamOS，给那个 VR 一体机用的，但没说过要支持 Mac 吧？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对，这个项目叫 steamac，就真做到了。关键它不是装个虚拟机那么简单，那个游戏画面是直接能在窗口里跑的，甚至能玩《剑星》这种 3A 大作。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"《剑星》？那是 PS5 上的游戏啊，能在 Mac 上跑？这怎么实现的？Windows 游戏不是 x86 的吗？Apple Silicon 可是 ARM 架构的。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"这就是最妙的地方。它整套系统都跑在一个轻量级虚拟机的里面，但是呢，这个虚拟机不是普通的模拟器，它是直接运行 ARM64 的 Linux 的。游戏本身是 x86 的 Windows 版，就靠 Proton 那个兼容层来转译。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"等等，我理一下思路……ARM64 的 Linux 虚拟机，里面套 x86 转译，然后游戏调用 Vulkan，再转译成 Metal。这不就是俄罗斯套娃吗？每个环节都转译一次，性能还能看吗？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"这就是让我觉得特别惊艳的地方。作者用了一条非常聪明的链路：游戏 → DXVK → Vulkan → Mesa Venus → 虚拟 GPU → MoltenVK → Meta"
+}

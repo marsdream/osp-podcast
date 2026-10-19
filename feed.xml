@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>连《剑星》都能跑：开源项目 steamac 让 M 系列 Mac 完美运行 SteamOS</title>
+      <description>连《剑星》都能跑：开源项目 steamac 让 M 系列 Mac 完美运行 SteamOS</description>
+      <pubDate>2026-10-17T23:27:38</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20261017_13941.mp3" type="audio/mpeg" length="6162669" />
+      <link>https://osp.io/archives/13941</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>唯一从零造引擎的浏览器，决定不再接受你的 PR</title>
       <description>唯一从零造引擎的浏览器，决定不再接受你的 PR</description>
       <pubDate>2026-10-12T04:42:44</pubDate>
