@@ -1,0 +1,11 @@
+{
+  "id": "20261021_14001",
+  "title": "数字主权这回真动到钱包了:荷兰税务局主动叫停 M365 公有云,转回 on-prem + 开源",
+  "link": "https://osp.io/archives/14001",
+  "date": "2026-10-21T23:18:39",
+  "audio_file": "episode_20261021_14001.mp3",
+  "file_size_kb": 5898,
+  "num_segments": 34,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你听说了吗？荷兰税务局把微软365的公有云迁移给砍了，这事儿还挺大的。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"啊？真的假的？之前不是说要迁到2026年底吗？怎么说砍就砍了？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对，原计划2025年初启动，结果现在正式取消了。大概5000名员工都已经迁过去了，剩下的也不迁了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"那他们后续怎么办？总得有邮件和日历用吧？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"他们打算拆开搞：2027年先把邮件和日历搬到本地，2027年末到2028年再上欧洲开源的个人存储和协作套件。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哦，所以不是简单换个SaaS，是把后端数据流从美国服务器上抽出来？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对对对，桌面上的Word、Excel、PowerPoint暂时留着，但核心的数据层不再依赖微软公有云了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"这背后肯定有导火索吧？总不能是预算问题突然就砍了。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"还真不是预算。2026年6月，荷兰ICT评估咨询委员会给议会写了份报告，直接建议反转M365的公有云设计。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"报告里说了啥？\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"信息安全、信息处理、未来-p"
+}
