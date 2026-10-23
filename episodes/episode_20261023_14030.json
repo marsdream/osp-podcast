@@ -1,0 +1,11 @@
+{
+  "id": "20261023_14030",
+  "title": "PHP 修了，但一半的世界拿不到补丁",
+  "link": "https://osp.io/archives/14030",
+  "date": "2026-10-23T03:31:30",
+  "audio_file": "episode_20261023_14030.mp3",
+  "file_size_kb": 6220,
+  "num_segments": 22,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n{\n\"speaker_id\": 0,\n\"dialog\": \"哎，你知道吗，PHP 昨天一口气发了四个版本，全是安全更新，听说有两个 CVSS 9.2 的远程代码执行漏洞，叫什么 php2shell，听着就吓人。\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对对对，这事儿我看了，确实有点炸。不过你先听我说，这两个漏洞的细节其实特有意思，它俩走的完全不是一条路。一个跟 PHP 处理内存耗尽时的 longjmp 机制有关，另一个是 worker 进程复用导致的 use-after-free。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"等等，longjmp？这不是 C 语言里的函数吗？PHP 内部用它干嘛？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"嘿，你问到点子上了。PHP 从几十年前就用 longjmp 做‘bailout’，就是遇到内存耗尽、致命错误这种不可恢复的情况，直接跳回请求循环，跳过正常的清理流程。速度是快了，但代价就是，跳转的瞬间有些内存处于半初始化状态，后续收尾代码照样去读它，就容易出问题。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"所以，那个 CVE-2026-109618 就是利用这个？构造一个特别大的 multipart 请求，把内存耗尽，然后触发 longjmp，导致乱七八糟的状态？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对，而且最狠的是，请求体积可以控制在 PHP 配置的 memory_limit 之内，因为问题出在解析阶段，分配失败时 PHP 没正确记账。攻击者不需要应用配合，引擎自己就把门打开了。尤其 Apache 的 mod_php，请求启动失败后无条件调用收尾流程，在任何一行应用代码运行之前就能中招。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"那第二个漏洞呢？你说什么 worker 进程复用……\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"CVE-2026-109619，这个更像典型的 use-after-free。PHP 有很多全局状态，比如错误、会话、对象，本来应该在请求结束前重置。但如果某个致命错误打"
+}
