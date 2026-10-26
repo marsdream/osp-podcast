@@ -15,12 +15,19 @@
   .subtitle { color: #888; font-size: 14px; }
   .rss-link { display: inline-block; margin-top: 12px; padding: 6px 14px; background: #e67e22; color: #fff; border-radius: 20px; font-size: 13px; text-decoration: none; }
   .episode { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  .episode.hidden { display: none; }
   .episode-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
   .date { color: #888; font-size: 13px; }
   .title { font-size: 17px; font-weight: 500; margin-bottom: 12px; line-height: 1.4; }
   .audio-row audio { width: 100%; height: 40px; }
+  /* 隐藏原生 audio 下载按钮 */
+  audio::-webkit-media-controls-download-button { display: none !important; }
+  audio::-webkit-media-controls { overflow: hidden; }
   .read-original { color: #666; font-size: 13px; text-decoration: none; }
   .read-original:hover { color: #0077cc; }
+  #load-more { display: none; width: 100%; padding: 12px; margin-top: 8px; background: #f0f0f0; border: none; border-radius: 8px; font-size: 14px; color: #666; cursor: pointer; }
+  #load-more:hover { background: #e0e0e0; }
+  #load-more.visible { display: block; }
   footer { text-align: center; color: #aaa; font-size: 12px; margin-top: 32px; }
 </style>
 </head>
@@ -33,175 +40,760 @@
 <main>
   <div class="episode">
     <div class="episode-header">
+      <span class="date">📅 2026-10-26</span>
+      <a class="read-original" href="https://osp.io/archives/14028" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Linux 内核删掉了 Assisted-by：一场关于「AI 代码要不要自首」的元老会决议</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20261026_14028.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode">
+    <div class="episode-header">
+      <span class="date">📅 2026-10-23</span>
+      <a class="read-original" href="https://osp.io/archives/14030" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">PHP 修了，但一半的世界拿不到补丁</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20261023_14030.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode">
+    <div class="episode-header">
+      <span class="date">📅 2026-10-21</span>
+      <a class="read-original" href="https://osp.io/archives/14001" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">数字主权这回真动到钱包了:荷兰税务局主动叫停 M365 公有云,转回 on-prem + 开源</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20261021_14001.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode">
+    <div class="episode-header">
+      <span class="date">📅 2026-10-17</span>
+      <a class="read-original" href="https://osp.io/archives/13941" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">连《剑星》都能跑：开源项目 steamac 让 M 系列 Mac 完美运行 SteamOS</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20261017_13941.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode">
+    <div class="episode-header">
+      <span class="date">📅 2026-10-12</span>
+      <a class="read-original" href="https://osp.io/archives/13888" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">唯一从零造引擎的浏览器，决定不再接受你的 PR</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20261012_13888.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-29</span>
+      <a class="read-original" href="https://osp.io/archives/11462" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">荷兰政府用 NixOS 重建数字主权：被微软切断 ICC 邮箱后，DAWO 项目正式上岗</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260929_11462.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-26</span>
+      <a class="read-original" href="https://osp.io/archives/11417" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">无停机重写80万行Rust：Microsoft用Copilot重写Copilot的14.5周</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260926_11417.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-25</span>
+      <a class="read-original" href="https://osp.io/archives/11416" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">新浪云 9·16 关停前夜:百万 B 站老视频差点跟着一起死,被全球志愿者接力救下</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260925_11416.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-23</span>
+      <a class="read-original" href="https://osp.io/archives/11384" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Bevy 0.19 来了：游戏引擎正在’下一个时代’</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260923_11384.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-20</span>
+      <a class="read-original" href="https://osp.io/archives/11378" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">XCancel 又双叒叕死了：Nitter 猫鼠游戏第二季，XCorp 开始杀鸡儆猴</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260920_11378.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-18</span>
+      <a class="read-original" href="https://osp.io/archives/11368" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">F-Droid AI 体检报告：102 款更新应用，67 款是 AI 写的</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260918_11368.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-16</span>
+      <a class="read-original" href="https://osp.io/archives/11355" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Mullenweg 的 48 小时 —— WordPress 之父被自己董事会架走，48 小时又翻盘</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260916_11355.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-10</span>
+      <a class="read-original" href="https://osp.io/archives/11265" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">wigolo：把 18 个搜索引擎塞进一个本地 MCP，AI 编程 Agent 的免费「查资料搭子」</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260910_11265.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-05</span>
+      <a class="read-original" href="https://osp.io/archives/10930" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">手机里跑 Alpine Linux：用 OpenMinis 把 iPhone 变成真正的 AI Agent 设备</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260905_10930.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-03</span>
+      <a class="read-original" href="https://osp.io/archives/10674" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Meta 开源的内部设计系统Astryx，1.3万应用验证</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260903_10674.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-09-01</span>
+      <a class="read-original" href="https://osp.io/archives/11232" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Debian 投票决定「既不背书、也不禁止」生成式 AI——8 提案对决背后的开源治理难题</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260901_11232.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-31</span>
+      <a class="read-original" href="https://osp.io/archives/11217" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">微软把 WinUI 主线搬上 GitHub，但「真开源」这事没那么简单</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260831_11217.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-25</span>
+      <a class="read-original" href="https://osp.io/archives/11161" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Qwen3.8-Max开源——2.4 万亿参数，阿里把自家最强模型放出来</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260825_11161.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-23</span>
+      <a class="read-original" href="https://osp.io/archives/11139" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Qwen 成了开源模型的「默认底座」：Hugging Face 夏季报告的三个关键信号</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260823_11139.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-21</span>
+      <a class="read-original" href="https://osp.io/archives/11134" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">VLC 33 秒放不出 MP3，不是开源拉胯，是微软 Defender 误杀</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260821_11134.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-16</span>
+      <a class="read-original" href="https://osp.io/archives/11085" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">GOG Galaxy 官方原生 Linux 客户端开发中：10 年等待的 DRM-free 启动器 Linux 化</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260816_11085.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-13</span>
+      <a class="read-original" href="https://osp.io/archives/11055" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Cloudflare 上白嫖一套服务器监控探针：CF-Server-Monitor 的 Cloudflare 全家桶玩法</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260813_11055.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-10</span>
+      <a class="read-original" href="https://osp.io/archives/10793" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Google 把『AI Agent 流水线』开源了 —— 一行命令，让你手头的 coding agent 变成 Google Cloud AI agent 专家</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260810_10793.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-10</span>
+      <a class="read-original" href="https://osp.io/archives/11008" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">light-c：把 C 盘清理做成现代桌面应用的国产新尝试</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260810_11008.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-06</span>
+      <a class="read-original" href="https://osp.io/archives/10174" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Qwen3-TTS：阿里开源语音克隆模型，97ms延迟、2分钟复制你的声音</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260806_10174.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-05</span>
+      <a class="read-original" href="https://osp.io/archives/10798" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Ubuntu 26.10 的「Myna」：把语音转文字第一次做成桌面一等公民</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260805_10798.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-08-03</span>
+      <a class="read-original" href="https://osp.io/archives/10799" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Kimi CLI 宣布演进为 Kimi Code CLI——Moonshot 的终端 AI Agent 进入下半场</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260803_10799.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-31</span>
+      <a class="read-original" href="https://osp.io/archives/10925" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Mozilla 终于松口：Haiku OS 拿到 Firefox 品牌授权，开源社区与商标博弈</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260731_10925.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-29</span>
+      <a class="read-original" href="https://osp.io/archives/10858" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Codeberg 拒绝把 FLOSS 当 AI 的血包：开源平台开始站队了</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260729_10858.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-25</span>
+      <a class="read-original" href="https://osp.io/archives/10844" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">WordPress紧急补丁背后：9000万网站还在裸奔</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260725_10844.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-23</span>
+      <a class="read-original" href="https://osp.io/archives/10828" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">30 年后，Comic Chat 终于住进了 GitHub——微软把那个教世界用 Comic Sans 的聊天软件开源了</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260723_10828.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-20</span>
+      <a class="read-original" href="https://osp.io/archives/10749" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">把 Claude、Gemini、Grok、GPT-5 关进同一座城：Emergence World 是近来最野的开源实验</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260720_10749.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-19</span>
+      <a class="read-original" href="https://osp.io/archives/10766" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">瑞士军方把 Microsoft 365 扔了，换上德国这套开源办公套件</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260719_10766.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-17</span>
+      <a class="read-original" href="https://osp.io/archives/10717" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">FluentCleaner：把 CCleaner 那个年代的「良心工具」搬回 Windows 11</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260717_10717.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-15</span>
+      <a class="read-original" href="https://osp.io/archives/10648" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">腾讯开源 BrowserSkill：让 AI Agent 借用你已登录的浏览器</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260715_10648.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-09</span>
+      <a class="read-original" href="https://osp.io/archives/10693" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">工程师用 Claude Code 把《命令与征服》搬上了 iPad——只花了一天</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260709_10693.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-07</span>
+      <a class="read-original" href="https://osp.io/archives/10696" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">ReactOS 又整活了：这个 30 岁的开源 Windows“替身”，刚刚跑起了 Half-Life 2</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260707_10696.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-05</span>
+      <a class="read-original" href="https://osp.io/archives/10684" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">WSL Container 公测：Windows 里直接跑 Linux 容器，不用装 Docker Desktop 了</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260705_10684.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-07-03</span>
+      <a class="read-original" href="https://osp.io/archives/10619" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">EpicGames 开源 Lore：游戏公司做的版本控制，有什么不一样？</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260703_10619.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-06-29</span>
+      <a class="read-original" href="https://osp.io/archives/10580" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Omnigent：一个框架，把所有 AI 编码 Agent 串联起来</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260629_10580.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-06-28</span>
+      <a class="read-original" href="https://osp.io/archives/10627" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">国产 x86 再下一城：海光 Model 8 “苏州” 上游进 GCC 17</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260628_10627.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-06-24</span>
+      <a class="read-original" href="https://osp.io/archives/10578" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">龙虾之父 Peter 开源 skill-cleaner：给你的 AI 技能做体检</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260624_10578.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-06-24</span>
+      <a class="read-original" href="https://osp.io/archives/10572" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">MiniMax M3 开源：稀疏注意力革了谁的命？</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260624_10572.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-06-23</span>
+      <a class="read-original" href="https://osp.io/archives/10571" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">AUR 恶意软件第二波来了：这次攻击者学会了「隐身术」</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260623_10571.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-06-01</span>
+      <a class="read-original" href="https://osp.io/archives/10111" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Syncthing：开源文件同步神器，数据自己掌控不香吗？</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/episode_20260601_10111.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
       <span class="date">📅 2026-05-26</span>
       <a class="read-original" href="https://osp.io/archives/10366" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">ViMax：让 AI 当你的导演，香港大学这个开源项目想把拍电影变简单</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260526.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260526.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-05-25</span>
-      <a class="read-original" href="https://osp.io/archives/10362" target="_blank">📖 阅读原文</a>
+      <a class="read-original" href="https://osp.io/archives/10328" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">AI 帮你生成完整的 UI 原型：开源版 Claude Design来了</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260525_AI-帮你生成完整的-UI-原型-开源版-Claude-Design来了.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260525_AI-帮你生成完整的-UI-原型-开源版-Claude-Design来了.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-05-25</span>
       <a class="read-original" href="https://osp.io/archives/10356" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">NGINX 惊现 18 年前漏洞：全球三分之一网站受影响，CVE-2026-42945 评分 9.2</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260525_NGINX-惊现-18-年前漏洞-全球三分之一网站受影响-CVE-2026-42945-评分-9-2.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260525_NGINX-惊现-18-年前漏洞-全球三分之一网站受影响-CVE-2026-42945-评分-9-2.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-05-25</span>
-      <a class="read-original" href="https://osp.io/archives/10359" target="_blank">📖 阅读原文</a>
+      <a class="read-original" href="https://osp.io/archives/10263" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">开源工具：now-playing-service 全能歌曲展示工具</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260525_开源工具-now-playing-service-全能歌曲展示工具.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260525_开源工具-now-playing-service-全能歌曲展示工具.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-05-25</span>
-      <a class="read-original" href="https://osp.io/archives/10360" target="_blank">📖 阅读原文</a>
+      <a class="read-original" href="https://osp.io/archives/10283" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">腾讯开源了个记忆插件，让 AI 助手不再重复问你这同样的问题</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260525_腾讯开源了个记忆插件-让-AI-助手不再重复问你这同样的问题.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260525_腾讯开源了个记忆插件-让-AI-助手不再重复问你这同样的问题.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-05-24</span>
       <a class="read-original" href="https://osp.io/archives/10358" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">Hermes Pets：给 AI 装个桌面宠物</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260524_Hermes-Pets-8211-给-AI-装个桌面宠物.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260524_Hermes-Pets-8211-给-AI-装个桌面宠物.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-05-21</span>
       <a class="read-original" href="https://osp.io/archives/10338" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">MyTube：开源自托管视频下载器，一站式管理你的媒体库</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260521_MyTube-开源自托管视频下载器-一站式管理你的媒体库.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260521_MyTube-开源自托管视频下载器-一站式管理你的媒体库.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-05-02</span>
       <a class="read-original" href="https://osp.io/archives/10240" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">你的录屏软件还收费？GitHub 刚冲上 2.5 万星的开源神器，不香吗？</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260502_你的录屏软件还收费-GitHub-刚冲上-2-5-万星的开源神器-不香吗.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260502_你的录屏软件还收费-GitHub-刚冲上-2-5-万星的开源神器-不香吗.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-05-01</span>
       <a class="read-original" href="https://osp.io/archives/10234" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">VoxClaw：给 AI 助手装上嘴巴，让它开口说话</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260501_VoxClaw-给-AI-助手装上嘴巴-让它开口说话.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260501_VoxClaw-给-AI-助手装上嘴巴-让它开口说话.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-04-30</span>
       <a class="read-original" href="https://osp.io/archives/10222" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">OpenCLI：让 AI 直接操控浏览器的「万能 CLI 枢纽」</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260430_OpenCLI-让-AI-直接操控浏览器的-万能-CLI-枢纽.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260430_OpenCLI-让-AI-直接操控浏览器的-万能-CLI-枢纽.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-04-23</span>
       <a class="read-original" href="https://osp.io/archives/10145" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">飞书官方亲自下场做CLI：给AI Agent打工人的第一把钥匙</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260423_飞书官方亲自下场做CLI-给AI-Agent打工人的第一把钥匙.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260423_飞书官方亲自下场做CLI-给AI-Agent打工人的第一把钥匙.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-04-22</span>
       <a class="read-original" href="https://osp.io/archives/10128" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">当开源神话遭遇AI冲击：Discourse喊话坚持开源</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260422_当开源神话遭遇AI冲击-Discourse喊话坚持开源.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260422_当开源神话遭遇AI冲击-Discourse喊话坚持开源.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-04-17</span>
       <a class="read-original" href="https://osp.io/archives/10104" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">MapToPoster：用代码把城市变成极简艺术海报</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260417_MapToPoster-用代码把城市变成极简艺术海报.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260417_MapToPoster-用代码把城市变成极简艺术海报.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-04-17</span>
       <a class="read-original" href="https://osp.io/archives/10088" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">MiniMax-M2.7 开源模型：第一个自己教自己的AI</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260417_MiniMax-M2-7-开源模型-第一个自己教自己的AI.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260417_MiniMax-M2-7-开源模型-第一个自己教自己的AI.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-04-15</span>
       <a class="read-original" href="https://osp.io/archives/10089" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">私人老师DeepTutor-AI 家教，真的能教会你做题？</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260415_私人老师DeepTutor-AI-家教-真的能教会你做题.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260415_私人老师DeepTutor-AI-家教-真的能教会你做题.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-04-14</span>
       <a class="read-original" href="https://osp.io/archives/9977" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">Linux 7.0 这刀砍得太狠：AWS Graviton4 上的 PostgreSQL 性能直接腰斩</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260414_Linux-7-0-这刀砍得太狠-AWS-Graviton4-上的-PostgreSQL-性能直接腰斩.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260414_Linux-7-0-这刀砍得太狠-AWS-Graviton4-上的-PostgreSQL-性能直接腰斩.mp3"></audio>
     </div>
   </div>
-  <div class="episode">
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-10</span>
+      <a class="read-original" href="https://osp.io/archives/9967" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">从聊天到行动：2026年AI Agent如何重塑人机协作</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-chat-to-action-20260405.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-10</span>
+      <a class="read-original" href="https://osp.io/archives/9949" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">SGLang 刷爆 GitHub 趋势：这个“省显存”的神器，让 AI 推理快到飞起</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-sglang-20260405.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-10</span>
+      <a class="read-original" href="https://osp.io/archives/9997" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Agent-Reach：给 AI Agent 装上互联网能力，一句话的事</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-agent-reach-20260407.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/3544" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Deep Learning深度学习：Ian Goodfellow AI经典教材</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-deeplearning-dylan-20260404.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/4428" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">OpenHub - 手机上的开源 GitHub 客户端</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-openhub-20260404.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/9906" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">AI圈最近流行”技能外包”：Skills是如何让AI变强的</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260404_AI圈最近流行_技能外包_Skills是如何让AI变强的.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/9928" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">一个人指挥一群AI干活：ClawTeam怎么让Agent自己组队</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260404_一个人指挥一群AI干活_ClawTeam怎么让Agent自己.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/9912" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">用 Rust 写一次，运行 everywhere：Dioxus 如何让前端变天？</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260404_用_Rust_写一次_运行_everywhere_Dioxu.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-04</span>
+      <a class="read-original" href="https://osp.io/archives/9913" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">Deep-Live-Cam：一键换脸，门槛已经低到可怕了</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260404_Deep_Live_Cam_一键换脸_门槛已经低到可怕了.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-03</span>
+      <a class="read-original" href="https://osp.io/archives/9924" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">在Mac上跑397B大模型？这位大哥真的做到了</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-397b-20260403.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-04-03</span>
+      <a class="read-original" href="https://osp.io/archives/9846" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">开源爆发之年：AI Agent 如何改变软件开发</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-ai-agent-20260403.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
     <div class="episode-header">
       <span class="date">📅 2026-04-01</span>
       <a class="read-original" href="https://osp.io/archives/9901" target="_blank">📖 阅读原文</a>
     </div>
     <h2 class="title">OBra新作superpowers：把AI编程方法论开源了</h2>
     <div class="audio-row">
-      <audio controls preload="none" src="https://podcast.herebuy.us/episodes/osp-podcast-20260401_OBra新作superpowers-把AI编程方法论开源了.mp3"></audio>
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260401_OBra新作superpowers-把AI编程方法论开源了.mp3"></audio>
+    </div>
+  </div>
+  <div class="episode hidden">
+    <div class="episode-header">
+      <span class="date">📅 2026-03-24</span>
+      <a class="read-original" href="https://osp.io/archives/9899" target="_blank">📖 阅读原文</a>
+    </div>
+    <h2 class="title">微软搞不定的PDF提取？韩国人开源了个怪物</h2>
+    <div class="audio-row">
+      <audio controls preload="none" controlsList="nodownload" src="https://podcast.herebuy.us/episodes/osp-podcast-20260324_微软搞不定的PDF提取？韩国人开源了个怪物.mp3"></audio>
     </div>
   </div>
 </main>
+<button id="load-more" class="visible">
+  加载更多 (69 条)
+</button>
 <footer>© 2026 开源派 · <a href="https://osp.io">osp.io</a></footer>
+<script>
+  const btn = document.getElementById('load-more');
+  const hidden = document.querySelectorAll('.episode.hidden');
+  let showing = 5;
+  btn && btn.addEventListener('click', () => {
+    hidden.forEach((el, i) => {
+      if (i < showing) el.style.display = 'block';
+    });
+    showing += 5;
+    if (showing >= hidden.length) btn.style.display = 'none';
+  });
+</script>
 </body>
 </html>
