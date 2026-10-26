@@ -343,5 +343,20 @@
     "id": "https://osp.io/?p=14030",
     "title": "PHP 修了，但一半的世界拿不到补丁",
     "link": "https://osp.io/archives/14030"
+  },
+  {
+    "id": "https://osp.io/?p=14028",
+    "title": "Linux 内核删掉了 Assisted-by：一场关于「AI 代码要不要自首」的元老会决议",
+    "link": "https://osp.io/archives/14028"
+  },
+  {
+    "id": "https://osp.io/?p=14038",
+    "title": "AI 做游戏最难的一步，是找个人来试玩",
+    "link": "https://osp.io/archives/14038"
+  },
+  {
+    "id": "https://osp.io/?p=14031",
+    "title": "Node.js 同日 4 个高危漏洞，Brotli 越界写其实是 Google 的锅",
+    "link": "https://osp.io/archives/14031"
   }
 ]
