@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
 generate_podcast.py - 生成 osp.io 播客音频
-从 osp.io RSS 获取文章，用 AI 生成播客对话脚本，Azure TTS 合成音频
+从 osp.io RSS 获取文章，用 AI 生成播客对话脚本，Edge-TTS 合成音频
 """
-
 import os
 import sys
 import json
 import re
+import time
 import subprocess
 import argparse
 import shutil
@@ -17,13 +17,6 @@ try:
     import feedparser
 except ImportError:
     print("ERROR: feedparser not installed. Run: pip install feedparser")
-    sys.exit(1)
-
-# Azure TTS
-try:
-    import azure.cognitiveservices.speech as speechsdk
-except ImportError:
-    print("ERROR: azure-cognitiveservices-speech not installed. Run: pip install azure-cognitiveservices-speech")
     sys.exit(1)
 
 # 用 Podcast-Generator 的 JSON prompt 技术
@@ -77,15 +70,11 @@ You are a master podcast scriptwriter, adept at transforming diverse input conte
 Transform the source material into a lively and engaging podcast conversation. The final output is a JSON string without code blocks. No explanatory text!
 """
 
-# speaker_id → Azure TTS voice (Neural)
+# speaker_id → Edge-TTS voice
 SPEAKER_VOICES = {
     0: "zh-CN-XiaoxiaoNeural",   # 女声-晓晓
     1: "zh-CN-YunyangNeural",    # 男声-云扬
 }
-
-# Azure TTS 配置（从环境变量读取）
-AZURE_SPEECH_KEY = os.environ.get("AZURE_SPEECH_KEY", "")
-AZURE_SPEECH_REGION = os.environ.get("AZURE_SPEECH_REGION", "southeastasia")
 
 # 模板路径（GitHub Actions 会把仓库 checkout 下来）
 TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "..", "templates")
@@ -141,8 +130,35 @@ def fetch_article_content(url, target_link=None):
     return entry.title, content, entry.get("link", ""), published
 
 
-def generate_script(title, content, api_key=None, base_url=None, model=None):
-    """调用 OpenAI 兼容 API 生成播客脚本（JSON 格式）"""
+# LLM 候选链：第一个失败（限流/超时/5xx）就自动换下一个。
+# 起因：2026-10-26 sensenova 的 deepseek-v4-flash 触发 TPM/RPM 限流
+# (429 'inference exceeds tpm/rpm limit')，整个 CI job 挂在第一篇文章上。
+# 同一 key 同一 base_url 下 glm-5.2 / sensenova-6.8-flash-lite 均可用。
+LLM_FALLBACK_MODELS = [
+    "deepseek-v4-flash",      # 首选，写稿质量最好
+    "glm-5.2",                # 备用 1，实测 200 OK
+    "sensenova-6.8-flash-lite",  # 备用 2，额度最大
+]
+
+
+def _is_retryable(exc):
+    """判断异常是否值得换模型重试（限流/超时/服务端错误）。"""
+    name = type(exc).__name__
+    if name in ("RateLimitError", "APITimeoutError", "APIConnectionError",
+                "InternalServerError", "APIStatusError"):
+        return True
+    status = getattr(exc, "status_code", None)
+    if isinstance(status, int) and (status == 429 or status >= 500):
+        return True
+    return False
+
+
+def generate_script(title, content, api_key=None, base_url=None, model=None,
+                    fallback_models=None):
+    """调用 OpenAI 兼容 API 生成播客脚本（JSON 格式）
+
+    带模型级 fallback：主模型限流/超时/5xx 时自动切下一个候选模型。
+    """
     try:
         import openai
     except ImportError:
@@ -155,24 +171,47 @@ def generate_script(title, content, api_key=None, base_url=None, model=None):
         return None, None
 
     url = base_url or os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
-    model_name = model or os.environ.get("LLM_MODEL", "qwen/qwen-plus")
+    primary = model or os.environ.get("LLM_MODEL", "qwen/qwen-plus")
 
-    print(f"Using LLM: {model_name} via {url}")
+    # 构造候选链：主模型优先，其余按 LLM_FALLBACK_MODELS 顺序去重补齐
+    candidates = [primary]
+    for m in (fallback_models if fallback_models is not None else LLM_FALLBACK_MODELS):
+        if m and m not in candidates:
+            candidates.append(m)
 
     client = openai.OpenAI(api_key=key, base_url=url)
 
     # Podcast-Generator 风格的 XML prompt
     prompt = PODCAST_PROMPT_TEMPLATE.replace("{{content}}", content[:4000])
 
-    response = client.chat.completions.create(
-        model=model_name,
-        messages=[
-            {"role": "system", "content": "你是一个专业的中文播客编剧。"},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=3000,
-        temperature=0.7
-    )
+    response = None
+    last_exc = None
+    for idx, model_name in enumerate(candidates):
+        try:
+            print(f"Using LLM: {model_name} via {url}"
+                  + (f" (fallback #{idx})" if idx else ""))
+            response = client.chat.completions.create(
+                model=model_name,
+                messages=[
+                    {"role": "system", "content": "你是一个专业的中文播客编剧。"},
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=3000,
+                temperature=0.7
+            )
+            break
+        except Exception as e:
+            last_exc = e
+            if not _is_retryable(e) or idx == len(candidates) - 1:
+                print(f"LLM 调用失败 ({model_name}): {type(e).__name__}: {e}")
+                if idx < len(candidates) - 1:
+                    print("不可重试的错误，放弃换模型")
+                raise
+            print(f"  {type(e).__name__}: {e} — 换下一个模型重试")
+            time.sleep(3)
+
+    if response is None:
+        raise last_exc
 
     raw = response.choices[0].message.content
 
@@ -194,32 +233,18 @@ def generate_script(title, content, api_key=None, base_url=None, model=None):
 
 
 def synthesize_audio(text, voice, output_path):
-    """用 Azure TTS 生成音频"""
-    if not AZURE_SPEECH_KEY:
-        print("ERROR: AZURE_SPEECH_KEY not set", file=sys.stderr)
+    """用 edge-tts 生成音频"""
+    cmd = [
+        sys.executable, "-m", "edge_tts",
+        "--text", text,
+        "--voice", voice,
+        "--write-media", output_path
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        print(f"TTS error: {result.stderr}", file=sys.stderr)
         return False
-
-    speech_config = speechsdk.SpeechConfig(
-        subscription=AZURE_SPEECH_KEY,
-        region=AZURE_SPEECH_REGION
-    )
-    audio_config = speechsdk.AudioConfig(filename=output_path)
-
-    synthesizer = speechsdk.SpeechSynthesizer(
-        speech_config=speech_config,
-        audio_config=audio_config
-    )
-
-    # Azure TTS 使用 ssml 格式，voice name 在 ssml 里指定
-    ssml = f"<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='zh-CN'><voice name='{voice}'>{text}</voice></speak>"
-
-    result = synthesizer.speak_ssml_async(ssml).get()
-
-    if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
-        return True
-    else:
-        print(f"TTS error: {result.error_details}", file=sys.stderr)
-        return False
+    return True
 
 
 def has_intro_outro():
@@ -332,12 +357,18 @@ def main():
 
     # 生成脚本
     print("生成播客脚本...")
-    transcripts, raw_script = generate_script(
-        title, article_content,
-        api_key=args.api_key,
-        base_url=args.base_url,
-        model=args.model
-    )
+    try:
+        transcripts, raw_script = generate_script(
+            title, article_content,
+            api_key=args.api_key,
+            base_url=args.base_url,
+            model=args.model
+        )
+    except Exception as e:
+        # LLM 全链路失败（限流/超时/5xx）不应让整个 CI job 失败。
+        # 该文章已从队列移除（见上方 queue 处理），下一个 CI run 继续处理下一篇。
+        print(f"ERROR: 脚本生成异常，跳过此文章: {type(e).__name__}: {e}")
+        sys.exit(0)
     if not transcripts:
         print("ERROR: 脚本生成失败，跳过此文章")
         # 单篇失败：更新队列文件（移除此文章）并正常退出，让下一 CI run 继续处理队列中下一篇

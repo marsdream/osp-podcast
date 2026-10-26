@@ -32,15 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update && sudo apt-get install -y ffmpeg rsync
-          pip install feedparser azure-cognitiveservices-speech openai ffmpeg-python
-
-      # ── 关键修复 1：从 gh-pages 拿历史音频，确保下次 CI 也能读到 ──
-      - name: Fetch historical episodes from gh-pages
-        run: |
-          git fetch origin gh-pages:gh-pages
-          mkdir -p episodes
-          cp gh-pages/episodes/*.mp3 episodes/ 2>/dev/null || true
-          cp gh-pages/episodes/*.json episodes/ 2>/dev/null || true
+          pip install feedparser edge-tts openai ffmpeg-python
 
       - name: Check new articles
         id: check
@@ -59,8 +51,10 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
           LLM_MODEL: deepseek-v4-flash
-          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
-          AZURE_SPEECH_REGION: ${{ secrets.AZURE_SPEECH_REGION }}
+        # generate_podcast.py 内置模型级 fallback：
+        # deepseek-v4-flash -> glm-5.2 -> sensenova-6.8-flash-lite
+        # 限流/超时/5xx 时自动切换，任一成功即可继续。
+        # 单篇文章失败会 exit 0 跳过（文章已出队），不会让整个 job 挂掉。
         run: python scripts/generate_podcast.py --auto --model deepseek-v4-flash --base-url "$LLM_BASE_URL"
 
       - name: Update RSS
@@ -69,16 +63,6 @@ jobs:
 
       - name: Generate index.html
         run: python scripts/generate_index.py
-
-      # ── 关键修复 2：新生成的 mp3 写回 main 分支，下次 CI 才能拿到 ──
-      - name: Commit new episodes to main
-        if: steps.check.outputs.has_new == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add episodes/*.mp3 episodes/*.json
-          git diff --cached --quiet || git commit -m "chore: add new podcast episodes $(date +%Y-%m-%d)"
-          git push
 
       - name: Prepare pages files
         run: |
