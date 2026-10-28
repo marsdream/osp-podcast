@@ -1,0 +1,11 @@
+{
+  "id": "20261027_14052",
+  "title": "REA 把 Hopper 塞进 AI 对话框，逆向最累的那步终于能交出去了",
+  "link": "https://osp.io/archives/14052",
+  "date": "2026-10-27T22:40:52",
+  "audio_file": "episode_20261027_14052.mp3",
+  "file_size_kb": 6099,
+  "num_segments": 28,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，你听说了吗？GitHub 上有个逆向工程的项目，星数已经冲到三十八万多，直接爆了。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"你说的是 REA 吧？最近圈子里都在聊这个。它干的事说白了特别简单——把 Ghidra、IDA 这些逆向工具，直接塞进 AI 编程助手的对话框里。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对对对，就是那个。你都不用自己动手翻汇编了，直接跟 Claude Code 或者 Codex 说一句‘帮我看看这个 App 的搜索怎么实现的’，它自己就去反编译、追调用链，然后把证据给你摆出来。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"这个我之前还特意翻了下它的 README，支持的东西真的多到离谱。原生二进制、JavaScript、Electron、.NET、Android APK、固件、Unity IL2CPP，甚至还有 CUDA 的 kernel 和 PTX……我数了下，光工具目录里就有两百多个工具名。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"两百多个？那大部分是不是都得靠 Ghidra 或者 IDA 撑着？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哎，这就是最妙的地方。一大半根本不需要装那些重型工具，纯静态解析就能出结果。只有分析 native binary 的时候，才需要你自己备一份 Hopper、Ghidra 或者 IDA。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"所以它其实是个调度层？帮你把活分给合适的引擎，再把结果攒起来？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"差不多这个意思。但人家这个胶水层是真值钱。你知道吗，以前要用 I"
+}
