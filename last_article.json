@@ -348,5 +348,15 @@
     "id": "https://osp.io/?p=14031",
     "title": "Node.js 同日 4 个高危漏洞，Brotli 越界写其实是 Google 的锅",
     "link": "https://osp.io/archives/14031"
+  },
+  {
+    "id": "https://osp.io/?p=14052",
+    "title": "REA 把 Hopper 塞进 AI 对话框，逆向最累的那步终于能交出去了",
+    "link": "https://osp.io/archives/14052"
+  },
+  {
+    "id": "https://osp.io/?p=14004",
+    "title": "RoboParty RP1 把中国人形机器人全栈硬件扔进 GitHub",
+    "link": "https://osp.io/archives/14004"
   }
 ]
