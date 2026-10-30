@@ -1,0 +1,11 @@
+{
+  "id": "20261030_14067",
+  "title": "Meta「Apache 2.0 三连击」，但被忽略的不只是技术",
+  "link": "https://osp.io/archives/14067",
+  "date": "2026-10-30T00:22:45",
+  "audio_file": "episode_20261030_14067.mp3",
+  "file_size_kb": 6647,
+  "num_segments": 28,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"诶，你看到最近Meta这波操作了吗？我还以为他们又只是例行公事地发个模型呢。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哈哈，你说的是那两个多月里连着扔出来的三样东西吧？我第一反应也是“哦，又开源了”，但仔细一扒，啧，真不是那么回事儿。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对对对，8月10号那个Glimmer 30B，然后扎克伯格还发了个6500字的什么宣言，10月2号又冒出来一个Muse Gadgets SDK。朋友圈全是“Meta又开源了”，但我觉得事情没那么简单。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"你抓到重点了。就说Glimmer，你知道它跟Llama最大的区别是啥吗？不只是参数和跑分，关键是许可证——这回是正经的Apache 2.0，不是Meta自定义那套。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎，Llama那个社区许可证我记得挺严格的对吧？什么月活超7亿要申请，还不能训练竞品，欧洲用户还受限……\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"没错，OSI和FSF都直接定性为“不是开源”。但Glimmer 30B是真·Apache 2.0，可商用、能再分发、你拿去训练竞品都行。就这一条，已经算是Meta史上最干净的一次了。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"而且我看技术细节，人家还专门给消费级显卡做了适配？24GB显存能跑30B，这是怎么做到的？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"它是个大概29.6B的dense模型，加一个1.8B的视觉编码器，上下文拉到131K。最关键的是官方直接给了两套4-bit量化——一套K-Quant"
+}
