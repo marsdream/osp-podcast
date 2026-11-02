@@ -9,14 +9,6 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
-      <title>Meta「Apache 2.0 三连击」，但被忽略的不只是技术</title>
-      <description>Meta「Apache 2.0 三连击」，但被忽略的不只是技术</description>
-      <pubDate>2026-10-30T00:22:45</pubDate>
-      <enclosure url="https://podcast.herebuy.us/episodes/episode_20261030_14067.mp3" type="audio/mpeg" length="6806637" />
-      <link>https://osp.io/archives/14067</link>
-      <itunes:image href="https://img.osp.io/podcastcover.png" />
-    </item>
-    <item>
       <title>PHP 修了，但一半的世界拿不到补丁</title>
       <description>PHP 修了，但一半的世界拿不到补丁</description>
       <pubDate>2026-10-23T03:31:30</pubDate>
