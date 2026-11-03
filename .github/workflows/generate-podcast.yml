@@ -25,6 +25,28 @@ jobs:
         with:
           fetch-depth: 0
 
+      # F1：从 gh-pages 拿回完整历史音频。
+      # CI runner 是干净虚拟机，main 上的 episodes/ 可能落后于 gh-pages；
+      # 不补齐的话，rsync 到 docs/episodes/ 的内容不完整，
+      # peaceiris 覆盖式部署会把 gh-pages 上已有的历史音频删掉。
+      - name: Fetch historical episodes from gh-pages
+        run: |
+          set -e
+          # actions-gh-pages 会 force-push gh-pages，普通 fetch 会 non-fast-forward 失败，
+          # 用 + 强制更新。fetch-depth:0 已经把分支拉下来了，这里只是兜底。
+          git fetch --no-tags origin '+gh-pages:gh-pages' || \
+          git fetch --no-tags origin '+gh-pages:refs/remotes/origin/gh-pages' || true
+          REF=gh-pages
+          git rev-parse --verify "$REF" >/dev/null 2>&1 || REF=origin/gh-pages
+          git rev-parse --verify "$REF" >/dev/null 2>&1 || { echo "WARN: gh-pages ref unavailable, skip restore"; exit 0; }
+          rm -rf /tmp/ghp && mkdir -p /tmp/ghp
+          git archive "$REF" episodes | tar -x -C /tmp/ghp
+          mkdir -p episodes
+          # -n 不覆盖本地已有文件
+          cp -n /tmp/ghp/episodes/*.mp3 episodes/ 2>/dev/null || true
+          cp -n /tmp/ghp/episodes/*.json episodes/ 2>/dev/null || true
+          echo "episodes/ now has $(ls episodes/*.mp3 2>/dev/null | wc -l | tr -d ' ') mp3 and $(ls episodes/*.json 2>/dev/null | wc -l | tr -d ' ') json"
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -54,8 +76,27 @@ jobs:
         # generate_podcast.py 内置模型级 fallback：
         # deepseek-v4-flash -> glm-5.2 -> sensenova-6.8-flash-lite
         # 限流/超时/5xx 时自动切换，任一成功即可继续。
-        # 单篇文章失败会 exit 0 跳过（文章已出队），不会让整个 job 挂掉。
+        # 单篇文章失败会 exit 0 跳过，且**不会出队**：
+        # generate_podcast.py 写 episode_result.json 标记失败，
+        # update_queue.py 只在标记成功时才出队，失败留给下一轮重试。
         run: python scripts/generate_podcast.py --auto --model deepseek-v4-flash --base-url "$LLM_BASE_URL"
+
+      # F2（核心）：新生成的 mp3/json 必须提交回 main。
+      # 缺这一步，下一轮 CI 从 main checkout 时拿不到它们，
+      # rsync 到 docs/episodes/ 时缺失，peaceiris 覆盖式部署就会把
+      # 上一轮已上线的音频删掉 —— 表现为 feed 停在旧日期、音频 404。
+      - name: Commit new episodes to main
+        if: steps.check.outputs.has_new == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f episodes/*.mp3 episodes/episode_*.json
+          if git diff --cached --quiet; then
+            echo "No new episode files to commit"
+          else
+            git commit -m "chore: add new podcast episodes $(date -u +%Y-%m-%d)"
+            git push origin HEAD:main
+          fi
 
       - name: Update RSS
         if: steps.check.outputs.has_new == 'true'
@@ -83,14 +124,37 @@ jobs:
           git commit -m "chore: update index.html and feed.xml" || true
           git push origin main || true
 
+      # F3：真校验音频。之前只数文件个数 —— HTML 404 页面也算通过，
+      # 于是坏内容照样部署（线上返回 200 但 content-type: text/html）。
+      # 校验失败就 exit 1，让 Deploy 步骤因 success() 条件被跳过，
+      # gh-pages 现有内容保持不变。
       - name: Verify audio files before deploy
         run: |
           echo "Checking audio files in docs/episodes/"
-          COUNT=$(ls docs/episodes/*.mp3 2>/dev/null | wc -l)
+          COUNT=$(ls docs/episodes/*.mp3 2>/dev/null | wc -l | tr -d ' ')
           echo "Found $COUNT mp3 files"
           if [ "$COUNT" -eq 0 ]; then
-            echo "WARNING: No audio files found — preserving existing gh-pages content"
+            echo "ERROR: No audio files found — aborting deploy to preserve existing gh-pages content"
+            exit 1
           fi
+          BAD=0
+          for f in docs/episodes/*.mp3; do
+            [ -e "$f" ] || continue
+            SZ=$(stat -c%s "$f")
+            HEAD=$(head -c 4 "$f" | xxd -p)
+            case "$HEAD" in
+              494433*|fffb*|fff3*|fff2*|fff1*) : ;;   # ID3 标签 / MPEG 帧同步
+              *) echo "INVALID (not audio): $f (size=$SZ head=$HEAD)"; BAD=$((BAD+1)); continue ;;
+            esac
+            if [ "$SZ" -lt 50000 ]; then
+              echo "SUSPICIOUS (too small): $f (size=$SZ)"; BAD=$((BAD+1))
+            fi
+          done
+          if [ "$BAD" -gt 0 ]; then
+            echo "ERROR: $BAD invalid audio file(s) found — aborting deploy"
+            exit 1
+          fi
+          echo "All $COUNT mp3 files verified as real audio"
 
       - name: Deploy to GitHub Pages
         if: success()
@@ -99,6 +163,10 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           publish_branch: gh-pages
+          # F4：keep_files 默认 false = 纯净覆盖式部署，publish_dir 里
+          # 没有的文件会被删除（这正是每轮 CI 回滚上一轮音频的原因）。
+          # 播客归档只应增不减，显式设为 true。
+          keep_files: true
 
       - name: Update queue & trigger next run
         if: steps.check.outputs.has_new == 'true'
