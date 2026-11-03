@@ -28,9 +28,12 @@ def fetch_gh_pages_episode_links():
     
     links = set()
     
-    # 先确保本地有完整的 gh-pages
+    # 先确保本地有完整的 gh-pages。
+    # 用 "+" 强制更新：actions-gh-pages@v4 会 force-push gh-pages，
+    # 普通 fetch 会因 non-fast-forward 失败，导致 archive 到旧快照，
+    # 把已发布过的文章重新当成"新文章"塞回队列。
     subprocess.run(
-        ["git", "fetch", "origin", "gh-pages:gh-pages"],
+        ["git", "fetch", "origin", "+gh-pages:gh-pages"],
         capture_output=True, text=True
     )
     
