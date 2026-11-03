@@ -313,6 +313,43 @@ def make_episode_id(article_date, link, title):
         slug = _re.sub(r'[^\w\u4e00-\-\uff00]+', '_', title)[:30]
     return f"{date_str}_{slug}"
 
+RESULT_FILE = "episode_result.json"
+
+
+def write_result(success, link, title=None, episode_id=None, error=None):
+    """写本轮处理结果，供 update_queue.py 决定是否出队。
+
+    只有 success=True 且带 episode_id 时才允许出队；
+    失败（429/超时/脚本生成失败）时文章留在队列里等下轮重试。
+    """
+    payload = {
+        "success": bool(success),
+        "link": link,
+        "title": title,
+        "episode_id": episode_id,
+        "error": error,
+        "finished_at": datetime.now().isoformat(),
+    }
+    # 附带已发布清单，供 update_queue.py 清理队列里的僵尸条目
+    published = []
+    try:
+        for fn in os.listdir("episodes"):
+            if fn.endswith(".json") and fn.startswith("episode_"):
+                try:
+                    with open(os.path.join("episodes", fn)) as f:
+                        meta = json.load(f)
+                    if meta.get("link"):
+                        published.append(meta["link"])
+                except (json.JSONDecodeError, OSError):
+                    continue
+    except OSError:
+        pass
+    payload["published_links"] = published
+    with open(RESULT_FILE, "w") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+    print(f"Result written: success={success} episode_id={episode_id}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="生成 osp.io 播客")
     parser.add_argument("--title", help="文章标题")
@@ -336,11 +373,13 @@ def main():
             with open(STATE_FILE) as f:
                 queue = json.load(f)
             if isinstance(queue, list) and queue:
+                # 只读取队首，不再在此处 pop。
+                # 原逻辑在这里 pop 一次、update_queue.py 又 pop 一次，
+                # 同一篇文章被出队两次 = 每处理一篇就丢一篇（72 → 71 → 70）。
+                # 出队统一交给 update_queue.py：只在 episode_result.json
+                # 确认本集成功后才移除。
                 target_link = queue[0]["link"]
-                remaining = queue[1:]
-                with open(STATE_FILE, "w") as f:
-                    json.dump(remaining, f, ensure_ascii=False, indent=2)
-                print(f"Queue: processing first of {len(queue)}, {len(remaining)} remaining")
+                print(f"Queue: processing first of {len(queue)}, {len(queue) - 1} remaining")
             elif isinstance(queue, dict):
                 target_link = queue["link"]
 
@@ -351,7 +390,8 @@ def main():
     title, article_content, link, article_date = fetch_article_content("https://osp.io/feed", target_link=target_link)
     if not title:
         print("ERROR: 无法获取文章内容")
-        sys.exit(1)
+        write_result(success=False, link=target_link, error="无法获取文章内容")
+        sys.exit(0)
     print(f"文章: {title}")
 
 
@@ -366,16 +406,16 @@ def main():
         )
     except Exception as e:
         # LLM 全链路失败（限流/超时/5xx）不应让整个 CI job 失败。
-        # 该文章已从队列移除（见上方 queue 处理），下一个 CI run 继续处理下一篇。
+        # 关键：文章必须留在队列里等下轮重试，不能被丢弃。
         print(f"ERROR: 脚本生成异常，跳过此文章: {type(e).__name__}: {e}")
+        write_result(success=False, link=target_link, title=title,
+                     error=f"{type(e).__name__}: {e}")
         sys.exit(0)
     if not transcripts:
         print("ERROR: 脚本生成失败，跳过此文章")
-        # 单篇失败：更新队列文件（移除此文章）并正常退出，让下一 CI run 继续处理队列中下一篇
-        if os.path.exists(STATE_FILE):
-            with open(STATE_FILE) as f:
-                remaining = json.load(f)
-            # 此文章已在上面从队列移除，无需额外操作
+        # 单篇失败：文章留在队列里，写失败标记，下轮 CI 重试
+        write_result(success=False, link=target_link, title=title,
+                     error="脚本生成失败（无有效 transcript）")
         sys.exit(0)  # 不算 CI 失败，只是跳过
 
     # episode_id 用日期+slug，避免同一天多篇文章互相覆盖
@@ -446,8 +486,26 @@ def main():
         os.remove(content_mp3)
 
     print(f"播客生成完成: {final_mp3}")
-    print(f"文件大小: {os.path.getsize(final_mp3) / 1024:.1f} KB")
+    final_size = os.path.getsize(final_mp3)
+    print(f"文件大小: {final_size / 1024:.1f} KB")
     print(f"Queue management delegated to update_queue.py step")
+
+    # 音频有效性检查：TTS 全部失败时 ffmpeg 仍可能产出极小/空文件。
+    # 这种情况不能算成功，否则出队后这集就永久丢失了。
+    if final_size < 50000:
+        print(f"ERROR: 生成的音频过小 ({final_size} bytes)，判定为失败，文章保留在队列中")
+        write_result(success=False, link=link, title=title,
+                     error=f"生成的音频过小 ({final_size} bytes)")
+        sys.exit(0)
+    with open(final_mp3, "rb") as fh:
+        head = fh.read(4)
+    if head[:3] == b"ID3" or head[:2] in (b"\xff\xfb", b"\xff\xf3", b"\xff\xf2"):
+        pass
+    else:
+        print(f"ERROR: 生成的文件不是有效 MP3 (head={head!r})，文章保留在队列中")
+        write_result(success=False, link=link, title=title,
+                     error=f"生成的文件不是有效 MP3 (head={head!r})")
+        sys.exit(0)
 
     # 保存元数据
     meta = {
@@ -463,6 +521,9 @@ def main():
     }
     with open(os.path.join(output_dir, f"episode_{episode_id}.json"), "w") as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
+
+    # 成功标记：只有这里写 success=True，update_queue.py 才会出队
+    write_result(success=True, link=link, title=title, episode_id=episode_id)
 
 
 if __name__ == "__main__":
