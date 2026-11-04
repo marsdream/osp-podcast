@@ -1,0 +1,25 @@
+name: diag-omniroute
+on:
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: probe reachability
+        run: |
+          set -u
+          echo "== runner info =="
+          echo "ip: $(curl -s -m 10 https://api.ipify.org || echo unknown)"
+          for ua in "curl/8.7.1" "python-requests/2.32.3" "OpenAI/Python 1.99.0"; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' -m 25 \
+              -H "User-Agent: $ua" https://omni.herebuy.us/v1/models || echo 000)
+            echo "GET /v1/models ua='$ua' -> $code"
+            sleep 2
+          done
+          echo "== POST chat without auth (expect 401 from gateway) =="
+          code=$(curl -s -o /tmp/p.txt -w '%{http_code}' -m 25 -X POST \
+            -H 'Content-Type: application/json' -H 'User-Agent: curl/8.7.1' \
+            -d '{"model":"agnes/agnes-3.0-flash","messages":[{"role":"user","content":"hi"}]}' \
+            https://omni.herebuy.us/v1/chat/completions || echo 000)
+          echo "POST /v1/chat/completions -> $code"
+          head -c 200 /tmp/p.txt | tr -d '\n'; echo
