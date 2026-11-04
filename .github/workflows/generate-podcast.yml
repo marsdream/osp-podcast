@@ -145,13 +145,30 @@ jobs:
             exit 1
           fi
           BAD=0
+          # 已知的历史遗留坏文件：这些不是本轮生成的，而是 2026-04 手工做的
+          # demo 残留 —— osp-podcast-demo-20260401.mp3 实际存的是某个网站的下架
+          # 提示页 HTML（head=3c21646f = "<!do"），不是音频。
+          # 同一篇文章的真实音频（osp-podcast-20260401_OBra新作...mp3, 7.2MB）
+          # 一直都在仓库和线上，feed.xml 里的这条 demo 条目也已发布多年。
+          # 所以这里【跳过校验】而不是删文件：删了老订阅者拉这一期会 404。
+          # 只对 demo 文件放行；其余任何非音频文件照旧 abort。
+          SKIP_LEGACY="osp-podcast-demo-20260401.mp3"
           for f in docs/episodes/*.mp3; do
             [ -e "$f" ] || continue
-            SZ=$(stat -c%s "$f")
+            # 用 wc -c 而不是 stat -c%s：后者是 GNU coreutils 专有，
+            # macOS/BSD 的 stat 会报 "illegal option -- c" 并返回空值，
+            # 换 runner 或基础镜像时校验会静默失效。
+            SZ=$(wc -c < "$f" | tr -d ' ')
             HEAD=$(head -c 4 "$f" | xxd -p)
             case "$HEAD" in
               494433*|fffb*|fff3*|fff2*|fff1*) : ;;   # ID3 标签 / MPEG 帧同步
-              *) echo "INVALID (not audio): $f (size=$SZ head=$HEAD)"; BAD=$((BAD+1)); continue ;;
+              *)
+                case "$(basename "$f")" in
+                  $SKIP_LEGACY)
+                    echo "SKIP (known legacy non-audio, kept for old subscribers): $f (size=$SZ head=$HEAD)"
+                    continue ;;
+                esac
+                echo "INVALID (not audio): $f (size=$SZ head=$HEAD)"; BAD=$((BAD+1)); continue ;;
             esac
             if [ "$SZ" -lt 50000 ]; then
               echo "SUSPICIOUS (too small): $f (size=$SZ)"; BAD=$((BAD+1))
