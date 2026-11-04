@@ -5,11 +5,6 @@
     "link": "https://osp.io/archives/11056"
   },
   {
-    "id": "https://osp.io/?p=11265",
-    "title": "wigolo：把 18 个搜索引擎塞进一个本地 MCP，AI 编程 Agent 的免费「查资料搭子」",
-    "link": "https://osp.io/archives/11265"
-  },
-  {
     "id": "https://osp.io/?p=11302",
     "title": "Linux 内核每版本近 2000 个 CVE，AI 漏洞猎人把维护者压垮了",
     "link": "https://osp.io/archives/11302"
@@ -60,11 +55,6 @@
     "link": "https://osp.io/archives/11313"
   },
   {
-    "id": "https://osp.io/?p=11355",
-    "title": "Mullenweg 的 48 小时 —— WordPress 之父被自己董事会架走，48 小时又翻盘",
-    "link": "https://osp.io/archives/11355"
-  },
-  {
     "id": "https://osp.io/?p=11133",
     "title": "Cloudflare 把邮箱搬进 Workers，Agentic Inbox 想干掉你的 Gmail",
     "link": "https://osp.io/archives/11133"
@@ -100,19 +90,9 @@
     "link": "https://osp.io/archives/11340"
   },
   {
-    "id": "https://osp.io/?p=11368",
-    "title": "F-Droid AI 体检报告：102 款更新应用，67 款是 AI 写的",
-    "link": "https://osp.io/archives/11368"
-  },
-  {
     "id": "https://osp.io/?p=11354",
     "title": "Google Artemis 抄了 mobile-use，删了作者名字，然后补了一行 NOTICE",
     "link": "https://osp.io/archives/11354"
-  },
-  {
-    "id": "https://osp.io/?p=11378",
-    "title": "XCancel 又双叒叕死了：Nitter 猫鼠游戏第二季，XCorp 开始杀鸡儆猴",
-    "link": "https://osp.io/archives/11378"
   },
   {
     "id": "https://osp.io/?p=11382",
@@ -123,11 +103,6 @@
     "id": "https://osp.io/?p=11364",
     "title": "微软把 Rust 升到和 C++、C# 平起平坐了",
     "link": "https://osp.io/archives/11364"
-  },
-  {
-    "id": "https://osp.io/?p=11384",
-    "title": "Bevy 0.19 来了：游戏引擎正在’下一个时代’",
-    "link": "https://osp.io/archives/11384"
   },
   {
     "id": "https://osp.io/?p=11399",
@@ -150,11 +125,6 @@
     "link": "https://osp.io/archives/11390"
   },
   {
-    "id": "https://osp.io/?p=11416",
-    "title": "新浪云 9·16 关停前夜:百万 B 站老视频差点跟着一起死,被全球志愿者接力救下",
-    "link": "https://osp.io/archives/11416"
-  },
-  {
     "id": "https://osp.io/?p=11380",
     "title": "Penpot 三年记：从 Figma 替代品到 AI 时代的设计工具基建",
     "link": "https://osp.io/archives/11380"
@@ -165,11 +135,6 @@
     "link": "https://osp.io/archives/11363"
   },
   {
-    "id": "https://osp.io/?p=11417",
-    "title": "无停机重写80万行Rust：Microsoft用Copilot重写Copilot的14.5周",
-    "link": "https://osp.io/archives/11417"
-  },
-  {
     "id": "https://osp.io/?p=11423",
     "title": "Googlebook 上位：Android 桌面化终局，还是 ChromeOS 的替身？",
     "link": "https://osp.io/archives/11423"
@@ -178,11 +143,6 @@
     "id": "https://osp.io/?p=11401",
     "title": "Meshtastic: 完全开源的离网 LoRa Mesh 通信生态",
     "link": "https://osp.io/archives/11401"
-  },
-  {
-    "id": "https://osp.io/?p=11462",
-    "title": "荷兰政府用 NixOS 重建数字主权：被微软切断 ICC 邮箱后，DAWO 项目正式上岗",
-    "link": "https://osp.io/archives/11462"
   },
   {
     "id": "https://osp.io/?p=11435",
@@ -198,11 +158,6 @@
     "id": "https://osp.io/?p=13904",
     "title": "开源派点评：AI 把 Google 的开源漏洞悬赏搞停了",
     "link": "https://osp.io/archives/13904"
-  },
-  {
-    "id": "https://osp.io/?p=13888",
-    "title": "唯一从零造引擎的浏览器，决定不再接受你的 PR",
-    "link": "https://osp.io/archives/13888"
   },
   {
     "id": "https://osp.io/?p=13883",
@@ -270,11 +225,6 @@
     "link": "https://osp.io/archives/13894"
   },
   {
-    "id": "https://osp.io/?p=13941",
-    "title": "连《剑星》都能跑：开源项目 steamac 让 M 系列 Mac 完美运行 SteamOS",
-    "link": "https://osp.io/archives/13941"
-  },
-  {
     "id": "https://osp.io/?p=13890",
     "title": "Higress：阿里开源的 AI Gateway，把你的 OpenAPI 5 分钟变成 MCP Server",
     "link": "https://osp.io/archives/13890"
@@ -293,16 +243,6 @@
     "id": "https://osp.io/?p=14005",
     "title": "NVIDIA Run:ai 全栈开源，7 亿美元收购怎么变成护城河",
     "link": "https://osp.io/archives/14005"
-  },
-  {
-    "id": "https://osp.io/?p=14001",
-    "title": "数字主权这回真动到钱包了:荷兰税务局主动叫停 M365 公有云,转回 on-prem + 开源",
-    "link": "https://osp.io/archives/14001"
-  },
-  {
-    "id": "https://osp.io/?p=14030",
-    "title": "PHP 修了，但一半的世界拿不到补丁",
-    "link": "https://osp.io/archives/14030"
   },
   {
     "id": "https://osp.io/?p=14028",
@@ -358,11 +298,6 @@
     "id": "https://osp.io/?p=14094",
     "title": "DeepSeek 开源了推理框架，但没开源的那一半才值钱",
     "link": "https://osp.io/archives/14094"
-  },
-  {
-    "id": "https://osp.io/?p=14071",
-    "title": "PhotoCraft 用 Rust 重写 Photoshop，一个多月 7.6 万星背后的技术野心",
-    "link": "https://osp.io/archives/14071"
   },
   {
     "id": "https://osp.io/?p=14092",
