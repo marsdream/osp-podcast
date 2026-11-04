@@ -134,30 +134,105 @@ def fetch_article_content(url, target_link=None):
 # 起因：2026-10-26 sensenova 的 deepseek-v4-flash 触发 TPM/RPM 限流
 # (429 'inference exceeds tpm/rpm limit')，整个 CI job 挂在第一篇文章上。
 # 同一 key 同一 base_url 下 glm-5.2 / sensenova-6.8-flash-lite 均可用。
+# LLM 候选链：每个候选是 (model, base_url, api_key, label) 四元组，
+# 支持跨供应商切换。起因：2026-11-04 排查发现 SenseNova 单日额度池会耗尽
+# （deepseek-v4-flash 返回 insufficient_quota，glm-5.2 / 6.8-flash 返回
+# code 8 RPM/TPM 限流），而 OmniRoute 背后的 Agnes 是完全独立的额度池，
+# 能兜住 SenseNova 全挂的场景。
+#
+# 顺序经过实测验证（2026-11-04）：
+#   sensenova/glm-5.2              200
+#   sensenova/sensenova-6.8-flash-lite 200
+#   omni agnes/agnes-2.5-flash     200（真实播客 prompt 解析出 21 段对话）
+#   sensenova/deepseek-v4-flash     429 insufficient_quota（额度池真空）
+# 因此 deepseek-v4-flash 放在最后，不做首选。
 LLM_FALLBACK_MODELS = [
-    "deepseek-v4-flash",      # 首选，写稿质量最好
-    "glm-5.2",                # 备用 1，实测 200 OK
-    "sensenova-6.8-flash-lite",  # 备用 2，额度最大
+    "glm-5.2",                    # SenseNova 首选，实测 200
+    "sensenova-6.8-flash-lite",   # SenseNova 备用，额度池较大
 ]
+
+# OmniRoute 兜底候选。设置了 OMNI_API_KEY / OMNI_BASE_URL 才启用。
+# agnes/agnes-2.5-flash：独立供应商，不受 SenseNova 额度池影响，
+# 真实播客 prompt 实测 200 / 23s / JSON 可解析。
+OMNI_FALLBACK_MODELS = [
+    "agnes/agnes-2.5-flash",
+]
+
+# 退避基数（秒）。SenseNova 的 RPM/TPM 滑窗实测需要 40-70 秒才恢复，
+# 3 秒的间隔必然让所有候选在同一窗口内全部 429。
+FALLBACK_BACKOFF_SECONDS = 25
+
+# max_tokens 上限。3000 会撞上限被截断（usage.completion_tokens==3000），
+# 导致 JSON 不完整、解析失败、白烧一次额度。2000 足够写完 3-5 分钟对话。
+LLM_MAX_TOKENS = 2000
 
 
 def _is_retryable(exc):
-    """判断异常是否值得换模型重试（限流/超时/服务端错误）。"""
-    name = type(exc).__name__
-    if name in ("RateLimitError", "APITimeoutError", "APIConnectionError",
-                "InternalServerError", "APIStatusError"):
-        return True
+    """判断异常是否值得换模型重试（限流/超时/服务端错误）。
+
+    有 status_code 时以状态码为准：只有 429 和 5xx 才值得重试。
+    403（套餐无权）/ 404（模型不存在）重试多少次都没用，必须换模型。
+    原实现把 APIStatusError 按类名一律当可重试，会在 403 上空转。
+    """
     status = getattr(exc, "status_code", None)
-    if isinstance(status, int) and (status == 429 or status >= 500):
-        return True
-    return False
+    if isinstance(status, int):
+        return status == 429 or status >= 500
+    name = type(exc).__name__
+    return name in ("RateLimitError", "APITimeoutError", "APIConnectionError",
+                    "InternalServerError")
+
+
+def _is_quota_exhausted(exc):
+    """区分「额度池耗尽」和「瞬时限流」。
+
+    2026-11-04 实测：insufficient_quota 表示该模型当日额度池已空，
+    退避再试也没用，必须换模型；而 code 8 (tpm/rpm limit) 是滑动窗口，
+    等一会儿就能恢复。两者混为一谈会导致在死模型上空转。
+    """
+    msg = str(exc).lower()
+    return "insufficient_quota" in msg or "quota" in msg
+
+
+def _build_candidates(primary, url, key, fallback_models, omni_models=None):
+    """构造 (model, base_url, api_key, label) 候选列表。
+
+    同一供应商的模型共用 base_url/key；OmniRoute 候选使用独立 endpoint 和 key。
+    """
+    candidates = []
+    seen = set()
+
+    def add(model, base, api_key, label):
+        if not model:
+            return
+        marker = (model, base)
+        if marker in seen:
+            return
+        seen.add(marker)
+        candidates.append((model, base, api_key, label))
+
+    # 1) 主模型
+    add(primary, url, key, "primary")
+
+    # 2) 同供应商 fallback
+    for m in (fallback_models if fallback_models is not None else LLM_FALLBACK_MODELS):
+        add(m, url, key, "fallback")
+
+    # 3) OmniRoute 兜底（跨供应商，额度池独立）
+    omni_key = os.environ.get("OMNI_API_KEY")
+    omni_url = os.environ.get("OMNI_BASE_URL", "https://omni.herebuy.us/v1")
+    if omni_key:
+        for m in (omni_models if omni_models is not None else OMNI_FALLBACK_MODELS):
+            add(m, omni_url, omni_key, "omniroute")
+
+    return candidates
 
 
 def generate_script(title, content, api_key=None, base_url=None, model=None,
                     fallback_models=None):
     """调用 OpenAI 兼容 API 生成播客脚本（JSON 格式）
 
-    带模型级 fallback：主模型限流/超时/5xx 时自动切下一个候选模型。
+    带跨供应商模型级 fallback：主模型限流/超时/5xx 时自动切下一个候选，
+    候选可以来自不同 base_url 和不同 key。
     """
     try:
         import openai
@@ -173,42 +248,53 @@ def generate_script(title, content, api_key=None, base_url=None, model=None,
     url = base_url or os.environ.get("LLM_BASE_URL", "https://openrouter.ai/api/v1")
     primary = model or os.environ.get("LLM_MODEL", "qwen/qwen-plus")
 
-    # 构造候选链：主模型优先，其余按 LLM_FALLBACK_MODELS 顺序去重补齐
-    candidates = [primary]
-    for m in (fallback_models if fallback_models is not None else LLM_FALLBACK_MODELS):
-        if m and m not in candidates:
-            candidates.append(m)
-
-    client = openai.OpenAI(api_key=key, base_url=url)
+    candidates = _build_candidates(primary, url, key, fallback_models)
+    if len(candidates) == 1 and not os.environ.get("OMNI_API_KEY"):
+        print("WARNING: 候选链只有主模型一个，没有可用的 fallback")
 
     # Podcast-Generator 风格的 XML prompt
     prompt = PODCAST_PROMPT_TEMPLATE.replace("{{content}}", content[:4000])
 
     response = None
     last_exc = None
-    for idx, model_name in enumerate(candidates):
+    clients = {}
+    for idx, (model_name, cand_url, cand_key, kind) in enumerate(candidates):
+        client = clients.get(cand_url)
+        if client is None:
+            client = openai.OpenAI(api_key=cand_key, base_url=cand_url, timeout=180.0)
+            clients[cand_url] = client
         try:
-            print(f"Using LLM: {model_name} via {url}"
-                  + (f" (fallback #{idx})" if idx else ""))
+            print(f"Using LLM: {model_name} via {cand_url}"
+                  + (f" ({kind} #{idx})" if idx else ""))
             response = client.chat.completions.create(
                 model=model_name,
                 messages=[
                     {"role": "system", "content": "你是一个专业的中文播客编剧。"},
                     {"role": "user", "content": prompt}
                 ],
-                max_tokens=3000,
+                max_tokens=LLM_MAX_TOKENS,
                 temperature=0.7
             )
             break
         except Exception as e:
             last_exc = e
-            if not _is_retryable(e) or idx == len(candidates) - 1:
+            if idx == len(candidates) - 1:
                 print(f"LLM 调用失败 ({model_name}): {type(e).__name__}: {e}")
-                if idx < len(candidates) - 1:
-                    print("不可重试的错误，放弃换模型")
+                print("所有候选均已失败")
                 raise
-            print(f"  {type(e).__name__}: {e} — 换下一个模型重试")
-            time.sleep(3)
+            if not _is_retryable(e):
+                # 401/403/404：端点或模型本身不可用。
+                # 跨端点链里这不代表整体失败 —— SenseNova 的 key 挂了，
+                # OmniRoute 的 key 照样能用。所以立即换下一个候选，不做长退避。
+                print(f"LLM 调用失败 ({model_name}): {type(e).__name__}: {e}")
+                print("  不可重试的错误，立即换下一个候选")
+                continue
+            if _is_quota_exhausted(e):
+                # 额度池耗尽：等再久也没用，立即换供应商。
+                print(f"  {type(e).__name__}: {e} — 额度池耗尽，立即换供应商")
+                continue
+            print(f"  {type(e).__name__}: {e} — 等待 {FALLBACK_BACKOFF_SECONDS}s 换下一个候选")
+            time.sleep(FALLBACK_BACKOFF_SECONDS)
 
     if response is None:
         raise last_exc
@@ -357,7 +443,7 @@ def main():
     parser.add_argument("--auto", action="store_true", help="自动从 RSS 获取最新文章")
     parser.add_argument("--api-key", help="API Key（默认从 OPENAI_API_KEY 环境变量读取）")
     parser.add_argument("--base-url", default="https://openrouter.ai/api/v1", help="API Base URL")
-    parser.add_argument("--model", default="qwen/qwen-plus", help="模型名称")
+    parser.add_argument("--model", default="glm-5.2", help="模型名称")
     parser.add_argument("--output-dir", default="episodes", help="输出目录")
     args = parser.parse_args()
     STATE_FILE = "last_article.json"
