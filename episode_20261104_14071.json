@@ -1,0 +1,11 @@
+{
+  "id": "20261104_14071",
+  "title": "PhotoCraft 用 Rust 重写 Photoshop，一个多月 7.6 万星背后的技术野心",
+  "link": "https://osp.io/archives/14071",
+  "date": "2026-11-04T07:00:00",
+  "audio_file": "episode_20261104_14071.mp3",
+  "file_size_kb": 5132,
+  "num_segments": 19,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哎开源君，你最近知道吗？有一个项目特别火，就是那个用 Rust 从头写 Photoshop 的，叫 PhotoCraft。才一个多月，星标就七万多了！\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哦对，我注意到了。这个项目确实挺猛的，fork 都过万了。关键是它的目标特别明确，就是要做一个真正能替代 Photoshop 的开源替代品。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"说到替代 Photoshop，很多人第一反应肯定是 GIMP 嘛。但这个项目跟 GIMP 有什么不同啊？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"差别挺大的。GIMP 技术栈停在 C 语言好多年了，快三十年了，架构上很难做 GPU 加速和现代化交互。PhotoCraft 走的是完全不同的一条路——纯 Rust 加上 wgpu 的 GPU 合成。而且它不是套 Electron，是完全的原生应用，能跑在 macOS、Windows、Linux 这些平台上，甚至还能跑在浏览器里。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哇，听起来很全面啊。那功能上呢？能真正对标 Photoshop 吗？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"功能覆盖还是挺扎实的。图层、蒙版、调整图层、图层样式、文字工具、矢量工具、笔刷这些都有，最关键是它支持真正的 PSD 文件读写。官方数据是 309 个测试文件里 307 个能正确往返保存，170 个混合测试集里 169 个通过，形状图层在像素级别都能跟 Photoshop 匹配。对一个这么年轻的项目来说，这数字相当可以了。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"不过我听他们一直在强调一个词叫 clean-room，这是啥意思啊？\"\n"
+}
