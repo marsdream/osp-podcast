@@ -358,5 +358,15 @@
     "id": "https://osp.io/?p=14094",
     "title": "DeepSeek 开源了推理框架，但没开源的那一半才值钱",
     "link": "https://osp.io/archives/14094"
+  },
+  {
+    "id": "https://osp.io/?p=14071",
+    "title": "PhotoCraft 用 Rust 重写 Photoshop，一个多月 7.6 万星背后的技术野心",
+    "link": "https://osp.io/archives/14071"
+  },
+  {
+    "id": "https://osp.io/?p=14092",
+    "title": "给 DeepSeek Harness 装个插件就能白嫖 Kimi K3，先想清楚谁在替你付账",
+    "link": "https://osp.io/archives/14092"
   }
 ]

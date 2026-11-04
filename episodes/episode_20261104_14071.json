@@ -1,0 +1,11 @@
+{
+  "id": "20261104_14071",
+  "title": "PhotoCraft 用 Rust 重写 Photoshop，一个多月 7.6 万星背后的技术野心",
+  "link": "https://osp.io/archives/14071",
+  "date": "2026-11-04T07:00:00",
+  "audio_file": "episode_20261104_14071.mp3",
+  "file_size_kb": 7029,
+  "num_segments": 26,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n{\n\"speaker_id\": 0,\n\"dialog\": \"哎，你最近有没有刷到一个叫 PhotoCraft 的项目？我天，简直离谱，一个月的时间，GitHub 星标直接飙到七万六，我差点以为自己看错位数了。\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对对对，我也看到了！当时第一反应是：又一个要替代 Photoshop 的？但仔细一看发现这路子走得真不一样。你知道吗，它居然是用纯 Rust 从零重写 Photoshop，而且号称 clean-room，完全没碰过 Adobe 的源码。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"“从零重写”听着就特别硬核。但我这种人第一反应肯定是：那它跟 GIMP 比咋样？毕竟一说开源替代 PS，大家首先想到的就是 GIMP 嘛。\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"这就有意思了。GIMP 的问题是技术栈还停留在 C 语言，快三十年了，架构太老，想好好做 GPU 加速啊、现代化交互啊，都特别费劲。Krita 又专注在数字绘画，Photopea 呢虽然是浏览器里跑，但还是有点局限。PhotoCraft 直接换赛道：纯 Rust 加上 wgpu 做 GPU 合成，原生应用，不套 Electron，也不搞 WebView，Windows、macOS、Linux、FreeBSD 甚至浏览器上都能跑。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"听起来挺厉害。但功能呢？不会只是个空壳吧？我看它说支持图层、蒙版、调整图层、文字工具、矢量工具、笔刷，还有真正的 PSD 文件读写？\"\n},\n{\n\"speaker_id\": 1,\n\"dialog\": \"对，而且它给的数据很有意思：309 个 psd-tools 测试文件里，有 307 个可以正确往返保存；170 个混合测试集里 169 个通过；116 个形状图层在像素级别上跟 Photoshop 匹配。对一个这么年轻的项目来说，这个兼容性已经相当扎实了。\"\n},\n{\n\"speaker_id\": 0,\n\"dialog\": \"你说的“clean-room”到底啥意思？我听过这个词，但具体是干嘛的？\"\n},\n{\n\"speaker_id\": 1,\n\"d"
+}
