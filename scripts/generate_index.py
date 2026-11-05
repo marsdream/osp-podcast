@@ -59,6 +59,8 @@ html = '''<!DOCTYPE html>
   h1 { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
   .subtitle { color: #888; font-size: 14px; }
   .rss-link { display: inline-block; margin-top: 12px; padding: 6px 14px; background: #e67e22; color: #fff; border-radius: 20px; font-size: 13px; text-decoration: none; }
+  .lang-switch { display: inline-block; margin-top: 12px; margin-left: 8px; padding: 6px 14px; background: #fff; color: #333; border: 1px solid #ddd; border-radius: 20px; font-size: 13px; text-decoration: none; }
+  .lang-switch:hover { background: #f0f0f0; border-color: #bbb; }
   .episode { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
   .episode.hidden { display: none; }
   .episode-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
@@ -81,6 +83,7 @@ html = '''<!DOCTYPE html>
   <h1>🎙️ 开源派技术播客</h1>
   <p class="subtitle">每周自动抓取 osp.io 最新文章，生成中文播客，由 AI 主播播报</p>
   <a class="rss-link" href="feed.xml">📡 RSS 订阅</a>
+  <a class="lang-switch" href="https://podcast-en.herebuy.us/">🇬🇧 English</a>
 </header>
 <main>
 '''
