@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>MiniMax M3.1 Flash 开放权重，428B 参数压到 4 位，但许可证不是 Apache</title>
+      <description>MiniMax M3.1 Flash 开放权重，428B 参数压到 4 位，但许可证不是 Apache</description>
+      <pubDate>2026-11-05T01:00:00</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20261105_14156.mp3" type="audio/mpeg" length="4800429" />
+      <link>https://osp.io/archives/14156</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>PhotoCraft 用 Rust 重写 Photoshop，一个多月 7.6 万星背后的技术野心</title>
       <description>PhotoCraft 用 Rust 重写 Photoshop，一个多月 7.6 万星背后的技术野心</description>
       <pubDate>2026-11-04T07:00:00</pubDate>
