@@ -303,5 +303,15 @@
     "id": "https://osp.io/?p=14092",
     "title": "给 DeepSeek Harness 装个插件就能白嫖 Kimi K3，先想清楚谁在替你付账",
     "link": "https://osp.io/archives/14092"
+  },
+  {
+    "id": "https://osp.io/?p=14156",
+    "title": "MiniMax M3.1 Flash 开放权重，428B 参数压到 4 位，但许可证不是 Apache",
+    "link": "https://osp.io/archives/14156"
+  },
+  {
+    "id": "https://osp.io/?p=14072",
+    "title": "用代码让画动起来：huashu-art-motion 把 35 种艺术风格做成了动画 skill",
+    "link": "https://osp.io/archives/14072"
   }
 ]

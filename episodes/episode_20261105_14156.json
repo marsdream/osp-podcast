@@ -1,0 +1,11 @@
+{
+  "id": "20261105_14156",
+  "title": "MiniMax M3.1 Flash 开放权重，428B 参数压到 4 位，但许可证不是 Apache",
+  "link": "https://osp.io/archives/14156",
+  "date": "2026-11-05T01:00:00",
+  "audio_file": "episode_20261105_14156.mp3",
+  "file_size_kb": 4687,
+  "num_segments": 18,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哈喽大家好，欢迎来到今天的节目！最近大模型圈可是热闹非凡啊，MiniMax在10月份搞了个大动作，发布了一个叫M3.1 Flash的旗舰级Agent模型。开源君，你对这个有啥看法？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对对对，这个我关注了。10月19号先上的API，10月23号凌晨就把权重挂到Hugging Face和魔搭社区了，动作挺快的。428B总参数，不过每个token只激活大概23B，上下文能拉到100万token，原生多模态，文本图片视频都能吃进去，最后吐文本出来。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哇，100万token的上下文，这量级确实挺猛的。那它在技术上有啥亮点吗？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"官方标了三个优化点。第一个是全模型稀疏注意力，之前M3的前几层还是全注意力，这次前三层也换了，整个模型统一了。第二个是量化感知训练，压到W4A4，就是权重和激活都压到4位。第三个是用DSpark投机解码，取代了之前那个EAGLE的方案。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"听起来挺厉害的，那评测分数怎么样？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"分数倒是给了好几个，Automation-Bench 62.8，BankerToolBench 76.2，DeepSWE v1.1 73.7%，CyberGym 82.2……但这些数字有个问题——全是MiniMax自己跑的，没有第三方复现。而且评测用的脚手架也不一样，不同工具跑出来的分根本没法直接横向比较。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哦？这就有点尴尬了啊。那用户是不是得谨慎看待这些榜单？\"\n    },\n    {\n      "
+}
