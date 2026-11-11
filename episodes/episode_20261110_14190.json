@@ -1,0 +1,11 @@
+{
+  "id": "20261110_14190",
+  "title": "个人 AI 代理终于做进了 MCP 客户端：talorys 0.1.8 的远程工具接入",
+  "link": "https://osp.io/archives/14190",
+  "date": "2026-11-10T11:00:00",
+  "audio_file": "episode_20261110_14190.mp3",
+  "file_size_kb": 5608,
+  "num_segments": 28,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哈喽大家好，欢迎来到开源派！我是梅梅～今天咱们聊一个特别有意思的个人AI代理项目，叫Talorys。对对对，就是最近github上悄悄涨到一千多个star的那个！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对，开源君最近一直在关注这个项目。它很有意思，是个部署在自己Cloudflare账号里的个人AI代理，而且24天就出了9个npm版本，迭代速度超快的。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哇，24天9个版本？这也太卷了吧！那它这次主要更新了什么呀？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"这次最重磅的是远程MCP客户端功能。你知道MCP吧，Model Context Protocol，现在大厂都在做这个，Claude Desktop、Cursor都在搞。但问题是，个人用户想在自己机器上跑一个代理，可选的开源实现其实很少。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"啊对，之前确实很少有人认真做这事儿。Talorys这个算是比较早入局的？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对，它仓库是2026年10月10日建的，到11月3号发0.1.8版本就把完整MCP客户端塞进去了。而且设计特别克制，我来给你讲讲几个点。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"快快快，洗耳恭听！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"首先，每个MCP工具默认都是关的。连上远程服务器之后，列出来的工具你得一个一个决定开不开。开了也有两种模式：默认是'Ask me every time'，每次调用都弹审批卡片给你看；还有一种'Run without asking'，但只限于只读工具。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"这个设计我很认可诶！很多人做M"
+}

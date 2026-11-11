@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>个人 AI 代理终于做进了 MCP 客户端：talorys 0.1.8 的远程工具接入</title>
+      <description>个人 AI 代理终于做进了 MCP 客户端：talorys 0.1.8 的远程工具接入</description>
+      <pubDate>2026-11-10T11:00:00</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20261110_14190.mp3" type="audio/mpeg" length="5742765" />
+      <link>https://osp.io/archives/14190</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>MiniMax M3.1 Flash 开放权重，428B 参数压到 4 位，但许可证不是 Apache</title>
       <description>MiniMax M3.1 Flash 开放权重，428B 参数压到 4 位，但许可证不是 Apache</description>
       <pubDate>2026-11-05T01:00:00</pubDate>
