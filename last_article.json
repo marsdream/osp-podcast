@@ -343,5 +343,25 @@
     "id": "https://osp.io/?p=14192",
     "title": "Agent2API 把几十家 AI 客户端塞进一个本地 base_url",
     "link": "https://osp.io/archives/14192"
+  },
+  {
+    "id": "https://osp.io/?p=14317",
+    "title": "一本新书讲透 Linux 和维基百科背后那套「同伴生产」",
+    "link": "https://osp.io/archives/14317"
+  },
+  {
+    "id": "https://osp.io/?p=14319",
+    "title": "Google 一次捐出三个项目，拼出一套 AI Agent 沙箱栈",
+    "link": "https://osp.io/archives/14319"
+  },
+  {
+    "id": "https://osp.io/?p=14299",
+    "title": "浙大 REAL Lab 开源 Easel，把社媒全流程塞进一个 Agent",
+    "link": "https://osp.io/archives/14299"
+  },
+  {
+    "id": "https://osp.io/?p=14301",
+    "title": "让旧 Echo 复活成 Agent 终端：Hermes Voice 把智能音箱接到本地 AI",
+    "link": "https://osp.io/archives/14301"
   }
 ]
