@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>一本新书讲透 Linux 和维基百科背后那套「同伴生产」</title>
+      <description>一本新书讲透 Linux 和维基百科背后那套「同伴生产」</description>
+      <pubDate>2026-11-12T11:00:00</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20261112_14317.mp3" type="audio/mpeg" length="4733612" />
+      <link>https://osp.io/archives/14317</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>个人 AI 代理终于做进了 MCP 客户端：talorys 0.1.8 的远程工具接入</title>
       <description>个人 AI 代理终于做进了 MCP 客户端：talorys 0.1.8 的远程工具接入</description>
       <pubDate>2026-11-10T11:00:00</pubDate>
