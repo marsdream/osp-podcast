@@ -358,5 +358,15 @@
     "id": "https://osp.io/?p=14301",
     "title": "让旧 Echo 复活成 Agent 终端：Hermes Voice 把智能音箱接到本地 AI",
     "link": "https://osp.io/archives/14301"
+  },
+  {
+    "id": "https://osp.io/?p=14392",
+    "title": "把联系表单搬回自己的 Cloudflare：Form Worker 这个自托管表单后端",
+    "link": "https://osp.io/archives/14392"
+  },
+  {
+    "id": "https://osp.io/?p=14393",
+    "title": "Hookshot 把 Switch 2 版《时之笛》重编译成 Windows 原生程序，模拟器之外的另一条路",
+    "link": "https://osp.io/archives/14393"
   }
 ]
