@@ -1,0 +1,11 @@
+{
+  "id": "20261115_14392",
+  "title": "把联系表单搬回自己的 Cloudflare：Form Worker 这个自托管表单后端",
+  "link": "https://osp.io/archives/14392",
+  "date": "2026-11-15T11:00:00",
+  "audio_file": "episode_20261115_14392.mp3",
+  "file_size_kb": 4881,
+  "num_segments": 20,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哈喽大家好，欢迎来到今天的节目！最近我搞了个静态站点，结果做联系表单的时候踩了一堆坑，想不想听我吐槽一下？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哎哟快说快说，静态站做表单这事儿我太懂了。站点放GitHub Pages或者Cloudflare Pages上，表单提交却得用Formspree、Basin这些第三方服务，每次客户发个邮件，名字邮箱公司全存在别人数据库里，想想就后背发凉。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"对对对！最扎心的是万一哪天人家涨价或者跑路了，你客户的联系方式就直接没了，想想都心梗。我最近发现个项目叫Form Worker，正好解决这个问题，跑在Cloudflare Workers上，数据存在你自己的D1数据库里。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"哦这个有点意思，自托管表单后端对吧？我看一眼GitHub仓库，哦对是AGSAVALIYA/form-worker，TypeScript写的，MIT授权。不过说实话这项目才1个star、6条提交、0个release，确实是个早期观察对象。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哈哈是的，作者也挺实在的，README里一堆已知问题都列出来了。但我觉得有些设计思路值得聊聊，比如它的垃圾过滤。你知道现在大多数表单服务的反垃圾机制都是黑盒，你只知道结果不知道过程。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"没错对吧，交上去然后告诉你通过或不通过，你连为什么被拦都不知道。Form Worker不一样，它每条提交打个0到100的分数，超过阈值才进垃圾箱。而且这分数规则全是可读的，比如正文里有链接按数量加10分25分45分，HTML链接直接40分，一次性邮箱30分，24小时内重复内容30分。\"\n    },\n    {\n  "
+}
