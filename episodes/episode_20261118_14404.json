@@ -1,0 +1,11 @@
+{
+  "id": "20261118_14404",
+  "title": "DeepSeek 把自家 App 拆成了 API，顺手扔出一个 MIT 的前端样板",
+  "link": "https://osp.io/archives/14404",
+  "date": "2026-11-18T01:00:00",
+  "audio_file": "episode_20261118_14404.mp3",
+  "file_size_kb": 5648,
+  "num_segments": 21,
+  "has_intro_outro": true,
+  "script": "{\n\"podcast_transcripts\": [\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"大家好，欢迎来到本期节目！今天咱们聊一个特别让人兴奋的消息——DeepSeek 刚刚开放了 App 能力，而且还有个超棒的开源项目。梅梅听说这个前后端都没有，光靠浏览器就能跑？快给我讲讲！\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对，没错。11月13号那天，DeepSeek 官方公告第一句话就说，DeepSeek App 背后的能力现在可以通过 API 调用了。不过这次放出来的只是前端，模型本身没动。你想想，联网搜索、深度思考、文件输入、链接阅读、安全审核，还有语音那条线的 OCR、ASR、TTS，全都给你开放了。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"哇，那功能挺全的啊！不过最让我好奇的是那个开源的前端 demo——deepseek-ai/chat-demo，听你说这玩意儿是纯前端？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"对对对，这是它最牛的地方。仓库里 TypeScript 大概 500KB，CSS 90KB，你翻遍整个目录都找不到任何后端代码。API key 存在你自己的浏览器 Settings 里，请求直接从浏览器发往 DeepSeek 接口。你下载下来解压，双击 index.html 就能跑，都不用装任何东西。\"\n  },\n  {\n    \"speaker_id\": 0,\n    \"dialog\": \"这也太香了吧！那功能上呢？能跟官方 App 比吗？\"\n  },\n  {\n    \"speaker_id\": 1,\n    \"dialog\": \"可以说基本抄了一遍。多会话、自动标题、重命名、删除、编辑 prompt、重新生成、分支切换、流式回复、深度思考模式、智能搜索、链接阅读、来源引用、停止后继续、附件上传粘贴拖拽、语音输入、朗读回复，录音的时候还有频谱动画。加上 Markdown、代码高亮、KaTeX 公式和 Mermaid 图表，中英文界面、明暗主题都有，还能导入从 DeepSeek App 导出的历史记录。\"\n  },\n  {\n    \"speaker_id\":"
+}
