@@ -363,5 +363,15 @@
     "id": "https://osp.io/?p=14393",
     "title": "Hookshot 把 Switch 2 版《时之笛》重编译成 Windows 原生程序，模拟器之外的另一条路",
     "link": "https://osp.io/archives/14393"
+  },
+  {
+    "id": "https://osp.io/?p=14404",
+    "title": "DeepSeek 把自家 App 拆成了 API，顺手扔出一个 MIT 的前端样板",
+    "link": "https://osp.io/archives/14404"
+  },
+  {
+    "id": "https://osp.io/?p=14176",
+    "title": "SUSE 裁掉 10% 员工，同一周 openSUSE Leap 16.1 照常发布",
+    "link": "https://osp.io/archives/14176"
   }
 ]
