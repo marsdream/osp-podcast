@@ -388,5 +388,45 @@
     "id": "https://osp.io/?p=14415",
     "title": "Anthropic 把 Agent Skills 捐给了 Linux Foundation：一项标准活多久，比谁写的更重要",
     "link": "https://osp.io/archives/14415"
+  },
+  {
+    "id": "https://osp.io/?p=14043",
+    "title": "NodeWarden：把 Bitwarden 服务端塞进 Cloudflare Workers，密码库终于不用自己养服务器",
+    "link": "https://osp.io/archives/14043"
+  },
+  {
+    "id": "https://osp.io/?p=14434",
+    "title": "Anthropic 把 11 个岗位的 SOP 写成了 Markdown：36K+ Star 的插件仓库里没有一行代码",
+    "link": "https://osp.io/archives/14434"
+  },
+  {
+    "id": "https://osp.io/?p=14405",
+    "title": "一个 MIT 协议的自托管 SEO 排名追踪器，把 Ahrefs 的价格打回了零",
+    "link": "https://osp.io/archives/14405"
+  },
+  {
+    "id": "https://osp.io/?p=14383",
+    "title": "13K+ Star 的 SimpMusic，一套 Kotlin 代码同时管住手机和桌面",
+    "link": "https://osp.io/archives/14383"
+  },
+  {
+    "id": "https://osp.io/?p=14385",
+    "title": "AWS 开源 Emulator：一份由上千个 AI agent 写出来的云端替身",
+    "link": "https://osp.io/archives/14385"
+  },
+  {
+    "id": "https://osp.io/?p=14068",
+    "title": "BUILD Foundation 落地，AI 时代为什么更需要 Bazel 这种老牌构建工具？",
+    "link": "https://osp.io/archives/14068"
+  },
+  {
+    "id": "https://osp.io/?p=14174",
+    "title": "listmonk 24K+ Star，把邮件订阅管理塞进一个二进制文件",
+    "link": "https://osp.io/archives/14174"
+  },
+  {
+    "id": "https://osp.io/?p=14450",
+    "title": "NGINX2Root：5 个 nginx 未认证 RCE + 1 个内核零日，把容器直接捅到宿主机 root",
+    "link": "https://osp.io/archives/14450"
   }
 ]
