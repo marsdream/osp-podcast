@@ -1,0 +1,11 @@
+{
+  "id": "20261125_14467",
+  "title": "苹果把它从 App Store 撤下，源码地址却印在商店页上",
+  "link": "https://osp.io/archives/14467",
+  "date": "2026-11-25T07:00:00",
+  "audio_file": "episode_20261125_14467.mp3",
+  "file_size_kb": 5652,
+  "num_segments": 22,
+  "has_intro_outro": true,
+  "script": "{\n  \"podcast_transcripts\": [\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"哈喽大家好，欢迎回到开源派！今天梅梅要跟大伙儿聊一个特别有意思的事儿——有个开发者，把自己的开源项目在App Store上架，结果被苹果秒删，连一句完整的话都没留下。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"对对对，你说的就是Kernarium这个项目吧？Linux内核跑在iOS上，还出了个Android模拟器版本Andarium。这项目我最近一直盯着，11月18日上架，19号或者20号就消失了，连零分零评论都没捞着。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"真的太离谱了！而且你知道最耐人寻味的是什么吗？苹果批过之后又撤掉，但仓库的代码一个字都没锁，开发者链接还直接挂在商店页上指向GitHub。这操作就像是……先把东西放你眼前让你看，然后又一把抢走。\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"没错，这反而更说明问题。苹果审核的时候肯定看到了GitHub链接，源码摊得明明白白。它引用的审核指南是2.5.2和1.1，理由是'功能没有聚焦于Apple平台体验，允许用户在iOS上复制Android操作系统'。注意啊，模拟器本身没被点名有罪，'复制另一个操作系统'才是问题所在。这个边界划得挺微妙的。\"\n    },\n    {\n      \"speaker_id\": 0,\n      \"dialog\": \"等等，咱们先说回项目本身行不行？梅梅我一开始看到新闻就懵了，Linux内核跑在iPhone上？这技术靠谱吗？\"\n    },\n    {\n      \"speaker_id\": 1,\n      \"dialog\": \"靠谱，而且路线选得很聪明。作者imxieyi自己给了个框架描述——这个项目处在全系统模拟器UTM和全用户态模拟器iSH之间。Linux内核直接编译成原生arm64代码跑，不做指令模拟；用户态程序才用解释器处理。GPU走的是KosmicKrisp把Vulkan翻成Metal，OpenGL也是Zink提供的，Video"
+}

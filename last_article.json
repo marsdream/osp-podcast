@@ -428,5 +428,30 @@
     "id": "https://osp.io/?p=14450",
     "title": "NGINX2Root：5 个 nginx 未认证 RCE + 1 个内核零日，把容器直接捅到宿主机 root",
     "link": "https://osp.io/archives/14450"
+  },
+  {
+    "id": "https://osp.io/?p=14467",
+    "title": "苹果把它从 App Store 撤下，源码地址却印在商店页上",
+    "link": "https://osp.io/archives/14467"
+  },
+  {
+    "id": "https://osp.io/?p=14468",
+    "title": "UU远程没开源，但有人给 macOS 补了块虚拟屏：Snug 9 天做到 1314 Star",
+    "link": "https://osp.io/archives/14468"
+  },
+  {
+    "id": "https://osp.io/?p=14457",
+    "title": "AI 公司开始往开源引擎的赞助名单里挤：Manus 拿下 Godot 白金牌",
+    "link": "https://osp.io/archives/14457"
+  },
+  {
+    "id": "https://osp.io/?p=14447",
+    "title": "Java 的 Base64 解码器出事了：64 个字符就能改写 JVM 堆内存",
+    "link": "https://osp.io/archives/14447"
+  },
+  {
+    "id": "https://osp.io/?p=14473",
+    "title": "Debian 成立游戏硬件团队，第一场争论就把 Stable 架上了台面",
+    "link": "https://osp.io/archives/14473"
   }
 ]
