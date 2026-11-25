@@ -9,6 +9,14 @@
     <itunes:author>开源派</itunes:author>
     <itunes:image href="https://img.osp.io/podcastcover.png" />
     <item>
+      <title>苹果把它从 App Store 撤下，源码地址却印在商店页上</title>
+      <description>苹果把它从 App Store 撤下，源码地址却印在商店页上</description>
+      <pubDate>2026-11-25T07:00:00</pubDate>
+      <enclosure url="https://podcast.herebuy.us/episodes/episode_20261125_14467.mp3" type="audio/mpeg" length="5787692" />
+      <link>https://osp.io/archives/14467</link>
+      <itunes:image href="https://img.osp.io/podcastcover.png" />
+    </item>
+    <item>
       <title>DeepSeek 把自家 App 拆成了 API，顺手扔出一个 MIT 的前端样板</title>
       <description>DeepSeek 把自家 App 拆成了 API，顺手扔出一个 MIT 的前端样板</description>
       <pubDate>2026-11-18T01:00:00</pubDate>
