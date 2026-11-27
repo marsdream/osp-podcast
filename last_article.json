@@ -448,5 +448,25 @@
     "id": "https://osp.io/?p=14473",
     "title": "Debian 成立游戏硬件团队，第一场争论就把 Stable 架上了台面",
     "link": "https://osp.io/archives/14473"
+  },
+  {
+    "id": "https://osp.io/?p=15547",
+    "title": "把 macOS 内核塞进 Linux：AFK-surf/xnulinux 六天 4000 星",
+    "link": "https://osp.io/archives/15547"
+  },
+  {
+    "id": "https://osp.io/?p=15511",
+    "title": "云析 YunX-Desktop：住校初中生写的 AGPL 桌面客户端，7.7k Star 与 50 万次下载",
+    "link": "https://osp.io/archives/15511"
+  },
+  {
+    "id": "https://osp.io/?p=14567",
+    "title": "Concat：把 MCP 焊进二进制的开源视频编辑器",
+    "link": "https://osp.io/archives/14567"
+  },
+  {
+    "id": "https://osp.io/?p=14489",
+    "title": "删之前先告诉你代价：这个用 Claude Code 写的 macOS 磁盘清理工具，把「清缓存」变成一道选择题",
+    "link": "https://osp.io/archives/14489"
   }
 ]
